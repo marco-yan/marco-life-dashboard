@@ -10,6 +10,13 @@
     "protein": ""
   },
   "completed": {},
-  "customTasks": [],
+  "customTasks": [
+    {
+      "id": "custom-1783705915321",
+      "date": "2026-07-10",
+      "category": "Work",
+      "text": "Fix website"
+    }
+  ],
   "scheduleOverrides": {}
 }
