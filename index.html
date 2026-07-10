@@ -12,7 +12,7 @@
   
   <style>
     /* ============================================================
-       COLOR SYSTEM (Your new palette)
+       COLOR SYSTEM
        Main bg:   #F7F6F0 (Warm ivory)
        Text:      #171A18 (Soft black)
        Primary:   #214E3B (Deep forest green)
@@ -117,7 +117,7 @@
     #marco-life-dashboard {
       max-width: 1280px;
       width: 100%;
-      display: none; /* hidden until password is correct */
+      display: none;
     }
     #marco-life-dashboard.visible {
       display: block;
@@ -197,6 +197,13 @@
     #marco-life-dashboard .btn-ghost:hover {
       background: #edebe5;
       color: #171A18;
+    }
+    #marco-life-dashboard .btn-danger {
+      background: #d95c5c;
+      color: white;
+    }
+    #marco-life-dashboard .btn-danger:hover {
+      background: #bf4747;
     }
     #marco-life-dashboard .btn:disabled {
       opacity: 0.4;
@@ -367,11 +374,18 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     #marco-life-dashboard .section-heading h3 {
       font-size: 1.1rem;
       font-weight: 600;
       color: #214E3B;
+    }
+    #marco-life-dashboard .section-heading .right-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     /* --- Schedule --- */
@@ -394,6 +408,112 @@
     #marco-life-dashboard .schedule-time {
       font-weight: 500;
       color: #214E3B;
+    }
+
+    /* --- Schedule Edit Modal --- */
+    #schedule-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(23, 26, 24, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+    #schedule-modal.active {
+      display: flex;
+    }
+    #schedule-modal .modal-box {
+      background: #F7F6F0;
+      max-width: 560px;
+      width: 90%;
+      max-height: 80vh;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+      overflow-y: auto;
+      border: 1px solid #e8e5db;
+    }
+    #schedule-modal .modal-box h2 {
+      font-size: 1.3rem;
+      color: #214E3B;
+      margin-bottom: 8px;
+    }
+    #schedule-modal .modal-box .sub {
+      color: #5a6b55;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+    #schedule-modal .block-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    #schedule-modal .block-row {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      background: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #e8e5db;
+    }
+    #schedule-modal .block-row .time {
+      font-weight: 600;
+      color: #214E3B;
+      font-size: 0.85rem;
+    }
+    #schedule-modal .block-row .label {
+      font-size: 0.9rem;
+    }
+    #schedule-modal .add-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr auto;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    #schedule-modal .add-row input {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #d6d2c6;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: white;
+    }
+    #schedule-modal .add-row input:focus {
+      outline: none;
+      border-color: #214E3B;
+      box-shadow: 0 0 0 3px rgba(33,78,59,0.1);
+    }
+    #schedule-modal .modal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-top: 1px solid #e8e5db;
+      padding-top: 20px;
+      margin-top: 8px;
+    }
+    #schedule-modal .modal-actions .btn {
+      flex: 1;
+      justify-content: center;
+      min-width: 100px;
+    }
+    #schedule-modal .btn-reset {
+      background: transparent;
+      color: #b33c3c;
+      border: 1px solid #e8e5db;
+    }
+    #schedule-modal .btn-reset:hover {
+      background: #fde8e8;
     }
 
     /* --- Todos --- */
@@ -663,7 +783,12 @@
         <section aria-labelledby="selected-day-title">
           <div class="section-heading">
             <h3 id="selected-day-title">Friday, July 10</h3>
-            <span class="text-small" id="day-status">0 of 0 done</span>
+            <div class="right-actions">
+              <span class="text-small" id="day-status">0 of 0 done</span>
+              <button type="button" class="btn btn-ghost" id="edit-schedule-btn" title="Edit this day's schedule">
+                <i data-lucide="pencil" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
           <div class="card-soft schedule-list" id="schedule-list" aria-label="Daily schedule"></div>
         </section>
@@ -782,992 +907,1145 @@
     </section>
 
     <div class="status-line" id="dashboard-status" aria-live="polite"></div>
+  </div>
 
-    <!-- ====== JAVASCRIPT (same logic + password handler) ====== -->
-    <script>
-      (function () {
-        "use strict";
+  <!-- ==================== SCHEDULE EDIT MODAL ==================== -->
+  <div id="schedule-modal">
+    <div class="modal-box">
+      <h2>✏️ Edit Schedule</h2>
+      <p class="sub" id="modal-day-label">Friday, July 10</p>
+      
+      <div class="block-list" id="modal-block-list"></div>
 
-        // --- PASSWORD LOGIC ---
-        const PASSWORD = "RockOn123";
-        const passwordScreen = document.getElementById('password-screen');
-        const dashboard = document.getElementById('marco-life-dashboard');
-        const passwordInput = document.getElementById('password-input');
-        const unlockBtn = document.getElementById('unlock-btn');
-        const errorMsg = document.getElementById('password-error');
+      <div class="add-row">
+        <input type="text" id="modal-new-time" placeholder="Time (e.g. 13:00–14:00)">
+        <input type="text" id="modal-new-label" placeholder="What are you doing?">
+        <button class="btn btn-primary" id="modal-add-block">+ Add</button>
+      </div>
 
-        function tryUnlock() {
-          const entered = passwordInput.value.trim();
-          if (entered === PASSWORD) {
-            passwordScreen.classList.add('hidden');
-            dashboard.classList.add('visible');
-            sessionStorage.setItem('dashboard_unlocked', 'true');
-            errorMsg.textContent = '';
-            // Initialize dashboard after unlock
-            initDashboard();
-          } else {
-            errorMsg.textContent = 'Incorrect password. Try again.';
-            passwordInput.value = '';
-            passwordInput.focus();
-          }
-        }
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="modal-save">Save changes</button>
+        <button class="btn btn-reset" id="modal-reset">Reset to default</button>
+        <button class="btn" id="modal-close">Close</button>
+      </div>
+    </div>
+  </div>
 
-        // Check if already unlocked in this session
-        if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
+  <!-- ============================================================ -->
+  <!-- JAVASCRIPT (Full logic + new schedule editor) -->
+  <script>
+    (function () {
+      "use strict";
+
+      // --- PASSWORD LOGIC ---
+      const PASSWORD = "RockOn123";
+      const passwordScreen = document.getElementById('password-screen');
+      const dashboard = document.getElementById('marco-life-dashboard');
+      const passwordInput = document.getElementById('password-input');
+      const unlockBtn = document.getElementById('unlock-btn');
+      const errorMsg = document.getElementById('password-error');
+
+      function tryUnlock() {
+        const entered = passwordInput.value.trim();
+        if (entered === PASSWORD) {
           passwordScreen.classList.add('hidden');
           dashboard.classList.add('visible');
-          // Need to init after DOM is ready
+          sessionStorage.setItem('dashboard_unlocked', 'true');
+          errorMsg.textContent = '';
           setTimeout(initDashboard, 50);
         } else {
+          errorMsg.textContent = 'Incorrect password. Try again.';
+          passwordInput.value = '';
           passwordInput.focus();
         }
+      }
 
-        unlockBtn.addEventListener('click', tryUnlock);
-        passwordInput.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') tryUnlock();
-        });
+      if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
+        passwordScreen.classList.add('hidden');
+        dashboard.classList.add('visible');
+        setTimeout(initDashboard, 50);
+      } else {
+        passwordInput.focus();
+      }
 
-        // --- DASHBOARD CORE (unchanged logic, wrapped in initDashboard) ---
-        function initDashboard() {
-          const root = document.getElementById("marco-life-dashboard");
-          if (!root) return;
+      unlockBtn.addEventListener('click', tryUnlock);
+      passwordInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') tryUnlock();
+      });
 
-          const RANGE_START = parseDate("2026-07-10");
-          const RANGE_END = parseDate("2026-12-31");
-          const STORAGE_KEY = "marco-life-dashboard-v1";
-          const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-          const LONG_DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-          const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      // --- DASHBOARD CORE ---
+      function initDashboard() {
+        const root = document.getElementById("marco-life-dashboard");
+        if (!root) return;
 
-          const defaultState = {
-            settings: {
-              race: "undecided",
-              applications: 8,
-              outreach: 10,
-              bikeStart: "2026-08-03",
-              swimStart: "2026-09-28",
-              indoorBikeStart: "2026-11-02",
-              calories: "",
-              protein: ""
-            },
-            completed: {},
-            customTasks: []
-          };
+        const RANGE_START = parseDate("2026-07-10");
+        const RANGE_END = parseDate("2026-12-31");
+        const STORAGE_KEY = "marco-life-dashboard-v1";
+        const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const LONG_DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-          const weekFocus = {
-            "2026-07-06": ["Kick off the dashboard and lock the weekly rhythm", "All 10 primary targets"],
-            "2026-07-13": ["Finish résumé variants, LinkedIn, tracker, and role lanes", "AtkinsRéalis · Intact · IQVIA"],
-            "2026-07-20": ["Launch the first high-quality application sprint", "AtkinsRéalis · Intact"],
-            "2026-07-27": ["Build the analytics and insurance pipeline", "IQVIA · Munich Re / HSB"],
-            "2026-08-03": ["Add bike without increasing the weekly time budget", "AstraZeneca · Zurich"],
-            "2026-08-10": ["Strengthen referrals and application quality", "Sanofi · Marsh"],
-            "2026-08-17": ["Complete the first pass across primary targets", "Metrolinx · Veeva"],
-            "2026-08-24": ["Referral sprint and Musselman registration watch", "AtkinsRéalis · Intact · IQVIA"],
-            "2026-08-31": ["Referral sprint and interview-story practice", "AstraZeneca · Sanofi · Veeva"],
-            "2026-09-07": ["Push insurance, risk, and project roles", "Munich Re / HSB · Zurich · Marsh"],
-            "2026-09-14": ["Convert outreach into live conversations", "AtkinsRéalis · Metrolinx"],
-            "2026-09-21": ["Push healthcare and commercial analytics roles", "IQVIA · AstraZeneca · Sanofi · Veeva"],
-            "2026-09-28": ["Start swim, choose a race, and convert interviews", "Active interview companies"],
-            "2026-10-05": ["Decision gate: double down on responsive lanes", "Top five by response rate"],
-            "2026-10-12": ["Prepare cases, stories, and technical examples", "Active interview companies"],
-            "2026-10-19": ["Deep interview preparation and targeted follow-ups", "Active interview companies"],
-            "2026-10-26": ["Revive stalled applications before November", "Primary targets with warm contacts"],
-            "2026-11-02": ["Open a backup pipeline while interviews continue", "Primary targets plus matched employers"],
-            "2026-11-09": ["Close active interview loops", "Late-stage processes"],
-            "2026-11-16": ["Offer, referral, and reference push", "Late-stage processes"],
-            "2026-11-23": ["Keep a second pipeline alive", "Responsive roles only"],
-            "2026-11-30": ["Final interview push before holiday slowdown", "Late-stage and high-fit roles"],
-            "2026-12-07": ["Drive decisions and prepare negotiation points", "Offer-stage companies"],
-            "2026-12-14": ["Secure the signed offer by December 15", "Best available permanent role"],
-            "2026-12-21": ["Transition cleanly and protect recovery", "Onboarding or active backup"],
-            "2026-12-28": ["Close 2026 and lock the January base plan", "2027 priorities"]
-          };
+        const defaultState = {
+          settings: {
+            race: "undecided",
+            applications: 8,
+            outreach: 10,
+            bikeStart: "2026-08-03",
+            swimStart: "2026-09-28",
+            indoorBikeStart: "2026-11-02",
+            calories: "",
+            protein: ""
+          },
+          completed: {},
+          customTasks: [],
+          scheduleOverrides: {} // key: dateKey, value: [{time, label}]
+        };
 
-          let state = loadState();
-          let selectedDate = clampDate(new Date());
-          let selectedWeek = startOfWeek(selectedDate);
+        const weekFocus = {
+          "2026-07-06": ["Kick off the dashboard and lock the weekly rhythm", "All 10 primary targets"],
+          "2026-07-13": ["Finish résumé variants, LinkedIn, tracker, and role lanes", "AtkinsRéalis · Intact · IQVIA"],
+          "2026-07-20": ["Launch the first high-quality application sprint", "AtkinsRéalis · Intact"],
+          "2026-07-27": ["Build the analytics and insurance pipeline", "IQVIA · Munich Re / HSB"],
+          "2026-08-03": ["Add bike without increasing the weekly time budget", "AstraZeneca · Zurich"],
+          "2026-08-10": ["Strengthen referrals and application quality", "Sanofi · Marsh"],
+          "2026-08-17": ["Complete the first pass across primary targets", "Metrolinx · Veeva"],
+          "2026-08-24": ["Referral sprint and Musselman registration watch", "AtkinsRéalis · Intact · IQVIA"],
+          "2026-08-31": ["Referral sprint and interview-story practice", "AstraZeneca · Sanofi · Veeva"],
+          "2026-09-07": ["Push insurance, risk, and project roles", "Munich Re / HSB · Zurich · Marsh"],
+          "2026-09-14": ["Convert outreach into live conversations", "AtkinsRéalis · Metrolinx"],
+          "2026-09-21": ["Push healthcare and commercial analytics roles", "IQVIA · AstraZeneca · Sanofi · Veeva"],
+          "2026-09-28": ["Start swim, choose a race, and convert interviews", "Active interview companies"],
+          "2026-10-05": ["Decision gate: double down on responsive lanes", "Top five by response rate"],
+          "2026-10-12": ["Prepare cases, stories, and technical examples", "Active interview companies"],
+          "2026-10-19": ["Deep interview preparation and targeted follow-ups", "Active interview companies"],
+          "2026-10-26": ["Revive stalled applications before November", "Primary targets with warm contacts"],
+          "2026-11-02": ["Open a backup pipeline while interviews continue", "Primary targets plus matched employers"],
+          "2026-11-09": ["Close active interview loops", "Late-stage processes"],
+          "2026-11-16": ["Offer, referral, and reference push", "Late-stage processes"],
+          "2026-11-23": ["Keep a second pipeline alive", "Responsive roles only"],
+          "2026-11-30": ["Final interview push before holiday slowdown", "Late-stage and high-fit roles"],
+          "2026-12-07": ["Drive decisions and prepare negotiation points", "Offer-stage companies"],
+          "2026-12-14": ["Secure the signed offer by December 15", "Best available permanent role"],
+          "2026-12-21": ["Transition cleanly and protect recovery", "Onboarding or active backup"],
+          "2026-12-28": ["Close 2026 and lock the January base plan", "2027 priorities"]
+        };
 
-          const weeks = [];
-          for (let cursor = startOfWeek(RANGE_START); cursor <= startOfWeek(RANGE_END); cursor = addDays(cursor, 7)) {
-            weeks.push(cursor);
+        let state = loadState();
+        let selectedDate = clampDate(new Date());
+        let selectedWeek = startOfWeek(selectedDate);
+
+        const weeks = [];
+        for (let cursor = startOfWeek(RANGE_START); cursor <= startOfWeek(RANGE_END); cursor = addDays(cursor, 7)) {
+          weeks.push(cursor);
+        }
+
+        const elements = {
+          tabs: Array.from(root.querySelectorAll("[data-view]")),
+          panels: {
+            week: root.querySelector("#panel-week"),
+            roadmap: root.querySelector("#panel-roadmap"),
+            settings: root.querySelector("#panel-settings")
+          },
+          weekSelect: root.querySelector("#week-select"),
+          previousWeek: root.querySelector("#previous-week"),
+          nextWeek: root.querySelector("#next-week"),
+          currentWeek: root.querySelector("#current-week"),
+          dayStrip: root.querySelector("#day-strip"),
+          scheduleList: root.querySelector("#schedule-list"),
+          todoList: root.querySelector("#todo-list"),
+          selectedDayTitle: root.querySelector("#selected-day-title"),
+          dayStatus: root.querySelector("#day-status"),
+          showAddTask: root.querySelector("#show-add-task"),
+          addTaskForm: root.querySelector("#add-task-form"),
+          cancelAddTask: root.querySelector("#cancel-add-task"),
+          newTaskCategory: root.querySelector("#new-task-category"),
+          newTaskText: root.querySelector("#new-task-text"),
+          phaseBadge: root.querySelector("#phase-badge"),
+          weekFocus: root.querySelector("#week-focus"),
+          targetCompanies: root.querySelector("#target-companies"),
+          weeklyQuota: root.querySelector("#weekly-quota"),
+          statCompletion: root.querySelector("#stat-completion"),
+          statCompletionDetail: root.querySelector("#stat-completion-detail"),
+          statApplications: root.querySelector("#stat-applications"),
+          statOutreach: root.querySelector("#stat-outreach"),
+          statTraining: root.querySelector("#stat-training"),
+          statNutrition: root.querySelector("#stat-nutrition"),
+          statNutritionDetail: root.querySelector("#stat-nutrition-detail"),
+          roadmapList: root.querySelector("#roadmap-list"),
+          raceSummary: root.querySelector("#race-summary"),
+          disciplineSummary: root.querySelector("#discipline-summary"),
+          settingsForm: root.querySelector("#settings-form"),
+          settingsStatus: root.querySelector("#settings-status"),
+          dashboardStatus: root.querySelector("#dashboard-status"),
+          settingRace: root.querySelector("#setting-race"),
+          settingApplications: root.querySelector("#setting-applications"),
+          settingOutreach: root.querySelector("#setting-outreach"),
+          settingBikeStart: root.querySelector("#setting-bike-start"),
+          settingSwimStart: root.querySelector("#setting-swim-start"),
+          settingIndoorBikeStart: root.querySelector("#setting-indoor-bike-start"),
+          settingCalories: root.querySelector("#setting-calories"),
+          settingProtein: root.querySelector("#setting-protein"),
+          editScheduleBtn: root.querySelector("#edit-schedule-btn"),
+          modal: document.getElementById("schedule-modal"),
+          modalDayLabel: document.getElementById("modal-day-label"),
+          modalBlockList: document.getElementById("modal-block-list"),
+          modalNewTime: document.getElementById("modal-new-time"),
+          modalNewLabel: document.getElementById("modal-new-label"),
+          modalAddBlock: document.getElementById("modal-add-block"),
+          modalSave: document.getElementById("modal-save"),
+          modalReset: document.getElementById("modal-reset"),
+          modalClose: document.getElementById("modal-close")
+        };
+
+        populateWeekSelect();
+        populateSettings();
+        bindEvents();
+        renderAll();
+
+        // --- Helper functions ---
+        function parseDate(value) {
+          const parts = String(value).split("-").map(Number);
+          return new Date(parts[0], parts[1] - 1, parts[2]);
+        }
+
+        function dateKey(date) {
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return year + "-" + month + "-" + day;
+        }
+
+        function addDays(date, amount) {
+          const next = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          next.setDate(next.getDate() + amount);
+          return next;
+        }
+
+        function startOfWeek(date) {
+          const copy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          const offset = (copy.getDay() + 6) % 7;
+          return addDays(copy, -offset);
+        }
+
+        function clampDate(date) {
+          const clean = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          if (clean < RANGE_START) return new Date(RANGE_START);
+          if (clean > RANGE_END) return new Date(RANGE_END);
+          return clean;
+        }
+
+        function inRange(date) {
+          return date >= RANGE_START && date <= RANGE_END;
+        }
+
+        function formatShortDate(date) {
+          return MONTH_NAMES[date.getMonth()].slice(0, 3) + " " + date.getDate();
+        }
+
+        function formatLongDate(date) {
+          return LONG_DAY_NAMES[date.getDay()] + ", " + MONTH_NAMES[date.getMonth()] + " " + date.getDate();
+        }
+
+        function formatWeek(date) {
+          const end = addDays(date, 6);
+          return formatShortDate(date) + "–" + formatShortDate(end);
+        }
+
+        function loadState() {
+          try {
+            const saved = window.localStorage.getItem(STORAGE_KEY);
+            if (!saved) return JSON.parse(JSON.stringify(defaultState));
+            const parsed = JSON.parse(saved);
+            return {
+              settings: Object.assign({}, defaultState.settings, parsed.settings || {}),
+              completed: parsed.completed || {},
+              customTasks: Array.isArray(parsed.customTasks) ? parsed.customTasks : [],
+              scheduleOverrides: parsed.scheduleOverrides || {}
+            };
+          } catch (error) {
+            return JSON.parse(JSON.stringify(defaultState));
           }
+        }
 
-          const elements = {
-            tabs: Array.from(root.querySelectorAll("[data-view]")),
-            panels: {
-              week: root.querySelector("#panel-week"),
-              roadmap: root.querySelector("#panel-roadmap"),
-              settings: root.querySelector("#panel-settings")
-            },
-            weekSelect: root.querySelector("#week-select"),
-            previousWeek: root.querySelector("#previous-week"),
-            nextWeek: root.querySelector("#next-week"),
-            currentWeek: root.querySelector("#current-week"),
-            dayStrip: root.querySelector("#day-strip"),
-            scheduleList: root.querySelector("#schedule-list"),
-            todoList: root.querySelector("#todo-list"),
-            selectedDayTitle: root.querySelector("#selected-day-title"),
-            dayStatus: root.querySelector("#day-status"),
-            showAddTask: root.querySelector("#show-add-task"),
-            addTaskForm: root.querySelector("#add-task-form"),
-            cancelAddTask: root.querySelector("#cancel-add-task"),
-            newTaskCategory: root.querySelector("#new-task-category"),
-            newTaskText: root.querySelector("#new-task-text"),
-            phaseBadge: root.querySelector("#phase-badge"),
-            weekFocus: root.querySelector("#week-focus"),
-            targetCompanies: root.querySelector("#target-companies"),
-            weeklyQuota: root.querySelector("#weekly-quota"),
-            statCompletion: root.querySelector("#stat-completion"),
-            statCompletionDetail: root.querySelector("#stat-completion-detail"),
-            statApplications: root.querySelector("#stat-applications"),
-            statOutreach: root.querySelector("#stat-outreach"),
-            statTraining: root.querySelector("#stat-training"),
-            statNutrition: root.querySelector("#stat-nutrition"),
-            statNutritionDetail: root.querySelector("#stat-nutrition-detail"),
-            roadmapList: root.querySelector("#roadmap-list"),
-            raceSummary: root.querySelector("#race-summary"),
-            disciplineSummary: root.querySelector("#discipline-summary"),
-            settingsForm: root.querySelector("#settings-form"),
-            settingsStatus: root.querySelector("#settings-status"),
-            dashboardStatus: root.querySelector("#dashboard-status"),
-            settingRace: root.querySelector("#setting-race"),
-            settingApplications: root.querySelector("#setting-applications"),
-            settingOutreach: root.querySelector("#setting-outreach"),
-            settingBikeStart: root.querySelector("#setting-bike-start"),
-            settingSwimStart: root.querySelector("#setting-swim-start"),
-            settingIndoorBikeStart: root.querySelector("#setting-indoor-bike-start"),
-            settingCalories: root.querySelector("#setting-calories"),
-            settingProtein: root.querySelector("#setting-protein")
-          };
-
-          populateWeekSelect();
-          populateSettings();
-          bindEvents();
-          renderAll();
-
-          function parseDate(value) {
-            const parts = String(value).split("-").map(Number);
-            return new Date(parts[0], parts[1] - 1, parts[2]);
+        function saveState(message) {
+          try {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            elements.dashboardStatus.textContent = message || "Progress saved on this device.";
+          } catch (error) {
+            elements.dashboardStatus.textContent = "Progress is active for this session.";
           }
+        }
 
-          function dateKey(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, "0");
-            const day = String(date.getDate()).padStart(2, "0");
-            return year + "-" + month + "-" + day;
-          }
+        // --- Core rendering ---
+        function populateWeekSelect() {
+          elements.weekSelect.innerHTML = "";
+          weeks.forEach(function (week) {
+            const option = document.createElement("option");
+            option.value = dateKey(week);
+            option.textContent = formatWeek(week);
+            elements.weekSelect.appendChild(option);
+          });
+        }
 
-          function addDays(date, amount) {
-            const next = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-            next.setDate(next.getDate() + amount);
-            return next;
-          }
+        function populateSettings() {
+          elements.settingRace.value = state.settings.race;
+          elements.settingApplications.value = state.settings.applications;
+          elements.settingOutreach.value = state.settings.outreach;
+          elements.settingBikeStart.value = state.settings.bikeStart;
+          elements.settingSwimStart.value = state.settings.swimStart;
+          elements.settingIndoorBikeStart.value = state.settings.indoorBikeStart;
+          elements.settingCalories.value = state.settings.calories;
+          elements.settingProtein.value = state.settings.protein;
+        }
 
-          function startOfWeek(date) {
-            const copy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-            const offset = (copy.getDay() + 6) % 7;
-            return addDays(copy, -offset);
-          }
-
-          function clampDate(date) {
-            const clean = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-            if (clean < RANGE_START) return new Date(RANGE_START);
-            if (clean > RANGE_END) return new Date(RANGE_END);
-            return clean;
-          }
-
-          function inRange(date) {
-            return date >= RANGE_START && date <= RANGE_END;
-          }
-
-          function formatShortDate(date) {
-            return MONTH_NAMES[date.getMonth()].slice(0, 3) + " " + date.getDate();
-          }
-
-          function formatLongDate(date) {
-            return LONG_DAY_NAMES[date.getDay()] + ", " + MONTH_NAMES[date.getMonth()] + " " + date.getDate();
-          }
-
-          function formatWeek(date) {
-            const end = addDays(date, 6);
-            return formatShortDate(date) + "–" + formatShortDate(end);
-          }
-
-          function loadState() {
-            try {
-              const saved = window.localStorage.getItem(STORAGE_KEY);
-              if (!saved) return JSON.parse(JSON.stringify(defaultState));
-              const parsed = JSON.parse(saved);
-              return {
-                settings: Object.assign({}, defaultState.settings, parsed.settings || {}),
-                completed: parsed.completed || {},
-                customTasks: Array.isArray(parsed.customTasks) ? parsed.customTasks : []
-              };
-            } catch (error) {
-              return JSON.parse(JSON.stringify(defaultState));
-            }
-          }
-
-          function saveState(message) {
-            try {
-              window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-              elements.dashboardStatus.textContent = message || "Progress saved on this device.";
-            } catch (error) {
-              elements.dashboardStatus.textContent = "Progress is active for this session.";
-            }
-          }
-
-          function populateWeekSelect() {
-            elements.weekSelect.innerHTML = "";
-            weeks.forEach(function (week) {
-              const option = document.createElement("option");
-              option.value = dateKey(week);
-              option.textContent = formatWeek(week);
-              elements.weekSelect.appendChild(option);
+        function bindEvents() {
+          elements.tabs.forEach(function (tab) {
+            tab.addEventListener("click", function () {
+              setView(tab.dataset.view);
             });
-          }
+          });
 
-          function populateSettings() {
-            elements.settingRace.value = state.settings.race;
-            elements.settingApplications.value = state.settings.applications;
-            elements.settingOutreach.value = state.settings.outreach;
-            elements.settingBikeStart.value = state.settings.bikeStart;
-            elements.settingSwimStart.value = state.settings.swimStart;
-            elements.settingIndoorBikeStart.value = state.settings.indoorBikeStart;
-            elements.settingCalories.value = state.settings.calories;
-            elements.settingProtein.value = state.settings.protein;
-          }
+          elements.previousWeek.addEventListener("click", function () {
+            moveWeek(-1);
+          });
 
-          function bindEvents() {
-            elements.tabs.forEach(function (tab) {
-              tab.addEventListener("click", function () {
-                setView(tab.dataset.view);
-              });
-            });
+          elements.nextWeek.addEventListener("click", function () {
+            moveWeek(1);
+          });
 
-            elements.previousWeek.addEventListener("click", function () {
-              moveWeek(-1);
-            });
+          elements.currentWeek.addEventListener("click", function () {
+            selectedDate = clampDate(new Date());
+            selectedWeek = startOfWeek(selectedDate);
+            renderWeek();
+          });
 
-            elements.nextWeek.addEventListener("click", function () {
-              moveWeek(1);
-            });
-
-            elements.currentWeek.addEventListener("click", function () {
-              selectedDate = clampDate(new Date());
-              selectedWeek = startOfWeek(selectedDate);
-              renderWeek();
-            });
-
-            elements.weekSelect.addEventListener("change", function () {
-              selectedWeek = parseDate(elements.weekSelect.value);
-              selectedDate = firstValidDay(selectedWeek);
-              renderWeek();
-            });
-
-            elements.showAddTask.addEventListener("click", function () {
-              elements.addTaskForm.classList.remove("is-hidden");
-              elements.newTaskText.focus();
-            });
-
-            elements.cancelAddTask.addEventListener("click", function () {
-              closeAddTask();
-            });
-
-            elements.addTaskForm.addEventListener("submit", function (event) {
-              event.preventDefault();
-              const text = elements.newTaskText.value.trim();
-              if (!text) return;
-              state.customTasks.push({
-                id: "custom-" + Date.now(),
-                date: dateKey(selectedDate),
-                category: elements.newTaskCategory.value,
-                text: text
-              });
-              saveState("Task added and saved.");
-              closeAddTask();
-              renderWeek();
-            });
-
-            elements.settingsForm.addEventListener("submit", function (event) {
-              event.preventDefault();
-              state.settings.race = elements.settingRace.value;
-              state.settings.applications = Number(elements.settingApplications.value) || 8;
-              state.settings.outreach = Number(elements.settingOutreach.value) || 10;
-              state.settings.bikeStart = elements.settingBikeStart.value || defaultState.settings.bikeStart;
-              state.settings.swimStart = elements.settingSwimStart.value || defaultState.settings.swimStart;
-              state.settings.indoorBikeStart = elements.settingIndoorBikeStart.value || defaultState.settings.indoorBikeStart;
-              state.settings.calories = elements.settingCalories.value;
-              state.settings.protein = elements.settingProtein.value;
-              saveState("Settings saved.");
-              elements.settingsStatus.textContent = "Saved.";
-              renderAll();
-            });
-          }
-
-          function setView(view) {
-            elements.tabs.forEach(function (tab) {
-              const active = tab.dataset.view === view;
-              tab.setAttribute("aria-selected", String(active));
-              tab.classList.toggle("btn-primary", active);
-            });
-
-            Object.keys(elements.panels).forEach(function (name) {
-              const active = name === view;
-              elements.panels[name].hidden = !active;
-              elements.panels[name].classList.toggle("is-hidden", !active);
-            });
-
-            if (view === "roadmap") renderRoadmap();
-            if (view === "settings") populateSettings();
-          }
-
-          function moveWeek(direction) {
-            const currentIndex = weeks.findIndex(function (week) {
-              return dateKey(week) === dateKey(selectedWeek);
-            });
-            const nextIndex = Math.max(0, Math.min(weeks.length - 1, currentIndex + direction));
-            selectedWeek = new Date(weeks[nextIndex]);
+          elements.weekSelect.addEventListener("change", function () {
+            selectedWeek = parseDate(elements.weekSelect.value);
             selectedDate = firstValidDay(selectedWeek);
             renderWeek();
-          }
+          });
 
-          function firstValidDay(week) {
-            for (let i = 0; i < 7; i += 1) {
-              const candidate = addDays(week, i);
-              if (inRange(candidate)) return candidate;
-            }
-            return clampDate(week);
-          }
+          elements.showAddTask.addEventListener("click", function () {
+            elements.addTaskForm.classList.remove("is-hidden");
+            elements.newTaskText.focus();
+          });
 
-          function renderAll() {
+          elements.cancelAddTask.addEventListener("click", function () {
+            closeAddTask();
+          });
+
+          elements.addTaskForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const text = elements.newTaskText.value.trim();
+            if (!text) return;
+            state.customTasks.push({
+              id: "custom-" + Date.now(),
+              date: dateKey(selectedDate),
+              category: elements.newTaskCategory.value,
+              text: text
+            });
+            saveState("Task added and saved.");
+            closeAddTask();
             renderWeek();
-            renderRoadmap();
+          });
+
+          elements.settingsForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            state.settings.race = elements.settingRace.value;
+            state.settings.applications = Number(elements.settingApplications.value) || 8;
+            state.settings.outreach = Number(elements.settingOutreach.value) || 10;
+            state.settings.bikeStart = elements.settingBikeStart.value || defaultState.settings.bikeStart;
+            state.settings.swimStart = elements.settingSwimStart.value || defaultState.settings.swimStart;
+            state.settings.indoorBikeStart = elements.settingIndoorBikeStart.value || defaultState.settings.indoorBikeStart;
+            state.settings.calories = elements.settingCalories.value;
+            state.settings.protein = elements.settingProtein.value;
+            saveState("Settings saved.");
+            elements.settingsStatus.textContent = "Saved.";
+            renderAll();
+          });
+
+          // --- Schedule Editor Events ---
+          elements.editScheduleBtn.addEventListener("click", function () {
+            openScheduleEditor();
+          });
+
+          elements.modalClose.addEventListener("click", function () {
+            closeScheduleEditor();
+          });
+
+          elements.modalSave.addEventListener("click", function () {
+            saveScheduleOverride();
+          });
+
+          elements.modalReset.addEventListener("click", function () {
+            resetScheduleOverride();
+          });
+
+          elements.modalAddBlock.addEventListener("click", function () {
+            const time = elements.modalNewTime.value.trim();
+            const label = elements.modalNewLabel.value.trim();
+            if (!time || !label) return;
+            // Find the current working list
+            const key = dateKey(selectedDate);
+            let blocks = getCurrentBlocks(key);
+            blocks.push({ time, label });
+            // Re-render the modal list
+            renderModalBlocks(blocks);
+            elements.modalNewTime.value = "";
+            elements.modalNewLabel.value = "";
+          });
+
+          // Close modal on background click
+          elements.modal.addEventListener("click", function(e) {
+            if (e.target === elements.modal) closeScheduleEditor();
+          });
+        }
+
+        function setView(view) {
+          elements.tabs.forEach(function (tab) {
+            const active = tab.dataset.view === view;
+            tab.setAttribute("aria-selected", String(active));
+            tab.classList.toggle("btn-primary", active);
+          });
+
+          Object.keys(elements.panels).forEach(function (name) {
+            const active = name === view;
+            elements.panels[name].hidden = !active;
+            elements.panels[name].classList.toggle("is-hidden", !active);
+          });
+
+          if (view === "roadmap") renderRoadmap();
+          if (view === "settings") populateSettings();
+        }
+
+        function moveWeek(direction) {
+          const currentIndex = weeks.findIndex(function (week) {
+            return dateKey(week) === dateKey(selectedWeek);
+          });
+          const nextIndex = Math.max(0, Math.min(weeks.length - 1, currentIndex + direction));
+          selectedWeek = new Date(weeks[nextIndex]);
+          selectedDate = firstValidDay(selectedWeek);
+          renderWeek();
+        }
+
+        function firstValidDay(week) {
+          for (let i = 0; i < 7; i += 1) {
+            const candidate = addDays(week, i);
+            if (inRange(candidate)) return candidate;
           }
+          return clampDate(week);
+        }
 
-          function renderWeek() {
-            elements.weekSelect.value = dateKey(selectedWeek);
-            const weekIndex = weeks.findIndex(function (week) {
-              return dateKey(week) === dateKey(selectedWeek);
-            });
-            elements.previousWeek.disabled = weekIndex <= 0;
-            elements.nextWeek.disabled = weekIndex >= weeks.length - 1;
+        function renderAll() {
+          renderWeek();
+          renderRoadmap();
+        }
 
-            const phase = getPhase(selectedWeek);
-            const focus = weekFocus[dateKey(selectedWeek)] || [phase.focus, phase.companies];
-            const targets = getWeekTargets(selectedWeek);
-            elements.phaseBadge.textContent = phase.name;
-            elements.weekFocus.textContent = focus[0];
-            elements.targetCompanies.textContent = "Focus: " + focus[1];
-            elements.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 2 conversations";
+        function renderWeek() {
+          elements.weekSelect.value = dateKey(selectedWeek);
+          const weekIndex = weeks.findIndex(function (week) {
+            return dateKey(week) === dateKey(selectedWeek);
+          });
+          elements.previousWeek.disabled = weekIndex <= 0;
+          elements.nextWeek.disabled = weekIndex >= weeks.length - 1;
 
-            renderDayStrip();
-            renderSelectedDay();
-            renderStats();
-          }
+          const phase = getPhase(selectedWeek);
+          const focus = weekFocus[dateKey(selectedWeek)] || [phase.focus, phase.companies];
+          const targets = getWeekTargets(selectedWeek);
+          elements.phaseBadge.textContent = phase.name;
+          elements.weekFocus.textContent = focus[0];
+          elements.targetCompanies.textContent = "Focus: " + focus[1];
+          elements.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 2 conversations";
 
-          function renderDayStrip() {
-            elements.dayStrip.innerHTML = "";
-            for (let i = 0; i < 7; i += 1) {
-              const date = addDays(selectedWeek, i);
-              const valid = inRange(date);
-              const tasks = valid ? tasksForDate(date) : [];
-              const done = tasks.filter(isComplete).length;
-              const button = document.createElement("button");
-              button.type = "button";
-              button.className = "btn viz-tile";
-              button.disabled = !valid;
-              button.setAttribute("role", "tab");
-              button.setAttribute("aria-selected", String(valid && dateKey(date) === dateKey(selectedDate)));
-              button.setAttribute("aria-label", valid ? formatLongDate(date) + ", " + done + " of " + tasks.length + " tasks done" : formatLongDate(date) + ", outside dashboard range");
-              button.textContent = DAY_NAMES[date.getDay()] + " " + date.getDate() + (valid ? " · " + done + "/" + tasks.length : " · —");
-              if (valid && dateKey(date) === dateKey(selectedDate)) button.classList.add("is-selected");
-              if (valid) {
-                button.addEventListener("click", function () {
-                  selectedDate = date;
-                  renderWeek();
-                });
-              }
-              elements.dayStrip.appendChild(button);
-            }
-          }
+          renderDayStrip();
+          renderSelectedDay();
+          renderStats();
+        }
 
-          function renderSelectedDay() {
-            elements.selectedDayTitle.textContent = formatLongDate(selectedDate);
-            renderSchedule();
-            renderTodos();
-          }
-
-          function renderSchedule() {
-            const blocks = scheduleForDate(selectedDate);
-            elements.scheduleList.innerHTML = "";
-            blocks.forEach(function (block) {
-              const row = document.createElement("div");
-              row.className = "schedule-item";
-              const time = document.createElement("span");
-              time.className = "schedule-time text-small";
-              time.textContent = block.time;
-              const label = document.createElement("span");
-              label.textContent = block.label;
-              row.appendChild(time);
-              row.appendChild(label);
-              elements.scheduleList.appendChild(row);
-            });
-          }
-
-          function renderTodos() {
-            const tasks = tasksForDate(selectedDate);
-            elements.todoList.innerHTML = "";
-
-            if (!tasks.length) {
-              const empty = document.createElement("div");
-              empty.className = "empty-state";
-              empty.textContent = "No tasks planned.";
-              elements.todoList.appendChild(empty);
-            }
-
-            tasks.forEach(function (task) {
-              const row = document.createElement("div");
-              row.className = "todo-row";
-              row.dataset.complete = String(isComplete(task));
-
-              const checkWrap = document.createElement("div");
-              checkWrap.className = "form-check";
-              const checkbox = document.createElement("input");
-              checkbox.className = "form-check-input";
-              checkbox.type = "checkbox";
-              checkbox.id = "task-" + safeId(task.id);
-              checkbox.checked = isComplete(task);
-              checkbox.setAttribute("aria-label", "Mark " + task.text + " complete");
-              checkbox.addEventListener("change", function () {
-                state.completed[task.id] = checkbox.checked;
-                saveState("Progress saved.");
+        function renderDayStrip() {
+          elements.dayStrip.innerHTML = "";
+          for (let i = 0; i < 7; i += 1) {
+            const date = addDays(selectedWeek, i);
+            const valid = inRange(date);
+            const tasks = valid ? tasksForDate(date) : [];
+            const done = tasks.filter(isComplete).length;
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "btn viz-tile";
+            button.disabled = !valid;
+            button.setAttribute("role", "tab");
+            button.setAttribute("aria-selected", String(valid && dateKey(date) === dateKey(selectedDate)));
+            button.setAttribute("aria-label", valid ? formatLongDate(date) + ", " + done + " of " + tasks.length + " tasks done" : formatLongDate(date) + ", outside dashboard range");
+            button.textContent = DAY_NAMES[date.getDay()] + " " + date.getDate() + (valid ? " · " + done + "/" + tasks.length : " · —");
+            if (valid && dateKey(date) === dateKey(selectedDate)) button.classList.add("is-selected");
+            if (valid) {
+              button.addEventListener("click", function () {
+                selectedDate = date;
                 renderWeek();
               });
-              checkWrap.appendChild(checkbox);
-
-              const copy = document.createElement("div");
-              copy.className = "todo-copy";
-              const label = document.createElement("label");
-              label.className = "form-check-label todo-text";
-              label.htmlFor = checkbox.id;
-              label.textContent = task.text;
-              const category = document.createElement("span");
-              category.className = "text-small text-muted";
-              category.textContent = task.category;
-              copy.appendChild(label);
-              copy.appendChild(category);
-
-              row.appendChild(checkWrap);
-              row.appendChild(copy);
-
-              if (task.custom) {
-                const remove = document.createElement("button");
-                remove.type = "button";
-                remove.className = "btn btn-ghost";
-                remove.setAttribute("aria-label", "Remove " + task.text);
-                const removeIcon = document.createElement("i");
-                removeIcon.setAttribute("data-lucide", "trash-2");
-                removeIcon.setAttribute("aria-hidden", "true");
-                remove.appendChild(removeIcon);
-                remove.addEventListener("click", function () {
-                  state.customTasks = state.customTasks.filter(function (item) {
-                    return item.id !== task.id;
-                  });
-                  delete state.completed[task.id];
-                  saveState("Task removed.");
-                  renderWeek();
-                });
-                row.appendChild(remove);
-              } else {
-                const spacer = document.createElement("span");
-                row.appendChild(spacer);
-              }
-
-              elements.todoList.appendChild(row);
-            });
-
-            const completeCount = tasks.filter(isComplete).length;
-            elements.dayStatus.textContent = completeCount + " of " + tasks.length + " done";
-            refreshIcons();
+            }
+            elements.dayStrip.appendChild(button);
           }
+        }
 
-          function renderStats() {
-            const tasks = tasksForWeek(selectedWeek);
-            const completeCount = tasks.filter(isComplete).length;
-            const completionPercent = tasks.length ? Math.round((completeCount / tasks.length) * 100) : 0;
-            const targets = getWeekTargets(selectedWeek);
+        function renderSelectedDay() {
+          elements.selectedDayTitle.textContent = formatLongDate(selectedDate);
+          renderSchedule();
+          renderTodos();
+        }
 
-            elements.statCompletion.textContent = completionPercent + "%";
-            elements.statCompletionDetail.textContent = completeCount + " of " + tasks.length + " tasks";
-            elements.statApplications.textContent = metricCompleted(tasks, "application") + " / " + targets.applications;
-            elements.statOutreach.textContent = metricCompleted(tasks, "outreach") + " / " + targets.outreach + " outreach";
-            elements.statTraining.textContent = metricCompleted(tasks, "training") + " / " + targets.training;
-            elements.statNutrition.textContent = metricCompleted(tasks, "nutrition") + " / " + targets.nutrition;
+        // --- SCHEDULE RENDER (with override support) ---
+        function renderSchedule() {
+          const key = dateKey(selectedDate);
+          let blocks = getCurrentBlocks(key);
+          elements.scheduleList.innerHTML = "";
+          blocks.forEach(function (block) {
+            const row = document.createElement("div");
+            row.className = "schedule-item";
+            const time = document.createElement("span");
+            time.className = "schedule-time text-small";
+            time.textContent = block.time;
+            const label = document.createElement("span");
+            label.textContent = block.label;
+            row.appendChild(time);
+            row.appendChild(label);
+            elements.scheduleList.appendChild(row);
+          });
+        }
 
-            const calories = state.settings.calories;
-            const protein = state.settings.protein;
-            if (calories && protein) {
-              elements.statNutritionDetail.textContent = calories + " kcal · " + protein + " g protein";
-            } else if (calories) {
-              elements.statNutritionDetail.textContent = calories + " kcal · protein target unset";
-            } else if (protein) {
-              elements.statNutritionDetail.textContent = protein + " g protein · calories unset";
+        // Helper to get blocks (override or default)
+        function getCurrentBlocks(key) {
+          if (state.scheduleOverrides[key] && state.scheduleOverrides[key].length > 0) {
+            return state.scheduleOverrides[key];
+          }
+          return scheduleForDate(selectedDate);
+        }
+
+        // --- Schedule Editor Logic ---
+        function openScheduleEditor() {
+          const key = dateKey(selectedDate);
+          elements.modalDayLabel.textContent = formatLongDate(selectedDate);
+          let blocks = getCurrentBlocks(key);
+          // Make a deep copy for editing
+          renderModalBlocks(blocks);
+          elements.modal.classList.add("active");
+          elements.modalNewTime.focus();
+        }
+
+        function renderModalBlocks(blocks) {
+          elements.modalBlockList.innerHTML = "";
+          blocks.forEach(function (block, index) {
+            const row = document.createElement("div");
+            row.className = "block-row";
+            const timeSpan = document.createElement("span");
+            timeSpan.className = "time";
+            timeSpan.textContent = block.time;
+            const labelSpan = document.createElement("span");
+            labelSpan.className = "label";
+            labelSpan.textContent = block.label;
+            const delBtn = document.createElement("button");
+            delBtn.className = "btn btn-danger";
+            delBtn.innerHTML = '<i data-lucide="trash-2" style="width:16px;height:16px;"></i>';
+            delBtn.setAttribute("aria-label", "Remove block");
+            delBtn.addEventListener("click", function () {
+              blocks.splice(index, 1);
+              renderModalBlocks(blocks);
+            });
+            row.appendChild(timeSpan);
+            row.appendChild(labelSpan);
+            row.appendChild(delBtn);
+            elements.modalBlockList.appendChild(row);
+          });
+          // Re-init icons in modal
+          if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
+          }
+          // Store current blocks in a data attribute for saving
+          elements.modalBlockList.dataset.blocks = JSON.stringify(blocks);
+        }
+
+        function saveScheduleOverride() {
+          const key = dateKey(selectedDate);
+          const blocksJson = elements.modalBlockList.dataset.blocks;
+          if (blocksJson) {
+            const blocks = JSON.parse(blocksJson);
+            if (blocks.length === 0) {
+              // If empty, remove the override to fall back to default
+              delete state.scheduleOverrides[key];
             } else {
-              elements.statNutritionDetail.textContent = "Set targets in settings";
+              state.scheduleOverrides[key] = blocks;
             }
+            saveState("Schedule updated.");
+            closeScheduleEditor();
+            renderWeek();
+          }
+        }
+
+        function resetScheduleOverride() {
+          const key = dateKey(selectedDate);
+          delete state.scheduleOverrides[key];
+          saveState("Schedule reset to default.");
+          closeScheduleEditor();
+          renderWeek();
+        }
+
+        function closeScheduleEditor() {
+          elements.modal.classList.remove("active");
+        }
+
+        // --- Existing logic (tasks, stats, etc.) - UNCHANGED ---
+        function renderTodos() {
+          const tasks = tasksForDate(selectedDate);
+          elements.todoList.innerHTML = "";
+
+          if (!tasks.length) {
+            const empty = document.createElement("div");
+            empty.className = "empty-state";
+            empty.textContent = "No tasks planned.";
+            elements.todoList.appendChild(empty);
           }
 
-          function renderRoadmap() {
-            const raceNames = {
-              undecided: "Ohio or Musselman; 2027 date TBD",
-              ohio: "IRONMAN 70.3 Ohio; 2027 date TBD",
-              musselman: "Musselman in Geneva, NY; 2027 date TBD"
-            };
-            elements.raceSummary.textContent = raceNames[state.settings.race] || raceNames.undecided;
-            elements.disciplineSummary.textContent = compactDate(state.settings.bikeStart) + " / " + compactDate(state.settings.swimStart);
+          tasks.forEach(function (task) {
+            const row = document.createElement("div");
+            row.className = "todo-row";
+            row.dataset.complete = String(isComplete(task));
 
-            const rows = roadmapRows();
-            elements.roadmapList.innerHTML = "";
-            rows.forEach(function (item) {
-              const row = document.createElement("div");
-              row.className = "roadmap-row";
-
-              const period = document.createElement("div");
-              period.className = "roadmap-period";
-              const badge = document.createElement("span");
-              badge.className = "viz-badge";
-              badge.textContent = item.phase;
-              const dates = document.createElement("p");
-              dates.className = "text-small";
-              dates.textContent = item.dates;
-              period.appendChild(badge);
-              period.appendChild(dates);
-
-              row.appendChild(period);
-              row.appendChild(roadmapCell("Career", item.career));
-              row.appendChild(roadmapCell("Training schedule", item.training));
-              row.appendChild(roadmapCell("Diet & life", item.life));
-              elements.roadmapList.appendChild(row);
+            const checkWrap = document.createElement("div");
+            checkWrap.className = "form-check";
+            const checkbox = document.createElement("input");
+            checkbox.className = "form-check-input";
+            checkbox.type = "checkbox";
+            checkbox.id = "task-" + safeId(task.id);
+            checkbox.checked = isComplete(task);
+            checkbox.setAttribute("aria-label", "Mark " + task.text + " complete");
+            checkbox.addEventListener("change", function () {
+              state.completed[task.id] = checkbox.checked;
+              saveState("Progress saved.");
+              renderWeek();
             });
+            checkWrap.appendChild(checkbox);
+
+            const copy = document.createElement("div");
+            copy.className = "todo-copy";
+            const label = document.createElement("label");
+            label.className = "form-check-label todo-text";
+            label.htmlFor = checkbox.id;
+            label.textContent = task.text;
+            const category = document.createElement("span");
+            category.className = "text-small text-muted";
+            category.textContent = task.category;
+            copy.appendChild(label);
+            copy.appendChild(category);
+
+            row.appendChild(checkWrap);
+            row.appendChild(copy);
+
+            if (task.custom) {
+              const remove = document.createElement("button");
+              remove.type = "button";
+              remove.className = "btn btn-ghost";
+              remove.setAttribute("aria-label", "Remove " + task.text);
+              const removeIcon = document.createElement("i");
+              removeIcon.setAttribute("data-lucide", "trash-2");
+              removeIcon.setAttribute("aria-hidden", "true");
+              remove.appendChild(removeIcon);
+              remove.addEventListener("click", function () {
+                state.customTasks = state.customTasks.filter(function (item) {
+                  return item.id !== task.id;
+                });
+                delete state.completed[task.id];
+                saveState("Task removed.");
+                renderWeek();
+              });
+              row.appendChild(remove);
+            } else {
+              const spacer = document.createElement("span");
+              row.appendChild(spacer);
+            }
+
+            elements.todoList.appendChild(row);
+          });
+
+          const completeCount = tasks.filter(isComplete).length;
+          elements.dayStatus.textContent = completeCount + " of " + tasks.length + " done";
+          refreshIcons();
+        }
+
+        function renderStats() {
+          const tasks = tasksForWeek(selectedWeek);
+          const completeCount = tasks.filter(isComplete).length;
+          const completionPercent = tasks.length ? Math.round((completeCount / tasks.length) * 100) : 0;
+          const targets = getWeekTargets(selectedWeek);
+
+          elements.statCompletion.textContent = completionPercent + "%";
+          elements.statCompletionDetail.textContent = completeCount + " of " + tasks.length + " tasks";
+          elements.statApplications.textContent = metricCompleted(tasks, "application") + " / " + targets.applications;
+          elements.statOutreach.textContent = metricCompleted(tasks, "outreach") + " / " + targets.outreach + " outreach";
+          elements.statTraining.textContent = metricCompleted(tasks, "training") + " / " + targets.training;
+          elements.statNutrition.textContent = metricCompleted(tasks, "nutrition") + " / " + targets.nutrition;
+
+          const calories = state.settings.calories;
+          const protein = state.settings.protein;
+          if (calories && protein) {
+            elements.statNutritionDetail.textContent = calories + " kcal · " + protein + " g protein";
+          } else if (calories) {
+            elements.statNutritionDetail.textContent = calories + " kcal · protein target unset";
+          } else if (protein) {
+            elements.statNutritionDetail.textContent = protein + " g protein · calories unset";
+          } else {
+            elements.statNutritionDetail.textContent = "Set targets in settings";
+          }
+        }
+
+        function renderRoadmap() {
+          const raceNames = {
+            undecided: "Ohio or Musselman; 2027 date TBD",
+            ohio: "IRONMAN 70.3 Ohio; 2027 date TBD",
+            musselman: "Musselman in Geneva, NY; 2027 date TBD"
+          };
+          elements.raceSummary.textContent = raceNames[state.settings.race] || raceNames.undecided;
+          elements.disciplineSummary.textContent = compactDate(state.settings.bikeStart) + " / " + compactDate(state.settings.swimStart);
+
+          const rows = roadmapRows();
+          elements.roadmapList.innerHTML = "";
+          rows.forEach(function (item) {
+            const row = document.createElement("div");
+            row.className = "roadmap-row";
+
+            const period = document.createElement("div");
+            period.className = "roadmap-period";
+            const badge = document.createElement("span");
+            badge.className = "viz-badge";
+            badge.textContent = item.phase;
+            const dates = document.createElement("p");
+            dates.className = "text-small";
+            dates.textContent = item.dates;
+            period.appendChild(badge);
+            period.appendChild(dates);
+
+            row.appendChild(period);
+            row.appendChild(roadmapCell("Career", item.career));
+            row.appendChild(roadmapCell("Training schedule", item.training));
+            row.appendChild(roadmapCell("Diet & life", item.life));
+            elements.roadmapList.appendChild(row);
+          });
+        }
+
+        function roadmapCell(title, text) {
+          const cell = document.createElement("div");
+          cell.className = "roadmap-cell";
+          const heading = document.createElement("strong");
+          heading.textContent = title;
+          const copy = document.createElement("p");
+          copy.className = "text-small";
+          copy.textContent = text;
+          cell.appendChild(heading);
+          cell.appendChild(copy);
+          return cell;
+        }
+
+        function roadmapRows() {
+          return [
+            {
+              phase: "Setup",
+              dates: "Jul 10–19",
+              career: "Build the tracker, résumé variants, LinkedIn, and first four applications. Role lanes: Project Coordinator / Junior PM, Business / Data / Operations Analyst, Strategy / Consulting Analyst, and graduate or rotational programs. Primary list: AtkinsRéalis, Intact, IQVIA, Munich Re / HSB, AstraZeneca, Zurich, Sanofi, Marsh, Metrolinx, and Veeva.",
+              training: "Keep the current run-and-lift emphasis inside four reserved weekly blocks.",
+              life: "Set calorie and protein targets, log a baseline week, and protect Friday night as the pressure-release valve."
+            },
+            {
+              phase: "Launch",
+              dates: "Jul 20–Aug 2",
+              career: "Reach " + state.settings.applications + " high-quality applications, " + state.settings.outreach + " targeted outreach messages, and 2 live conversations per week.",
+              training: "Continue summer running; confirm bike access, route, fit, and indoor option before August.",
+              life: "Use Sunday for groceries, meal prep, and the weekly dashboard review."
+            },
+            {
+              phase: "Build",
+              dates: "Aug 3–Sep 13",
+              career: "Complete the first pass across all 10 primary companies, then run two referral sprints. Watch Musselman registration from late August.",
+              training: "Bike begins " + fullCompactDate(state.settings.bikeStart) + ". The Saturday bike replaces one run block; it does not create a fifth block.",
+              life: "Keep weekday meals repetitive and easy to log while application volume is highest."
+            },
+            {
+              phase: "Convert",
+              dates: "Sep 14–Oct 11",
+              career: "Convert outreach to interviews, practice stories and cases, and double down on the job lanes producing responses. Choose and register for the race when 2027 entry opens.",
+              training: "Swim begins " + fullCompactDate(state.settings.swimStart) + " in an indoor pool, replacing a weekday run slot.",
+              life: "Schedule interviews before adding optional commitments; keep one recovery evening untouched."
+            },
+            {
+              phase: "Interview",
+              dates: "Oct 12–Nov 15",
+              career: "Shift time from broad applications toward cases, technical examples, follow-ups, references, and late-stage interviews. Open a backup pipeline in early November.",
+              training: "Move the bike indoors around " + fullCompactDate(state.settings.indoorBikeStart) + "; keep four total blocks and avoid volume creep.",
+              life: "Protect sleep before interviews and prepare meals on Sunday rather than relying on weekday decisions."
+            },
+            {
+              phase: "Offer close",
+              dates: "Nov 16–Dec 15",
+              career: "Drive decisions, prepare references and negotiation points, and secure a signed permanent early-career offer by December 15.",
+              training: "Maintain the established indoor rhythm; interviews and offer work take priority over adding sessions.",
+              life: "Keep food logging simple and preserve open time for interviews, references, and decision-making."
+            },
+            {
+              phase: "Transition",
+              dates: "Dec 16–31",
+              career: "Transition cleanly, prepare onboarding, and keep the backup pipeline active until the signed offer is secure.",
+              training: "Maintain consistency and set the January 2027 base schedule after the work situation is known.",
+              life: "Review the year, set January targets, and leave room for holidays and recovery."
+            }
+          ];
+        }
+
+        function getPhase(date) {
+          if (date <= parseDate("2026-07-19")) {
+            return { name: "Setup", focus: "Build the operating system", companies: "All primary targets" };
+          }
+          if (date <= parseDate("2026-08-02")) {
+            return { name: "Launch", focus: "Launch the application pipeline", companies: "First five targets" };
+          }
+          if (date <= parseDate("2026-09-13")) {
+            return { name: "Build", focus: "Build referrals and start cycling", companies: "Primary target rotation" };
+          }
+          if (date <= parseDate("2026-10-11")) {
+            return { name: "Convert", focus: "Convert outreach into interviews", companies: "Responsive companies" };
+          }
+          if (date <= parseDate("2026-11-15")) {
+            return { name: "Interview", focus: "Deep interview preparation", companies: "Active and backup pipelines" };
+          }
+          if (date <= parseDate("2026-12-15")) {
+            return { name: "Offer close", focus: "Drive an offer to signature", companies: "Late-stage processes" };
+          }
+          return { name: "Transition", focus: "Close the year and plan January", companies: "Onboarding or backup" };
+        }
+
+        function getWeekTargets(week) {
+          const phase = getPhase(week);
+          const validDates = weekDates(week).filter(inRange);
+          const training = validDates.filter(isTrainingDay).length;
+          let applications = Number(state.settings.applications) || 8;
+          let outreach = Number(state.settings.outreach) || 10;
+
+          if (dateKey(week) === "2026-07-06") {
+            applications = 2;
+            outreach = 4;
+          } else if (dateKey(week) === "2026-07-13") {
+            applications = 4;
+            outreach = 8;
+          } else if (dateKey(week) === "2026-12-14") {
+            applications = 2;
+            outreach = 4;
+          } else if (phase.name === "Interview") {
+            applications = Math.max(6, Math.round(applications * 0.75));
+            outreach = Math.max(6, Math.round(outreach * 0.8));
+          } else if (phase.name === "Offer close") {
+            applications = Math.max(4, Math.round(applications * 0.5));
+            outreach = Math.max(4, Math.round(outreach * 0.6));
+          } else if (phase.name === "Transition") {
+            applications = 0;
+            outreach = 0;
           }
 
-          function roadmapCell(title, text) {
-            const cell = document.createElement("div");
-            cell.className = "roadmap-cell";
-            const heading = document.createElement("strong");
-            heading.textContent = title;
-            const copy = document.createElement("p");
-            copy.className = "text-small";
-            copy.textContent = text;
-            cell.appendChild(heading);
-            cell.appendChild(copy);
-            return cell;
+          return {
+            applications: applications,
+            outreach: outreach,
+            training: training,
+            nutrition: validDates.length
+          };
+        }
+
+        function weekDates(week) {
+          const dates = [];
+          for (let i = 0; i < 7; i += 1) dates.push(addDays(week, i));
+          return dates;
+        }
+
+        function isTrainingDay(date) {
+          const key = dateKey(date);
+          if (key === "2026-07-10" || key === "2026-07-11") return true;
+          if (key === "2026-07-12") return false;
+          return [0, 2, 4, 6].indexOf(date.getDay()) !== -1;
+        }
+
+        function trainingType(date) {
+          const key = dateKey(date);
+          if (key === "2026-07-10") return "short run";
+          if (key === "2026-07-11") return "lift";
+          const bikeStart = parseDate(state.settings.bikeStart);
+          const swimStart = parseDate(state.settings.swimStart);
+          const indoorBikeStart = parseDate(state.settings.indoorBikeStart);
+          const day = date.getDay();
+
+          if (date < bikeStart) {
+            if (day === 2 || day === 6) return "run";
+            return "lift";
           }
 
-          function roadmapRows() {
-            return [
-              {
-                phase: "Setup",
-                dates: "Jul 10–19",
-                career: "Build the tracker, résumé variants, LinkedIn, and first four applications. Role lanes: Project Coordinator / Junior PM, Business / Data / Operations Analyst, Strategy / Consulting Analyst, and graduate or rotational programs. Primary list: AtkinsRéalis, Intact, IQVIA, Munich Re / HSB, AstraZeneca, Zurich, Sanofi, Marsh, Metrolinx, and Veeva.",
-                training: "Keep the current run-and-lift emphasis inside four reserved weekly blocks.",
-                life: "Set calorie and protein targets, log a baseline week, and protect Friday night as the pressure-release valve."
-              },
-              {
-                phase: "Launch",
-                dates: "Jul 20–Aug 2",
-                career: "Reach " + state.settings.applications + " high-quality applications, " + state.settings.outreach + " targeted outreach messages, and 2 live conversations per week.",
-                training: "Continue summer running; confirm bike access, route, fit, and indoor option before August.",
-                life: "Use Sunday for groceries, meal prep, and the weekly dashboard review."
-              },
-              {
-                phase: "Build",
-                dates: "Aug 3–Sep 13",
-                career: "Complete the first pass across all 10 primary companies, then run two referral sprints. Watch Musselman registration from late August.",
-                training: "Bike begins " + fullCompactDate(state.settings.bikeStart) + ". The Saturday bike replaces one run block; it does not create a fifth block.",
-                life: "Keep weekday meals repetitive and easy to log while application volume is highest."
-              },
-              {
-                phase: "Convert",
-                dates: "Sep 14–Oct 11",
-                career: "Convert outreach to interviews, practice stories and cases, and double down on the job lanes producing responses. Choose and register for the race when 2027 entry opens.",
-                training: "Swim begins " + fullCompactDate(state.settings.swimStart) + " in an indoor pool, replacing a weekday run slot.",
-                life: "Schedule interviews before adding optional commitments; keep one recovery evening untouched."
-              },
-              {
-                phase: "Interview",
-                dates: "Oct 12–Nov 15",
-                career: "Shift time from broad applications toward cases, technical examples, follow-ups, references, and late-stage interviews. Open a backup pipeline in early November.",
-                training: "Move the bike indoors around " + fullCompactDate(state.settings.indoorBikeStart) + "; keep four total blocks and avoid volume creep.",
-                life: "Protect sleep before interviews and prepare meals on Sunday rather than relying on weekday decisions."
-              },
-              {
-                phase: "Offer close",
-                dates: "Nov 16–Dec 15",
-                career: "Drive decisions, prepare references and negotiation points, and secure a signed permanent early-career offer by December 15.",
-                training: "Maintain the established indoor rhythm; interviews and offer work take priority over adding sessions.",
-                life: "Keep food logging simple and preserve open time for interviews, references, and decision-making."
-              },
-              {
-                phase: "Transition",
-                dates: "Dec 16–31",
-                career: "Transition cleanly, prepare onboarding, and keep the backup pipeline active until the signed offer is secure.",
-                training: "Maintain consistency and set the January 2027 base schedule after the work situation is known.",
-                life: "Review the year, set January targets, and leave room for holidays and recovery."
-              }
-            ];
-          }
-
-          function getPhase(date) {
-            if (date <= parseDate("2026-07-19")) {
-              return { name: "Setup", focus: "Build the operating system", companies: "All primary targets" };
-            }
-            if (date <= parseDate("2026-08-02")) {
-              return { name: "Launch", focus: "Launch the application pipeline", companies: "First five targets" };
-            }
-            if (date <= parseDate("2026-09-13")) {
-              return { name: "Build", focus: "Build referrals and start cycling", companies: "Primary target rotation" };
-            }
-            if (date <= parseDate("2026-10-11")) {
-              return { name: "Convert", focus: "Convert outreach into interviews", companies: "Responsive companies" };
-            }
-            if (date <= parseDate("2026-11-15")) {
-              return { name: "Interview", focus: "Deep interview preparation", companies: "Active and backup pipelines" };
-            }
-            if (date <= parseDate("2026-12-15")) {
-              return { name: "Offer close", focus: "Drive an offer to signature", companies: "Late-stage processes" };
-            }
-            return { name: "Transition", focus: "Close the year and plan January", companies: "Onboarding or backup" };
-          }
-
-          function getWeekTargets(week) {
-            const phase = getPhase(week);
-            const validDates = weekDates(week).filter(inRange);
-            const training = validDates.filter(isTrainingDay).length;
-            let applications = Number(state.settings.applications) || 8;
-            let outreach = Number(state.settings.outreach) || 10;
-
-            if (dateKey(week) === "2026-07-06") {
-              applications = 2;
-              outreach = 4;
-            } else if (dateKey(week) === "2026-07-13") {
-              applications = 4;
-              outreach = 8;
-            } else if (dateKey(week) === "2026-12-14") {
-              applications = 2;
-              outreach = 4;
-            } else if (phase.name === "Interview") {
-              applications = Math.max(6, Math.round(applications * 0.75));
-              outreach = Math.max(6, Math.round(outreach * 0.8));
-            } else if (phase.name === "Offer close") {
-              applications = Math.max(4, Math.round(applications * 0.5));
-              outreach = Math.max(4, Math.round(outreach * 0.6));
-            } else if (phase.name === "Transition") {
-              applications = 0;
-              outreach = 0;
-            }
-
-            return {
-              applications: applications,
-              outreach: outreach,
-              training: training,
-              nutrition: validDates.length
-            };
-          }
-
-          function weekDates(week) {
-            const dates = [];
-            for (let i = 0; i < 7; i += 1) dates.push(addDays(week, i));
-            return dates;
-          }
-
-          function isTrainingDay(date) {
-            const key = dateKey(date);
-            if (key === "2026-07-10" || key === "2026-07-11") return true;
-            if (key === "2026-07-12") return false;
-            return [0, 2, 4, 6].indexOf(date.getDay()) !== -1;
-          }
-
-          function trainingType(date) {
-            const key = dateKey(date);
-            if (key === "2026-07-10") return "short run";
-            if (key === "2026-07-11") return "lift";
-            const bikeStart = parseDate(state.settings.bikeStart);
-            const swimStart = parseDate(state.settings.swimStart);
-            const indoorBikeStart = parseDate(state.settings.indoorBikeStart);
-            const day = date.getDay();
-
-            if (date < bikeStart) {
-              if (day === 2 || day === 6) return "run";
-              return "lift";
-            }
-
-            if (date < swimStart) {
-              if (day === 6) return "outdoor bike";
-              if (day === 4) return "lift";
-              return "run";
-            }
-
-            if (day === 2) return "indoor swim";
-            if (day === 6) return date >= indoorBikeStart ? "indoor bike" : "outdoor bike";
+          if (date < swimStart) {
+            if (day === 6) return "outdoor bike";
             if (day === 4) return "lift";
             return "run";
           }
 
-          function scheduleForDate(date) {
-            const day = date.getDay();
-            const blocks = [];
+          if (day === 2) return "indoor swim";
+          if (day === 6) return date >= indoorBikeStart ? "indoor bike" : "outdoor bike";
+          if (day === 4) return "lift";
+          return "run";
+        }
 
-            if (dateKey(date) === "2026-07-10") {
-              return [
-                { time: "8:00–8:30", label: "Commute to work" },
-                { time: "8:30–18:00", label: "Work" },
-                { time: "18:00–18:30", label: "Commute home" },
-                { time: "18:30–19:15", label: "Short run" },
-                { time: "19:15–19:30", label: "Shower and change" },
-                { time: "19:30–20:00", label: "Travel to the event" },
-                { time: "20:00 onward", label: "Event with friends" }
-              ];
-            }
+        function scheduleForDate(date) {
+          const day = date.getDay();
+          const blocks = [];
 
-            if (day >= 1 && day <= 5) {
-              blocks.push({ time: "8:00–8:30", label: "Commute to work" });
-              blocks.push({ time: "8:30–18:00", label: day === 2 || day === 4 ? "Work; use lunch for a networking call if booked" : "Work" });
-
-              if (isTrainingDay(date)) {
-                blocks.push({ time: "18:00–18:30", label: "Commute to training" });
-                blocks.push({ time: "18:30–21:00", label: "Training block: " + trainingType(date) });
-                blocks.push({ time: "21:00–21:30", label: "Commute home" });
-              } else if (day === 1 || day === 3) {
-                blocks.push({ time: "18:00–18:30", label: "Commute home" });
-                blocks.push({ time: "18:30–19:00", label: "Dinner and reset" });
-                blocks.push({ time: "19:00–21:00", label: "Job-search focus block" });
-              } else {
-                blocks.push({ time: "18:00–18:30", label: "Commute home" });
-                blocks.push({ time: "19:00–19:30", label: "Follow-ups and weekly close" });
-                blocks.push({ time: "After 19:30", label: "Recovery, social time, or overflow" });
-              }
-            } else if (day === 6) {
-              blocks.push({ time: "8:30–9:00", label: "Commute to training" });
-              blocks.push({ time: "9:00–11:30", label: "Training block: " + trainingType(date) });
-              blocks.push({ time: "11:30–12:00", label: "Commute home" });
-              blocks.push({ time: "13:30–15:30", label: "Applications and target-company research" });
-            } else if (isTrainingDay(date)) {
-              blocks.push({ time: "8:30–9:00", label: "Commute to training" });
-              blocks.push({ time: "9:00–11:30", label: "Training block: " + trainingType(date) });
-              blocks.push({ time: "11:30–12:00", label: "Commute home" });
-              blocks.push({ time: "13:30–14:30", label: "One high-fit application or follow-up" });
-              blocks.push({ time: "16:00–18:00", label: "Meal prep, weekly review, and calendar lock" });
-            } else {
-              blocks.push({ time: "Morning", label: "Rest and recovery" });
-              blocks.push({ time: "13:30–14:30", label: "One high-fit application or follow-up" });
-              blocks.push({ time: "16:00–18:00", label: "Meal prep, weekly review, and calendar lock" });
-            }
-            return blocks;
+          if (dateKey(date) === "2026-07-10") {
+            return [
+              { time: "8:00–8:30", label: "Commute to work" },
+              { time: "8:30–18:00", label: "Work" },
+              { time: "18:00–18:30", label: "Commute home" },
+              { time: "18:30–19:15", label: "Short run" },
+              { time: "19:15–19:30", label: "Shower and change" },
+              { time: "19:30–20:00", label: "Travel to the event" },
+              { time: "20:00 onward", label: "Event with friends" }
+            ];
           }
 
-          function tasksForWeek(week) {
-            let tasks = [];
-            weekDates(week).forEach(function (date) {
-              if (inRange(date)) tasks = tasks.concat(tasksForDate(date));
-            });
-            return tasks;
-          }
-
-          function tasksForDate(date) {
-            const key = dateKey(date);
-            const week = startOfWeek(date);
-            const targets = getWeekTargets(week);
-            const applicationAllocation = allocateWeeklyTarget(week, targets.applications, [
-              { day: 1, weight: 2 },
-              { day: 3, weight: 2 },
-              { day: 6, weight: 3 },
-              { day: 0, weight: 1 }
-            ]);
-            const outreachAllocation = allocateWeeklyTarget(week, targets.outreach, [
-              { day: 1, weight: 3 },
-              { day: 3, weight: 3 },
-              { day: 5, weight: 2 },
-              { day: 6, weight: 1 },
-              { day: 0, weight: 1 }
-            ]);
-            const tasks = [];
-            const day = date.getDay();
-            const phase = getPhase(date);
-
-            if (day >= 1 && day <= 5) {
-              const workText = {
-                1: "Set the three work outcomes that matter this week",
-                2: "Finish today's highest-value WebHealth outcome",
-                3: "Update the work pipeline and close one open loop",
-                4: "Finish today's highest-value WebHealth outcome",
-                5: "Write the week's wins, open items, and Monday priorities"
-              };
-              tasks.push(task(key, "work", "Work", workText[day]));
-            }
-
-            const applicationCount = applicationAllocation[key] || 0;
-            if (applicationCount > 0) {
-              tasks.push(metricTask(key, "applications", "Career", "Submit " + applicationCount + " tailored application" + (applicationCount === 1 ? "" : "s"), "application", applicationCount));
-            }
-
-            const outreachCount = outreachAllocation[key] || 0;
-            if (outreachCount > 0) {
-              tasks.push(metricTask(key, "outreach", "Career", "Send " + outreachCount + " targeted outreach or follow-up message" + (outreachCount === 1 ? "" : "s"), "outreach", outreachCount));
-            }
-
-            if (day === 2 || day === 4) {
-              tasks.push(task(key, "conversation-" + day, "Career", "Hold or book one networking conversation"));
-            }
-
-            if ((phase.name === "Convert" || phase.name === "Interview") && day === 3) {
-              tasks.push(task(key, "interview-prep", "Career", "Practice two interview stories or one case prompt"));
-            }
-
-            if (phase.name === "Offer close" && day === 3) {
-              tasks.push(task(key, "offer-prep", "Career", "Update interview, reference, and negotiation notes"));
-            }
+          if (day >= 1 && day <= 5) {
+            blocks.push({ time: "8:00–8:30", label: "Commute to work" });
+            blocks.push({ time: "8:30–18:00", label: day === 2 || day === 4 ? "Work; use lunch for a networking call if booked" : "Work" });
 
             if (isTrainingDay(date)) {
-              const trainingText = key === "2026-07-10"
-                ? "Complete the shortened run immediately after getting home at 6:30 PM"
-                : "Complete the scheduled " + trainingType(date) + " block and commute buffer";
-              tasks.push(metricTask(key, "training", "Training", trainingText, "training", 1));
-              if (day >= 1 && day <= 5) {
-                const preparationText = key === "2026-07-10"
-                  ? "Have running clothes ready and leave for the event by 7:30 PM"
-                  : "Pack the work-to-training food, clothes, and gear before leaving home";
-                tasks.push(task(key, "training-prep", "Nutrition", preparationText));
-              }
-            } else if (day === 5) {
-              tasks.push(task(key, "recovery", "Life", "Keep the evening open for recovery, friends, or overflow"));
+              blocks.push({ time: "18:00–18:30", label: "Commute to training" });
+              blocks.push({ time: "18:30–21:00", label: "Training block: " + trainingType(date) });
+              blocks.push({ time: "21:00–21:30", label: "Commute home" });
+            } else if (day === 1 || day === 3) {
+              blocks.push({ time: "18:00–18:30", label: "Commute home" });
+              blocks.push({ time: "18:30–19:00", label: "Dinner and reset" });
+              blocks.push({ time: "19:00–21:00", label: "Job-search focus block" });
+            } else {
+              blocks.push({ time: "18:00–18:30", label: "Commute home" });
+              blocks.push({ time: "19:00–19:30", label: "Follow-ups and weekly close" });
+              blocks.push({ time: "After 19:30", label: "Recovery, social time, or overflow" });
             }
-
-            tasks.push(metricTask(key, "nutrition", "Nutrition", nutritionTaskText(), "nutrition", 1));
-
-            if (key === "2026-07-10") {
-              tasks.push(task(key, "friends-event", "Life", "Friends' event at 8:00 PM"));
-            }
-
-            if (day === 0) {
-              tasks.push(task(key, "meal-prep", "Nutrition", "Meal prep for Monday through Thursday"));
-              tasks.push(task(key, "weekly-review", "Life", "Review the dashboard and lock next week's calendar"));
-            }
-
-            if (day === 6) {
-              const focus = weekFocus[dateKey(week)];
-              if (focus) tasks.push(task(key, "company-research", "Career", "Research the week's focus: " + focus[1]));
-            }
-
-            state.customTasks.filter(function (item) {
-              return item.date === key;
-            }).forEach(function (item) {
-              tasks.push({
-                id: item.id,
-                category: item.category,
-                text: item.text,
-                custom: true
-              });
-            });
-
-            return tasks;
+          } else if (day === 6) {
+            blocks.push({ time: "8:30–9:00", label: "Commute to training" });
+            blocks.push({ time: "9:00–11:30", label: "Training block: " + trainingType(date) });
+            blocks.push({ time: "11:30–12:00", label: "Commute home" });
+            blocks.push({ time: "13:30–15:30", label: "Applications and target-company research" });
+          } else if (isTrainingDay(date)) {
+            blocks.push({ time: "8:30–9:00", label: "Commute to training" });
+            blocks.push({ time: "9:00–11:30", label: "Training block: " + trainingType(date) });
+            blocks.push({ time: "11:30–12:00", label: "Commute home" });
+            blocks.push({ time: "13:30–14:30", label: "One high-fit application or follow-up" });
+            blocks.push({ time: "16:00–18:00", label: "Meal prep, weekly review, and calendar lock" });
+          } else {
+            blocks.push({ time: "Morning", label: "Rest and recovery" });
+            blocks.push({ time: "13:30–14:30", label: "One high-fit application or follow-up" });
+            blocks.push({ time: "16:00–18:00", label: "Meal prep, weekly review, and calendar lock" });
           }
+          return blocks;
+        }
 
-          function task(date, suffix, category, text) {
-            return {
-              id: date + "-" + suffix,
-              category: category,
-              text: text,
-              custom: false
+        function tasksForWeek(week) {
+          let tasks = [];
+          weekDates(week).forEach(function (date) {
+            if (inRange(date)) tasks = tasks.concat(tasksForDate(date));
+          });
+          return tasks;
+        }
+
+        function tasksForDate(date) {
+          const key = dateKey(date);
+          const week = startOfWeek(date);
+          const targets = getWeekTargets(week);
+          const applicationAllocation = allocateWeeklyTarget(week, targets.applications, [
+            { day: 1, weight: 2 },
+            { day: 3, weight: 2 },
+            { day: 6, weight: 3 },
+            { day: 0, weight: 1 }
+          ]);
+          const outreachAllocation = allocateWeeklyTarget(week, targets.outreach, [
+            { day: 1, weight: 3 },
+            { day: 3, weight: 3 },
+            { day: 5, weight: 2 },
+            { day: 6, weight: 1 },
+            { day: 0, weight: 1 }
+          ]);
+          const tasks = [];
+          const day = date.getDay();
+          const phase = getPhase(date);
+
+          if (day >= 1 && day <= 5) {
+            const workText = {
+              1: "Set the three work outcomes that matter this week",
+              2: "Finish today's highest-value WebHealth outcome",
+              3: "Update the work pipeline and close one open loop",
+              4: "Finish today's highest-value WebHealth outcome",
+              5: "Write the week's wins, open items, and Monday priorities"
             };
+            tasks.push(task(key, "work", "Work", workText[day]));
           }
 
-          function metricTask(date, suffix, category, text, metricType, metricValue) {
-            const item = task(date, suffix, category, text);
-            item.metricType = metricType;
-            item.metricValue = metricValue;
-            return item;
+          const applicationCount = applicationAllocation[key] || 0;
+          if (applicationCount > 0) {
+            tasks.push(metricTask(key, "applications", "Career", "Submit " + applicationCount + " tailored application" + (applicationCount === 1 ? "" : "s"), "application", applicationCount));
           }
 
-          function nutritionTaskText() {
-            const calorieText = state.settings.calories ? state.settings.calories + " kcal" : "calorie target";
-            const proteinText = state.settings.protein ? state.settings.protein + " g protein" : "protein target";
-            return "Log meals and check " + calorieText + " / " + proteinText;
+          const outreachCount = outreachAllocation[key] || 0;
+          if (outreachCount > 0) {
+            tasks.push(metricTask(key, "outreach", "Career", "Send " + outreachCount + " targeted outreach or follow-up message" + (outreachCount === 1 ? "" : "s"), "outreach", outreachCount));
           }
 
-          function allocateWeeklyTarget(week, total, candidates) {
-            const valid = candidates.map(function (candidate) {
-              const offset = candidate.day === 0 ? 6 : candidate.day - 1;
-              return {
-                date: addDays(week, offset),
-                weight: candidate.weight
-              };
-            }).filter(function (candidate) {
-              return inRange(candidate.date);
-            });
+          if (day === 2 || day === 4) {
+            tasks.push(task(key, "conversation-" + day, "Career", "Hold or book one networking conversation"));
+          }
 
-            const allocation = {};
-            if (!valid.length || total <= 0) return allocation;
-            const totalWeight = valid.reduce(function (sum, candidate) {
-              return sum + candidate.weight;
-            }, 0);
-            let assigned = 0;
+          if ((phase.name === "Convert" || phase.name === "Interview") && day === 3) {
+            tasks.push(task(key, "interview-prep", "Career", "Practice two interview stories or one case prompt"));
+          }
 
-            valid.forEach(function (candidate) {
-              const amount = Math.floor((total * candidate.weight) / totalWeight);
-              allocation[dateKey(candidate.date)] = amount;
-              assigned += amount;
-            });
+          if (phase.name === "Offer close" && day === 3) {
+            tasks.push(task(key, "offer-prep", "Career", "Update interview, reference, and negotiation notes"));
+          }
 
-            let cursor = 0;
-            while (assigned < total) {
-              const candidate = valid[cursor % valid.length];
-              allocation[dateKey(candidate.date)] += 1;
-              assigned += 1;
-              cursor += 1;
+          if (isTrainingDay(date)) {
+            const trainingText = key === "2026-07-10"
+              ? "Complete the shortened run immediately after getting home at 6:30 PM"
+              : "Complete the scheduled " + trainingType(date) + " block and commute buffer";
+            tasks.push(metricTask(key, "training", "Training", trainingText, "training", 1));
+            if (day >= 1 && day <= 5) {
+              const preparationText = key === "2026-07-10"
+                ? "Have running clothes ready and leave for the event by 7:30 PM"
+                : "Pack the work-to-training food, clothes, and gear before leaving home";
+              tasks.push(task(key, "training-prep", "Nutrition", preparationText));
             }
-            return allocation;
+          } else if (day === 5) {
+            tasks.push(task(key, "recovery", "Life", "Keep the evening open for recovery, friends, or overflow"));
           }
 
-          function isComplete(task) {
-            return Boolean(state.completed[task.id]);
+          tasks.push(metricTask(key, "nutrition", "Nutrition", nutritionTaskText(), "nutrition", 1));
+
+          if (key === "2026-07-10") {
+            tasks.push(task(key, "friends-event", "Life", "Friends' event at 8:00 PM"));
           }
 
-          function metricCompleted(tasks, metricType) {
-            return tasks.reduce(function (sum, item) {
-              if (item.metricType === metricType && isComplete(item)) return sum + (item.metricValue || 1);
-              return sum;
-            }, 0);
+          if (day === 0) {
+            tasks.push(task(key, "meal-prep", "Nutrition", "Meal prep for Monday through Thursday"));
+            tasks.push(task(key, "weekly-review", "Life", "Review the dashboard and lock next week's calendar"));
           }
 
-          function compactDate(value) {
-            const date = parseDate(value);
-            return MONTH_NAMES[date.getMonth()].slice(0, 3) + " " + date.getDate();
+          if (day === 6) {
+            const focus = weekFocus[dateKey(week)];
+            if (focus) tasks.push(task(key, "company-research", "Career", "Research the week's focus: " + focus[1]));
           }
 
-          function fullCompactDate(value) {
-            const date = parseDate(value);
-            return MONTH_NAMES[date.getMonth()] + " " + date.getDate();
-          }
+          state.customTasks.filter(function (item) {
+            return item.date === key;
+          }).forEach(function (item) {
+            tasks.push({
+              id: item.id,
+              category: item.category,
+              text: item.text,
+              custom: true
+            });
+          });
 
-          function safeId(value) {
-            return String(value).replace(/[^a-zA-Z0-9_-]/g, "-");
-          }
+          return tasks;
+        }
 
-          function closeAddTask() {
-            elements.addTaskForm.classList.add("is-hidden");
-            elements.newTaskText.value = "";
-          }
+        function task(date, suffix, category, text) {
+          return {
+            id: date + "-" + suffix,
+            category: category,
+            text: text,
+            custom: false
+          };
+        }
 
-          function refreshIcons() {
-            if (window.lucide && typeof window.lucide.createIcons === "function") {
-              window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
-            }
+        function metricTask(date, suffix, category, text, metricType, metricValue) {
+          const item = task(date, suffix, category, text);
+          item.metricType = metricType;
+          item.metricValue = metricValue;
+          return item;
+        }
+
+        function nutritionTaskText() {
+          const calorieText = state.settings.calories ? state.settings.calories + " kcal" : "calorie target";
+          const proteinText = state.settings.protein ? state.settings.protein + " g protein" : "protein target";
+          return "Log meals and check " + calorieText + " / " + proteinText;
+        }
+
+        function allocateWeeklyTarget(week, total, candidates) {
+          const valid = candidates.map(function (candidate) {
+            const offset = candidate.day === 0 ? 6 : candidate.day - 1;
+            return {
+              date: addDays(week, offset),
+              weight: candidate.weight
+            };
+          }).filter(function (candidate) {
+            return inRange(candidate.date);
+          });
+
+          const allocation = {};
+          if (!valid.length || total <= 0) return allocation;
+          const totalWeight = valid.reduce(function (sum, candidate) {
+            return sum + candidate.weight;
+          }, 0);
+          let assigned = 0;
+
+          valid.forEach(function (candidate) {
+            const amount = Math.floor((total * candidate.weight) / totalWeight);
+            allocation[dateKey(candidate.date)] = amount;
+            assigned += amount;
+          });
+
+          let cursor = 0;
+          while (assigned < total) {
+            const candidate = valid[cursor % valid.length];
+            allocation[dateKey(candidate.date)] += 1;
+            assigned += 1;
+            cursor += 1;
           }
-        } // end initDashboard
-      })();
-    </script>
-  </div>
+          return allocation;
+        }
+
+        function isComplete(task) {
+          return Boolean(state.completed[task.id]);
+        }
+
+        function metricCompleted(tasks, metricType) {
+          return tasks.reduce(function (sum, item) {
+            if (item.metricType === metricType && isComplete(item)) return sum + (item.metricValue || 1);
+            return sum;
+          }, 0);
+        }
+
+        function compactDate(value) {
+          const date = parseDate(value);
+          return MONTH_NAMES[date.getMonth()].slice(0, 3) + " " + date.getDate();
+        }
+
+        function fullCompactDate(value) {
+          const date = parseDate(value);
+          return MONTH_NAMES[date.getMonth()] + " " + date.getDate();
+        }
+
+        function safeId(value) {
+          return String(value).replace(/[^a-zA-Z0-9_-]/g, "-");
+        }
+
+        function closeAddTask() {
+          elements.addTaskForm.classList.add("is-hidden");
+          elements.newTaskText.value = "";
+        }
+
+        function refreshIcons() {
+          if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
+          }
+        }
+      } // end initDashboard
+    })();
+  </script>
 </body>
 </html>
