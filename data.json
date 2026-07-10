@@ -9,17 +9,7 @@
     "calories": "",
     "protein": ""
   },
-  "completed": {
-    "2026-07-10-work": false,
-    "2026-07-10-outreach": false
-  },
-  "customTasks": [
-    {
-      "id": "custom-1783705783671",
-      "date": "2026-07-10",
-      "category": "Life",
-      "text": "Fix Website"
-    }
-  ],
+  "completed": {},
+  "customTasks": [],
   "scheduleOverrides": {}
 }
