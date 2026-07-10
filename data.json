@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "race": "undecided",
+    "applications": 8,
+    "outreach": 10,
+    "bikeStart": "2026-08-03",
+    "swimStart": "2026-09-28",
+    "indoorBikeStart": "2026-11-02",
+    "calories": "",
+    "protein": ""
+  },
+  "completed": {
+    "2026-07-10-work": false,
+    "2026-07-10-outreach": false
+  },
+  "customTasks": [],
+  "scheduleOverrides": {}
+}
