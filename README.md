@@ -20,7 +20,7 @@
 
 **What changed:**
 - **New color palette** – Replaced blue/grey with custom earth tones (ivory, forest green, sage, antique gold).
-- **Password protection** – Added a simple lock screen with password `RockOn123` (session-based, no logout on refresh).
+- **Password protection** – Added a simple lock screen with password `R` (session-based, no logout on refresh).
 - **UI polish** – Cards, shadows, typography, and spacing overhauled for a cleaner, more premium feel.
 - **Day pills** – Rounded day buttons with better hover/selected states.
 - **Focus strip** – Distinct background to highlight weekly priorities.
