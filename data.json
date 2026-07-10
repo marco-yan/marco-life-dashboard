@@ -9,7 +9,9 @@
     "calories": "",
     "protein": ""
   },
-  "completed": {},
+  "completed": {
+    "custom-1783705915321": true
+  },
   "customTasks": [
     {
       "id": "custom-1783705915321",
