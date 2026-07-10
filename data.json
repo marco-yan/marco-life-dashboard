@@ -6,8 +6,8 @@
     "bikeStart": "2026-08-03",
     "swimStart": "2026-09-28",
     "indoorBikeStart": "2026-11-02",
-    "calories": "",
-    "protein": ""
+    "calories": "2100",
+    "protein": "110"
   },
   "completed": {
     "custom-1783705915321": true
