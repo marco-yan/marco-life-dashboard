@@ -1,4 +1,12 @@
 # Marco Life Dashboard — Update Log
+## [v2.0] – 2026-07-10
+
+**What changed:**
+- **Switched from GitHub to JSONBin sync** – No more GitHub tokens required for anyone. Just open the link, enter the password, and use the dashboard.
+- **Auto-sync works for everyone** – Anyone with the link and password (`RockOn123`) can edit and their changes sync automatically to the cloud.
+- **Simplified settings** – Removed GitHub token fields. Added simple "Sync Now" and "Load from Cloud" buttons.
+- **Zero setup for new users** – Share the link and password. That’s it.
+
 ## [v1.5] – 2026-07-10
 
 **What changed:**
