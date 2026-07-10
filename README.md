@@ -1,7 +1,7 @@
 # Marco Life Dashboard — Update Log
 
 ---
-## [v1.2] – 2026-07-10   <-- PASTE THIS BLOCK HERE
+## [v1.2] – 2026-07-10
 
 **What changed:**
 - **Schedule editor** – Click the pencil icon (✏️) next to any date to edit that day's hourly schedule.
