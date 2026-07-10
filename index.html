@@ -475,7 +475,6 @@
     #schedule-modal .btn-reset { background: transparent; color: #b33c3c; border: 1px solid #e8e5db; }
     #schedule-modal .btn-reset:hover { background: #fde8e8; }
 
-    /* Career & Notes specific styles */
     .career-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     @media (max-width: 740px) { .career-grid { grid-template-columns: 1fr; } }
     .company-list { columns: 2; column-gap: 32px; }
@@ -656,12 +655,8 @@
       <div class="card">
         <h3 style="color:#214E3B; margin-bottom:12px;">Target Companies & Roles</h3>
         <div class="career-grid">
-          <div id="career-target-list">
-            <!-- Rendered from state -->
-          </div>
-          <div id="career-lanes-list">
-            <!-- Rendered from state -->
-          </div>
+          <div id="career-target-list"></div>
+          <div id="career-lanes-list"></div>
         </div>
       </div>
 
@@ -720,9 +715,7 @@
       <div class="card">
         <div class="plan-details">
           <summary>View Your 24-Week Strategic Plan</summary>
-          <div class="plan-content" id="career-plan-content">
-            <!-- Rendered from state -->
-          </div>
+          <div class="plan-content" id="career-plan-content"></div>
         </div>
       </div>
     </section>
@@ -790,27 +783,22 @@
           </div>
         </div>
 
+        <!-- ===== JSONBIN SYNC (No tokens needed) ===== -->
         <div class="settings-section">
-          <h3>Auto-Sync (GitHub)</h3>
-          <div class="settings-grid">
-            <label class="form-label" for="github-token">GitHub Token
-              <input class="form-control" id="github-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="font-family:monospace;">
-            </label>
-            <label class="form-label" for="github-repo">Repository
-              <input class="form-control" id="github-repo" type="text" value="marco-yan/marco-life-dashboard" style="font-family:monospace;">
-            </label>
+          <h3>Sync (Cloud)</h3>
+          <div class="settings-grid" style="grid-template-columns: 1fr 1fr;">
+            <div>
+              <p class="text-small" style="font-weight:600; color:#214E3B;">Status</p>
+              <div class="sync-status" id="sync-status">Ready to sync.</div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:end; justify-content:flex-end; flex-wrap:wrap;">
+              <button type="button" class="btn btn-primary" id="sync-now-btn">Sync Now</button>
+              <button type="button" class="btn" id="load-now-btn">Load from Cloud</button>
+            </div>
           </div>
-          <div class="settings-actions" style="margin-top:14px;">
-            <button type="button" class="btn btn-primary" id="github-save-token">Save Token</button>
-            <button type="button" class="btn btn-success" id="github-sync-now">Sync Now</button>
-            <button type="button" class="btn" id="github-load-now">Load from GitHub</button>
-          </div>
-          <div class="sync-status" id="github-status">Status: Not connected. Add your GitHub token above.</div>
-          <p class="text-small" style="margin-top:10px; color:#5a6b55;">
-            <strong>How to get a token:</strong> 
-            <a href="https://github.com/settings/tokens" target="_blank" style="color:#214E3B;">github.com/settings/tokens</a> → 
-            Generate new token (classic) → Check <strong>repo</strong> scope → Generate → Copy the token here.
-            <br>Your token is stored only in your browser's local storage. It never leaves your device.
+          <p class="text-small" style="margin-top:12px; color:#5a6b55;">
+            Your data is stored securely in the cloud. Changes auto-sync within a few seconds.
+            <br>No setup required — just open the link and use the dashboard.
           </p>
         </div>
 
@@ -883,11 +871,14 @@
         const root = document.getElementById("marco-life-dashboard");
         if (!root) return;
 
+        // ===== JSONBIN CONFIG (HARDCODED) =====
+        const JSONBIN_BIN_ID = "6a513c19da38895dfe4ca9a6";
+        const JSONBIN_MASTER_KEY = "$2a$10$hgWaWK5EN.DzPpby3ifbLOzXt3n2XUpUqHtg30diOC9QfBlXHl4Ti";
+        const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+
         const RANGE_START = parseDate("2026-07-10");
         const RANGE_END = parseDate("2026-12-31");
         const STORAGE_KEY = "marco-life-dashboard-v1";
-        const GITHUB_TOKEN_KEY = "marco-github-token";
-        const GITHUB_REPO_KEY = "marco-github-repo";
         const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         const LONG_DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -1009,12 +1000,6 @@
           modalSave: document.getElementById("modal-save"),
           modalReset: document.getElementById("modal-reset"),
           modalClose: document.getElementById("modal-close"),
-          githubToken: document.getElementById("github-token"),
-          githubRepo: document.getElementById("github-repo"),
-          githubSaveToken: document.getElementById("github-save-token"),
-          githubSyncNow: document.getElementById("github-sync-now"),
-          githubLoadNow: document.getElementById("github-load-now"),
-          githubStatus: document.getElementById("github-status"),
           // Career & Notes
           notesTextarea: document.getElementById("notes-textarea"),
           notesStatus: document.getElementById("notes-status"),
@@ -1040,6 +1025,10 @@
           editStrategicPlan: document.getElementById("edit-strategic-plan"),
           saveCareerContent: document.getElementById("save-career-content"),
           careerEditStatus: document.getElementById("career-edit-status"),
+          // Sync
+          syncStatus: document.getElementById("sync-status"),
+          syncNowBtn: document.getElementById("sync-now-btn"),
+          loadNowBtn: document.getElementById("load-now-btn"),
         };
 
         // ===== HELPERS =====
@@ -1053,6 +1042,86 @@
         function formatLongDate(d) { return LONG_DAY_NAMES[d.getDay()] + ", " + MONTH_NAMES[d.getMonth()] + " " + d.getDate(); }
         function formatWeek(d) { const e = addDays(d,6); return formatShortDate(d) + "–" + formatShortDate(e); }
         function todayStr() { const d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+
+        // ===== JSONBIN SYNC ENGINE =====
+        function setSyncStatus(msg, type) {
+          els.syncStatus.textContent = msg;
+          els.syncStatus.className = "sync-status" + (type ? " " + type : "");
+        }
+
+        async function saveToJSONBin() {
+          if (isSyncing) return;
+          isSyncing = true;
+          setSyncStatus("Saving to cloud...", "syncing");
+          try {
+            const data = {
+              settings: state.settings,
+              completed: state.completed,
+              customTasks: state.customTasks,
+              scheduleOverrides: state.scheduleOverrides,
+              notes: state.notes,
+              careerApps: state.careerApps,
+              careerContacts: state.careerContacts,
+              careerContent: state.careerContent
+            };
+            const res = await fetch(JSONBIN_URL, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": JSONBIN_MASTER_KEY
+              },
+              body: JSON.stringify(data)
+            });
+            if (!res.ok) throw new Error("JSONBin save failed: " + res.status);
+            setSyncStatus("Synced to cloud.", "success");
+          } catch (e) {
+            setSyncStatus("Save failed: " + e.message, "error");
+          } finally {
+            isSyncing = false;
+          }
+        }
+
+        async function loadFromJSONBin() {
+          setSyncStatus("Loading from cloud...", "syncing");
+          try {
+            const res = await fetch(JSONBIN_URL, {
+              headers: { "X-Master-Key": JSONBIN_MASTER_KEY }
+            });
+            if (!res.ok) {
+              if (res.status === 404) {
+                setSyncStatus("No cloud data found. Starting fresh.", "");
+                return;
+              }
+              throw new Error("JSONBin load failed: " + res.status);
+            }
+            const json = await res.json();
+            const data = json.record;
+            if (data) {
+              if (data.settings) state.settings = data.settings;
+              if (data.completed) state.completed = data.completed;
+              if (data.customTasks) state.customTasks = data.customTasks;
+              if (data.scheduleOverrides) state.scheduleOverrides = data.scheduleOverrides;
+              if (data.notes !== undefined) state.notes = data.notes;
+              if (data.careerApps) state.careerApps = data.careerApps;
+              if (data.careerContacts) state.careerContacts = data.careerContacts;
+              if (data.careerContent) state.careerContent = Object.assign({}, defaultState.careerContent, data.careerContent);
+              saveState("Loaded from cloud.");
+              renderAll();
+              populateSettings();
+              populateCareerEditFields();
+              setSyncStatus("Loaded from cloud.", "success");
+            }
+          } catch (e) {
+            setSyncStatus("Load failed: " + e.message, "error");
+          }
+        }
+
+        function triggerSync() {
+          if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
+          syncDebounceTimer = setTimeout(() => {
+            saveToJSONBin();
+          }, 3000);
+        }
 
         // ===== STATE MANAGEMENT =====
         function loadState() {
@@ -1079,63 +1148,6 @@
             if (msg) els.dashboardStatus.textContent = msg;
             triggerSync();
           } catch (e) { els.dashboardStatus.textContent = "Saved locally."; }
-        }
-
-        // ===== GITHUB SYNC =====
-        function getGitHubConfig() {
-          return { token: localStorage.getItem(GITHUB_TOKEN_KEY) || "", repo: localStorage.getItem(GITHUB_REPO_KEY) || "marco-yan/marco-life-dashboard" };
-        }
-        function setGitHubStatus(msg, type) { els.githubStatus.textContent = msg; els.githubStatus.className = "sync-status" + (type ? " " + type : ""); }
-
-        async function pushToGitHub() {
-          const { token, repo } = getGitHubConfig();
-          if (!token) { setGitHubStatus("No token.", "error"); return; }
-          if (isSyncing) return;
-          isSyncing = true;
-          setGitHubStatus("Syncing...", "syncing");
-          try {
-            const data = { settings: state.settings, completed: state.completed, customTasks: state.customTasks, scheduleOverrides: state.scheduleOverrides, notes: state.notes, careerApps: state.careerApps, careerContacts: state.careerContacts, careerContent: state.careerContent };
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-            const url = `https://api.github.com/repos/${repo}/contents/data.json`;
-            let sha = null;
-            try { const r = await fetch(url, { headers: { Authorization: `token ${token}` } }); if(r.ok) sha = (await r.json()).sha; } catch(e) {}
-            const payload = { message: "Auto-sync", content, branch: "main" };
-            if (sha) payload.sha = sha;
-            const res = await fetch(url, { method: "PUT", headers: { Authorization: `token ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-            if (!res.ok) throw new Error("GitHub API error");
-            setGitHubStatus("Synced!", "success");
-          } catch (e) { setGitHubStatus("Sync failed: " + e.message, "error"); } finally { isSyncing = false; }
-        }
-
-        async function loadFromGitHub() {
-          const { token, repo } = getGitHubConfig();
-          if (!token) { setGitHubStatus("No token.", "error"); return; }
-          setGitHubStatus("Loading...", "syncing");
-          try {
-            const url = `https://api.github.com/repos/${repo}/contents/data.json`;
-            const res = await fetch(url, { headers: { Authorization: `token ${token}` } });
-            if (!res.ok) { if(res.status === 404) { setGitHubStatus("No data found.", ""); return; } throw new Error("Fetch failed"); }
-            const json = await res.json();
-            const content = JSON.parse(decodeURIComponent(escape(atob(json.content))));
-            if(content.settings) state.settings = content.settings;
-            if(content.completed) state.completed = content.completed;
-            if(content.customTasks) state.customTasks = content.customTasks;
-            if(content.scheduleOverrides) state.scheduleOverrides = content.scheduleOverrides;
-            if(content.notes !== undefined) state.notes = content.notes;
-            if(content.careerApps) state.careerApps = content.careerApps;
-            if(content.careerContacts) state.careerContacts = content.careerContacts;
-            if(content.careerContent) state.careerContent = Object.assign({}, defaultState.careerContent, content.careerContent);
-            saveState("Loaded from GitHub.");
-            setGitHubStatus("Loaded!", "success");
-            renderAll();
-            populateSettings();
-            populateCareerEditFields();
-          } catch (e) { setGitHubStatus("Load failed: " + e.message, "error"); }
-        }
-
-        function triggerSync() {
-          if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
-          syncDebounceTimer = setTimeout(() => { if (getGitHubConfig().token) pushToGitHub(); }, 3000);
         }
 
         // ===== CORE LOGIC (Week / Schedule / Tasks) =====
@@ -1409,12 +1421,11 @@
           els.careerContactsCount.textContent = contacts.length;
           els.careerReferralsCount.textContent = referrals;
 
-          // Render Target Companies & Roles
+          // Companies
           const companiesText = state.careerContent.targetCompaniesText || "";
           const lanesText = state.careerContent.searchLanesText || "";
           const planText = state.careerContent.strategicPlanText || "";
 
-          // Companies
           els.careerTargetList.innerHTML = `<ul class="company-list">`;
           const companyLines = companiesText.split('\n').filter(l => l.trim());
           if (companyLines.length === 0) {
@@ -1433,7 +1444,6 @@
             els.careerTargetList.innerHTML += `</ul>`;
           }
 
-          // Lanes
           els.careerLanesList.innerHTML = `<p style="font-weight:600; color:#214E3B; margin-bottom:8px;">Search Lanes</p><ul style="padding-left:20px; font-size:0.9rem;">`;
           const laneLines = lanesText.split('\n').filter(l => l.trim());
           if (laneLines.length === 0) {
@@ -1445,7 +1455,6 @@
           }
           els.careerLanesList.innerHTML += `</ul>`;
 
-          // Plan
           els.careerPlanContent.innerHTML = '';
           const planLines = planText.split('\n').filter(l => l.trim());
           if (planLines.length === 0) {
@@ -1464,7 +1473,6 @@
             });
           }
 
-          // Render apps
           els.careerAppTbody.innerHTML = "";
           apps.slice().reverse().forEach((app, idx) => {
             const row = document.createElement("tr");
@@ -1479,7 +1487,6 @@
             els.careerAppTbody.appendChild(row);
           });
 
-          // Render contacts
           els.careerContactTbody.innerHTML = "";
           contacts.slice().reverse().forEach((c, idx) => {
             const row = document.createElement("tr");
@@ -1522,7 +1529,7 @@
           els.notesStatus.textContent = "Saved.";
         }
 
-        // ===== SETTINGS / POPULATE =====
+        // ===== SETTINGS =====
         function populateSettings() {
           els.settingRace.value = state.settings.race;
           els.settingApplications.value = state.settings.applications;
@@ -1532,16 +1539,10 @@
           els.settingIndoorBikeStart.value = state.settings.indoorBikeStart;
           els.settingCalories.value = state.settings.calories;
           els.settingProtein.value = state.settings.protein;
-          const token = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
-          const repo = localStorage.getItem(GITHUB_REPO_KEY) || "marco-yan/marco-life-dashboard";
-          els.githubToken.value = token;
-          els.githubRepo.value = repo;
-          setGitHubStatus(token ? "GitHub token set. Auto-sync active." : "Status: Not connected. Add your GitHub token above.", token ? "success" : "");
         }
 
         // ===== EVENTS =====
         function bindEvents() {
-          // Tabs
           els.tabs.forEach(tab => {
             tab.addEventListener("click", function() {
               const view = this.dataset.view;
@@ -1558,13 +1559,11 @@
             });
           });
 
-          // Week nav
           els.previousWeek.addEventListener("click", function() { const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek)); if(idx>0) { selectedWeek = weeks[idx-1]; selectedDate = selectedWeek; renderAll(); } });
           els.nextWeek.addEventListener("click", function() { const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek)); if(idx<weeks.length-1) { selectedWeek = weeks[idx+1]; selectedDate = selectedWeek; renderAll(); } });
           els.currentWeek.addEventListener("click", function() { selectedDate = clampDate(new Date()); selectedWeek = startOfWeek(selectedDate); renderAll(); });
           els.weekSelect.addEventListener("change", function() { selectedWeek = parseDate(this.value); selectedDate = selectedWeek; renderAll(); });
 
-          // Add task
           els.showAddTask.addEventListener("click", function() { els.addTaskForm.classList.remove("is-hidden"); els.newTaskText.focus(); });
           els.cancelAddTask.addEventListener("click", function() { els.addTaskForm.classList.add("is-hidden"); els.newTaskText.value = ""; });
           els.addTaskForm.addEventListener("submit", function(e) {
@@ -1578,7 +1577,6 @@
             renderWeek();
           });
 
-          // Settings
           els.settingsForm.addEventListener("submit", function(e) {
             e.preventDefault();
             state.settings.race = els.settingRace.value;
@@ -1594,7 +1592,6 @@
             renderAll();
           });
 
-          // Schedule Editor
           els.editScheduleBtn.addEventListener("click", function() {
             const key = dateKey(selectedDate);
             els.modalDayLabel.textContent = formatLongDate(selectedDate);
@@ -1651,22 +1648,6 @@
             refreshIcons();
           }
 
-          // GitHub Sync
-          els.githubSaveToken.addEventListener("click", function() {
-            const token = els.githubToken.value.trim();
-            const repo = els.githubRepo.value.trim() || "marco-yan/marco-life-dashboard";
-            if (!token) { setGitHubStatus("Please enter a GitHub token.", "error"); return; }
-            localStorage.setItem(GITHUB_TOKEN_KEY, token);
-            localStorage.setItem(GITHUB_REPO_KEY, repo);
-            setGitHubStatus("Token saved! Auto-sync is active.", "success");
-            setTimeout(pushToGitHub, 500);
-          });
-          els.githubSyncNow.addEventListener("click", pushToGitHub);
-          els.githubLoadNow.addEventListener("click", function() {
-            loadFromGitHub().then(() => { renderAll(); populateSettings(); populateCareerEditFields(); });
-          });
-
-          // Career: Application Form
           els.careerAppForm.addEventListener("submit", function(e) {
             e.preventDefault();
             const company = els.careerAppCompany.value.trim();
@@ -1685,7 +1666,6 @@
             renderCareer();
           });
 
-          // Career: Contact Form
           els.careerContactForm.addEventListener("submit", function(e) {
             e.preventDefault();
             const name = els.careerContactName.value.trim();
@@ -1704,10 +1684,8 @@
             renderCareer();
           });
 
-          // Career: Save Content
           els.saveCareerContent.addEventListener("click", saveCareerContent);
 
-          // Notes: Auto-save
           els.notesTextarea.addEventListener("input", function() {
             els.notesStatus.textContent = "Saving...";
             if (notesSaveTimer) clearTimeout(notesSaveTimer);
@@ -1716,12 +1694,26 @@
             }, 500);
           });
 
-          // Auto-load if token exists
-          if (localStorage.getItem(GITHUB_TOKEN_KEY)) {
-            setTimeout(() => {
-              loadFromGitHub().then(() => { renderAll(); populateSettings(); populateCareerEditFields(); });
-            }, 1000);
-          }
+          // Sync buttons
+          els.syncNowBtn.addEventListener("click", function() {
+            saveToJSONBin();
+          });
+          els.loadNowBtn.addEventListener("click", function() {
+            loadFromJSONBin().then(() => {
+              renderAll();
+              populateSettings();
+              populateCareerEditFields();
+            });
+          });
+
+          // Auto-load on startup
+          setTimeout(() => {
+            loadFromJSONBin().then(() => {
+              renderAll();
+              populateSettings();
+              populateCareerEditFields();
+            });
+          }, 1000);
         }
 
         function refreshIcons() {
