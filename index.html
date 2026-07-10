@@ -506,6 +506,15 @@
 
     .notes-textarea { width: 100%; min-height: 400px; padding: 20px; border-radius: 16px; border: 1px solid #e8e5db; font-family: inherit; font-size: 0.95rem; line-height: 1.6; resize: vertical; background: white; transition: border 0.2s; }
     .notes-textarea:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
+
+    .edit-career-toggle { margin: 16px 0 8px 0; }
+    .edit-career-toggle summary { font-weight: 600; cursor: pointer; color: #214E3B; padding: 10px 16px; background: #fcfcf9; border-radius: 12px; border: 1px solid #e8e5db; }
+    .edit-career-toggle summary:hover { background: #f2efe8; }
+    .edit-career-content { padding: 16px 0; }
+    .edit-career-content textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #d6d2c6; font-family: 'Inter', monospace; font-size: 0.85rem; resize: vertical; background: white; margin-bottom: 12px; }
+    .edit-career-content textarea:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
+    .edit-career-content .label { font-weight: 600; font-size: 0.85rem; color: #214E3B; display: block; margin-bottom: 4px; }
+    .edit-career-content .hint { font-size: 0.75rem; color: #5a6b55; margin-bottom: 8px; display: block; }
   </style>
 </head>
 <body>
@@ -513,7 +522,7 @@
   <!-- ===== PASSWORD SCREEN ===== -->
   <div id="password-screen">
     <div class="lock-box">
-      <h1>🔒 Marco's Dashboard</h1>
+      <h1>Marco's Dashboard</h1>
       <p>Enter your private access code</p>
       <input type="password" id="password-input" placeholder="Enter password" autofocus>
       <button class="btn-unlock" id="unlock-btn">Unlock</button>
@@ -529,7 +538,7 @@
       <button type="button" class="btn" id="tab-roadmap" data-view="roadmap">July–December</button>
       <button type="button" class="btn" id="tab-career" data-view="career">Career Tracker</button>
       <button type="button" class="btn" id="tab-notes" data-view="notes">Notes</button>
-      <button type="button" class="btn" id="tab-settings" data-view="settings">Goals &amp; settings</button>
+      <button type="button" class="btn" id="tab-settings" data-view="settings">Goals & settings</button>
     </div>
 
     <!-- ===== PANEL: WEEK ===== -->
@@ -622,46 +631,43 @@
         <div class="card viz-stat"><span class="text-muted">Referrals</span><span class="viz-stat-value" id="career-referrals-count">0</span><span class="text-small">Received</span></div>
       </div>
 
+      <!-- Editable Content Section -->
+      <details class="edit-career-toggle">
+        <summary>Edit Career Content (Companies, Lanes, Plan)</summary>
+        <div class="edit-career-content">
+          <span class="label">Target Companies & Roles</span>
+          <span class="hint">One company per line. Format: Company: Title1, Title2, Title3</span>
+          <textarea id="edit-target-companies" rows="12"></textarea>
+          
+          <span class="label">Search Lanes</span>
+          <span class="hint">One lane per line. Format: Lane Name: Percentage</span>
+          <textarea id="edit-search-lanes" rows="4"></textarea>
+          
+          <span class="label">24-Week Strategic Plan</span>
+          <span class="hint">One week per line. Format: Week X (Date): Description</span>
+          <textarea id="edit-strategic-plan" rows="28"></textarea>
+          
+          <button type="button" class="btn btn-primary" id="save-career-content">Save Career Content</button>
+          <span id="career-edit-status" class="text-small" style="margin-left:16px; color:#5a6b55;"></span>
+        </div>
+      </details>
+
       <!-- Target Companies -->
       <div class="card">
-        <h3 style="color:#214E3B; margin-bottom:12px;">🏢 Target Companies &amp; Roles</h3>
+        <h3 style="color:#214E3B; margin-bottom:12px;">Target Companies & Roles</h3>
         <div class="career-grid">
-          <div>
-            <p style="font-weight:600; color:#214E3B;">Tier 1 (Priority)</p>
-            <ul class="company-list">
-              <li><span class="tier">AtkinsRéalis</span><br><span class="job-title-tag">Data Analyst</span><span class="job-title-tag">Project Controls</span><span class="job-title-tag">Risk Analyst</span><span class="job-title-tag">PMO Analyst</span></li>
-              <li><span class="tier">Intact</span><br><span class="job-title-tag">Specialty Lines Dev</span><span class="job-title-tag">Commercial Lines Dev</span><span class="job-title-tag">Underwriting Associate</span></li>
-              <li><span class="tier">IQVIA</span><br><span class="job-title-tag">Associate Consultant</span><span class="job-title-tag">Business Analyst</span><span class="job-title-tag">Commercial Analytics</span></li>
-              <li><span class="tier">Munich Re / HSB</span><br><span class="job-title-tag">Underwriting Associate</span><span class="job-title-tag">Reinsurance Trainee</span><span class="job-title-tag">Risk Analyst</span></li>
-              <li><span class="tier">AstraZeneca</span><br><span class="job-title-tag">Business Insights</span><span class="job-title-tag">Commercial Excellence</span><span class="job-title-tag">Omnichannel Analyst</span></li>
-              <li><span class="tier">Zurich</span><br><span class="job-title-tag">Underwriting Trainee</span><span class="job-title-tag">Commercial Insurance Analyst</span></li>
-              <li><span class="tier">Sanofi</span><br><span class="job-title-tag">Commercial Excellence</span><span class="job-title-tag">Transformation Analyst</span></li>
-              <li><span class="tier">Marsh</span><br><span class="job-title-tag">Graduate Program</span><span class="job-title-tag">Risk Analyst</span><span class="job-title-tag">Broking Analyst</span></li>
-              <li><span class="tier">Metrolinx</span><br><span class="job-title-tag">Project Controls</span><span class="job-title-tag">PMO Analyst</span><span class="job-title-tag">Risk Analyst</span></li>
-              <li><span class="tier">Veeva</span><br><span class="job-title-tag">Associate Consultant</span><span class="job-title-tag">Data Operations</span><span class="job-title-tag">Analytics Associate</span></li>
-            </ul>
+          <div id="career-target-list">
+            <!-- Rendered from state -->
           </div>
-          <div>
-            <p style="font-weight:600; color:#5a6b55;">Watchlist</p>
-            <ul class="company-list" style="columns:1;">
-              <li>OPG, Aon, RBC, BMO, Chubb, AIG</li>
-              <li>Travelers, Roche, GSK, TELUS Health</li>
-              <li>PointClickCare, Klick Health, Aecon, WSP, Hydro One</li>
-            </ul>
-            <p style="font-weight:600; color:#214E3B; margin-top:16px;">Search Lanes</p>
-            <ul style="padding-left:20px; font-size:0.9rem;">
-              <li><strong>35%</strong> Insurance / Reinsurance / Risk</li>
-              <li><strong>35%</strong> Infrastructure / Project Controls</li>
-              <li><strong>25%</strong> Healthcare Commercial Analytics</li>
-              <li><strong>5%</strong> Banking / General Analyst</li>
-            </ul>
+          <div id="career-lanes-list">
+            <!-- Rendered from state -->
           </div>
         </div>
       </div>
 
       <!-- Application Tracker -->
       <div class="card">
-        <h3 style="color:#214E3B; margin-bottom:12px;">📋 Application Tracker</h3>
+        <h3 style="color:#214E3B; margin-bottom:12px;">Application Tracker</h3>
         <form id="career-app-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
           <label class="form-label">Company <input class="form-control" id="career-app-company" placeholder="e.g. Intact" required></label>
           <label class="form-label">Job Title <input class="form-control" id="career-app-title" placeholder="e.g. Underwriting Trainee"></label>
@@ -687,7 +693,7 @@
 
       <!-- Networking Tracker -->
       <div class="card">
-        <h3 style="color:#214E3B; margin-bottom:12px;">🤝 Networking Tracker</h3>
+        <h3 style="color:#214E3B; margin-bottom:12px;">Networking Tracker</h3>
         <form id="career-contact-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
           <label class="form-label">Name <input class="form-control" id="career-contact-name" placeholder="e.g. Jane Smith"></label>
           <label class="form-label">Company <input class="form-control" id="career-contact-company" placeholder="e.g. Zurich"></label>
@@ -710,37 +716,12 @@
         </div>
       </div>
 
-      <!-- 24-Week Strategic Plan -->
+      <!-- Strategic Plan -->
       <div class="card">
         <div class="plan-details">
-          <summary>📅 View Your Complete 24-Week Strategic Plan</summary>
-          <div class="plan-content">
-            <p style="margin-bottom:12px; font-weight:500; color:#214E3B;">Target: Secure a permanent, structured early-career role by December 15, 2026.</p>
-            <div class="week-block"><span class="week-title">Week 1 (Jul 8–12):</span> Apply to AtkinsRéalis Data Analyst role. Create master tracker. Set job alerts.</div>
-            <div class="week-block"><span class="week-title">Week 2 (Jul 13–19):</span> Build 3 résumé versions (Insurance, Infrastructure, Healthcare). Update LinkedIn.</div>
-            <div class="week-block"><span class="week-title">Week 3 (Jul 20–26):</span> Insurance networking (Intact, Munich Re, Zurich, Marsh). 12 messages, 2 calls.</div>
-            <div class="week-block"><span class="week-title">Week 4 (Jul 27–Aug 2):</span> Healthcare networking (IQVIA, AstraZeneca, Sanofi, Veeva). 12 messages, 3 calls.</div>
-            <div class="week-block"><span class="week-title">Week 5 (Aug 3–9):</span> Infrastructure networking (AtkinsRéalis, Metrolinx, OPG, Aecon, WSP). Learn P6/Power BI basics.</div>
-            <div class="week-block"><span class="week-title">Week 6 (Aug 10–16):</span> Prepare 8 STAR stories + 6 career-transition answers. Mock interviews.</div>
-            <div class="week-block"><span class="week-title">Week 7 (Aug 17–23):</span> Convert networking to referrals. Follow up with top contacts.</div>
-            <div class="week-block"><span class="week-title">Week 8 (Aug 24–30):</span> Prepare for fall recruiting. Identify graduate programs. Prepare transcripts.</div>
-            <div class="week-block"><span class="week-title">Week 9 (Aug 31–Sep 6):</span> <strong>Fall Application Surge</strong> — 12 apps, 15 messages, 3 calls. Target: 60-70 cumulative apps.</div>
-            <div class="week-block"><span class="week-title">Week 10 (Sep 7–13):</span> Funnel analysis. Revise weakest résumé. 2 mock interviews.</div>
-            <div class="week-block"><span class="week-title">Week 11 (Sep 14–20):</span> <strong>Decision Gate 1.</strong> Assess pipeline. If no interviews, broaden targets.</div>
-            <div class="week-block"><span class="week-title">Week 12 (Sep 21–27):</span> Create technical work sample (Project Controls Dashboard or Healthcare Campaign).</div>
-            <div class="week-block"><span class="week-title">Week 13 (Sep 28–Oct 4):</span> Re-engage all "stay in touch" contacts. Second application wave.</div>
-            <div class="week-block"><span class="week-title">Week 14 (Oct 5–11):</span> Direct recruiter outreach (AtkinsRéalis, Intact, Zurich, IQVIA, AstraZeneca, Marsh).</div>
-            <div class="week-block"><span class="week-title">Week 15 (Oct 12–18):</span> Interview conversion prep. Research business units. Thank-you follow-ups.</div>
-            <div class="week-block"><span class="week-title">Week 16 (Oct 19–25):</span> Expand company list if needed (Chubb, AIG, Roche, GSK, Hydro One, etc.)</div>
-            <div class="week-block"><span class="week-title">Week 17 (Oct 26–Nov 1):</span> <strong>Decision Gate 2.</strong> Target: 100+ apps, 6+ first-round, 2+ late-stage. If not, expand titles (Ops Analyst, Client Services, Project Coordinator).</div>
-            <div class="week-block"><span class="week-title">Week 18 (Nov 2–8):</span> Shift to immediate-start hiring (0-2 yrs, 1-3 yrs roles). Apply to 1-3 year positions with 70% fit.</div>
-            <div class="week-block"><span class="week-title">Week 19 (Nov 9–15):</span> Final-round & offer preparation. Salary range, references, resignation language.</div>
-            <div class="week-block"><span class="week-title">Week 20 (Nov 16–22):</span> Concentrated referral push. 10 direct messages to strongest relationships.</div>
-            <div class="week-block"><span class="week-title">Week 21 (Nov 23–29):</span> December pipeline. Target January starts, backfills, contract-to-perm.</div>
-            <div class="week-block"><span class="week-title">Week 22 (Nov 30–Dec 6):</span> <strong>Decision Gate 3.</strong> Classify all active processes. If no offers, decide whether to continue into Jan or expand.</div>
-            <div class="week-block"><span class="week-title">Week 23 (Dec 7–13):</span> Close or extend. Review offers. Conduct post-mortem if none.</div>
-            <div class="week-block"><span class="week-title">Week 24 (Dec 14–20):</span> <strong>Transition.</strong> Sign offer, resign professionally, prepare handover.</div>
-            <p style="margin-top:12px; font-style:italic; color:#5a6b55;">Targets: 140+ apps, 95+ contacts, 30+ calls, 10+ referrals, 10+ first-rounds, 3-4 final rounds, 1+ offer.</p>
+          <summary>View Your 24-Week Strategic Plan</summary>
+          <div class="plan-content" id="career-plan-content">
+            <!-- Rendered from state -->
           </div>
         </div>
       </div>
@@ -749,8 +730,8 @@
     <!-- ===== PANEL: NOTES ===== -->
     <section id="panel-notes" class="is-hidden" role="tabpanel" hidden>
       <div class="card" style="margin-bottom:0;">
-        <h3 style="color:#214E3B; margin-bottom:8px;">📝 Quick Notes</h3>
-        <p class="text-small" style="margin-bottom:16px;">Auto-saves locally and syncs to GitHub. Use it for meeting notes, interview prep, or anything you need to remember.</p>
+        <h3 style="color:#214E3B; margin-bottom:8px;">Quick Notes</h3>
+        <p class="text-small" style="margin-bottom:16px;">Auto-saves locally and syncs. Use it for meeting notes, interview prep, or anything you need to remember.</p>
         <textarea class="notes-textarea" id="notes-textarea" placeholder="Jot down your thoughts, interview notes, reminders..."></textarea>
         <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
           <span class="text-small" id="notes-status">Saved.</span>
@@ -810,7 +791,7 @@
         </div>
 
         <div class="settings-section">
-          <h3>🔁 Auto-Sync (GitHub)</h3>
+          <h3>Auto-Sync (GitHub)</h3>
           <div class="settings-grid">
             <label class="form-label" for="github-token">GitHub Token
               <input class="form-control" id="github-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="font-family:monospace;">
@@ -821,8 +802,8 @@
           </div>
           <div class="settings-actions" style="margin-top:14px;">
             <button type="button" class="btn btn-primary" id="github-save-token">Save Token</button>
-            <button type="button" class="btn btn-success" id="github-sync-now">📤 Sync Now</button>
-            <button type="button" class="btn" id="github-load-now">📥 Load from GitHub</button>
+            <button type="button" class="btn btn-success" id="github-sync-now">Sync Now</button>
+            <button type="button" class="btn" id="github-load-now">Load from GitHub</button>
           </div>
           <div class="sync-status" id="github-status">Status: Not connected. Add your GitHub token above.</div>
           <p class="text-small" style="margin-top:10px; color:#5a6b55;">
@@ -846,7 +827,7 @@
   <!-- ===== SCHEDULE MODAL ===== -->
   <div id="schedule-modal">
     <div class="modal-box">
-      <h2>✏️ Edit Schedule</h2>
+      <h2>Edit Schedule</h2>
       <p class="sub" id="modal-day-label">Friday, July 10</p>
       <div class="block-list" id="modal-block-list"></div>
       <div class="add-row">
@@ -927,7 +908,12 @@
           scheduleOverrides: {},
           notes: "",
           careerApps: [],
-          careerContacts: []
+          careerContacts: [],
+          careerContent: {
+            targetCompaniesText: "AtkinsRéalis: Data Analyst, Project Controls, Risk Analyst, PMO Analyst\nIntact: Specialty Lines Dev, Commercial Lines Dev, Underwriting Associate\nIQVIA: Associate Consultant, Business Analyst, Commercial Analytics\nMunich Re / HSB: Underwriting Associate, Reinsurance Trainee, Risk Analyst\nAstraZeneca: Business Insights, Commercial Excellence, Omnichannel Analyst\nZurich: Underwriting Trainee, Commercial Insurance Analyst\nSanofi: Commercial Excellence, Transformation Analyst\nMarsh: Graduate Program, Risk Analyst, Broking Analyst\nMetrolinx: Project Controls, PMO Analyst, Risk Analyst\nVeeva: Associate Consultant, Data Operations, Analytics Associate",
+            searchLanesText: "Insurance / Reinsurance / Risk: 35%\nInfrastructure / Project Controls: 35%\nHealthcare Commercial Analytics: 25%\nBanking / General Analyst: 5%",
+            strategicPlanText: "Week 1 (Jul 8–12): Apply to AtkinsRéalis Data Analyst role. Create master tracker. Set job alerts.\nWeek 2 (Jul 13–19): Build 3 résumé versions (Insurance, Infrastructure, Healthcare). Update LinkedIn.\nWeek 3 (Jul 20–26): Insurance networking (Intact, Munich Re, Zurich, Marsh). 12 messages, 2 calls.\nWeek 4 (Jul 27–Aug 2): Healthcare networking (IQVIA, AstraZeneca, Sanofi, Veeva). 12 messages, 3 calls.\nWeek 5 (Aug 3–9): Infrastructure networking (AtkinsRéalis, Metrolinx, OPG, Aecon, WSP). Learn P6/Power BI basics.\nWeek 6 (Aug 10–16): Prepare 8 STAR stories + 6 career-transition answers. Mock interviews.\nWeek 7 (Aug 17–23): Convert networking to referrals. Follow up with top contacts.\nWeek 8 (Aug 24–30): Prepare for fall recruiting. Identify graduate programs. Prepare transcripts.\nWeek 9 (Aug 31–Sep 6): Fall Application Surge — 12 apps, 15 messages, 3 calls. Target: 60-70 cumulative apps.\nWeek 10 (Sep 7–13): Funnel analysis. Revise weakest résumé. 2 mock interviews.\nWeek 11 (Sep 14–20): Decision Gate 1. Assess pipeline. If no interviews, broaden targets.\nWeek 12 (Sep 21–27): Create technical work sample (Project Controls Dashboard or Healthcare Campaign).\nWeek 13 (Sep 28–Oct 4): Re-engage all \"stay in touch\" contacts. Second application wave.\nWeek 14 (Oct 5–11): Direct recruiter outreach (AtkinsRéalis, Intact, Zurich, IQVIA, AstraZeneca, Marsh).\nWeek 15 (Oct 12–18): Interview conversion prep. Research business units. Thank-you follow-ups.\nWeek 16 (Oct 19–25): Expand company list if needed (Chubb, AIG, Roche, GSK, Hydro One, etc.)\nWeek 17 (Oct 26–Nov 1): Decision Gate 2. Target: 100+ apps, 6+ first-round, 2+ late-stage. If not, expand titles.\nWeek 18 (Nov 2–8): Shift to immediate-start hiring (0-2 yrs, 1-3 yrs roles). Apply to 1-3 year positions with 70% fit.\nWeek 19 (Nov 9–15): Final-round & offer preparation. Salary range, references, resignation language.\nWeek 20 (Nov 16–22): Concentrated referral push. 10 direct messages to strongest relationships.\nWeek 21 (Nov 23–29): December pipeline. Target January starts, backfills, contract-to-perm.\nWeek 22 (Nov 30–Dec 6): Decision Gate 3. Classify all active processes. If no offers, decide whether to continue.\nWeek 23 (Dec 7–13): Close or extend. Review offers. Conduct post-mortem if none.\nWeek 24 (Dec 14–20): Transition. Sign offer, resign professionally, prepare handover."
+          }
         };
 
         const weekFocus = {
@@ -1046,6 +1032,14 @@
           careerContactCompany: document.getElementById("career-contact-company"),
           careerContactStatus: document.getElementById("career-contact-status"),
           careerContactTbody: document.getElementById("career-contact-tbody"),
+          careerTargetList: document.getElementById("career-target-list"),
+          careerLanesList: document.getElementById("career-lanes-list"),
+          careerPlanContent: document.getElementById("career-plan-content"),
+          editTargetCompanies: document.getElementById("edit-target-companies"),
+          editSearchLanes: document.getElementById("edit-search-lanes"),
+          editStrategicPlan: document.getElementById("edit-strategic-plan"),
+          saveCareerContent: document.getElementById("save-career-content"),
+          careerEditStatus: document.getElementById("career-edit-status"),
         };
 
         // ===== HELPERS =====
@@ -1073,7 +1067,8 @@
               scheduleOverrides: parsed.scheduleOverrides || {},
               notes: parsed.notes || "",
               careerApps: parsed.careerApps || [],
-              careerContacts: parsed.careerContacts || []
+              careerContacts: parsed.careerContacts || [],
+              careerContent: Object.assign({}, defaultState.careerContent, parsed.careerContent || {})
             };
           } catch (e) { return JSON.parse(JSON.stringify(defaultState)); }
         }
@@ -1094,12 +1089,12 @@
 
         async function pushToGitHub() {
           const { token, repo } = getGitHubConfig();
-          if (!token) { setGitHubStatus("❌ No token.", "error"); return; }
+          if (!token) { setGitHubStatus("No token.", "error"); return; }
           if (isSyncing) return;
           isSyncing = true;
-          setGitHubStatus("⏳ Syncing...", "syncing");
+          setGitHubStatus("Syncing...", "syncing");
           try {
-            const data = { settings: state.settings, completed: state.completed, customTasks: state.customTasks, scheduleOverrides: state.scheduleOverrides, notes: state.notes, careerApps: state.careerApps, careerContacts: state.careerContacts };
+            const data = { settings: state.settings, completed: state.completed, customTasks: state.customTasks, scheduleOverrides: state.scheduleOverrides, notes: state.notes, careerApps: state.careerApps, careerContacts: state.careerContacts, careerContent: state.careerContent };
             const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
             const url = `https://api.github.com/repos/${repo}/contents/data.json`;
             let sha = null;
@@ -1108,18 +1103,18 @@
             if (sha) payload.sha = sha;
             const res = await fetch(url, { method: "PUT", headers: { Authorization: `token ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(payload) });
             if (!res.ok) throw new Error("GitHub API error");
-            setGitHubStatus("✅ Synced!", "success");
-          } catch (e) { setGitHubStatus("❌ Sync failed: " + e.message, "error"); } finally { isSyncing = false; }
+            setGitHubStatus("Synced!", "success");
+          } catch (e) { setGitHubStatus("Sync failed: " + e.message, "error"); } finally { isSyncing = false; }
         }
 
         async function loadFromGitHub() {
           const { token, repo } = getGitHubConfig();
-          if (!token) { setGitHubStatus("❌ No token.", "error"); return; }
-          setGitHubStatus("⏳ Loading...", "syncing");
+          if (!token) { setGitHubStatus("No token.", "error"); return; }
+          setGitHubStatus("Loading...", "syncing");
           try {
             const url = `https://api.github.com/repos/${repo}/contents/data.json`;
             const res = await fetch(url, { headers: { Authorization: `token ${token}` } });
-            if (!res.ok) { if(res.status === 404) { setGitHubStatus("ℹ️ No data found.", ""); return; } throw new Error("Fetch failed"); }
+            if (!res.ok) { if(res.status === 404) { setGitHubStatus("No data found.", ""); return; } throw new Error("Fetch failed"); }
             const json = await res.json();
             const content = JSON.parse(decodeURIComponent(escape(atob(json.content))));
             if(content.settings) state.settings = content.settings;
@@ -1129,13 +1124,13 @@
             if(content.notes !== undefined) state.notes = content.notes;
             if(content.careerApps) state.careerApps = content.careerApps;
             if(content.careerContacts) state.careerContacts = content.careerContacts;
+            if(content.careerContent) state.careerContent = Object.assign({}, defaultState.careerContent, content.careerContent);
             saveState("Loaded from GitHub.");
-            setGitHubStatus("✅ Loaded!", "success");
+            setGitHubStatus("Loaded!", "success");
             renderAll();
             populateSettings();
-            renderCareer();
-            renderNotes();
-          } catch (e) { setGitHubStatus("❌ Load failed: " + e.message, "error"); }
+            populateCareerEditFields();
+          } catch (e) { setGitHubStatus("Load failed: " + e.message, "error"); }
         }
 
         function triggerSync() {
@@ -1414,6 +1409,61 @@
           els.careerContactsCount.textContent = contacts.length;
           els.careerReferralsCount.textContent = referrals;
 
+          // Render Target Companies & Roles
+          const companiesText = state.careerContent.targetCompaniesText || "";
+          const lanesText = state.careerContent.searchLanesText || "";
+          const planText = state.careerContent.strategicPlanText || "";
+
+          // Companies
+          els.careerTargetList.innerHTML = `<ul class="company-list">`;
+          const companyLines = companiesText.split('\n').filter(l => l.trim());
+          if (companyLines.length === 0) {
+            els.careerTargetList.innerHTML = `<p class="text-small">No companies added yet. Use "Edit Career Content" above to add them.</p>`;
+          } else {
+            companyLines.forEach(line => {
+              const parts = line.split(':');
+              const company = parts[0].trim();
+              const titles = parts.slice(1).join(':').trim().split(',').map(t => t.trim()).filter(t => t);
+              els.careerTargetList.innerHTML += `<li><span class="tier">${company}</span><br>`;
+              titles.forEach(title => {
+                els.careerTargetList.innerHTML += `<span class="job-title-tag">${title}</span>`;
+              });
+              els.careerTargetList.innerHTML += `</li>`;
+            });
+            els.careerTargetList.innerHTML += `</ul>`;
+          }
+
+          // Lanes
+          els.careerLanesList.innerHTML = `<p style="font-weight:600; color:#214E3B; margin-bottom:8px;">Search Lanes</p><ul style="padding-left:20px; font-size:0.9rem;">`;
+          const laneLines = lanesText.split('\n').filter(l => l.trim());
+          if (laneLines.length === 0) {
+            els.careerLanesList.innerHTML += `<li class="text-small">No lanes defined.</li>`;
+          } else {
+            laneLines.forEach(line => {
+              els.careerLanesList.innerHTML += `<li><strong>${line}</strong></li>`;
+            });
+          }
+          els.careerLanesList.innerHTML += `</ul>`;
+
+          // Plan
+          els.careerPlanContent.innerHTML = '';
+          const planLines = planText.split('\n').filter(l => l.trim());
+          if (planLines.length === 0) {
+            els.careerPlanContent.innerHTML = '<p class="text-small">No strategic plan defined.</p>';
+          } else {
+            planLines.forEach(line => {
+              const div = document.createElement('div');
+              div.className = 'week-block';
+              const isWeek = line.match(/^Week \d+/i);
+              if (isWeek) {
+                div.innerHTML = `<span class="week-title">${line}</span>`;
+              } else {
+                div.innerHTML = line;
+              }
+              els.careerPlanContent.appendChild(div);
+            });
+          }
+
           // Render apps
           els.careerAppTbody.innerHTML = "";
           apps.slice().reverse().forEach((app, idx) => {
@@ -1445,6 +1495,22 @@
           refreshIcons();
         }
 
+        function populateCareerEditFields() {
+          els.editTargetCompanies.value = state.careerContent.targetCompaniesText || "";
+          els.editSearchLanes.value = state.careerContent.searchLanesText || "";
+          els.editStrategicPlan.value = state.careerContent.strategicPlanText || "";
+        }
+
+        function saveCareerContent() {
+          state.careerContent.targetCompaniesText = els.editTargetCompanies.value;
+          state.careerContent.searchLanesText = els.editSearchLanes.value;
+          state.careerContent.strategicPlanText = els.editStrategicPlan.value;
+          saveState("Career content saved.");
+          els.careerEditStatus.textContent = "Saved!";
+          setTimeout(() => { els.careerEditStatus.textContent = ""; }, 3000);
+          renderCareer();
+        }
+
         // ===== NOTES =====
         function renderNotes() {
           els.notesTextarea.value = state.notes || "";
@@ -1470,7 +1536,7 @@
           const repo = localStorage.getItem(GITHUB_REPO_KEY) || "marco-yan/marco-life-dashboard";
           els.githubToken.value = token;
           els.githubRepo.value = repo;
-          setGitHubStatus(token ? "✅ GitHub token set. Auto-sync active." : "Status: Not connected. Add your GitHub token above.", token ? "success" : "");
+          setGitHubStatus(token ? "GitHub token set. Auto-sync active." : "Status: Not connected. Add your GitHub token above.", token ? "success" : "");
         }
 
         // ===== EVENTS =====
@@ -1487,7 +1553,7 @@
               });
               if (view === "roadmap") renderRoadmap();
               if (view === "settings") populateSettings();
-              if (view === "career") renderCareer();
+              if (view === "career") { renderCareer(); populateCareerEditFields(); }
               if (view === "notes") renderNotes();
             });
           });
@@ -1589,15 +1655,15 @@
           els.githubSaveToken.addEventListener("click", function() {
             const token = els.githubToken.value.trim();
             const repo = els.githubRepo.value.trim() || "marco-yan/marco-life-dashboard";
-            if (!token) { setGitHubStatus("❌ Please enter a GitHub token.", "error"); return; }
+            if (!token) { setGitHubStatus("Please enter a GitHub token.", "error"); return; }
             localStorage.setItem(GITHUB_TOKEN_KEY, token);
             localStorage.setItem(GITHUB_REPO_KEY, repo);
-            setGitHubStatus("✅ Token saved! Auto-sync is active.", "success");
+            setGitHubStatus("Token saved! Auto-sync is active.", "success");
             setTimeout(pushToGitHub, 500);
           });
           els.githubSyncNow.addEventListener("click", pushToGitHub);
           els.githubLoadNow.addEventListener("click", function() {
-            loadFromGitHub().then(() => { renderAll(); populateSettings(); });
+            loadFromGitHub().then(() => { renderAll(); populateSettings(); populateCareerEditFields(); });
           });
 
           // Career: Application Form
@@ -1638,7 +1704,10 @@
             renderCareer();
           });
 
-          // Notes: Auto-save on input (debounced)
+          // Career: Save Content
+          els.saveCareerContent.addEventListener("click", saveCareerContent);
+
+          // Notes: Auto-save
           els.notesTextarea.addEventListener("input", function() {
             els.notesStatus.textContent = "Saving...";
             if (notesSaveTimer) clearTimeout(notesSaveTimer);
@@ -1650,7 +1719,7 @@
           // Auto-load if token exists
           if (localStorage.getItem(GITHUB_TOKEN_KEY)) {
             setTimeout(() => {
-              loadFromGitHub().then(() => { renderAll(); populateSettings(); });
+              loadFromGitHub().then(() => { renderAll(); populateSettings(); populateCareerEditFields(); });
             }, 1000);
           }
         }
@@ -1664,6 +1733,7 @@
         // ===== INIT =====
         function init() {
           populateSettings();
+          populateCareerEditFields();
           bindEvents();
           els.weekSelect.innerHTML = "";
           weeks.forEach(w => {
