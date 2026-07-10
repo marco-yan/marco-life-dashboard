@@ -1,5 +1,12 @@
 # Marco Life Dashboard — Update Log
+## [v1.3] – 2026-07-10
 
+**What changed:**
+- **Auto-sync via GitHub** – Dashboard now syncs automatically across all devices (phone, tablet, desktop).
+- **New settings section** – Add your GitHub token once, and all data (tasks, checkmarks, schedule edits, settings) syncs to a `data.json` file in your repo.
+- **Sync buttons** – "Sync Now" pushes your data to GitHub; "Load from GitHub" pulls it down to any device.
+- **Debounced saves** – Changes are saved locally and auto-synced 3 seconds after your last action (no constant API spam).
+- **Status indicators** – See real-time sync status (syncing, success, error) in the Settings panel.
 ---
 ## [v1.2] – 2026-07-10
 
