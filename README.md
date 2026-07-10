@@ -1,4 +1,11 @@
 # Marco Life Dashboard — Update Log
+## [v1.5] – 2026-07-10
+
+**What changed:**
+- **Career Tracker is now fully editable** – Company lists, search lanes, and the 24-week strategic plan can be edited directly in the dashboard using the "Edit Career Content" toggle. No HTML editing required.
+- **Removed all emojis** – Cleaner, more professional UI with text-only labels and buttons.
+- **Auto-sync preserves career content** – All career data (including your custom companies and plan) syncs via GitHub across devices.
+
 ## [v1.3] – 2026-07-10
 
 **What changed:**
