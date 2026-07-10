@@ -10,16 +10,19 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
+    /* ===== RESET & BODY ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background: #F7F6F0;
       color: #171A18;
-      padding: 32px 24px;
+      padding: 40px 24px;
       display: flex;
       justify-content: center;
       min-height: 100vh;
     }
+
+    /* ===== PASSWORD SCREEN ===== */
     #password-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: #F7F6F0; display: flex; justify-content: center; align-items: center;
@@ -44,80 +47,462 @@
     #password-screen .lock-box .btn-unlock:hover { background: #16382a; }
     #password-screen .lock-box .error-msg { color: #b33c3c; font-size: 0.85rem; margin-top: 12px; min-height: 1.5em; }
 
-    #marco-life-dashboard { max-width: 1280px; width: 100%; display: none; }
+    /* ===== DASHBOARD CONTAINER ===== */
+    #marco-life-dashboard {
+      max-width: 1280px;
+      width: 100%;
+      display: none;
+    }
     #marco-life-dashboard.visible { display: block; }
-    /* --- Rest of your CSS is exactly the same as before, I'm keeping it compact for length --- */
-    /* (I've kept all the styles from the previous version, just trimmed the duplicate comments) */
+
+    /* ===== BASE STYLES (Spacious) ===== */
     #marco-life-dashboard .is-hidden { display: none !important; }
     #marco-life-dashboard button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
     #marco-life-dashboard .text-small { font-size: 0.8125rem; color: #5a6b55; }
     #marco-life-dashboard .text-muted { color: #5a6b55; }
-    #marco-life-dashboard .card { background: #ffffff; border-radius: 16px; padding: 20px 24px; border: 1px solid #e8e5db; }
-    #marco-life-dashboard .card-soft { background: #fcfcf9; border: 1px solid #e8e5db; border-radius: 14px; padding: 16px 20px; }
-    #marco-life-dashboard .btn { padding: 8px 16px; border-radius: 10px; font-weight: 500; font-size: 0.875rem; background: #edebe5; color: #171A18; display: inline-flex; align-items: center; gap: 6px; }
-    #marco-life-dashboard .btn-primary { background: #214E3B; color: #fff; }
-    #marco-life-dashboard .btn-primary:hover { background: #16382a; }
-    #marco-life-dashboard .btn-ghost { background: transparent; color: #5a6b55; padding: 6px 8px; }
+    #marco-life-dashboard .field-span { grid-column: 1 / -1; }
+
+    /* ===== CARDS ===== */
+    #marco-life-dashboard .card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(33, 78, 59, 0.04), 0 4px 12px rgba(33, 78, 59, 0.03);
+      padding: 24px 28px;
+      border: 1px solid #e8e5db;
+      transition: box-shadow 0.2s;
+    }
+    #marco-life-dashboard .card-soft {
+      background: #fcfcf9;
+      border: 1px solid #e8e5db;
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+
+    /* ===== BUTTONS ===== */
+    #marco-life-dashboard .btn {
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      background: #edebe5;
+      color: #171A18;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1.4;
+    }
+    #marco-life-dashboard .btn:hover { background: #e0ddd4; }
+    #marco-life-dashboard .btn-primary { background: #214E3B; color: #fff; border-color: #214E3B; }
+    #marco-life-dashboard .btn-primary:hover { background: #16382a; border-color: #16382a; }
+    #marco-life-dashboard .btn-ghost { background: transparent; color: #5a6b55; padding: 6px 10px; }
+    #marco-life-dashboard .btn-ghost:hover { background: #edebe5; color: #171A18; }
     #marco-life-dashboard .btn-danger { background: #d95c5c; color: white; }
+    #marco-life-dashboard .btn-danger:hover { background: #bf4747; }
     #marco-life-dashboard .btn-success { background: #2a7a4a; color: white; }
-    #marco-life-dashboard .dash-tabs { display: flex; gap: 8px; margin-bottom: 28px; border-bottom: 1px solid #e8e5db; padding-bottom: 12px; }
-    #marco-life-dashboard .dash-tabs .btn { border-radius: 30px; padding: 8px 20px; background: transparent; font-weight: 500; color: #5a6b55; }
-    #marco-life-dashboard .dash-tabs .btn-primary { background: #214E3B; color: #fff; }
-    #marco-life-dashboard .week-nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
-    #marco-life-dashboard .week-picker { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.875rem; }
-    #marco-life-dashboard .form-select { padding: 8px 32px 8px 14px; border-radius: 10px; border: 1px solid #d6d2c6; background: white; font-family: inherit; font-size: 0.875rem; appearance: none; cursor: pointer; min-width: 180px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6b55' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-    #marco-life-dashboard .viz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
-    #marco-life-dashboard .viz-stat-value { font-size: 1.75rem; font-weight: 700; color: #214E3B; }
-    #marco-life-dashboard .focus-strip { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #f2efe8; border-radius: 14px; padding: 14px 20px; margin-bottom: 24px; border: 1px solid #d6d2c6; }
-    #marco-life-dashboard .viz-badge { background: #C5A46D; color: #171A18; font-size: 0.7rem; font-weight: 700; padding: 2px 12px; border-radius: 30px; text-transform: uppercase; }
-    #marco-life-dashboard .day-strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 28px; }
-    #marco-life-dashboard .viz-tile { background: white; border: 1px solid #e8e5db; border-radius: 30px; padding: 10px 6px; text-align: center; font-weight: 500; font-size: 0.8rem; }
-    #marco-life-dashboard .viz-tile.is-selected { background: #214E3B; border-color: #214E3B; color: white; }
-    #marco-life-dashboard .daily-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; }
-    @media (max-width: 740px) { #marco-life-dashboard .daily-layout { grid-template-columns: 1fr; gap: 20px; } }
-    #marco-life-dashboard .section-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
-    #marco-life-dashboard .section-heading h3 { font-size: 1.1rem; font-weight: 600; color: #214E3B; }
-    #marco-life-dashboard .schedule-item { display: grid; grid-template-columns: 100px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid #edebe5; font-size: 0.9rem; }
-    #marco-life-dashboard .schedule-time { font-weight: 500; color: #214E3B; }
-    #marco-life-dashboard .todo-row { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; padding: 12px 0; border-bottom: 1px solid #edebe5; }
-    #marco-life-dashboard .todo-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: #214E3B; cursor: pointer; }
-    #marco-life-dashboard .todo-row[data-complete="true"] .todo-text { color: #82906A; text-decoration: line-through; }
-    #marco-life-dashboard .empty-state { color: #82906A; padding: 24px 0; text-align: center; }
-    #marco-life-dashboard .add-task-form { margin-top: 16px; padding: 20px; background: #fcfcf9; border-radius: 16px; border: 1px solid #e8e5db; }
-    #marco-life-dashboard .add-task-fields { display: grid; grid-template-columns: 1fr 2fr; gap: 14px; }
+    #marco-life-dashboard .btn-success:hover { background: #1e5f38; }
+    #marco-life-dashboard .btn:disabled { opacity: 0.4; pointer-events: none; }
+
+    /* ===== TABS ===== */
+    #marco-life-dashboard .dash-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid #e8e5db;
+      padding-bottom: 16px;
+    }
+    #marco-life-dashboard .dash-tabs .btn {
+      border-radius: 30px;
+      padding: 10px 24px;
+      background: transparent;
+      font-weight: 500;
+      color: #5a6b55;
+    }
+    #marco-life-dashboard .dash-tabs .btn-primary {
+      background: #214E3B;
+      color: #fff;
+    }
+    #marco-life-dashboard .dash-tabs .btn-primary:hover { background: #16382a; }
+
+    /* ===== WEEK NAV ===== */
+    #marco-life-dashboard .week-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    #marco-life-dashboard .week-nav .viz-row { display: flex; gap: 8px; align-items: center; }
+    #marco-life-dashboard .week-picker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+    #marco-life-dashboard .form-select {
+      padding: 10px 36px 10px 16px;
+      border-radius: 10px;
+      border: 1px solid #d6d2c6;
+      background: white;
+      font-family: inherit;
+      font-size: 0.875rem;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6b55' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+      min-width: 200px;
+    }
+
+    /* ===== STATS ===== */
+    #marco-life-dashboard .viz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    #marco-life-dashboard .viz-stat { display: flex; flex-direction: column; gap: 4px; }
+    #marco-life-dashboard .viz-stat-value {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #214E3B;
+    }
+
+    /* ===== FOCUS STRIP ===== */
+    #marco-life-dashboard .focus-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: #f2efe8;
+      border-radius: 14px;
+      padding: 18px 24px;
+      margin-bottom: 28px;
+      border: 1px solid #d6d2c6;
+    }
+    #marco-life-dashboard .viz-badge {
+      background: #C5A46D;
+      color: #171A18;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    #marco-life-dashboard .focus-copy {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    #marco-life-dashboard .focus-copy strong { font-weight: 600; font-size: 1.05rem; }
+
+    /* ===== DAY STRIP ===== */
+    #marco-life-dashboard .day-strip {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    #marco-life-dashboard .viz-tile {
+      background: white;
+      border: 1px solid #e8e5db;
+      border-radius: 30px;
+      padding: 12px 6px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 0.8rem;
+      transition: all 0.15s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+    #marco-life-dashboard .viz-tile:hover:not(:disabled) { background: #edebe5; border-color: #82906A; }
+    #marco-life-dashboard .viz-tile.is-selected {
+      background: #214E3B;
+      border-color: #214E3B;
+      color: white;
+      box-shadow: 0 4px 10px rgba(33, 78, 59, 0.25);
+    }
+    #marco-life-dashboard .viz-tile:disabled { opacity: 0.3; background: #f8f6f0; }
+
+    /* ===== DAILY LAYOUT (Spacious) ===== */
+    #marco-life-dashboard .daily-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 32px;
+    }
+    @media (max-width: 740px) {
+      #marco-life-dashboard .daily-layout { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    #marco-life-dashboard .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    #marco-life-dashboard .section-heading h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #214E3B;
+    }
+    #marco-life-dashboard .section-heading .right-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ===== SCHEDULE ===== */
+    #marco-life-dashboard .schedule-list { display: flex; flex-direction: column; gap: 0; }
+    #marco-life-dashboard .schedule-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid #edebe5;
+      font-size: 0.9rem;
+    }
+    #marco-life-dashboard .schedule-item:last-child { border-bottom: none; }
+    #marco-life-dashboard .schedule-time { font-weight: 600; color: #214E3B; }
+
+    /* ===== TODOS ===== */
+    #marco-life-dashboard .todo-list { display: flex; flex-direction: column; gap: 0; }
+    #marco-life-dashboard .todo-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-bottom: 1px solid #edebe5;
+      transition: background 0.1s;
+    }
+    #marco-life-dashboard .todo-row:hover {
+      background: #fcfcf9;
+      margin: 0 -12px;
+      padding-left: 12px;
+      padding-right: 12px;
+      border-radius: 10px;
+    }
+    #marco-life-dashboard .todo-row .form-check { padding-top: 2px; }
+    #marco-life-dashboard .todo-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #214E3B;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #marco-life-dashboard .todo-text { font-weight: 500; font-size: 0.9rem; cursor: pointer; }
+    #marco-life-dashboard .todo-row[data-complete="true"] .todo-text {
+      color: #82906A;
+      text-decoration: line-through;
+    }
+    #marco-life-dashboard .empty-state { color: #82906A; padding: 28px 0; text-align: center; font-size: 0.9rem; }
+
+    /* ===== ADD TASK ===== */
+    #marco-life-dashboard .add-task-form {
+      margin-top: 20px;
+      padding: 24px;
+      background: #fcfcf9;
+      border-radius: 16px;
+      border: 1px solid #e8e5db;
+    }
+    #marco-life-dashboard .add-task-fields {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px;
+    }
     @media (max-width: 500px) { #marco-life-dashboard .add-task-fields { grid-template-columns: 1fr; } }
-    #marco-life-dashboard .form-label { font-weight: 500; font-size: 0.8rem; color: #214E3B; display: flex; flex-direction: column; gap: 4px; }
-    #marco-life-dashboard .form-control, #marco-life-dashboard .form-select { padding: 10px 14px; border-radius: 10px; border: 1px solid #d6d2c6; font-family: inherit; font-size: 0.9rem; background: white; }
-    #marco-life-dashboard .form-control:focus, #marco-life-dashboard .form-select:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
-    #marco-life-dashboard .roadmap-row { display: grid; grid-template-columns: 160px 1fr 1fr 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid #edebe5; }
-    @media (max-width: 740px) { #marco-life-dashboard .roadmap-row { grid-template-columns: 1fr; gap: 8px; } }
-    #marco-life-dashboard .roadmap-cell strong { display: block; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; color: #82906A; margin-bottom: 4px; }
-    #marco-life-dashboard .settings-section { border-bottom: 1px solid #e8e5db; padding-bottom: 24px; }
-    #marco-life-dashboard .settings-section h3 { font-size: 1rem; font-weight: 600; color: #214E3B; margin-bottom: 16px; }
-    #marco-life-dashboard .settings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    #marco-life-dashboard .form-label {
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: #214E3B;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    #marco-life-dashboard .form-control,
+    #marco-life-dashboard .form-select {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid #d6d2c6;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: white;
+      transition: border 0.15s;
+    }
+    #marco-life-dashboard .form-control:focus,
+    #marco-life-dashboard .form-select:focus {
+      outline: none;
+      border-color: #214E3B;
+      box-shadow: 0 0 0 3px rgba(33, 78, 59, 0.1);
+    }
+
+    /* ===== ROADMAP (Full Detail Restored) ===== */
+    #marco-life-dashboard .roadmap-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr 1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid #edebe5;
+    }
+    @media (max-width: 740px) {
+      #marco-life-dashboard .roadmap-row { grid-template-columns: 1fr; gap: 12px; padding: 20px 0; }
+    }
+    #marco-life-dashboard .roadmap-period p { margin-top: 6px; }
+    #marco-life-dashboard .roadmap-cell strong {
+      display: block;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: #82906A;
+      margin-bottom: 6px;
+    }
+    #marco-life-dashboard .roadmap-cell p { font-size: 0.9rem; line-height: 1.6; }
+
+    /* ===== SETTINGS ===== */
+    #marco-life-dashboard .settings-form { display: flex; flex-direction: column; gap: 32px; }
+    #marco-life-dashboard .settings-section {
+      border-bottom: 1px solid #e8e5db;
+      padding-bottom: 28px;
+    }
+    #marco-life-dashboard .settings-section h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #214E3B;
+      margin-bottom: 18px;
+    }
+    #marco-life-dashboard .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
     @media (max-width: 500px) { #marco-life-dashboard .settings-grid { grid-template-columns: 1fr; } }
-    #marco-life-dashboard .settings-actions { display: flex; align-items: center; gap: 20px; margin-top: 8px; flex-wrap: wrap; }
-    #marco-life-dashboard .sync-status { font-size: 0.85rem; margin-top: 8px; padding: 10px 14px; border-radius: 10px; background: #f2efe8; }
+    #marco-life-dashboard .settings-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    #marco-life-dashboard .assumption-line {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #e8e5db;
+      color: #5a6b55;
+    }
+
+    /* ===== SYNC STATUS ===== */
+    #marco-life-dashboard .sync-status {
+      font-size: 0.85rem;
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: #f2efe8;
+    }
     #marco-life-dashboard .sync-status.success { background: #e0f0e6; color: #1e5f38; }
     #marco-life-dashboard .sync-status.error { background: #fde8e8; color: #b33c3c; }
-    #marco-life-dashboard .status-line { min-height: 1.5rem; color: #5a6b55; font-size: 0.85rem; }
+    #marco-life-dashboard .sync-status.syncing { background: #fdf6e3; color: #8a7a3a; }
+
+    /* ===== STATUS LINE ===== */
+    #marco-life-dashboard .status-line {
+      min-height: 1.5rem;
+      color: #5a6b55;
+      font-size: 0.85rem;
+    }
+    #marco-life-dashboard .viz-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    /* ===== ICONS ===== */
     #marco-life-dashboard svg { width: 16px; height: 16px; display: inline-block; vertical-align: middle; }
 
-    #schedule-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(23,26,24,0.4); backdrop-filter: blur(4px); z-index: 10000; justify-content: center; align-items: center; }
+    /* ===== SCHEDULE MODAL ===== */
+    #schedule-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(23, 26, 24, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
     #schedule-modal.active { display: flex; }
-    #schedule-modal .modal-box { background: #F7F6F0; max-width: 560px; width: 90%; max-height: 80vh; border-radius: 24px; padding: 32px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); overflow-y: auto; border: 1px solid #e8e5db; }
+    #schedule-modal .modal-box {
+      background: #F7F6F0;
+      max-width: 560px;
+      width: 90%;
+      max-height: 80vh;
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+      overflow-y: auto;
+      border: 1px solid #e8e5db;
+    }
     #schedule-modal .modal-box h2 { font-size: 1.3rem; color: #214E3B; margin-bottom: 8px; }
-    #schedule-modal .block-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; max-height: 300px; overflow-y: auto; }
-    #schedule-modal .block-row { display: grid; grid-template-columns: 100px 1fr auto; gap: 12px; align-items: center; background: white; padding: 10px 14px; border-radius: 12px; border: 1px solid #e8e5db; }
-    #schedule-modal .add-row { display: grid; grid-template-columns: 1fr 2fr auto; gap: 10px; margin-bottom: 20px; }
-    #schedule-modal .add-row input { padding: 10px 12px; border-radius: 10px; border: 1px solid #d6d2c6; font-family: inherit; font-size: 0.85rem; background: white; }
-    #schedule-modal .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; border-top: 1px solid #e8e5db; padding-top: 20px; }
+    #schedule-modal .modal-box .sub { color: #5a6b55; font-size: 0.85rem; margin-bottom: 24px; }
+    #schedule-modal .block-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    #schedule-modal .block-row {
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      background: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid #e8e5db;
+    }
+    #schedule-modal .block-row .time { font-weight: 600; color: #214E3B; font-size: 0.85rem; }
+    #schedule-modal .block-row .label { font-size: 0.9rem; }
+    #schedule-modal .add-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr auto;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    #schedule-modal .add-row input {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #d6d2c6;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: white;
+    }
+    #schedule-modal .add-row input:focus {
+      outline: none;
+      border-color: #214E3B;
+      box-shadow: 0 0 0 3px rgba(33,78,59,0.1);
+    }
+    #schedule-modal .modal-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      border-top: 1px solid #e8e5db;
+      padding-top: 24px;
+    }
+    #schedule-modal .modal-actions .btn { flex: 1; justify-content: center; min-width: 100px; }
     #schedule-modal .btn-reset { background: transparent; color: #b33c3c; border: 1px solid #e8e5db; }
+    #schedule-modal .btn-reset:hover { background: #fde8e8; }
   </style>
 </head>
 <body>
 
-  <!-- PASSWORD SCREEN -->
+  <!-- ===== PASSWORD SCREEN ===== -->
   <div id="password-screen">
     <div class="lock-box">
       <h1>🔒 Marco's Dashboard</h1>
@@ -128,108 +513,192 @@
     </div>
   </div>
 
-  <!-- DASHBOARD -->
+  <!-- ===== DASHBOARD ===== -->
   <div id="marco-life-dashboard">
-    <div class="dash-tabs">
+    <!-- Tabs -->
+    <div class="dash-tabs" role="tablist">
       <button type="button" class="btn btn-primary" id="tab-week" data-view="week">This week</button>
       <button type="button" class="btn" id="tab-roadmap" data-view="roadmap">July–December</button>
       <button type="button" class="btn" id="tab-settings" data-view="settings">Goals &amp; settings</button>
     </div>
 
-    <section id="panel-week">
+    <!-- Panel: Week -->
+    <section id="panel-week" role="tabpanel">
       <div class="week-nav">
-        <div><button class="btn" id="previous-week"><i data-lucide="chevron-left"></i> Previous</button><button class="btn" id="current-week">Today</button><button class="btn" id="next-week">Next <i data-lucide="chevron-right"></i></button></div>
-        <label class="week-picker">Week <select class="form-select" id="week-select"></select></label>
+        <div class="viz-row">
+          <button type="button" class="btn" id="previous-week"><i data-lucide="chevron-left"></i> Previous</button>
+          <button type="button" class="btn" id="current-week">Today</button>
+          <button type="button" class="btn" id="next-week">Next <i data-lucide="chevron-right"></i></button>
+        </div>
+        <label class="week-picker" for="week-select">Week <select class="form-select" id="week-select"></select></label>
       </div>
-      <div class="viz-grid">
+
+      <!-- Stats -->
+      <div class="viz-grid" aria-label="Weekly progress">
         <div class="card viz-stat"><span class="text-muted">Checklist complete</span><span class="viz-stat-value" id="stat-completion">0%</span><span class="text-small" id="stat-completion-detail">0 of 0 tasks</span></div>
         <div class="card viz-stat"><span class="text-muted">Applications</span><span class="viz-stat-value" id="stat-applications">0 / 0</span><span class="text-small" id="stat-outreach">0 / 0 outreach</span></div>
-        <div class="card viz-stat"><span class="text-muted">Training blocks</span><span class="viz-stat-value" id="stat-training">0 / 0</span><span class="text-small">150 min each</span></div>
-        <div class="card viz-stat"><span class="text-muted">Nutrition logs</span><span class="viz-stat-value" id="stat-nutrition">0 / 0</span><span class="text-small" id="stat-nutrition-detail">Set targets</span></div>
+        <div class="card viz-stat"><span class="text-muted">Training blocks</span><span class="viz-stat-value" id="stat-training">0 / 0</span><span class="text-small">150 min each, plus travel</span></div>
+        <div class="card viz-stat"><span class="text-muted">Nutrition logs</span><span class="viz-stat-value" id="stat-nutrition">0 / 0</span><span class="text-small" id="stat-nutrition-detail">Set targets in settings</span></div>
       </div>
+
+      <!-- Focus Strip -->
       <div class="focus-strip">
-        <div><span class="viz-badge" id="phase-badge">Setup</span><strong id="week-focus">Build</strong><span class="text-small" id="target-companies">Focus</span></div>
-        <span class="text-small" id="weekly-quota">Quota</span>
+        <div class="focus-copy">
+          <span class="viz-badge" id="phase-badge">Setup</span>
+          <strong id="week-focus">Build the system</strong>
+          <span class="text-small" id="target-companies">Target companies</span>
+        </div>
+        <span class="text-small" id="weekly-quota">Weekly quota</span>
       </div>
-      <div class="day-strip" id="day-strip"></div>
+
+      <!-- Day Strip -->
+      <div class="day-strip" id="day-strip" role="tablist"></div>
+
+      <!-- Daily Layout -->
       <div class="daily-layout">
-        <section>
-          <div class="section-heading"><h3 id="selected-day-title">Friday</h3><div><span class="text-small" id="day-status">0 done</span><button class="btn btn-ghost" id="edit-schedule-btn"><i data-lucide="pencil"></i></button></div></div>
-          <div class="card-soft schedule-list" id="schedule-list"></div>
+        <!-- Left: Schedule -->
+        <section aria-labelledby="selected-day-title">
+          <div class="section-heading">
+            <h3 id="selected-day-title">Friday, July 10</h3>
+            <div class="right-actions">
+              <span class="text-small" id="day-status">0 of 0 done</span>
+              <button type="button" class="btn btn-ghost" id="edit-schedule-btn" title="Edit this day's schedule"><i data-lucide="pencil"></i></button>
+            </div>
+          </div>
+          <div class="card-soft schedule-list" id="schedule-list" aria-label="Daily schedule"></div>
         </section>
-        <section>
-          <div class="section-heading"><h3>Daily to-dos</h3><button class="btn btn-ghost" id="show-add-task"><i data-lucide="plus"></i> Add</button></div>
+
+        <!-- Right: Todos -->
+        <section aria-labelledby="todo-heading">
+          <div class="section-heading">
+            <h3 id="todo-heading">Daily to-dos</h3>
+            <button type="button" class="btn btn-ghost" id="show-add-task"><i data-lucide="plus"></i> Add task</button>
+          </div>
           <div class="card-soft todo-list" id="todo-list"></div>
+
           <form class="add-task-form is-hidden" id="add-task-form">
             <div class="add-task-fields">
-              <label class="form-label">Category <select class="form-select" id="new-task-category"><option>Work</option><option>Career</option><option>Training</option><option>Nutrition</option><option>Life</option></select></label>
-              <label class="form-label">Task <input class="form-control" id="new-task-text" type="text" maxlength="120" placeholder="Add action" required></label>
+              <label class="form-label" for="new-task-category">Category
+                <select class="form-select" id="new-task-category">
+                  <option value="Work">Work</option><option value="Career">Career</option>
+                  <option value="Training">Training</option><option value="Nutrition">Nutrition</option>
+                  <option value="Life">Life</option>
+                </select>
+              </label>
+              <label class="form-label" for="new-task-text">Task
+                <input class="form-control" id="new-task-text" type="text" maxlength="120" placeholder="Add one clear action" required>
+              </label>
             </div>
-            <div style="margin-top:12px;"><button type="submit" class="btn btn-primary">Save</button><button type="button" class="btn" id="cancel-add-task">Cancel</button></div>
+            <div class="viz-row" style="margin-top:14px;">
+              <button type="submit" class="btn btn-primary">Save task</button>
+              <button type="button" class="btn" id="cancel-add-task">Cancel</button>
+            </div>
           </form>
         </section>
       </div>
     </section>
 
-    <section id="panel-roadmap" class="is-hidden" hidden>
+    <!-- Panel: Roadmap (FULL DETAIL RESTORED) -->
+    <section id="panel-roadmap" class="is-hidden" role="tabpanel" hidden>
       <div class="viz-grid roadmap-summary">
-        <div class="card viz-stat"><span class="text-muted">Career objective</span><span class="viz-stat-value">December 15</span><span class="text-small">Signed offer</span></div>
-        <div class="card viz-stat"><span class="text-muted">Race window</span><span class="viz-stat-value">Aug 24–Oct 4</span><span class="text-small" id="race-summary">TBD</span></div>
-        <div class="card viz-stat"><span class="text-muted">New disciplines</span><span class="viz-stat-value" id="discipline-summary">Aug / Sep</span><span class="text-small">Bike / Swim</span></div>
+        <div class="card viz-stat"><span class="text-muted">Career objective</span><span class="viz-stat-value">December 15</span><span class="text-small">Signed permanent early-career offer</span></div>
+        <div class="card viz-stat"><span class="text-muted">Race decision window</span><span class="viz-stat-value">Aug 24–Oct 4</span><span class="text-small" id="race-summary">Ohio or Musselman; 2027 date TBD</span></div>
+        <div class="card viz-stat"><span class="text-muted">New disciplines</span><span class="viz-stat-value" id="discipline-summary">Aug 3 / Sep 28</span><span class="text-small">Bike / swim start</span></div>
       </div>
-      <div class="roadmap-list" id="roadmap-list"></div>
-      <p class="assumption-line text-small">Four training blocks per week. Bike and swim replace existing blocks.</p>
+      <div class="roadmap-list" id="roadmap-list" aria-label="July through December roadmap"></div>
+      <p class="assumption-line text-small">The schedule reserves four training blocks per week. Bike and swim replace existing blocks instead of adding more time. Race dates and 2027 registration openings remain to be confirmed.</p>
     </section>
 
-    <section id="panel-settings" class="is-hidden" hidden>
+    <!-- Panel: Settings -->
+    <section id="panel-settings" class="is-hidden" role="tabpanel" hidden>
       <form class="settings-form" id="settings-form">
-        <div class="settings-section"><h3>Career &amp; Race</h3><div class="settings-grid">
-          <label class="form-label">Target race <select class="form-select" id="setting-race"><option value="undecided">Undecided</option><option value="ohio">Ohio</option><option value="musselman">Musselman</option></select></label>
-          <label class="form-label">Apps/week <input class="form-control" id="setting-applications" type="number" min="4" max="12"></label>
-          <label class="form-label">Outreach/week <input class="form-control" id="setting-outreach" type="number" min="4" max="20"></label>
-        </div></div>
-        <div class="settings-section"><h3>Training</h3><div class="settings-grid">
-          <label class="form-label">Bike start <input class="form-control" id="setting-bike-start" type="date"></label>
-          <label class="form-label">Swim start <input class="form-control" id="setting-swim-start" type="date"></label>
-          <label class="form-label">Indoor bike <input class="form-control" id="setting-indoor-bike-start" type="date"></label>
-          <p class="text-small field-span">Work 8:30–18:00, 30 min commute, 150 min training.</p>
-        </div></div>
-        <div class="settings-section"><h3>Diet</h3><div class="settings-grid">
-          <label class="form-label">Calories <input class="form-control" id="setting-calories" type="number" min="1000" max="6000" placeholder="Target"></label>
-          <label class="form-label">Protein (g) <input class="form-control" id="setting-protein" type="number" min="40" max="400" placeholder="Target"></label>
-        </div></div>
+        <div class="settings-section">
+          <h3>Career and race</h3>
+          <div class="settings-grid">
+            <label class="form-label" for="setting-race">Target race
+              <select class="form-select" id="setting-race">
+                <option value="undecided">Undecided</option>
+                <option value="ohio">IRONMAN 70.3 Ohio</option>
+                <option value="musselman">IRONMAN 70.3 Musselman (Geneva, NY)</option>
+              </select>
+            </label>
+            <label class="form-label" for="setting-applications">Applications per active week
+              <input class="form-control" id="setting-applications" type="number" min="4" max="12" step="1">
+            </label>
+            <label class="form-label" for="setting-outreach">Outreach messages per active week
+              <input class="form-control" id="setting-outreach" type="number" min="4" max="20" step="1">
+            </label>
+          </div>
+        </div>
 
-        <!-- AUTO-SYNC SECTION -->
+        <div class="settings-section">
+          <h3>Training schedule</h3>
+          <div class="settings-grid">
+            <label class="form-label" for="setting-bike-start">Bike start
+              <input class="form-control" id="setting-bike-start" type="date" min="2026-07-10" max="2026-12-31">
+            </label>
+            <label class="form-label" for="setting-swim-start">Swim start
+              <input class="form-control" id="setting-swim-start" type="date" min="2026-07-10" max="2026-12-31">
+            </label>
+            <label class="form-label" for="setting-indoor-bike-start">Indoor bike transition
+              <input class="form-control" id="setting-indoor-bike-start" type="date" min="2026-09-01" max="2026-12-31">
+            </label>
+            <p class="text-small field-span">Fixed planning assumptions: work 8:30 AM–6:00 PM, 30 minutes per commute leg, and 150 minutes per training session.</p>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Diet tracking</h3>
+          <div class="settings-grid">
+            <label class="form-label" for="setting-calories">Daily calorie target
+              <input class="form-control" id="setting-calories" type="number" min="1000" max="6000" step="10" placeholder="Set your target">
+            </label>
+            <label class="form-label" for="setting-protein">Daily protein target (g)
+              <input class="form-control" id="setting-protein" type="number" min="40" max="400" step="1" placeholder="Set your target">
+            </label>
+          </div>
+        </div>
+
+        <!-- ===== GITHUB AUTO-SYNC ===== -->
         <div class="settings-section">
           <h3>🔁 Auto-Sync (GitHub)</h3>
           <div class="settings-grid">
-            <label class="form-label">GitHub Token <input class="form-control" id="github-token" type="password" placeholder="ghp_xxxx" style="font-family:monospace;"></label>
-            <label class="form-label">Repository <input class="form-control" id="github-repo" type="text" value="marco-yan/marco-life-dashboard" style="font-family:monospace;"></label>
+            <label class="form-label" for="github-token">GitHub Token
+              <input class="form-control" id="github-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="font-family:monospace;">
+            </label>
+            <label class="form-label" for="github-repo">Repository
+              <input class="form-control" id="github-repo" type="text" value="marco-yan/marco-life-dashboard" style="font-family:monospace;">
+            </label>
           </div>
-          <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+          <div class="settings-actions" style="margin-top:14px;">
             <button type="button" class="btn btn-primary" id="github-save-token">Save Token</button>
             <button type="button" class="btn btn-success" id="github-sync-now">📤 Sync Now</button>
             <button type="button" class="btn" id="github-load-now">📥 Load from GitHub</button>
           </div>
-          <div class="sync-status" id="github-status">Status: Not connected.</div>
-          <p class="text-small" style="margin-top:8px; color:#5a6b55;">Get token at <a href="https://github.com/settings/tokens" target="_blank" style="color:#214E3B;">github.com/settings/tokens</a> (check <strong>repo</strong> scope).</p>
+          <div class="sync-status" id="github-status">Status: Not connected. Add your GitHub token above.</div>
+          <p class="text-small" style="margin-top:10px; color:#5a6b55;">
+            <strong>How to get a token:</strong> 
+            <a href="https://github.com/settings/tokens" target="_blank" style="color:#214E3B;">github.com/settings/tokens</a> → 
+            Generate new token (classic) → Check <strong>repo</strong> scope → Generate → Copy the token here.
+            <br>Your token is stored only in your browser's local storage. It never leaves your device.
+          </p>
         </div>
 
         <div class="settings-actions">
           <button type="submit" class="btn btn-primary">Save settings</button>
-          <span class="status-line" id="settings-status"></span>
+          <span class="status-line" id="settings-status" aria-live="polite"></span>
         </div>
       </form>
     </section>
 
-    <div class="status-line" id="dashboard-status" style="color:#b33c3c; font-weight:bold;"></div>
+    <div class="status-line" id="dashboard-status" aria-live="polite"></div>
   </div>
 
-  <!-- SCHEDULE MODAL -->
+  <!-- ===== SCHEDULE MODAL ===== -->
   <div id="schedule-modal">
     <div class="modal-box">
       <h2>✏️ Edit Schedule</h2>
-      <p class="sub" id="modal-day-label">Today</p>
+      <p class="sub" id="modal-day-label">Friday, July 10</p>
       <div class="block-list" id="modal-block-list"></div>
       <div class="add-row">
         <input type="text" id="modal-new-time" placeholder="Time (e.g. 13:00–14:00)">
@@ -237,21 +706,18 @@
         <button class="btn btn-primary" id="modal-add-block">+ Add</button>
       </div>
       <div class="modal-actions">
-        <button class="btn btn-primary" id="modal-save">Save</button>
-        <button class="btn btn-reset" id="modal-reset">Reset</button>
+        <button class="btn btn-primary" id="modal-save">Save changes</button>
+        <button class="btn btn-reset" id="modal-reset">Reset to default</button>
         <button class="btn" id="modal-close">Close</button>
       </div>
     </div>
   </div>
 
   <script>
-    // ============================================================
-    // SAFE BOOT: If anything crashes, it shows the error on screen
-    // ============================================================
     (function () {
       "use strict";
 
-      // --- PASSWORD LOGIC ---
+      // ===== PASSWORD LOGIC =====
       const PASSWORD = "RockOn123";
       const passwordScreen = document.getElementById('password-screen');
       const dashboard = document.getElementById('marco-life-dashboard');
@@ -268,11 +734,11 @@
           try {
             initDashboard();
           } catch (e) {
-            document.getElementById('dashboard-status').textContent = '⚠️ Error loading: ' + e.message;
+            document.getElementById('dashboard-status').textContent = '⚠️ Error: ' + e.message;
             console.error(e);
           }
         } else {
-          errorMsg.textContent = 'Incorrect password.';
+          errorMsg.textContent = 'Incorrect password. Try again.';
           passwordInput.value = '';
           passwordInput.focus();
         }
@@ -281,29 +747,20 @@
       if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
         passwordScreen.classList.add('hidden');
         dashboard.classList.add('visible');
-        try {
-          initDashboard();
-        } catch (e) {
-          document.getElementById('dashboard-status').textContent = '⚠️ Error loading: ' + e.message;
-          console.error(e);
-        }
-      } else {
-        passwordInput.focus();
-      }
+        try { initDashboard(); } catch (e) { console.error(e); }
+      } else { passwordInput.focus(); }
 
       unlockBtn.addEventListener('click', tryUnlock);
       passwordInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') tryUnlock(); });
 
-      // --- THE MAIN DASHBOARD ENGINE (wrapped in try-catch inside) ---
+      // ===== THE MAIN ENGINE (FULL DETAILS RESTORED) =====
       function initDashboard() {
-        // ============================================================
-        // FULL DASHBOARD LOGIC (condensed for reliability)
-        // ============================================================
         const root = document.getElementById("marco-life-dashboard");
         if (!root) return;
 
-        const RANGE_START = new Date(2026, 6, 10);
-        const RANGE_END = new Date(2026, 11, 31);
+        // ===== CONSTANTS =====
+        const RANGE_START = parseDate("2026-07-10");
+        const RANGE_END = parseDate("2026-12-31");
         const STORAGE_KEY = "marco-life-dashboard-v1";
         const GITHUB_TOKEN_KEY = "marco-github-token";
         const GITHUB_REPO_KEY = "marco-github-repo";
@@ -311,54 +768,69 @@
         const LONG_DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+        // ===== FULL DEFAULT STATE =====
         const defaultState = {
-          settings: { race: "undecided", applications: 8, outreach: 10, bikeStart: "2026-08-03", swimStart: "2026-09-28", indoorBikeStart: "2026-11-02", calories: "", protein: "" },
+          settings: {
+            race: "undecided",
+            applications: 8,
+            outreach: 10,
+            bikeStart: "2026-08-03",
+            swimStart: "2026-09-28",
+            indoorBikeStart: "2026-11-02",
+            calories: "",
+            protein: ""
+          },
           completed: {},
           customTasks: [],
           scheduleOverrides: {}
         };
 
+        // ===== FULL WEEK FOCUS (ALL YOUR DETAILED COMPANIES) =====
         const weekFocus = {
-          "2026-07-06": ["Kick off", "All 10 primary"],
-          "2026-07-13": ["Résumé + LinkedIn", "AtkinsRéalis · Intact"],
-          "2026-07-20": ["Launch sprint", "AtkinsRéalis · Intact"],
-          "2026-07-27": ["Analytics pipeline", "IQVIA · Munich Re"],
-          "2026-08-03": ["Add bike", "AstraZeneca · Zurich"],
-          "2026-08-10": ["Referrals", "Sanofi · Marsh"],
-          "2026-08-17": ["First pass complete", "Metrolinx · Veeva"],
-          "2026-08-24": ["Referral sprint", "AtkinsRéalis · Intact"],
-          "2026-08-31": ["Interview prep", "AstraZeneca · Sanofi"],
-          "2026-09-07": ["Insurance roles", "Munich Re · Zurich"],
-          "2026-09-14": ["Convert outreach", "AtkinsRéalis · Metrolinx"],
-          "2026-09-21": ["Healthcare roles", "IQVIA · AstraZeneca"],
-          "2026-09-28": ["Start swim", "Active interviews"],
-          "2026-10-05": ["Decision gate", "Top five"],
-          "2026-10-12": ["Case prep", "Active interviews"],
-          "2026-10-19": ["Follow-ups", "Active interviews"],
-          "2026-10-26": ["Revive applications", "Primary targets"],
-          "2026-11-02": ["Backup pipeline", "Primary + matched"],
-          "2026-11-09": ["Close loops", "Late-stage"],
-          "2026-11-16": ["Offer push", "Late-stage"],
-          "2026-11-23": ["Second pipeline", "Responsive roles"],
-          "2026-11-30": ["Final push", "Late-stage"],
-          "2026-12-07": ["Decisions", "Offer-stage"],
-          "2026-12-14": ["Secure offer", "Best role"],
-          "2026-12-21": ["Transition", "Onboarding"],
-          "2026-12-28": ["Close year", "2027 priorities"]
+          "2026-07-06": ["Kick off the dashboard and lock the weekly rhythm", "All 10 primary targets"],
+          "2026-07-13": ["Finish résumé variants, LinkedIn, tracker, and role lanes", "AtkinsRéalis · Intact · IQVIA"],
+          "2026-07-20": ["Launch the first high-quality application sprint", "AtkinsRéalis · Intact"],
+          "2026-07-27": ["Build the analytics and insurance pipeline", "IQVIA · Munich Re / HSB"],
+          "2026-08-03": ["Add bike without increasing the weekly time budget", "AstraZeneca · Zurich"],
+          "2026-08-10": ["Strengthen referrals and application quality", "Sanofi · Marsh"],
+          "2026-08-17": ["Complete the first pass across primary targets", "Metrolinx · Veeva"],
+          "2026-08-24": ["Referral sprint and Musselman registration watch", "AtkinsRéalis · Intact · IQVIA"],
+          "2026-08-31": ["Referral sprint and interview-story practice", "AstraZeneca · Sanofi · Veeva"],
+          "2026-09-07": ["Push insurance, risk, and project roles", "Munich Re / HSB · Zurich · Marsh"],
+          "2026-09-14": ["Convert outreach into live conversations", "AtkinsRéalis · Metrolinx"],
+          "2026-09-21": ["Push healthcare and commercial analytics roles", "IQVIA · AstraZeneca · Sanofi · Veeva"],
+          "2026-09-28": ["Start swim, choose a race, and convert interviews", "Active interview companies"],
+          "2026-10-05": ["Decision gate: double down on responsive lanes", "Top five by response rate"],
+          "2026-10-12": ["Prepare cases, stories, and technical examples", "Active interview companies"],
+          "2026-10-19": ["Deep interview preparation and targeted follow-ups", "Active interview companies"],
+          "2026-10-26": ["Revive stalled applications before November", "Primary targets with warm contacts"],
+          "2026-11-02": ["Open a backup pipeline while interviews continue", "Primary targets plus matched employers"],
+          "2026-11-09": ["Close active interview loops", "Late-stage processes"],
+          "2026-11-16": ["Offer, referral, and reference push", "Late-stage processes"],
+          "2026-11-23": ["Keep a second pipeline alive", "Responsive roles only"],
+          "2026-11-30": ["Final interview push before holiday slowdown", "Late-stage and high-fit roles"],
+          "2026-12-07": ["Drive decisions and prepare negotiation points", "Offer-stage companies"],
+          "2026-12-14": ["Secure the signed offer by December 15", "Best available permanent role"],
+          "2026-12-21": ["Transition cleanly and protect recovery", "Onboarding or active backup"],
+          "2026-12-28": ["Close 2026 and lock the January base plan", "2027 priorities"]
         };
 
         let state = loadState();
         let selectedDate = clampDate(new Date());
         let selectedWeek = startOfWeek(selectedDate);
-        let syncDebounce = null;
+        let syncDebounceTimer = null;
         let isSyncing = false;
 
         const weeks = [];
-        for (let c = startOfWeek(RANGE_START); c <= startOfWeek(RANGE_END); c = addDays(c, 7)) weeks.push(c);
+        for (let cursor = startOfWeek(RANGE_START); cursor <= startOfWeek(RANGE_END); cursor = addDays(cursor, 7)) {
+          weeks.push(cursor);
+        }
 
         // ===== ELEMENTS =====
         const $ = (id) => document.getElementById(id);
         const els = {
+          tabs: Array.from(document.querySelectorAll("[data-view]")),
+          panels: { week: document.getElementById("panel-week"), roadmap: document.getElementById("panel-roadmap"), settings: document.getElementById("panel-settings") },
           weekSelect: $("week-select"), previousWeek: $("previous-week"), nextWeek: $("next-week"),
           currentWeek: $("current-week"), dayStrip: $("day-strip"), scheduleList: $("schedule-list"),
           todoList: $("todo-list"), selectedDayTitle: $("selected-day-title"), dayStatus: $("day-status"),
@@ -384,9 +856,7 @@
           modalClose: document.getElementById("modal-close"),
           githubToken: $("github-token"), githubRepo: $("github-repo"),
           githubSaveToken: $("github-save-token"), githubSyncNow: $("github-sync-now"),
-          githubLoadNow: $("github-load-now"), githubStatus: $("github-status"),
-          tabs: Array.from(document.querySelectorAll("[data-view]")),
-          panels: { week: document.getElementById("panel-week"), roadmap: document.getElementById("panel-roadmap"), settings: document.getElementById("panel-settings") }
+          githubLoadNow: $("github-load-now"), githubStatus: $("github-status")
         };
 
         // ===== HELPERS =====
@@ -394,20 +864,36 @@
         function dateKey(d) { return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
         function addDays(d, a) { const n = new Date(d); n.setDate(n.getDate()+a); return n; }
         function startOfWeek(d) { const c = new Date(d); const off = (c.getDay()+6)%7; return addDays(c, -off); }
-        function clampDate(d) { const c = new Date(d); if (c < RANGE_START) return new Date(RANGE_START); if (c > RANGE_END) return new Date(RANGE_END); return c; }
+        function clampDate(d) { const c = new Date(d); if(c < RANGE_START) return new Date(RANGE_START); if(c > RANGE_END) return new Date(RANGE_END); return c; }
         function inRange(d) { return d >= RANGE_START && d <= RANGE_END; }
+        function formatShortDate(d) { return MONTH_NAMES[d.getMonth()].slice(0,3) + " " + d.getDate(); }
         function formatLongDate(d) { return LONG_DAY_NAMES[d.getDay()] + ", " + MONTH_NAMES[d.getMonth()] + " " + d.getDate(); }
-        function formatWeek(d) { const e = addDays(d,6); return MONTH_NAMES[d.getMonth()].slice(0,3)+" "+d.getDate()+"–"+MONTH_NAMES[e.getMonth()].slice(0,3)+" "+e.getDate(); }
+        function formatWeek(d) { const e = addDays(d,6); return formatShortDate(d) + "–" + formatShortDate(e); }
 
+        // ===== STATE MANAGEMENT =====
         function loadState() {
-          try { const s = localStorage.getItem(STORAGE_KEY); if(!s) return JSON.parse(JSON.stringify(defaultState)); const p = JSON.parse(s); return { settings: Object.assign({}, defaultState.settings, p.settings||{}), completed: p.completed||{}, customTasks: p.customTasks||[], scheduleOverrides: p.scheduleOverrides||{} }; } 
-          catch(e) { return JSON.parse(JSON.stringify(defaultState)); }
-        }
-        function saveState(msg) {
-          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); els.dashboardStatus.textContent = msg || "Saved."; triggerSync(); } 
-          catch(e) { els.dashboardStatus.textContent = "Saved locally."; }
+          try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return JSON.parse(JSON.stringify(defaultState));
+            const parsed = JSON.parse(saved);
+            return {
+              settings: Object.assign({}, defaultState.settings, parsed.settings || {}),
+              completed: parsed.completed || {},
+              customTasks: Array.isArray(parsed.customTasks) ? parsed.customTasks : [],
+              scheduleOverrides: parsed.scheduleOverrides || {}
+            };
+          } catch (e) { return JSON.parse(JSON.stringify(defaultState)); }
         }
 
+        function saveState(msg) {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            els.dashboardStatus.textContent = msg || "Saved locally.";
+            triggerSync();
+          } catch (e) { els.dashboardStatus.textContent = "Saved locally."; }
+        }
+
+        // ===== GITHUB SYNC ENGINE =====
         function getGitHubConfig() {
           return { token: localStorage.getItem(GITHUB_TOKEN_KEY) || "", repo: localStorage.getItem(GITHUB_REPO_KEY) || "marco-yan/marco-life-dashboard" };
         }
@@ -415,97 +901,153 @@
 
         async function pushToGitHub() {
           const { token, repo } = getGitHubConfig();
-          if (!token) { setGitHubStatus("❌ No token.", "error"); return; }
+          if (!token) { setGitHubStatus("❌ No token. Please save your GitHub token.", "error"); return; }
           if (isSyncing) return;
-          isSyncing = true; setGitHubStatus("⏳ Syncing...", "syncing");
+          isSyncing = true;
+          setGitHubStatus("⏳ Syncing data to GitHub...", "syncing");
           try {
             const data = { settings: state.settings, completed: state.completed, customTasks: state.customTasks, scheduleOverrides: state.scheduleOverrides };
             const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
             const url = `https://api.github.com/repos/${repo}/contents/data.json`;
             let sha = null;
             try { const r = await fetch(url, { headers: { Authorization: `token ${token}` } }); if(r.ok) sha = (await r.json()).sha; } catch(e) {}
-            const payload = { message: "Auto-sync", content, branch: "main" }; if(sha) payload.sha = sha;
+            const payload = { message: "Auto-sync dashboard data", content, branch: "main" };
+            if (sha) payload.sha = sha;
             const res = await fetch(url, { method: "PUT", headers: { Authorization: `token ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-            if(!res.ok) throw new Error("API error");
-            setGitHubStatus("✅ Synced!", "success");
-          } catch(e) { setGitHubStatus("❌ Sync failed: " + e.message, "error"); } finally { isSyncing = false; }
+            if (!res.ok) throw new Error("GitHub API error");
+            setGitHubStatus("✅ Data synced to GitHub!", "success");
+          } catch (e) { setGitHubStatus("❌ Sync failed: " + e.message, "error"); } finally { isSyncing = false; }
         }
 
         async function loadFromGitHub() {
           const { token, repo } = getGitHubConfig();
           if (!token) { setGitHubStatus("❌ No token.", "error"); return; }
-          setGitHubStatus("⏳ Loading...", "syncing");
+          setGitHubStatus("⏳ Loading data from GitHub...", "syncing");
           try {
             const url = `https://api.github.com/repos/${repo}/contents/data.json`;
             const res = await fetch(url, { headers: { Authorization: `token ${token}` } });
-            if(!res.ok) { if(res.status === 404) { setGitHubStatus("ℹ️ No data found.", ""); return; } throw new Error("Fetch failed"); }
+            if (!res.ok) { if(res.status === 404) { setGitHubStatus("ℹ️ No saved data found.", ""); return; } throw new Error("Fetch failed"); }
             const json = await res.json();
             const content = JSON.parse(decodeURIComponent(escape(atob(json.content))));
             if(content.settings) state.settings = content.settings;
             if(content.completed) state.completed = content.completed;
             if(content.customTasks) state.customTasks = content.customTasks;
             if(content.scheduleOverrides) state.scheduleOverrides = content.scheduleOverrides;
-            saveState("Loaded from GitHub.");
-            setGitHubStatus("✅ Loaded!", "success");
+            saveState("Data loaded from GitHub.");
+            setGitHubStatus("✅ Data loaded!", "success");
             renderAll(); populateSettings();
-          } catch(e) { setGitHubStatus("❌ Load failed: " + e.message, "error"); }
+          } catch (e) { setGitHubStatus("❌ Load failed: " + e.message, "error"); }
         }
 
-        function triggerSync() { if(syncDebounce) clearTimeout(syncDebounce); syncDebounce = setTimeout(() => { if(getGitHubConfig().token) pushToGitHub(); }, 3000); }
+        function triggerSync() {
+          if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
+          syncDebounceTimer = setTimeout(() => { if (getGitHubConfig().token) pushToGitHub(); }, 3000);
+        }
 
-        // ===== RENDER FUNCTIONS =====
+        // ===== CORE LOGIC (FULL DETAIL) =====
         function getPhase(date) {
-          if (date <= parseDate("2026-07-19")) return { name: "Setup", focus: "Build OS", companies: "All primary" };
-          if (date <= parseDate("2026-08-02")) return { name: "Launch", focus: "Application pipeline", companies: "First five" };
-          if (date <= parseDate("2026-09-13")) return { name: "Build", focus: "Referrals & cycling", companies: "Primary rotation" };
-          if (date <= parseDate("2026-10-11")) return { name: "Convert", focus: "Outreach to interviews", companies: "Responsive" };
-          if (date <= parseDate("2026-11-15")) return { name: "Interview", focus: "Deep prep", companies: "Active pipelines" };
-          if (date <= parseDate("2026-12-15")) return { name: "Offer close", focus: "Drive to signature", companies: "Late-stage" };
-          return { name: "Transition", focus: "Close year", companies: "Onboarding" };
+          if (date <= parseDate("2026-07-19")) return { name: "Setup", focus: "Build the operating system", companies: "All primary targets" };
+          if (date <= parseDate("2026-08-02")) return { name: "Launch", focus: "Launch the application pipeline", companies: "First five targets" };
+          if (date <= parseDate("2026-09-13")) return { name: "Build", focus: "Build referrals and start cycling", companies: "Primary target rotation" };
+          if (date <= parseDate("2026-10-11")) return { name: "Convert", focus: "Convert outreach into interviews", companies: "Responsive companies" };
+          if (date <= parseDate("2026-11-15")) return { name: "Interview", focus: "Deep interview preparation", companies: "Active and backup pipelines" };
+          if (date <= parseDate("2026-12-15")) return { name: "Offer close", focus: "Drive an offer to signature", companies: "Late-stage processes" };
+          return { name: "Transition", focus: "Close the year and plan January", companies: "Onboarding or backup" };
         }
 
         function getWeekTargets(week) {
           const phase = getPhase(week);
-          let apps = Number(state.settings.applications) || 8;
-          let out = Number(state.settings.outreach) || 10;
-          if(dateKey(week)==="2026-07-06") { apps=2; out=4; } else if(dateKey(week)==="2026-07-13") { apps=4; out=8; } else if(dateKey(week)==="2026-12-14") { apps=2; out=4; } else if(phase.name==="Interview") { apps=Math.max(6, Math.round(apps*0.75)); out=Math.max(6, Math.round(out*0.8)); } else if(phase.name==="Offer close") { apps=Math.max(4, Math.round(apps*0.5)); out=Math.max(4, Math.round(out*0.6)); } else if(phase.name==="Transition") { apps=0; out=0; }
-          return { applications: apps, outreach: out, training: 4, nutrition: 7 };
+          const validDates = weekDates(week).filter(inRange);
+          const training = validDates.filter(isTrainingDay).length;
+          let applications = Number(state.settings.applications) || 8;
+          let outreach = Number(state.settings.outreach) || 10;
+
+          if (dateKey(week) === "2026-07-06") { applications = 2; outreach = 4; }
+          else if (dateKey(week) === "2026-07-13") { applications = 4; outreach = 8; }
+          else if (dateKey(week) === "2026-12-14") { applications = 2; outreach = 4; }
+          else if (phase.name === "Interview") { applications = Math.max(6, Math.round(applications * 0.75)); outreach = Math.max(6, Math.round(outreach * 0.8)); }
+          else if (phase.name === "Offer close") { applications = Math.max(4, Math.round(applications * 0.5)); outreach = Math.max(4, Math.round(outreach * 0.6)); }
+          else if (phase.name === "Transition") { applications = 0; outreach = 0; }
+
+          return { applications, outreach, training, nutrition: validDates.length };
         }
 
-        function isTrainingDay(d) {
-          const k = dateKey(d);
-          if(k==="2026-07-10" || k==="2026-07-11") return true;
-          if(k==="2026-07-12") return false;
-          return [0,2,4,6].indexOf(d.getDay()) !== -1;
+        function weekDates(week) { const d=[]; for(let i=0;i<7;i++) d.push(addDays(week,i)); return d; }
+
+        function isTrainingDay(date) {
+          const key = dateKey(date);
+          if (key === "2026-07-10" || key === "2026-07-11") return true;
+          if (key === "2026-07-12") return false;
+          return [0, 2, 4, 6].indexOf(date.getDay()) !== -1;
         }
 
-        function trainingType(d) {
-          const k = dateKey(d);
-          if(k==="2026-07-10") return "short run";
-          if(k==="2026-07-11") return "lift";
-          const bs = parseDate(state.settings.bikeStart), ss = parseDate(state.settings.swimStart), ibs = parseDate(state.settings.indoorBikeStart);
-          const day = d.getDay();
-          if(d < bs) { if(day===2||day===6) return "run"; return "lift"; }
-          if(d < ss) { if(day===6) return "outdoor bike"; if(day===4) return "lift"; return "run"; }
-          if(day===2) return "indoor swim";
-          if(day===6) return d >= ibs ? "indoor bike" : "outdoor bike";
-          if(day===4) return "lift";
+        function trainingType(date) {
+          const key = dateKey(date);
+          if (key === "2026-07-10") return "short run";
+          if (key === "2026-07-11") return "lift";
+          const bikeStart = parseDate(state.settings.bikeStart);
+          const swimStart = parseDate(state.settings.swimStart);
+          const indoorBikeStart = parseDate(state.settings.indoorBikeStart);
+          const day = date.getDay();
+
+          if (date < bikeStart) { if (day === 2 || day === 6) return "run"; return "lift"; }
+          if (date < swimStart) { if (day === 6) return "outdoor bike"; if (day === 4) return "lift"; return "run"; }
+          if (day === 2) return "indoor swim";
+          if (day === 6) return date >= indoorBikeStart ? "indoor bike" : "outdoor bike";
+          if (day === 4) return "lift";
           return "run";
         }
 
-        function scheduleForDate(d) {
-          const day = d.getDay();
+        // ===== FULL SCHEDULE (RESTORED DETAIL) =====
+        function scheduleForDate(date) {
+          const day = date.getDay();
           const blocks = [];
-          if(dateKey(d)==="2026-07-10") return [{time:"8:00–8:30",label:"Commute"},{time:"8:30–18:00",label:"Work"},{time:"18:00–18:30",label:"Commute home"},{time:"18:30–19:15",label:"Short run"},{time:"19:15–19:30",label:"Shower"},{time:"19:30–20:00",label:"Travel"},{time:"20:00 onward",label:"Event"}];
-          if(day>=1 && day<=5) {
-            blocks.push({time:"8:00–8:30",label:"Commute"});
-            blocks.push({time:"8:30–18:00",label: day===2||day===4 ? "Work + lunch call" : "Work"});
-            if(isTrainingDay(d)) { blocks.push({time:"18:00–18:30",label:"Commute to training"}); blocks.push({time:"18:30–21:00",label:"Training: "+trainingType(d)}); blocks.push({time:"21:00–21:30",label:"Commute home"}); }
-            else if(day===1||day===3) { blocks.push({time:"18:00–18:30",label:"Commute home"}); blocks.push({time:"18:30–19:00",label:"Dinner"}); blocks.push({time:"19:00–21:00",label:"Job search"}); }
-            else { blocks.push({time:"18:00–18:30",label:"Commute home"}); blocks.push({time:"19:00–19:30",label:"Follow-ups"}); blocks.push({time:"After 19:30",label:"Recovery"}); }
-          } else if(day===6) { blocks.push({time:"8:30–9:00",label:"Commute"}); blocks.push({time:"9:00–11:30",label:"Training: "+trainingType(d)}); blocks.push({time:"11:30–12:00",label:"Commute home"}); blocks.push({time:"13:30–15:30",label:"Applications"}); }
-          else if(isTrainingDay(d)) { blocks.push({time:"8:30–9:00",label:"Commute"}); blocks.push({time:"9:00–11:30",label:"Training: "+trainingType(d)}); blocks.push({time:"11:30–12:00",label:"Commute home"}); blocks.push({time:"13:30–14:30",label:"Application"}); blocks.push({time:"16:00–18:00",label:"Meal prep"}); }
-          else { blocks.push({time:"Morning",label:"Rest"}); blocks.push({time:"13:30–14:30",label:"Application"}); blocks.push({time:"16:00–18:00",label:"Meal prep"}); }
+
+          if (dateKey(date) === "2026-07-10") {
+            return [
+              { time: "8:00–8:30", label: "Commute to work" },
+              { time: "8:30–18:00", label: "Work" },
+              { time: "18:00–18:30", label: "Commute home" },
+              { time: "18:30–19:15", label: "Short run" },
+              { time: "19:15–19:30", label: "Shower and change" },
+              { time: "19:30–20:00", label: "Travel to the event" },
+              { time: "20:00 onward", label: "Event with friends" }
+            ];
+          }
+
+          if (day >= 1 && day <= 5) {
+            blocks.push({ time: "8:00–8:30", label: "Commute to work" });
+            blocks.push({ time: "8:30–18:00", label: day === 2 || day === 4 ? "Work; use lunch for a networking call if booked" : "Work" });
+
+            if (isTrainingDay(date)) {
+              blocks.push({ time: "18:00–18:30", label: "Commute to training" });
+              blocks.push({ time: "18:30–21:00", label: "Training block: " + trainingType(date) });
+              blocks.push({ time: "21:00–21:30", label: "Commute home" });
+            } else if (day === 1 || day === 3) {
+              blocks.push({ time: "18:00–18:30", label: "Commute home" });
+              blocks.push({ time: "18:30–19:00", label: "Dinner and reset" });
+              blocks.push({ time: "19:00–21:00", label: "Job-search focus block" });
+            } else {
+              blocks.push({ time: "18:00–18:30", label: "Commute home" });
+              blocks.push({ time: "19:00–19:30", label: "Follow-ups and weekly close" });
+              blocks.push({ time: "After 19:30", label: "Recovery, social time, or overflow" });
+            }
+          } else if (day === 6) {
+            blocks.push({ time: "8:30–9:00", label: "Commute to training" });
+            blocks.push({ time: "9:00–11:30", label: "Training block: " + trainingType(date) });
+            blocks.push({ time: "11:30–12:00", label: "Commute home" });
+            blocks.push({ time: "13:30–15:30", label: "Applications and target-company research" });
+          } else if (isTrainingDay(date)) {
+            blocks.push({ time: "8:30–9:00", label: "Commute to training" });
+            blocks.push({ time: "9:00–11:30", label: "Training block: " + trainingType(date) });
+            blocks.push({ time: "11:30–12:00", label: "Commute home" });
+            blocks.push({ time: "13:30–14:30", label: "One high-fit application or follow-up" });
+            blocks.push({ time: "16:00–18:00", label: "Meal prep, weekly review, and calendar lock" });
+          } else {
+            blocks.push({ time: "Morning", label: "Rest and recovery" });
+            blocks.push({ time: "13:30–14:30", label: "One high-fit application or follow-up" });
+            blocks.push({ time: "16:00–18:00", label: "Meal prep, weekly review, and calendar lock" });
+          }
           return blocks;
         }
 
@@ -514,81 +1056,302 @@
           return scheduleForDate(selectedDate);
         }
 
-        function tasksForDate(d) {
-          const key = dateKey(d);
-          const week = startOfWeek(d);
+        // ===== ALLOCATION ENGINE (FULL) =====
+        function allocateWeeklyTarget(week, total, candidates) {
+          const valid = candidates.map(function (candidate) {
+            const offset = candidate.day === 0 ? 6 : candidate.day - 1;
+            return { date: addDays(week, offset), weight: candidate.weight };
+          }).filter(function (candidate) { return inRange(candidate.date); });
+
+          const allocation = {};
+          if (!valid.length || total <= 0) return allocation;
+          const totalWeight = valid.reduce(function (sum, candidate) { return sum + candidate.weight; }, 0);
+          let assigned = 0;
+          valid.forEach(function (candidate) {
+            const amount = Math.floor((total * candidate.weight) / totalWeight);
+            allocation[dateKey(candidate.date)] = amount;
+            assigned += amount;
+          });
+          let cursor = 0;
+          while (assigned < total) {
+            const candidate = valid[cursor % valid.length];
+            allocation[dateKey(candidate.date)] += 1;
+            assigned += 1;
+            cursor += 1;
+          }
+          return allocation;
+        }
+
+        function nutritionTaskText() {
+          const calorieText = state.settings.calories ? state.settings.calories + " kcal" : "calorie target";
+          const proteinText = state.settings.protein ? state.settings.protein + " g protein" : "protein target";
+          return "Log meals and check " + calorieText + " / " + proteinText;
+        }
+
+        // ===== FULL TASKS (RESTORED DETAIL) =====
+        function tasksForDate(date) {
+          const key = dateKey(date);
+          const week = startOfWeek(date);
           const targets = getWeekTargets(week);
+          const applicationAllocation = allocateWeeklyTarget(week, targets.applications, [
+            { day: 1, weight: 2 }, { day: 3, weight: 2 }, { day: 6, weight: 3 }, { day: 0, weight: 1 }
+          ]);
+          const outreachAllocation = allocateWeeklyTarget(week, targets.outreach, [
+            { day: 1, weight: 3 }, { day: 3, weight: 3 }, { day: 5, weight: 2 }, { day: 6, weight: 1 }, { day: 0, weight: 1 }
+          ]);
           const tasks = [];
-          const day = d.getDay();
-          const phase = getPhase(d);
-          if(day>=1 && day<=5) tasks.push({id:key+"-work", category:"Work", text:["Set 3 outcomes","Finish WebHealth","Close open loop","Finish WebHealth","Write wins"][day-1], custom:false});
-          const apps = Math.floor(targets.applications / 4) || 0;
-          if(apps>0) tasks.push({id:key+"-apps", category:"Career", text:"Submit "+apps+" application"+(apps>1?"s":""), custom:false});
-          const out = Math.floor(targets.outreach / 5) || 0;
-          if(out>0) tasks.push({id:key+"-out", category:"Career", text:"Send "+out+" outreach"+(out>1?"s":""), custom:false});
-          if(day===2||day===4) tasks.push({id:key+"-conv", category:"Career", text:"Book a networking conversation"});
-          if((phase.name==="Convert"||phase.name==="Interview")&&day===3) tasks.push({id:key+"-prep", category:"Career", text:"Practice interview stories"});
-          if(isTrainingDay(d)) { tasks.push({id:key+"-train", category:"Training", text:"Complete "+trainingType(d)+" block"}); if(day>=1&&day<=5) tasks.push({id:key+"-pack", category:"Nutrition", text:"Pack training gear"}); }
-          else if(day===5) tasks.push({id:key+"-rec", category:"Life", text:"Keep evening open for recovery"});
-          tasks.push({id:key+"-nut", category:"Nutrition", text:"Log meals & check targets"});
-          if(key==="2026-07-10") tasks.push({id:key+"-event", category:"Life", text:"Friends' event at 8:00 PM"});
-          if(day===0) { tasks.push({id:key+"-meal", category:"Nutrition", text:"Meal prep"});
-          tasks.push({id:key+"-review", category:"Life", text:"Weekly review"}); }
-          if(day===6) { const f = weekFocus[dateKey(week)]; if(f) tasks.push({id:key+"-research", category:"Career", text:"Research: "+f[1]}); }
-          state.customTasks.filter(t => t.date === key).forEach(t => tasks.push({id:t.id, category:t.category, text:t.text, custom:true}));
+          const day = date.getDay();
+          const phase = getPhase(date);
+
+          // Work tasks
+          if (day >= 1 && day <= 5) {
+            const workText = {
+              1: "Set the three work outcomes that matter this week",
+              2: "Finish today's highest-value WebHealth outcome",
+              3: "Update the work pipeline and close one open loop",
+              4: "Finish today's highest-value WebHealth outcome",
+              5: "Write the week's wins, open items, and Monday priorities"
+            };
+            tasks.push({ id: key + "-work", category: "Work", text: workText[day], custom: false });
+          }
+
+          // Applications
+          const applicationCount = applicationAllocation[key] || 0;
+          if (applicationCount > 0) {
+            tasks.push({
+              id: key + "-apps",
+              category: "Career",
+              text: "Submit " + applicationCount + " tailored application" + (applicationCount === 1 ? "" : "s"),
+              custom: false,
+              metricType: "application",
+              metricValue: applicationCount
+            });
+          }
+
+          // Outreach
+          const outreachCount = outreachAllocation[key] || 0;
+          if (outreachCount > 0) {
+            tasks.push({
+              id: key + "-out",
+              category: "Career",
+              text: "Send " + outreachCount + " targeted outreach or follow-up message" + (outreachCount === 1 ? "" : "s"),
+              custom: false,
+              metricType: "outreach",
+              metricValue: outreachCount
+            });
+          }
+
+          // Networking conversations
+          if (day === 2 || day === 4) {
+            tasks.push({ id: key + "-conv-" + day, category: "Career", text: "Hold or book one networking conversation", custom: false });
+          }
+
+          // Interview prep
+          if ((phase.name === "Convert" || phase.name === "Interview") && day === 3) {
+            tasks.push({ id: key + "-interview-prep", category: "Career", text: "Practice two interview stories or one case prompt", custom: false });
+          }
+          if (phase.name === "Offer close" && day === 3) {
+            tasks.push({ id: key + "-offer-prep", category: "Career", text: "Update interview, reference, and negotiation notes", custom: false });
+          }
+
+          // Training
+          if (isTrainingDay(date)) {
+            const trainingText = key === "2026-07-10"
+              ? "Complete the shortened run immediately after getting home at 6:30 PM"
+              : "Complete the scheduled " + trainingType(date) + " block and commute buffer";
+            tasks.push({ id: key + "-training", category: "Training", text: trainingText, custom: false, metricType: "training", metricValue: 1 });
+            if (day >= 1 && day <= 5) {
+              const preparationText = key === "2026-07-10"
+                ? "Have running clothes ready and leave for the event by 7:30 PM"
+                : "Pack the work-to-training food, clothes, and gear before leaving home";
+              tasks.push({ id: key + "-training-prep", category: "Nutrition", text: preparationText, custom: false });
+            }
+          } else if (day === 5) {
+            tasks.push({ id: key + "-recovery", category: "Life", text: "Keep the evening open for recovery, friends, or overflow", custom: false });
+          }
+
+          // Nutrition
+          tasks.push({ id: key + "-nutrition", category: "Nutrition", text: nutritionTaskText(), custom: false, metricType: "nutrition", metricValue: 1 });
+
+          // Special events
+          if (key === "2026-07-10") {
+            tasks.push({ id: key + "-friends-event", category: "Life", text: "Friends' event at 8:00 PM", custom: false });
+          }
+
+          // Sunday routines
+          if (day === 0) {
+            tasks.push({ id: key + "-meal-prep", category: "Nutrition", text: "Meal prep for Monday through Thursday", custom: false });
+            tasks.push({ id: key + "-weekly-review", category: "Life", text: "Review the dashboard and lock next week's calendar", custom: false });
+          }
+
+          // Saturday research
+          if (day === 6) {
+            const focus = weekFocus[dateKey(week)];
+            if (focus) tasks.push({ id: key + "-company-research", category: "Career", text: "Research the week's focus: " + focus[1], custom: false });
+          }
+
+          // Custom tasks
+          state.customTasks.filter(item => item.date === key).forEach(item => {
+            tasks.push({ id: item.id, category: item.category, text: item.text, custom: true });
+          });
+
+          return tasks;
+        }
+
+        function tasksForWeek(week) {
+          let tasks = [];
+          weekDates(week).forEach(date => { if (inRange(date)) tasks = tasks.concat(tasksForDate(date)); });
           return tasks;
         }
 
         function isComplete(task) { return Boolean(state.completed[task.id]); }
 
-        // ===== RENDER WEEKS =====
+        function metricCompleted(tasks, metricType) {
+          return tasks.reduce(function (sum, item) {
+            if (item.metricType === metricType && isComplete(item)) return sum + (item.metricValue || 1);
+            return sum;
+          }, 0);
+        }
+
+        // ===== FULL ROADMAP (RESTORED) =====
+        function roadmapRows() {
+          return [
+            {
+              phase: "Setup",
+              dates: "Jul 10–19",
+              career: "Build the tracker, résumé variants, LinkedIn, and first four applications. Role lanes: Project Coordinator / Junior PM, Business / Data / Operations Analyst, Strategy / Consulting Analyst, and graduate or rotational programs. Primary list: AtkinsRéalis, Intact, IQVIA, Munich Re / HSB, AstraZeneca, Zurich, Sanofi, Marsh, Metrolinx, and Veeva.",
+              training: "Keep the current run-and-lift emphasis inside four reserved weekly blocks.",
+              life: "Set calorie and protein targets, log a baseline week, and protect Friday night as the pressure-release valve."
+            },
+            {
+              phase: "Launch",
+              dates: "Jul 20–Aug 2",
+              career: "Reach " + state.settings.applications + " high-quality applications, " + state.settings.outreach + " targeted outreach messages, and 2 live conversations per week.",
+              training: "Continue summer running; confirm bike access, route, fit, and indoor option before August.",
+              life: "Use Sunday for groceries, meal prep, and the weekly dashboard review."
+            },
+            {
+              phase: "Build",
+              dates: "Aug 3–Sep 13",
+              career: "Complete the first pass across all 10 primary companies, then run two referral sprints. Watch Musselman registration from late August.",
+              training: "Bike begins " + compactDate(state.settings.bikeStart) + ". The Saturday bike replaces one run block; it does not create a fifth block.",
+              life: "Keep weekday meals repetitive and easy to log while application volume is highest."
+            },
+            {
+              phase: "Convert",
+              dates: "Sep 14–Oct 11",
+              career: "Convert outreach to interviews, practice stories and cases, and double down on the job lanes producing responses. Choose and register for the race when 2027 entry opens.",
+              training: "Swim begins " + compactDate(state.settings.swimStart) + " in an indoor pool, replacing a weekday run slot.",
+              life: "Schedule interviews before adding optional commitments; keep one recovery evening untouched."
+            },
+            {
+              phase: "Interview",
+              dates: "Oct 12–Nov 15",
+              career: "Shift time from broad applications toward cases, technical examples, follow-ups, references, and late-stage interviews. Open a backup pipeline in early November.",
+              training: "Move the bike indoors around " + compactDate(state.settings.indoorBikeStart) + "; keep four total blocks and avoid volume creep.",
+              life: "Protect sleep before interviews and prepare meals on Sunday rather than relying on weekday decisions."
+            },
+            {
+              phase: "Offer close",
+              dates: "Nov 16–Dec 15",
+              career: "Drive decisions, prepare references and negotiation points, and secure a signed permanent early-career offer by December 15.",
+              training: "Maintain the established indoor rhythm; interviews and offer work take priority over adding sessions.",
+              life: "Keep food logging simple and preserve open time for interviews, references, and decision-making."
+            },
+            {
+              phase: "Transition",
+              dates: "Dec 16–31",
+              career: "Transition cleanly, prepare onboarding, and keep the backup pipeline active until the signed offer is secure.",
+              training: "Maintain consistency and set the January 2027 base schedule after the work situation is known.",
+              life: "Review the year, set January targets, and leave room for holidays and recovery."
+            }
+          ];
+        }
+
+        function compactDate(value) {
+          if(!value) return "TBD";
+          const date = parseDate(value);
+          return MONTH_NAMES[date.getMonth()].slice(0, 3) + " " + date.getDate();
+        }
+
+        // ===== RENDER FUNCTIONS =====
         function renderWeek() {
           els.weekSelect.value = dateKey(selectedWeek);
+          const weekIndex = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek));
+          els.previousWeek.disabled = weekIndex <= 0;
+          els.nextWeek.disabled = weekIndex >= weeks.length - 1;
+
           const phase = getPhase(selectedWeek);
           const focus = weekFocus[dateKey(selectedWeek)] || [phase.focus, phase.companies];
           const targets = getWeekTargets(selectedWeek);
           els.phaseBadge.textContent = phase.name;
           els.weekFocus.textContent = focus[0];
           els.targetCompanies.textContent = "Focus: " + focus[1];
-          els.weeklyQuota.textContent = targets.applications + " apps · " + targets.outreach + " outreach";
+          els.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 2 conversations";
 
-          // Day strip
-          els.dayStrip.innerHTML = "";
-          for(let i=0; i<7; i++) {
-            const date = addDays(selectedWeek, i);
-            const valid = inRange(date);
-            const tasks = valid ? tasksForDate(date) : [];
-            const done = tasks.filter(isComplete).length;
-            const btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "btn viz-tile" + (valid && dateKey(date)===dateKey(selectedDate) ? " is-selected" : "");
-            btn.disabled = !valid;
-            btn.textContent = DAY_NAMES[date.getDay()] + " " + date.getDate() + (valid ? " · "+done+"/"+tasks.length : " · —");
-            if(valid) btn.addEventListener("click", function() { selectedDate = date; renderWeek(); renderSelectedDay(); renderStats(); });
-            els.dayStrip.appendChild(btn);
-          }
+          renderDayStrip();
           renderSelectedDay();
           renderStats();
         }
 
+        function renderDayStrip() {
+          els.dayStrip.innerHTML = "";
+          for (let i = 0; i < 7; i++) {
+            const date = addDays(selectedWeek, i);
+            const valid = inRange(date);
+            const tasks = valid ? tasksForDate(date) : [];
+            const done = tasks.filter(isComplete).length;
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "btn viz-tile";
+            button.disabled = !valid;
+            button.setAttribute("role", "tab");
+            button.setAttribute("aria-selected", String(valid && dateKey(date) === dateKey(selectedDate)));
+            button.textContent = DAY_NAMES[date.getDay()] + " " + date.getDate() + (valid ? " · " + done + "/" + tasks.length : " · —");
+            if (valid && dateKey(date) === dateKey(selectedDate)) button.classList.add("is-selected");
+            if (valid) {
+              button.addEventListener("click", function () {
+                selectedDate = date;
+                renderWeek();
+              });
+            }
+            els.dayStrip.appendChild(button);
+          }
+        }
+
         function renderSelectedDay() {
           els.selectedDayTitle.textContent = formatLongDate(selectedDate);
+          renderSchedule();
+          renderTodos();
+        }
+
+        function renderSchedule() {
           const key = dateKey(selectedDate);
           let blocks = getCurrentBlocks(key);
           els.scheduleList.innerHTML = "";
-          blocks.forEach(b => { const row = document.createElement("div"); row.className="schedule-item"; row.innerHTML='<span class="schedule-time">'+b.time+'</span><span>'+b.label+'</span>'; els.scheduleList.appendChild(row); });
+          blocks.forEach(block => {
+            const row = document.createElement("div");
+            row.className = "schedule-item";
+            row.innerHTML = '<span class="schedule-time">'+block.time+'</span><span>'+block.label+'</span>';
+            els.scheduleList.appendChild(row);
+          });
+        }
 
+        function renderTodos() {
           const tasks = tasksForDate(selectedDate);
           els.todoList.innerHTML = "";
-          if(!tasks.length) { els.todoList.innerHTML = '<div class="empty-state">No tasks.</div>'; }
+          if (!tasks.length) {
+            els.todoList.innerHTML = '<div class="empty-state">No tasks planned.</div>';
+          }
           tasks.forEach(task => {
             const row = document.createElement("div");
             row.className = "todo-row";
             row.dataset.complete = String(isComplete(task));
             const checked = isComplete(task);
             const id = "task-" + (task.id || "t" + Date.now() + Math.random());
-            row.innerHTML = `<div class="form-check"><input class="form-check-input" type="checkbox" id="${id}" ${checked?"checked":""}></div>
-              <div class="todo-copy"><label class="form-check-label todo-text" for="${id}">${task.text}</label><span class="text-small text-muted">${task.category}</span></div>
+            const categoryHtml = task.category ? '<span class="text-small text-muted">'+task.category+'</span>' : '';
+            row.innerHTML = `<div class="form-check"><input class="form-check-input" type="checkbox" id="${id}" ${checked ? "checked" : ""}></div>
+              <div class="todo-copy"><label class="form-check-label todo-text" for="${id}">${task.text}</label>${categoryHtml}</div>
               ${task.custom ? '<button class="btn btn-ghost" data-remove="'+task.id+'"><i data-lucide="trash-2"></i></button>' : '<span></span>'}`;
             const cb = row.querySelector('input[type="checkbox"]');
             cb.addEventListener("change", function() {
@@ -596,7 +1359,7 @@
               saveState("Progress saved.");
               renderWeek();
             });
-            if(task.custom) {
+            if (task.custom) {
               const del = row.querySelector('[data-remove]');
               del.addEventListener("click", function() {
                 state.customTasks = state.customTasks.filter(t => t.id !== task.id);
@@ -607,53 +1370,57 @@
             }
             els.todoList.appendChild(row);
           });
-          const total = tasks.length;
           const done = tasks.filter(isComplete).length;
-          els.dayStatus.textContent = done + " of " + total + " done";
+          els.dayStatus.textContent = done + " of " + tasks.length + " done";
           refreshIcons();
         }
 
         function renderStats() {
-          const tasks = [];
-          for(let i=0; i<7; i++) { const d = addDays(selectedWeek, i); if(inRange(d)) tasks.push(...tasksForDate(d)); }
+          const tasks = tasksForWeek(selectedWeek);
           const done = tasks.filter(isComplete).length;
           const pct = tasks.length ? Math.round((done/tasks.length)*100) : 0;
+          const targets = getWeekTargets(selectedWeek);
+
           els.statCompletion.textContent = pct + "%";
           els.statCompletionDetail.textContent = done + " of " + tasks.length + " tasks";
-          const targets = getWeekTargets(selectedWeek);
-          els.statApplications.textContent = "0 / " + targets.applications;
-          els.statOutreach.textContent = "0 / " + targets.outreach + " outreach";
-          els.statTraining.textContent = "0 / " + targets.training;
-          els.statNutrition.textContent = "0 / " + targets.nutrition;
-          const c = state.settings.calories, p = state.settings.protein;
-          els.statNutritionDetail.textContent = (c && p) ? c+" kcal · "+p+"g protein" : "Set targets";
+          els.statApplications.textContent = metricCompleted(tasks, "application") + " / " + targets.applications;
+          els.statOutreach.textContent = metricCompleted(tasks, "outreach") + " / " + targets.outreach + " outreach";
+          els.statTraining.textContent = metricCompleted(tasks, "training") + " / " + targets.training;
+          els.statNutrition.textContent = metricCompleted(tasks, "nutrition") + " / " + targets.nutrition;
+
+          const cal = state.settings.calories;
+          const prot = state.settings.protein;
+          if (cal && prot) els.statNutritionDetail.textContent = cal + " kcal · " + prot + " g protein";
+          else if (cal) els.statNutritionDetail.textContent = cal + " kcal · protein target unset";
+          else if (prot) els.statNutritionDetail.textContent = prot + " g protein · calories unset";
+          else els.statNutritionDetail.textContent = "Set targets in settings";
         }
 
         function renderRoadmap() {
-          const rows = [
-            { phase: "Setup", dates: "Jul 10–19", career: "Build tracker, resumes, first apps.", training: "Run + lift", life: "Set nutrition targets." },
-            { phase: "Launch", dates: "Jul 20–Aug 2", career: "Reach "+state.settings.applications+" apps.", training: "Summer running", life: "Meal prep Sunday." },
-            { phase: "Build", dates: "Aug 3–Sep 13", career: "Complete primary pass.", training: "Bike begins "+compactDate(state.settings.bikeStart), life: "Repetitive meals." },
-            { phase: "Convert", dates: "Sep 14–Oct 11", career: "Outreach to interviews.", training: "Swim begins "+compactDate(state.settings.swimStart), life: "Protect recovery." },
-            { phase: "Interview", dates: "Oct 12–Nov 15", career: "Cases & late-stage.", training: "Indoor bike "+compactDate(state.settings.indoorBikeStart), life: "Sleep priority." },
-            { phase: "Offer close", dates: "Nov 16–Dec 15", career: "Drive to signed offer.", training: "Maintain rhythm.", life: "Simple logging." },
-            { phase: "Transition", dates: "Dec 16–31", career: "Onboarding prep.", training: "Consistency.", life: "Set 2027 targets." }
-          ];
+          const raceNames = {
+            undecided: "Ohio or Musselman; 2027 date TBD",
+            ohio: "IRONMAN 70.3 Ohio; 2027 date TBD",
+            musselman: "Musselman in Geneva, NY; 2027 date TBD"
+          };
+          els.raceSummary.textContent = raceNames[state.settings.race] || raceNames.undecided;
+          els.disciplineSummary.textContent = compactDate(state.settings.bikeStart) + " / " + compactDate(state.settings.swimStart);
+
+          const rows = roadmapRows();
           els.roadmapList.innerHTML = "";
           rows.forEach(item => {
             const row = document.createElement("div");
             row.className = "roadmap-row";
             row.innerHTML = `<div class="roadmap-period"><span class="viz-badge">${item.phase}</span><p class="text-small">${item.dates}</p></div>
               <div class="roadmap-cell"><strong>Career</strong><p class="text-small">${item.career}</p></div>
-              <div class="roadmap-cell"><strong>Training</strong><p class="text-small">${item.training}</p></div>
-              <div class="roadmap-cell"><strong>Diet & Life</strong><p class="text-small">${item.life}</p></div>`;
+              <div class="roadmap-cell"><strong>Training schedule</strong><p class="text-small">${item.training}</p></div>
+              <div class="roadmap-cell"><strong>Diet & life</strong><p class="text-small">${item.life}</p></div>`;
             els.roadmapList.appendChild(row);
           });
         }
 
-        function compactDate(v) { if(!v) return "TBD"; const d = parseDate(v); return MONTH_NAMES[d.getMonth()].slice(0,3)+" "+d.getDate(); }
-        function refreshIcons() { if(window.lucide) lucide.createIcons({attrs:{width:16,height:16}}); }
+        function renderAll() { renderWeek(); renderRoadmap(); }
 
+        // ===== SETTINGS / POPULATE =====
         function populateSettings() {
           els.settingRace.value = state.settings.race;
           els.settingApplications.value = state.settings.applications;
@@ -663,52 +1430,83 @@
           els.settingIndoorBikeStart.value = state.settings.indoorBikeStart;
           els.settingCalories.value = state.settings.calories;
           els.settingProtein.value = state.settings.protein;
+
           const token = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
           const repo = localStorage.getItem(GITHUB_REPO_KEY) || "marco-yan/marco-life-dashboard";
           els.githubToken.value = token;
           els.githubRepo.value = repo;
-          setGitHubStatus(token ? "✅ Token set." : "❌ No token.", token ? "success" : "error");
+          setGitHubStatus(token ? "✅ GitHub token set. Auto-sync active." : "Status: Not connected. Add your GitHub token above.", token ? "success" : "");
         }
 
-        function renderAll() { renderWeek(); renderRoadmap(); }
-
-        // ===== BIND EVENTS =====
+        // ===== EVENTS =====
         function bindEvents() {
           // Tabs
-          els.tabs.forEach(tab => tab.addEventListener("click", function() {
-            els.tabs.forEach(t => { t.classList.toggle("btn-primary", t===this); t.setAttribute("aria-selected", t===this); });
-            const view = this.dataset.view;
-            Object.keys(els.panels).forEach(p => { els.panels[p].hidden = (p !== view); els.panels[p].classList.toggle("is-hidden", p !== view); });
-            if(view === "roadmap") renderRoadmap();
-            if(view === "settings") populateSettings();
-          }));
+          els.tabs.forEach(tab => {
+            tab.addEventListener("click", function() {
+              const view = this.dataset.view;
+              els.tabs.forEach(t => {
+                t.classList.toggle("btn-primary", t === this);
+                t.setAttribute("aria-selected", String(t === this));
+              });
+              Object.keys(els.panels).forEach(p => {
+                const active = p === view;
+                els.panels[p].hidden = !active;
+                els.panels[p].classList.toggle("is-hidden", !active);
+              });
+              if (view === "roadmap") renderRoadmap();
+              if (view === "settings") populateSettings();
+            });
+          });
 
-          els.previousWeek.addEventListener("click", function() { const idx = weeks.findIndex(w => dateKey(w)===dateKey(selectedWeek)); if(idx>0) { selectedWeek = weeks[idx-1]; selectedDate = selectedWeek; renderAll(); } });
-          els.nextWeek.addEventListener("click", function() { const idx = weeks.findIndex(w => dateKey(w)===dateKey(selectedWeek)); if(idx<weeks.length-1) { selectedWeek = weeks[idx+1]; selectedDate = selectedWeek; renderAll(); } });
-          els.currentWeek.addEventListener("click", function() { selectedDate = clampDate(new Date()); selectedWeek = startOfWeek(selectedDate); renderAll(); });
-          els.weekSelect.addEventListener("change", function() { selectedWeek = parseDate(this.value); selectedDate = selectedWeek; renderAll(); });
+          // Week nav
+          els.previousWeek.addEventListener("click", function() {
+            const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek));
+            if (idx > 0) { selectedWeek = weeks[idx-1]; selectedDate = selectedWeek; renderAll(); }
+          });
+          els.nextWeek.addEventListener("click", function() {
+            const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek));
+            if (idx < weeks.length - 1) { selectedWeek = weeks[idx+1]; selectedDate = selectedWeek; renderAll(); }
+          });
+          els.currentWeek.addEventListener("click", function() {
+            selectedDate = clampDate(new Date());
+            selectedWeek = startOfWeek(selectedDate);
+            renderAll();
+          });
+          els.weekSelect.addEventListener("change", function() {
+            selectedWeek = parseDate(this.value);
+            selectedDate = selectedWeek;
+            renderAll();
+          });
 
-          els.showAddTask.addEventListener("click", function() { els.addTaskForm.classList.remove("is-hidden"); els.newTaskText.focus(); });
-          els.cancelAddTask.addEventListener("click", function() { els.addTaskForm.classList.add("is-hidden"); els.newTaskText.value = ""; });
+          // Add task
+          els.showAddTask.addEventListener("click", function() {
+            els.addTaskForm.classList.remove("is-hidden");
+            els.newTaskText.focus();
+          });
+          els.cancelAddTask.addEventListener("click", function() {
+            els.addTaskForm.classList.add("is-hidden");
+            els.newTaskText.value = "";
+          });
           els.addTaskForm.addEventListener("submit", function(e) {
             e.preventDefault();
             const text = els.newTaskText.value.trim();
-            if(!text) return;
-            state.customTasks.push({ id: "custom-"+Date.now(), date: dateKey(selectedDate), category: els.newTaskCategory.value, text: text });
+            if (!text) return;
+            state.customTasks.push({ id: "custom-" + Date.now(), date: dateKey(selectedDate), category: els.newTaskCategory.value, text: text });
             saveState("Task added.");
             els.addTaskForm.classList.add("is-hidden");
             els.newTaskText.value = "";
             renderWeek();
           });
 
+          // Settings
           els.settingsForm.addEventListener("submit", function(e) {
             e.preventDefault();
             state.settings.race = els.settingRace.value;
             state.settings.applications = Number(els.settingApplications.value) || 8;
             state.settings.outreach = Number(els.settingOutreach.value) || 10;
-            state.settings.bikeStart = els.settingBikeStart.value;
-            state.settings.swimStart = els.settingSwimStart.value;
-            state.settings.indoorBikeStart = els.settingIndoorBikeStart.value;
+            state.settings.bikeStart = els.settingBikeStart.value || defaultState.settings.bikeStart;
+            state.settings.swimStart = els.settingSwimStart.value || defaultState.settings.swimStart;
+            state.settings.indoorBikeStart = els.settingIndoorBikeStart.value || defaultState.settings.indoorBikeStart;
             state.settings.calories = els.settingCalories.value;
             state.settings.protein = els.settingProtein.value;
             saveState("Settings saved.");
@@ -728,9 +1526,9 @@
           els.modalSave.addEventListener("click", function() {
             const key = dateKey(selectedDate);
             const blocksJson = els.modalBlockList.dataset.blocks;
-            if(blocksJson) {
+            if (blocksJson) {
               const blocks = JSON.parse(blocksJson);
-              if(blocks.length === 0) delete state.scheduleOverrides[key];
+              if (blocks.length === 0) delete state.scheduleOverrides[key];
               else state.scheduleOverrides[key] = blocks;
               saveState("Schedule updated.");
               els.modal.classList.remove("active");
@@ -740,14 +1538,14 @@
           els.modalReset.addEventListener("click", function() {
             const key = dateKey(selectedDate);
             delete state.scheduleOverrides[key];
-            saveState("Schedule reset.");
+            saveState("Schedule reset to default.");
             els.modal.classList.remove("active");
             renderWeek();
           });
           els.modalAddBlock.addEventListener("click", function() {
             const time = els.modalNewTime.value.trim();
             const label = els.modalNewLabel.value.trim();
-            if(!time || !label) return;
+            if (!time || !label) return;
             const key = dateKey(selectedDate);
             let blocks = getCurrentBlocks(key);
             blocks.push({ time, label });
@@ -755,7 +1553,7 @@
             els.modalNewTime.value = "";
             els.modalNewLabel.value = "";
           });
-          els.modal.addEventListener("click", function(e) { if(e.target === els.modal) els.modal.classList.remove("active"); });
+          els.modal.addEventListener("click", function(e) { if (e.target === els.modal) els.modal.classList.remove("active"); });
 
           function renderModalBlocks(blocks) {
             els.modalBlockList.innerHTML = "";
@@ -773,22 +1571,32 @@
             refreshIcons();
           }
 
-          // GitHub
+          // GitHub Sync
           els.githubSaveToken.addEventListener("click", function() {
             const token = els.githubToken.value.trim();
             const repo = els.githubRepo.value.trim() || "marco-yan/marco-life-dashboard";
-            if(!token) { setGitHubStatus("❌ Enter a token.", "error"); return; }
+            if (!token) { setGitHubStatus("❌ Please enter a GitHub token.", "error"); return; }
             localStorage.setItem(GITHUB_TOKEN_KEY, token);
             localStorage.setItem(GITHUB_REPO_KEY, repo);
-            setGitHubStatus("✅ Token saved!", "success");
+            setGitHubStatus("✅ Token saved! Auto-sync is active.", "success");
             setTimeout(pushToGitHub, 500);
           });
           els.githubSyncNow.addEventListener("click", pushToGitHub);
-          els.githubLoadNow.addEventListener("click", function() { loadFromGitHub().then(() => { renderAll(); populateSettings(); }); });
+          els.githubLoadNow.addEventListener("click", function() {
+            loadFromGitHub().then(() => { renderAll(); populateSettings(); });
+          });
 
-          // Auto-load on start if token exists
-          if(localStorage.getItem(GITHUB_TOKEN_KEY)) {
-            setTimeout(() => { loadFromGitHub().then(() => { renderAll(); populateSettings(); }); }, 1000);
+          // Auto-load if token exists
+          if (localStorage.getItem(GITHUB_TOKEN_KEY)) {
+            setTimeout(() => {
+              loadFromGitHub().then(() => { renderAll(); populateSettings(); });
+            }, 1000);
+          }
+        }
+
+        function refreshIcons() {
+          if (window.lucide && typeof window.lucide.createIcons === "function") {
+            try { window.lucide.createIcons({ attrs: { width: 16, height: 16 } }); } catch(e) {}
           }
         }
 
@@ -796,11 +1604,15 @@
         function init() {
           populateSettings();
           bindEvents();
-          renderAll();
-          // Populate week dropdown
           els.weekSelect.innerHTML = "";
-          weeks.forEach(w => { const opt = document.createElement("option"); opt.value = dateKey(w); opt.textContent = formatWeek(w); els.weekSelect.appendChild(opt); });
+          weeks.forEach(w => {
+            const opt = document.createElement("option");
+            opt.value = dateKey(w);
+            opt.textContent = formatWeek(w);
+            els.weekSelect.appendChild(opt);
+          });
           els.weekSelect.value = dateKey(selectedWeek);
+          renderAll();
         }
 
         init();
