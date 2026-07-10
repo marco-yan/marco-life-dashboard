@@ -1,8 +1,13 @@
-# marco-life-dashboard
-
 # Marco Life Dashboard — Update Log
 
 ---
+## [v1.2] – 2026-07-10   <-- PASTE THIS BLOCK HERE
+
+**What changed:**
+- **Schedule editor** – Click the pencil icon (✏️) next to any date to edit that day's hourly schedule.
+- **Add/delete blocks** – In the modal, delete existing time blocks or add new ones (time + label).
+- **Reset to default** – Revert any edited day back to the original auto-generated schedule.
+- **Persists per day** – Changes save to local storage for each day independently (overrides don't affect other days).
 
 ## [v1.1] – 2026-07-10
 
