@@ -783,7 +783,7 @@
           </div>
         </div>
 
-        <!-- ===== JSONBIN SYNC (No tokens needed) ===== -->
+        <!-- ===== JSONBIN SYNC ===== -->
         <div class="settings-section">
           <h3>Sync (Cloud)</h3>
           <div class="settings-grid" style="grid-template-columns: 1fr 1fr;">
@@ -871,7 +871,7 @@
         const root = document.getElementById("marco-life-dashboard");
         if (!root) return;
 
-        // ===== JSONBIN CONFIG (HARDCODED) =====
+        // ===== JSONBIN CONFIG =====
         const JSONBIN_BIN_ID = "6a513c19da38895dfe4ca9a6";
         const JSONBIN_MASTER_KEY = "$2a$10$hgWaWK5EN.DzPpby3ifbLOzXt3n2XUpUqHtg30diOC9QfBlXHl4Ti";
         const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
@@ -1000,7 +1000,6 @@
           modalSave: document.getElementById("modal-save"),
           modalReset: document.getElementById("modal-reset"),
           modalClose: document.getElementById("modal-close"),
-          // Career & Notes
           notesTextarea: document.getElementById("notes-textarea"),
           notesStatus: document.getElementById("notes-status"),
           careerAppsCount: document.getElementById("career-apps-count"),
@@ -1025,7 +1024,6 @@
           editStrategicPlan: document.getElementById("edit-strategic-plan"),
           saveCareerContent: document.getElementById("save-career-content"),
           careerEditStatus: document.getElementById("career-edit-status"),
-          // Sync
           syncStatus: document.getElementById("sync-status"),
           syncNowBtn: document.getElementById("sync-now-btn"),
           loadNowBtn: document.getElementById("load-now-btn"),
@@ -1042,6 +1040,23 @@
         function formatLongDate(d) { return LONG_DAY_NAMES[d.getDay()] + ", " + MONTH_NAMES[d.getMonth()] + " " + d.getDate(); }
         function formatWeek(d) { const e = addDays(d,6); return formatShortDate(d) + "–" + formatShortDate(e); }
         function todayStr() { const d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+
+        // ===== NEW SORTING LOGIC (FIXES THE SCHEDULE ORDER) =====
+        function sortBlocksByTime(blocks) {
+          if (!blocks || blocks.length <= 1) return blocks;
+          return blocks.slice().sort(function(a, b) {
+            function getStartMinutes(timeStr) {
+              // Split by hyphen, en dash, or em dash
+              var parts = timeStr.split(/[-–—]/);
+              if (parts.length < 2) return 0;
+              var startStr = parts[0].trim();
+              var hm = startStr.split(':').map(Number);
+              if (hm.length < 2 || isNaN(hm[0]) || isNaN(hm[1])) return 0;
+              return hm[0] * 60 + hm[1];
+            }
+            return getStartMinutes(a.time) - getStartMinutes(b.time);
+          });
+        }
 
         // ===== JSONBIN SYNC ENGINE =====
         function setSyncStatus(msg, type) {
@@ -1150,7 +1165,7 @@
           } catch (e) { els.dashboardStatus.textContent = "Saved locally."; }
         }
 
-        // ===== CORE LOGIC (Week / Schedule / Tasks) =====
+        // ===== CORE LOGIC =====
         function getPhase(date) {
           if (date <= parseDate("2026-07-19")) return { name: "Setup", focus: "Build the operating system", companies: "All primary targets" };
           if (date <= parseDate("2026-08-02")) return { name: "Launch", focus: "Launch the application pipeline", companies: "First five targets" };
@@ -1304,7 +1319,7 @@
 
         function compactDate(value) { if(!value) return "TBD"; const d=parseDate(value); return MONTH_NAMES[d.getMonth()].slice(0,3)+" "+d.getDate(); }
 
-        // ===== RENDER FUNCTIONS =====
+        // ===== RENDER FUNCTIONS (UPDATED WITH SORTING) =====
         function renderWeek() {
           els.weekSelect.value = dateKey(selectedWeek);
           const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek));
@@ -1342,10 +1357,31 @@
 
         function renderSelectedDay() {
           els.selectedDayTitle.textContent = formatLongDate(selectedDate);
+          renderSchedule();
+          renderTodos();
+        }
+
+        // *** FIXED: SORT SCHEDULE BLOCKS BEFORE DISPLAY ***
+        function renderSchedule() {
           const key = dateKey(selectedDate);
           let blocks = getCurrentBlocks(key);
+          blocks = sortBlocksByTime(blocks); // <-- SORT HERE
           els.scheduleList.innerHTML = "";
-          blocks.forEach(b => { const row = document.createElement("div"); row.className="schedule-item"; row.innerHTML='<span class="schedule-time">'+b.time+'</span><span>'+b.label+'</span>'; els.scheduleList.appendChild(row); });
+          blocks.forEach(function(block) {
+            const row = document.createElement("div");
+            row.className = "schedule-item";
+            const time = document.createElement("span");
+            time.className = "schedule-time text-small";
+            time.textContent = block.time;
+            const label = document.createElement("span");
+            label.textContent = block.label;
+            row.appendChild(time);
+            row.appendChild(label);
+            els.scheduleList.appendChild(row);
+          });
+        }
+
+        function renderTodos() {
           const tasks = tasksForDate(selectedDate);
           els.todoList.innerHTML = "";
           if (!tasks.length) { els.todoList.innerHTML = '<div class="empty-state">No tasks planned.</div>'; }
@@ -1421,7 +1457,6 @@
           els.careerContactsCount.textContent = contacts.length;
           els.careerReferralsCount.textContent = referrals;
 
-          // Companies
           const companiesText = state.careerContent.targetCompaniesText || "";
           const lanesText = state.careerContent.searchLanesText || "";
           const planText = state.careerContent.strategicPlanText || "";
@@ -1592,19 +1627,24 @@
             renderAll();
           });
 
+          // Schedule Editor
           els.editScheduleBtn.addEventListener("click", function() {
             const key = dateKey(selectedDate);
             els.modalDayLabel.textContent = formatLongDate(selectedDate);
             let blocks = getCurrentBlocks(key);
+            blocks = sortBlocksByTime(blocks); // SORT when opening modal
             renderModalBlocks(blocks);
             els.modal.classList.add("active");
           });
           els.modalClose.addEventListener("click", function() { els.modal.classList.remove("active"); });
+          
+          // *** FIXED: SORT BEFORE SAVING ***
           els.modalSave.addEventListener("click", function() {
             const key = dateKey(selectedDate);
             const blocksJson = els.modalBlockList.dataset.blocks;
             if (blocksJson) {
-              const blocks = JSON.parse(blocksJson);
+              let blocks = JSON.parse(blocksJson);
+              blocks = sortBlocksByTime(blocks); // SORT before saving
               if (blocks.length === 0) delete state.scheduleOverrides[key];
               else state.scheduleOverrides[key] = blocks;
               saveState("Schedule updated.");
@@ -1612,6 +1652,7 @@
               renderWeek();
             }
           });
+          
           els.modalReset.addEventListener("click", function() {
             const key = dateKey(selectedDate);
             delete state.scheduleOverrides[key];
@@ -1626,13 +1667,16 @@
             const key = dateKey(selectedDate);
             let blocks = getCurrentBlocks(key);
             blocks.push({ time, label });
+            blocks = sortBlocksByTime(blocks); // SORT after adding in modal
             renderModalBlocks(blocks);
             els.modalNewTime.value = "";
             els.modalNewLabel.value = "";
           });
           els.modal.addEventListener("click", function(e) { if (e.target === els.modal) els.modal.classList.remove("active"); });
 
+          // *** FIXED: SORT IN MODAL RENDER ***
           function renderModalBlocks(blocks) {
+            blocks = sortBlocksByTime(blocks); // SORT before rendering modal list
             els.modalBlockList.innerHTML = "";
             blocks.forEach((block, idx) => {
               const row = document.createElement("div");
@@ -1694,7 +1738,6 @@
             }, 500);
           });
 
-          // Sync buttons
           els.syncNowBtn.addEventListener("click", function() {
             saveToJSONBin();
           });
@@ -1706,7 +1749,6 @@
             });
           });
 
-          // Auto-load on startup
           setTimeout(() => {
             loadFromJSONBin().then(() => {
               renderAll();
