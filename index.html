@@ -37,26 +37,49 @@
     #password-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: #F7F6F0; display: flex; justify-content: center; align-items: center;
-      z-index: 9999;
+      padding: 14px; z-index: 9999;
     }
     #password-screen.hidden { display: none; }
     #password-screen .lock-box {
       background: var(--background); padding: 48px 40px; border-radius: 24px;
-      border: 1px solid var(--border); max-width: 380px; width: 100%; text-align: center;
+      border: 1px solid var(--border); max-width: 420px; width: 100%; text-align: center;
     }
     #password-screen .lock-box h1 { font-size: 1.5rem; font-weight: 600; color: #214E3B; margin-bottom: 8px; }
     #password-screen .lock-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+    #password-screen .login-form { display: grid; gap: 16px; }
+    #password-screen .login-field { display: grid; gap: 7px; text-align: left; }
+    #password-screen .login-field span { color: var(--text); font-size: 0.8rem; font-weight: 600; }
     #password-screen .lock-box input {
       width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border);
-      font-family: inherit; font-size: 1rem; background: #F7F6F0; margin-bottom: 16px;
+      font-family: inherit; font-size: 1rem; background: #F7F6F0; min-height: 48px;
     }
     #password-screen .lock-box input:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
     #password-screen .lock-box .btn-unlock {
-      width: 100%; padding: 14px; background: #214E3B; color: var(--background);
+      width: 100%; min-height: 48px; padding: 14px; background: #214E3B; color: var(--background);
       border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer;
     }
     #password-screen .lock-box .btn-unlock:hover { background: var(--primary-hover); }
     #password-screen .lock-box .error-msg { color: var(--text); font-size: 0.85rem; margin-top: 12px; min-height: 1.5em; }
+
+    #marco-life-dashboard .access-mode-chip { min-height: 44px; }
+    #marco-life-dashboard .guest-banner {
+      align-items: flex-start;
+      background: var(--surface-strong);
+      border: 1px solid var(--highlight);
+      border-radius: 14px;
+      display: none;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding: 14px 18px;
+    }
+    #marco-life-dashboard .guest-banner i { color: var(--primary); flex: 0 0 auto; margin-top: 2px; }
+    #marco-life-dashboard .guest-banner strong { color: var(--primary); display: block; margin-bottom: 2px; }
+    body[data-dashboard-role="guest"] #marco-life-dashboard .guest-banner { display: flex; }
+    body[data-dashboard-role="guest"] #marco-life-dashboard .admin-only { display: none !important; }
+    body[data-dashboard-role="guest"] #marco-life-dashboard .roadmap-editable { cursor: default; }
+    body[data-dashboard-role="guest"] #marco-life-dashboard input:disabled,
+    body[data-dashboard-role="guest"] #marco-life-dashboard select:disabled,
+    body[data-dashboard-role="guest"] #marco-life-dashboard textarea[readonly] { opacity: 1; color: var(--text); }
 
     #marco-life-dashboard { max-width: 1280px; width: 100%; display: none; }
     #marco-life-dashboard.visible { display: block; }
@@ -692,7 +715,7 @@
     #marco-life-dashboard .card:hover { box-shadow: 0 10px 26px var(--shadow); }
     #marco-life-dashboard .viz-stat { border-top: 3px solid var(--secondary); min-height: 132px; }
     #marco-life-dashboard .viz-stat-value { margin: 4px 0 2px; }
-    #marco-life-dashboard .btn { min-height: 38px; }
+    #marco-life-dashboard .btn { min-height: 44px; }
     #marco-life-dashboard .btn.task-hide-btn { min-height: 44px; }
     #marco-life-dashboard .btn:active:not(:disabled) { transform: translateY(1px); }
     #marco-life-dashboard .form-control,
@@ -1345,13 +1368,22 @@
 </head>
 <body>
 
-  <!-- ===== PASSWORD SCREEN ===== -->
+  <!-- ===== LOGIN SCREEN ===== -->
   <div id="password-screen" role="dialog" aria-modal="true" aria-labelledby="password-title">
     <div class="lock-box">
       <h1 id="password-title">Marco's Dashboard</h1>
-      <p>Enter your private access code</p>
-      <input type="password" id="password-input" placeholder="Enter password" aria-label="Dashboard password" autocomplete="current-password" autofocus>
-      <button class="btn-unlock" id="unlock-btn">Unlock</button>
+      <p>Sign in with your dashboard account</p>
+      <form class="login-form" id="login-form">
+        <label class="login-field" for="username-input">
+          <span>Username</span>
+          <input type="text" id="username-input" placeholder="Username" autocomplete="username" autocapitalize="none" spellcheck="false" autofocus required>
+        </label>
+        <label class="login-field" for="password-input">
+          <span>Password</span>
+          <input type="password" id="password-input" placeholder="Password" autocomplete="current-password" required>
+        </label>
+        <button type="submit" class="btn-unlock" id="unlock-btn">Sign in</button>
+      </form>
       <div class="error-msg" id="password-error"></div>
     </div>
   </div>
@@ -1365,10 +1397,16 @@
         <p class="header-copy">Career, training, and life—planned one week at a time.</p>
       </div>
       <div class="header-actions">
+        <span class="status-chip access-mode-chip" id="access-mode-chip"><i data-lucide="shield-check"></i><span id="access-mode-label">Admin</span></span>
         <span class="status-chip"><i data-lucide="cloud-check"></i><span id="dashboard-status" aria-live="polite">Ready.</span></span>
-        <button type="button" class="btn btn-ghost" id="lock-dashboard"><i data-lucide="lock"></i> Lock</button>
+        <button type="button" class="btn btn-ghost" id="lock-dashboard"><i data-lucide="log-out"></i> Sign out</button>
       </div>
     </header>
+
+    <aside class="guest-banner" id="guest-banner" aria-live="polite">
+      <i data-lucide="eye"></i>
+      <div><strong>Guest preview</strong><span class="text-small">You can explore every tab, but editing and saving are disabled.</span></div>
+    </aside>
 
     <!-- Tabs -->
     <div class="dash-tabs" role="tablist">
@@ -1415,7 +1453,7 @@
           <span class="focus-label"><i data-lucide="users-round"></i> Networking triangle</span>
           <strong id="networking-focus">3 planned contacts</strong>
           <span class="text-small" id="weekly-quota">Weekly quota</span>
-          <button type="button" class="btn btn-ghost" id="edit-week-focus"><i data-lucide="pencil-line"></i> Edit in roadmap</button>
+          <button type="button" class="btn btn-ghost admin-only" id="edit-week-focus"><i data-lucide="pencil-line"></i> Edit in roadmap</button>
         </div>
       </div>
 
@@ -1452,7 +1490,7 @@
             <h3 id="selected-day-title">Friday, July 10</h3>
             <div class="right-actions">
               <span class="text-small" id="day-status">0 of 0 done</span>
-              <button type="button" class="btn btn-ghost" id="edit-schedule-btn" title="Edit this day's schedule" aria-label="Edit this day's schedule"><i data-lucide="pencil"></i></button>
+              <button type="button" class="btn btn-ghost admin-only" id="edit-schedule-btn" title="Edit this day's schedule" aria-label="Edit this day's schedule"><i data-lucide="pencil"></i></button>
             </div>
           </div>
           <div class="card-soft schedule-list" id="schedule-list" aria-label="Daily schedule"></div>
@@ -1465,14 +1503,14 @@
               <p class="text-small todo-help">Drag the handle to reprioritize. Hide removes a task from this day only.</p>
             </div>
             <div class="right-actions">
-              <button type="button" class="btn btn-ghost is-hidden" id="restore-hidden-tasks"><i data-lucide="rotate-ccw"></i> Restore hidden <span id="hidden-task-count"></span></button>
-              <button type="button" class="btn btn-ghost" id="show-add-task"><i data-lucide="plus"></i> Add task</button>
+              <button type="button" class="btn btn-ghost admin-only is-hidden" id="restore-hidden-tasks"><i data-lucide="rotate-ccw"></i> Restore hidden <span id="hidden-task-count"></span></button>
+              <button type="button" class="btn btn-ghost admin-only" id="show-add-task"><i data-lucide="plus"></i> Add task</button>
             </div>
           </div>
           <span class="sr-only" id="task-sort-status" aria-live="assertive"></span>
           <div class="card-soft todo-list" id="todo-list" role="list"></div>
 
-          <form class="add-task-form is-hidden" id="add-task-form">
+          <form class="add-task-form admin-only is-hidden" id="add-task-form">
             <div class="add-task-fields">
               <label class="form-label" for="new-task-category">Category
                 <select class="form-select" id="new-task-category">
@@ -1564,7 +1602,7 @@
       </div>
 
       <!-- Editable Content Section -->
-      <details class="edit-career-toggle">
+      <details class="edit-career-toggle admin-only">
         <summary>Edit Career Content (Companies, Lanes, Plan)</summary>
         <div class="edit-career-content">
           <span class="label">Target Companies & Roles</span>
@@ -1596,7 +1634,7 @@
       <!-- Application Tracker -->
       <div class="card">
         <h3 style="color:#214E3B; margin-bottom:12px;">Application Tracker</h3>
-        <form id="career-app-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
+        <form class="admin-only" id="career-app-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
           <label class="form-label">Company <input class="form-control" id="career-app-company" placeholder="e.g. Intact" autocomplete="organization" required></label>
           <label class="form-label">Job Title <input class="form-control" id="career-app-title" placeholder="e.g. Underwriting Trainee" autocomplete="organization-title" required></label>
           <label class="form-label">Status 
@@ -1622,7 +1660,7 @@
       <!-- Networking Tracker -->
       <div class="card">
         <h3 style="color:#214E3B; margin-bottom:12px;">Networking Tracker</h3>
-        <form id="career-contact-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
+        <form class="admin-only" id="career-contact-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
           <label class="form-label">Name <input class="form-control" id="career-contact-name" placeholder="e.g. Jane Smith" autocomplete="name" required></label>
           <label class="form-label">Company <input class="form-control" id="career-contact-company" placeholder="e.g. Zurich" autocomplete="organization" required></label>
           <label class="form-label">Status 
@@ -1657,7 +1695,7 @@
     <section id="panel-notes" class="is-hidden" role="tabpanel" aria-labelledby="tab-notes" hidden>
       <div class="card" style="margin-bottom:0;">
         <h3 style="color:#214E3B; margin-bottom:8px;">Quick Notes</h3>
-        <p class="text-small" style="margin-bottom:16px;">Auto-saves locally and syncs. Use it for meeting notes, interview prep, or anything you need to remember.</p>
+        <p class="text-small" id="notes-helper" style="margin-bottom:16px;">Auto-saves locally and syncs. Use it for meeting notes, interview prep, or anything you need to remember.</p>
         <textarea class="notes-textarea" id="notes-textarea" placeholder="Jot down your thoughts, interview notes, reminders..."></textarea>
         <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
           <span class="text-small" id="notes-status">Saved.</span>
@@ -1725,7 +1763,7 @@
               <div class="sync-status" id="sync-status">Ready to sync.</div>
             </div>
             <div style="display:flex; gap:12px; align-items:end; justify-content:flex-end; flex-wrap:wrap;">
-              <button type="button" class="btn btn-primary" id="sync-now-btn">Sync Now</button>
+              <button type="button" class="btn btn-primary admin-only" id="sync-now-btn">Sync Now</button>
               <button type="button" class="btn" id="load-now-btn">Load from Cloud</button>
             </div>
           </div>
@@ -1735,7 +1773,7 @@
           </p>
         </div>
 
-        <div class="settings-actions">
+        <div class="settings-actions admin-only">
           <button type="submit" class="btn btn-primary">Save settings</button>
           <span class="status-line" id="settings-status" aria-live="polite"></span>
         </div>
@@ -1767,14 +1805,36 @@
     (function () {
       "use strict";
 
-      // ===== PASSWORD =====
-      const PASSWORD = "RockOn123";
+      // ===== ACCESS CONTROL =====
+      const ACCOUNTS = Object.freeze({
+        admin: { password: "RockOn123", role: "admin" },
+        guest: { password: "123", role: "guest" }
+      });
+      const SESSION_KEY = "marco-dashboard-role";
       const passwordScreen = document.getElementById('password-screen');
       const dashboard = document.getElementById('marco-life-dashboard');
+      const loginForm = document.getElementById('login-form');
+      const usernameInput = document.getElementById('username-input');
       const passwordInput = document.getElementById('password-input');
-      const unlockBtn = document.getElementById('unlock-btn');
       const errorMsg = document.getElementById('password-error');
       let dashboardInitialized = false;
+      let currentRole = null;
+
+      function isAdmin() { return currentRole === "admin"; }
+
+      function getStoredRole() {
+        try {
+          const role = sessionStorage.getItem(SESSION_KEY);
+          return role === "admin" || role === "guest" ? role : null;
+        } catch (e) { return null; }
+      }
+
+      function storeRole(role) {
+        try {
+          sessionStorage.setItem(SESSION_KEY, role);
+          sessionStorage.removeItem("dashboard_unlocked");
+        } catch (e) {}
+      }
 
       function ensureDashboardInitialized() {
         if (dashboardInitialized) return;
@@ -1782,28 +1842,38 @@
         dashboardInitialized = true;
       }
 
-      function tryUnlock() {
-        if (passwordInput.value.trim() === PASSWORD) {
-          passwordScreen.classList.add('hidden');
-          dashboard.classList.add('visible');
-          sessionStorage.setItem('dashboard_unlocked', 'true');
-          errorMsg.textContent = '';
-          try { ensureDashboardInitialized(); } catch (e) { console.error(e); }
-        } else {
-          errorMsg.textContent = 'Incorrect password. Try again.';
-          passwordInput.value = '';
-          passwordInput.focus();
-        }
+      function openDashboard(role) {
+        currentRole = role;
+        document.body.dataset.dashboardRole = role;
+        passwordScreen.classList.add('hidden');
+        passwordScreen.setAttribute('aria-hidden', 'true');
+        dashboard.classList.add('visible');
+        storeRole(role);
+        errorMsg.textContent = '';
+        try { ensureDashboardInitialized(); } catch (e) { console.error(e); }
       }
 
-      if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
-        passwordScreen.classList.add('hidden');
-        dashboard.classList.add('visible');
-        try { ensureDashboardInitialized(); } catch (e) { console.error(e); }
-      } else { passwordInput.focus(); }
+      function trySignIn(event) {
+        if (event) event.preventDefault();
+        const username = usernameInput.value.trim().toLowerCase();
+        const account = ACCOUNTS[username];
+        if (account && passwordInput.value === account.password) {
+          openDashboard(account.role);
+          return;
+        }
+        errorMsg.textContent = 'Incorrect username or password. Try again.';
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
 
-      unlockBtn.addEventListener('click', tryUnlock);
-      passwordInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') tryUnlock(); });
+      const storedRole = getStoredRole();
+      if (storedRole) openDashboard(storedRole);
+      else {
+        try { sessionStorage.removeItem("dashboard_unlocked"); } catch (e) {}
+        usernameInput.focus();
+      }
+
+      loginForm.addEventListener('submit', trySignIn);
 
       // ===== THE MAIN ENGINE =====
       function initDashboard() {
@@ -2170,6 +2240,8 @@
           settingsForm: document.getElementById("settings-form"),
           settingsStatus: document.getElementById("settings-status"),
           dashboardStatus: document.getElementById("dashboard-status"),
+          accessModeLabel: document.getElementById("access-mode-label"),
+          guestBanner: document.getElementById("guest-banner"),
           settingRace: document.getElementById("setting-race"),
           settingApplications: document.getElementById("setting-applications"),
           settingOutreach: document.getElementById("setting-outreach"),
@@ -2190,6 +2262,7 @@
           modalClose: document.getElementById("modal-close"),
           notesTextarea: document.getElementById("notes-textarea"),
           notesStatus: document.getElementById("notes-status"),
+          notesHelper: document.getElementById("notes-helper"),
           careerAppsCount: document.getElementById("career-apps-count"),
           careerInterviewsCount: document.getElementById("career-interviews-count"),
           careerContactsCount: document.getElementById("career-contacts-count"),
@@ -2219,6 +2292,54 @@
         };
 
         // ===== HELPERS =====
+        function requireAdmin(message) {
+          if (isAdmin()) return true;
+          const notice = message || "Guest mode is read-only.";
+          if (els.dashboardStatus) els.dashboardStatus.textContent = notice;
+          return false;
+        }
+
+        function applyRoleAccess() {
+          const admin = isAdmin();
+          root.dataset.accessRole = currentRole || "guest";
+          document.body.dataset.dashboardRole = currentRole || "guest";
+          els.accessModeLabel.textContent = admin ? "Admin" : "Guest · read-only";
+          els.guestBanner.setAttribute("aria-hidden", String(admin));
+
+          root.querySelectorAll(".admin-only").forEach(function(element) {
+            element.hidden = !admin;
+          });
+          els.settingsForm.querySelectorAll("input, select, textarea").forEach(function(control) {
+            control.disabled = !admin;
+          });
+          els.notesTextarea.readOnly = !admin;
+          els.notesTextarea.setAttribute("aria-readonly", String(!admin));
+          els.notesHelper.textContent = admin
+            ? "Auto-saves locally and syncs. Use it for meeting notes, interview prep, or anything you need to remember."
+            : "Read-only preview of the synced notes.";
+          els.notesStatus.textContent = admin ? "Saved." : "Read-only preview.";
+          els.roadmapSaveStatus.textContent = admin ? "All changes saved" : "Read-only preview";
+
+          root.querySelectorAll(".roadmap-editable").forEach(function(editor) {
+            editor.contentEditable = admin ? "true" : "false";
+            editor.tabIndex = admin ? 0 : -1;
+            editor.setAttribute("aria-readonly", String(!admin));
+          });
+          root.querySelectorAll(".roadmap-contact-select, .portfolio-milestone input, .networking-done-btn, .form-check-input").forEach(function(control) {
+            control.disabled = !admin;
+          });
+          root.querySelectorAll(".task-drag-handle, .task-hide-btn").forEach(function(control) {
+            control.disabled = !admin;
+            control.hidden = !admin;
+          });
+
+          if (!admin) {
+            els.addTaskForm.classList.add("is-hidden");
+            els.modal.classList.remove("active");
+            document.body.classList.remove("modal-open");
+          }
+        }
+
         function parseDate(v) { const p = String(v).split("-").map(Number); return new Date(p[0], p[1]-1, p[2]); }
         function dateKey(d) { return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
         function addDays(d, a) { const n = new Date(d); n.setDate(n.getDate()+a); return n; }
@@ -2405,6 +2526,7 @@
         }
 
         async function saveToJSONBin() {
+          if (!requireAdmin("Guest mode cannot sync changes.")) return;
           if (isSyncing) {
             syncQueued = true;
             return;
@@ -2483,6 +2605,7 @@
         }
 
         function triggerSync() {
+          if (!isAdmin()) return;
           if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
           syncDebounceTimer = setTimeout(() => {
             saveToJSONBin();
@@ -2537,11 +2660,16 @@
         }
 
         function saveState(msg) {
+          if (!requireAdmin("Guest mode is read-only; nothing was saved.")) return false;
           try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
             if (msg) els.dashboardStatus.textContent = msg;
             triggerSync();
-          } catch (e) { els.dashboardStatus.textContent = "Saved locally."; }
+            return true;
+          } catch (e) {
+            els.dashboardStatus.textContent = "Local save unavailable.";
+            return false;
+          }
         }
 
         // ===== CORE LOGIC =====
@@ -2846,7 +2974,9 @@
             doneButton.innerHTML = done
               ? '<i data-lucide="check"></i><span>Done</span>'
               : '<i data-lucide="circle"></i><span>Mark done</span>';
+            doneButton.disabled = !isAdmin();
             doneButton.addEventListener("click", function() {
+              if (!requireAdmin()) return;
               state.completed[assignment.taskId] = !done;
               saveState("Networking progress saved.");
               renderWeek();
@@ -2934,6 +3064,7 @@
         }
 
         function persistTaskOrder(message) {
+          if (!requireAdmin()) return false;
           const key = dateKey(selectedDate);
           const visibleIds = taskIdsInDOM();
           const allIds = tasksForDate(selectedDate, { includeHidden: true }).map(function(task) { return task.id; });
@@ -2957,6 +3088,7 @@
         }
 
         function hideTaskForSelectedDate(task) {
+          if (!requireAdmin()) return;
           const key = dateKey(selectedDate);
           const hidden = Array.isArray(state.hiddenTasks[key]) ? state.hiddenTasks[key].slice() : [];
           if (!hidden.includes(task.id)) hidden.push(task.id);
@@ -2967,6 +3099,7 @@
         }
 
         function restoreHiddenTasksForSelectedDate() {
+          if (!requireAdmin()) return;
           const key = dateKey(selectedDate);
           const count = Array.isArray(state.hiddenTasks[key]) ? state.hiddenTasks[key].length : 0;
           if (!count) return;
@@ -2992,6 +3125,7 @@
         }
 
         function beginTaskDrag(event, handle) {
+          if (!requireAdmin()) return;
           if (taskDragState || (event.pointerType === "mouse" && event.button !== 0)) return;
           const row = handle.closest(".todo-row");
           if (!row) return;
@@ -3058,6 +3192,7 @@
         }
 
         function moveTaskWithKeyboard(event, handle) {
+          if (!requireAdmin()) return;
           if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
           event.preventDefault();
           const row = handle.closest(".todo-row");
@@ -3108,6 +3243,7 @@
             cb.type = "checkbox";
             cb.id = id;
             cb.checked = checked;
+            cb.disabled = !isAdmin();
             checkWrap.appendChild(cb);
 
             const copy = document.createElement("div");
@@ -3143,9 +3279,18 @@
             row.appendChild(checkWrap);
             row.appendChild(copy);
             row.appendChild(action);
+            dragHandle.disabled = !isAdmin();
+            dragHandle.hidden = !isAdmin();
+            action.disabled = !isAdmin();
+            action.hidden = !isAdmin();
             dragHandle.addEventListener("pointerdown", function(event) { beginTaskDrag(event, dragHandle); });
             dragHandle.addEventListener("keydown", function(event) { moveTaskWithKeyboard(event, dragHandle); });
-            cb.addEventListener("change", function() { state.completed[task.id] = this.checked; saveState("Progress saved."); renderWeek(); });
+            cb.addEventListener("change", function() {
+              if (!requireAdmin()) { this.checked = isComplete(task); return; }
+              state.completed[task.id] = this.checked;
+              saveState("Progress saved.");
+              renderWeek();
+            });
             action.addEventListener("click", function() { hideTaskForSelectedDate(task); });
             els.todoList.appendChild(row);
           });
@@ -3269,6 +3414,7 @@
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.checked = complete;
+            checkbox.disabled = !isAdmin();
             checkbox.setAttribute("aria-label", milestone.title);
             const copy = document.createElement("span");
             copy.className = "portfolio-milestone-copy";
@@ -3280,6 +3426,7 @@
             label.appendChild(copy);
             label.appendChild(due);
             checkbox.addEventListener("change", function() {
+              if (!requireAdmin()) { checkbox.checked = complete; return; }
               const completed = getPortfolioProgressState().completedMilestones;
               if (checkbox.checked) completed[milestone.id] = true;
               else delete completed[milestone.id];
@@ -3428,9 +3575,11 @@
           heading.textContent = label;
           const editor = document.createElement("p");
           editor.className = "roadmap-editable text-small";
-          editor.contentEditable = "true";
+          editor.contentEditable = isAdmin() ? "true" : "false";
+          editor.tabIndex = isAdmin() ? 0 : -1;
           editor.spellcheck = true;
           editor.setAttribute("role", "textbox");
+          editor.setAttribute("aria-readonly", String(!isAdmin()));
           editor.setAttribute("aria-label", label + " focus for " + formatWeek(parseDate(weekKey)));
           editor.dataset.weekKey = weekKey;
           editor.dataset.focusField = field;
@@ -3461,6 +3610,7 @@
             select.dataset.weekKey = weekKey;
             select.dataset.networkingSlot = slot.key;
             select.setAttribute("aria-label", slot.label + " for " + formatWeek(parseDate(weekKey)));
+            select.disabled = !isAdmin();
 
             const none = document.createElement("option");
             none.value = "";
@@ -3487,6 +3637,7 @@
         }
 
         function saveWeeklyNetworkingSelection(select) {
+          if (!requireAdmin()) return;
           if (!select || !select.dataset.weekKey || !select.dataset.networkingSlot) return;
           const weekKey = select.dataset.weekKey;
           const slotKey = select.dataset.networkingSlot;
@@ -3503,6 +3654,7 @@
         }
 
         function saveRoadmapFocus(editor) {
+          if (!requireAdmin()) return;
           if (!editor || !editor.dataset.weekKey) return;
           const weekKey = editor.dataset.weekKey;
           const field = editor.dataset.focusField;
@@ -3531,7 +3683,14 @@
           renderWeek();
         }
 
-        function renderAll() { renderWeek(); renderRoadmap(); renderPortfolio(); renderCareer(); renderNotes(); }
+        function renderAll() {
+          renderWeek();
+          renderRoadmap();
+          renderPortfolio();
+          renderCareer();
+          renderNotes();
+          applyRoleAccess();
+        }
 
         // ===== CAREER TRACKER =====
         function renderCareer() {
@@ -3606,8 +3765,9 @@
           apps.slice().reverse().forEach((app, idx) => {
             const row = document.createElement("tr");
             const statusClass = String(app.status || "watching").toLowerCase().replace(/[^a-z-]/g, "");
-            row.innerHTML = `<td><strong>${escapeHTML(app.company)}</strong></td><td>${escapeHTML(app.title)}</td><td><span class="status-badge ${statusClass}">${escapeHTML(app.status)}</span></td><td>${escapeHTML(app.date)}</td><td>${escapeHTML(app.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger" aria-label="Remove ${escapeHTML(app.company)} application" data-app-idx="${apps.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
+            row.innerHTML = `<td><strong>${escapeHTML(app.company)}</strong></td><td>${escapeHTML(app.title)}</td><td><span class="status-badge ${statusClass}">${escapeHTML(app.status)}</span></td><td>${escapeHTML(app.date)}</td><td>${escapeHTML(app.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger admin-only" aria-label="Remove ${escapeHTML(app.company)} application" data-app-idx="${apps.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
             row.querySelector('[data-app-idx]').addEventListener('click', function() {
+              if (!requireAdmin()) return;
               const realIdx = parseInt(this.dataset.appIdx);
               state.careerApps.splice(realIdx, 1);
               saveState("Application removed.");
@@ -3622,8 +3782,9 @@
           }
           contacts.slice().reverse().forEach((c, idx) => {
             const row = document.createElement("tr");
-            row.innerHTML = `<td><strong>${escapeHTML(c.name)}</strong></td><td>${escapeHTML(c.company)}</td><td>${escapeHTML(c.status)}</td><td>${escapeHTML(c.date)}</td><td>${escapeHTML(c.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger" aria-label="Remove ${escapeHTML(c.name)} contact" data-contact-idx="${contacts.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
+            row.innerHTML = `<td><strong>${escapeHTML(c.name)}</strong></td><td>${escapeHTML(c.company)}</td><td>${escapeHTML(c.status)}</td><td>${escapeHTML(c.date)}</td><td>${escapeHTML(c.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger admin-only" aria-label="Remove ${escapeHTML(c.name)} contact" data-contact-idx="${contacts.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
             row.querySelector('[data-contact-idx]').addEventListener('click', function() {
+              if (!requireAdmin()) return;
               const realIdx = parseInt(this.dataset.contactIdx);
               state.careerContacts.splice(realIdx, 1);
               saveState("Contact removed.");
@@ -3641,6 +3802,7 @@
         }
 
         function saveCareerContent() {
+          if (!requireAdmin()) return;
           state.careerContent.targetCompaniesText = els.editTargetCompanies.value;
           state.careerContent.searchLanesText = els.editSearchLanes.value;
           state.careerContent.strategicPlanText = els.editStrategicPlan.value;
@@ -3656,6 +3818,11 @@
         }
 
         function saveNotes() {
+          if (!requireAdmin()) {
+            els.notesTextarea.value = state.notes || "";
+            els.notesStatus.textContent = "Read-only preview.";
+            return;
+          }
           state.notes = els.notesTextarea.value;
           saveState("Notes saved.");
           els.notesStatus.textContent = "Saved.";
@@ -3754,6 +3921,7 @@
           });
 
           els.editWeekFocus.addEventListener("click", function() {
+            if (!requireAdmin()) return;
             activateView("roadmap");
             setTimeout(function() { scrollToRoadmapWeek("career"); }, 50);
           });
@@ -3764,13 +3932,16 @@
           els.portfolioJumpCurrent.addEventListener("click", scrollToCurrentPortfolioPhase);
           els.roadmapCurrentWeek.addEventListener("click", function() { scrollToRoadmapWeek(); });
           els.roadmapList.addEventListener("change", function(event) {
+            if (!isAdmin()) return;
             const select = event.target.closest(".roadmap-contact-select");
             if (select) saveWeeklyNetworkingSelection(select);
           });
           els.roadmapList.addEventListener("focusin", function(event) {
+            if (!isAdmin()) return;
             if (event.target.matches(".roadmap-editable")) event.target.dataset.originalValue = event.target.textContent;
           });
           els.roadmapList.addEventListener("input", function(event) {
+            if (!isAdmin()) return;
             const editor = event.target.closest(".roadmap-editable");
             if (!editor) return;
             editor.classList.add("is-saving");
@@ -3779,12 +3950,14 @@
             roadmapSaveTimer = setTimeout(function() { saveRoadmapFocus(editor); }, 400);
           });
           els.roadmapList.addEventListener("focusout", function(event) {
+            if (!isAdmin()) return;
             const editor = event.target.closest(".roadmap-editable");
             if (!editor) return;
             if (roadmapSaveTimer) clearTimeout(roadmapSaveTimer);
             saveRoadmapFocus(editor);
           });
           els.roadmapList.addEventListener("keydown", function(event) {
+            if (!isAdmin()) return;
             const editor = event.target.closest(".roadmap-editable");
             if (!editor) return;
             if (event.key === "Enter") {
@@ -3801,11 +3974,11 @@
           });
 
           els.lockDashboard.addEventListener("click", function() {
-            sessionStorage.removeItem("dashboard_unlocked");
-            dashboard.classList.remove("visible");
-            passwordScreen.classList.remove("hidden");
-            passwordInput.value = "";
-            passwordInput.focus();
+            try {
+              sessionStorage.removeItem(SESSION_KEY);
+              sessionStorage.removeItem("dashboard_unlocked");
+            } catch (e) {}
+            window.location.reload();
           });
 
           els.previousWeek.addEventListener("click", function() { const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek)); if(idx>0) { selectedWeek = weeks[idx-1]; selectedDate = selectedWeek; renderAll(); } });
@@ -3819,10 +3992,15 @@
           document.addEventListener("pointercancel", finishTaskDrag);
           window.addEventListener("blur", finishTaskDrag);
 
-          els.showAddTask.addEventListener("click", function() { els.addTaskForm.classList.remove("is-hidden"); els.newTaskText.focus(); });
+          els.showAddTask.addEventListener("click", function() {
+            if (!requireAdmin()) return;
+            els.addTaskForm.classList.remove("is-hidden");
+            els.newTaskText.focus();
+          });
           els.cancelAddTask.addEventListener("click", function() { els.addTaskForm.classList.add("is-hidden"); els.newTaskText.value = ""; });
           els.addTaskForm.addEventListener("submit", function(e) {
             e.preventDefault();
+            if (!requireAdmin()) return;
             const text = els.newTaskText.value.trim();
             if (!text) return;
             state.customTasks.push({ id: "custom-"+Date.now(), date: dateKey(selectedDate), category: els.newTaskCategory.value, text: text });
@@ -3834,6 +4012,7 @@
 
           els.settingsForm.addEventListener("submit", function(e) {
             e.preventDefault();
+            if (!requireAdmin()) return;
             state.settings.race = els.settingRace.value;
             state.settings.applications = Number(els.settingApplications.value) || 8;
             state.settings.outreach = Number(els.settingOutreach.value) || 10;
@@ -3849,6 +4028,7 @@
 
           // Schedule Editor
           els.editScheduleBtn.addEventListener("click", function() {
+            if (!requireAdmin()) return;
             lastModalTrigger = this;
             const key = dateKey(selectedDate);
             els.modalDayLabel.textContent = formatLongDate(selectedDate);
@@ -3862,6 +4042,7 @@
           els.modalClose.addEventListener("click", closeScheduleModal);
           
           els.modalSave.addEventListener("click", function() {
+            if (!requireAdmin()) return;
             const key = dateKey(selectedDate);
             const blocksJson = els.modalBlockList.dataset.blocks;
             if (blocksJson) {
@@ -3876,6 +4057,7 @@
           });
           
           els.modalReset.addEventListener("click", function() {
+            if (!requireAdmin()) return;
             const key = dateKey(selectedDate);
             delete state.scheduleOverrides[key];
             saveState("Schedule reset to default.");
@@ -3883,6 +4065,7 @@
             renderWeek();
           });
           els.modalAddBlock.addEventListener("click", function() {
+            if (!requireAdmin()) return;
             const time = els.modalNewTime.value.trim();
             const label = els.modalNewLabel.value.trim();
             if (!time || !label) return;
@@ -3923,7 +4106,10 @@
               remove.dataset.idx = idx;
               remove.setAttribute("aria-label", "Remove " + block.label);
               remove.innerHTML = '<i data-lucide="trash-2"></i>';
+              remove.disabled = !isAdmin();
+              remove.hidden = !isAdmin();
               remove.addEventListener("click", function() {
+                if (!requireAdmin()) return;
                 blocks.splice(Number(this.dataset.idx), 1);
                 renderModalBlocks(blocks);
               });
@@ -3938,6 +4124,7 @@
 
           els.careerAppForm.addEventListener("submit", function(e) {
             e.preventDefault();
+            if (!requireAdmin()) return;
             const company = els.careerAppCompany.value.trim();
             const title = els.careerAppTitle.value.trim();
             if (!company || !title) return;
@@ -3956,6 +4143,7 @@
 
           els.careerContactForm.addEventListener("submit", function(e) {
             e.preventDefault();
+            if (!requireAdmin()) return;
             const name = els.careerContactName.value.trim();
             const company = els.careerContactCompany.value.trim();
             if (!name || !company) return;
@@ -3975,6 +4163,10 @@
           els.saveCareerContent.addEventListener("click", saveCareerContent);
 
           els.notesTextarea.addEventListener("input", function() {
+            if (!isAdmin()) {
+              els.notesTextarea.value = state.notes || "";
+              return;
+            }
             els.notesStatus.textContent = "Saving...";
             if (notesSaveTimer) clearTimeout(notesSaveTimer);
             notesSaveTimer = setTimeout(function() {
