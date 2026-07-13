@@ -1,4 +1,19 @@
 # Marco Life Dashboard — Update Log
+
+## [v2.1] – 2026-07-13
+
+**Key improvements:**
+
+Added click-to-edit weekly Career and Training roadmap entries.
+Saves edits to state.careerContent.weeklyFocus and syncs through JSONBin.
+Updated the “This week” focus strip automatically, with hardcoded fallbacks.
+Added an “Edit in roadmap” shortcut.
+Improved mobile layout, navigation, accessibility, empty states, and overall polish.
+Strengthened schedule sorting, sync queuing, and safe text rendering.
+Preserved the password, JSONBin configuration, single-file structure, and exact color palette.
+
+The pushed file was fetched back and verified byte-for-byte.
+
 ## [v2.0] – 2026-07-10
 
 **What changed:**
