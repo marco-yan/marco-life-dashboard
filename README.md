@@ -48,14 +48,7 @@ The selected day's Google Calendar events appear directly below the dashboard's 
 
 The Apps Script deployment executes as its owner, so it can continue reading the configured calendars without asking the dashboard user to renew a browser access token. The deployment remains active until the owner revokes its authorization, deletes it, or changes its access settings.
 
-## One-time Google Calendar setup
-
-### 1. Create the read-only feed
-
-1. Open [Google Apps Script](https://script.google.com/home) while signed into the Google account that owns the calendar.
-2. Select **New project** and rename it to `Marco Dashboard Calendar Feed`.
-3. Replace the starter code in `Code.gs` with the complete script below.
-4. Save the project.
+## Google Calendar setup
 
 ```javascript
 const CALENDAR_IDS = [];
@@ -149,29 +142,6 @@ const CALENDAR_IDS = [
 
 Calendar IDs are available in Google Calendar under **Settings → Settings for my calendars → Integrate calendar → Calendar ID**.
 
-### 2. Authorize and deploy it
-
-1. In Apps Script, choose `authorizeCalendar` from the function menu and select **Run**.
-2. Select **Review permissions**, choose the calendar-owning Google account, and approve Calendar access for this project.
-3. Open **Project Settings** and set the time zone to **America/Toronto**.
-4. Select **Deploy → New deployment**.
-5. Next to **Select type**, choose **Web app**.
-6. Set **Execute as** to **Me**.
-7. Set **Who has access** to **Anyone**. The dashboard cannot load the feed if the deployment requires an interactive Google sign-in.
-8. Select **Deploy**, then copy the deployed URL ending in `/exec`. Do not use the `/dev` test URL.
-
-Google's first-party references for this architecture are the [Apps Script web-app deployment guide](https://developers.google.com/apps-script/guides/web), [Content Service guide](https://developers.google.com/apps-script/guides/content), and [Calendar service reference](https://developers.google.com/apps-script/reference/calendar/calendar-app).
-
-### 3. Connect the dashboard
-
-1. Sign into the dashboard as Admin.
-2. Open **Goals & settings**.
-3. Find **Google Calendar** and paste the `/exec` deployment URL.
-4. Select **Test connection**. A successful test reports how many events were loaded for the selected week.
-5. Select **Save settings**.
-6. Return to **This week**, select a day with an event, and confirm it appears below the daily schedule.
-
-No recurring 30-day refresh is required. Calendar changes flow through the existing deployment and the dashboard checks for new data every 10 minutes while open. If the Apps Script code itself is changed later, create a new deployment version under **Deploy → Manage deployments**; normal calendar edits do not require redeployment.
 
 ### Privacy and deployment access
 
