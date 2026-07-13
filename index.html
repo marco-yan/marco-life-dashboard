@@ -678,7 +678,7 @@
     #marco-life-dashboard .dash-tabs .btn {
       border-radius: 10px;
       flex: 0 0 auto;
-      min-height: 42px;
+      min-height: 44px;
       padding: 10px 16px;
     }
     #marco-life-dashboard .dash-tabs .btn[aria-selected="true"] { box-shadow: 0 5px 16px var(--shadow); }
@@ -870,6 +870,262 @@
     }
     #marco-life-dashboard .networking-task-link:hover { text-decoration: underline; }
 
+    /* ===== PORTFOLIO PLAN ===== */
+    #marco-life-dashboard .portfolio-week-card {
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--highlight);
+      border-radius: 16px;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.5fr) minmax(180px, 0.7fr) auto;
+      margin: -4px 0 28px;
+      padding: 18px 20px;
+    }
+    #marco-life-dashboard .portfolio-week-copy h2 {
+      color: var(--primary);
+      font-size: 1.05rem;
+      line-height: 1.4;
+      margin: 4px 0 5px;
+    }
+    #marco-life-dashboard .portfolio-week-progress { min-width: 0; }
+    #marco-life-dashboard .portfolio-progress-label {
+      align-items: center;
+      color: var(--muted);
+      display: flex;
+      font-size: 0.76rem;
+      font-weight: 600;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 7px;
+    }
+    #marco-life-dashboard .portfolio-progress-track {
+      background: var(--surface-strong);
+      border-radius: 999px;
+      height: 9px;
+      overflow: hidden;
+      width: 100%;
+    }
+    #marco-life-dashboard .portfolio-progress-fill {
+      background: var(--primary);
+      border-radius: inherit;
+      display: block;
+      height: 100%;
+      transition: width 0.2s ease;
+      width: 0;
+    }
+    #marco-life-dashboard .portfolio-week-card .btn,
+    #marco-life-dashboard .portfolio-panel-header .btn { min-height: 44px; }
+
+    #marco-life-dashboard .portfolio-panel-header {
+      align-items: flex-end;
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      margin: 8px 0 24px;
+    }
+    #marco-life-dashboard .portfolio-panel-header h2 {
+      color: var(--primary);
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      letter-spacing: -0.025em;
+      margin: 4px 0 7px;
+    }
+    #marco-life-dashboard .portfolio-panel-header .text-small { max-width: 760px; }
+    #marco-life-dashboard .portfolio-cadence {
+      align-items: center;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) repeat(3, minmax(140px, 0.55fr));
+      margin-bottom: 24px;
+    }
+    #marco-life-dashboard .portfolio-cadence h3 {
+      color: var(--primary);
+      font-size: 1.05rem;
+      margin: 4px 0;
+    }
+    #marco-life-dashboard .portfolio-cadence-block {
+      border-left: 3px solid var(--highlight);
+      padding-left: 13px;
+    }
+    #marco-life-dashboard .portfolio-cadence-block strong {
+      color: var(--primary);
+      display: block;
+      font-size: 0.88rem;
+    }
+    #marco-life-dashboard .portfolio-timeline {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      margin-bottom: 24px;
+    }
+    #marco-life-dashboard .portfolio-phase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      min-height: 112px;
+      padding: 14px;
+    }
+    #marco-life-dashboard .portfolio-phase[data-active="true"] {
+      background: var(--surface-strong);
+      border-color: var(--highlight);
+      box-shadow: inset 0 3px 0 var(--highlight);
+    }
+    #marco-life-dashboard .portfolio-phase span {
+      color: var(--secondary);
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    #marco-life-dashboard .portfolio-phase strong {
+      color: var(--primary);
+      display: block;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    #marco-life-dashboard .portfolio-project-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 24px;
+    }
+    #marco-life-dashboard .portfolio-project-card {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+      min-width: 0;
+    }
+    #marco-life-dashboard .portfolio-project-top {
+      align-items: flex-start;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+    }
+    #marco-life-dashboard .portfolio-project-card h3 {
+      color: var(--primary);
+      font-size: 1.08rem;
+      line-height: 1.35;
+      margin: 4px 0 6px;
+    }
+    #marco-life-dashboard .portfolio-status {
+      align-items: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--primary);
+      display: inline-flex;
+      flex: 0 0 auto;
+      font-size: 0.7rem;
+      font-weight: 700;
+      min-height: 32px;
+      padding: 5px 11px;
+      white-space: nowrap;
+    }
+    #marco-life-dashboard .portfolio-status[data-status="Complete"] {
+      background: var(--primary);
+      color: var(--background);
+    }
+    #marco-life-dashboard .portfolio-project-meta {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    #marco-life-dashboard .portfolio-tool-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    #marco-life-dashboard .portfolio-tool {
+      background: var(--surface-strong);
+      border-radius: 999px;
+      color: var(--primary);
+      font-size: 0.69rem;
+      font-weight: 600;
+      padding: 5px 9px;
+    }
+    #marco-life-dashboard .portfolio-next {
+      border-left: 3px solid var(--highlight);
+      line-height: 1.45;
+      margin: 14px 0 2px;
+      padding-left: 11px;
+    }
+    #marco-life-dashboard .portfolio-milestones {
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+      padding-top: 10px;
+    }
+    #marco-life-dashboard .portfolio-milestones summary {
+      align-items: center;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      font-size: 0.82rem;
+      font-weight: 700;
+      min-height: 44px;
+    }
+    #marco-life-dashboard .portfolio-milestone-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 4px;
+    }
+    #marco-life-dashboard .portfolio-milestone {
+      align-items: center;
+      border-radius: 10px;
+      cursor: pointer;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 32px minmax(0, 1fr) auto;
+      min-height: 48px;
+      padding: 6px 8px;
+    }
+    #marco-life-dashboard .portfolio-milestone:hover { background: var(--surface-strong); }
+    #marco-life-dashboard .portfolio-milestone input {
+      accent-color: var(--primary);
+      height: 24px;
+      width: 24px;
+    }
+    #marco-life-dashboard .portfolio-milestone-copy {
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    #marco-life-dashboard .portfolio-milestone[data-complete="true"] .portfolio-milestone-copy {
+      color: var(--secondary);
+      text-decoration: line-through;
+    }
+    #marco-life-dashboard .portfolio-milestone-date {
+      color: var(--secondary);
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+    #marco-life-dashboard .portfolio-refinement { margin-bottom: 0; }
+
+    #marco-life-dashboard .roadmap-portfolio {
+      align-items: center;
+      background: var(--surface-strong);
+      border-radius: 12px;
+      display: grid;
+      gap: 12px;
+      grid-column: 2 / -1;
+      grid-template-columns: minmax(0, 1fr) minmax(150px, 0.45fr) auto;
+      margin-top: -2px;
+      padding: 12px 14px;
+    }
+    #marco-life-dashboard .roadmap-portfolio-copy strong {
+      color: var(--primary);
+      display: block;
+      font-size: 0.78rem;
+      margin-bottom: 3px;
+      text-transform: none;
+    }
+    #marco-life-dashboard .roadmap-portfolio .btn { min-height: 44px; }
+
     #marco-life-dashboard .day-strip { scrollbar-width: thin; }
     #marco-life-dashboard .viz-tile { min-height: 46px; }
     #marco-life-dashboard .schedule-item { align-items: start; }
@@ -1003,6 +1259,9 @@
       #marco-life-dashboard .focus-actions { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--background) 25%, transparent); grid-column: 1 / -1; }
       #marco-life-dashboard .networking-list { grid-template-columns: 1fr; }
       #marco-life-dashboard .roadmap-summary { grid-template-columns: 1fr; }
+      #marco-life-dashboard .portfolio-timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      #marco-life-dashboard .portfolio-cadence { grid-template-columns: 1fr 1fr 1fr; }
+      #marco-life-dashboard .portfolio-cadence > div:first-child { grid-column: 1 / -1; }
       #career-app-form, #career-contact-form { grid-template-columns: 1fr 1fr !important; }
     }
     @media (max-width: 740px) {
@@ -1034,12 +1293,24 @@
       #marco-life-dashboard .networking-week-header { align-items: flex-start; flex-direction: column; gap: 12px; }
       #marco-life-dashboard .networking-progress { width: 100%; }
       #marco-life-dashboard .networking-card-role { min-height: 0; }
+      #marco-life-dashboard .portfolio-week-card { grid-template-columns: 1fr; }
+      #marco-life-dashboard .portfolio-week-card .btn { justify-content: center; width: 100%; }
+      #marco-life-dashboard .portfolio-panel-header { align-items: flex-start; flex-direction: column; }
+      #marco-life-dashboard .portfolio-project-grid { grid-template-columns: 1fr; }
+      #marco-life-dashboard .portfolio-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #marco-life-dashboard .portfolio-cadence { grid-template-columns: 1fr; }
+      #marco-life-dashboard .portfolio-cadence > div:first-child { grid-column: auto; }
       #marco-life-dashboard .roadmap-toolbar { align-items: stretch; flex-direction: column; }
       #marco-life-dashboard .roadmap-toolbar-actions { align-items: flex-start; text-align: left; }
       #marco-life-dashboard .roadmap-column-head { display: none; }
       #marco-life-dashboard .roadmap-row { grid-template-columns: 1fr; gap: 14px; }
       #marco-life-dashboard .roadmap-cell { border-top: 1px solid var(--border); padding-top: 13px; }
       #marco-life-dashboard .roadmap-contact-label { grid-template-columns: 90px minmax(0, 1fr); }
+      #marco-life-dashboard .roadmap-portfolio {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+      }
+      #marco-life-dashboard .roadmap-portfolio .btn { justify-content: center; width: 100%; }
       #marco-life-dashboard #todo-list.card-soft { padding: 8px 10px; }
       #marco-life-dashboard .todo-row {
         gap: 4px;
@@ -1059,6 +1330,11 @@
       #marco-life-dashboard .viz-grid { grid-template-columns: 1fr; }
       #career-app-form, #career-contact-form { grid-template-columns: 1fr !important; }
       #marco-life-dashboard .status-chip { max-width: calc(100vw - 120px); }
+      #marco-life-dashboard .portfolio-timeline { grid-template-columns: 1fr; }
+      #marco-life-dashboard .portfolio-project-top { flex-direction: column; gap: 10px; }
+      #marco-life-dashboard .portfolio-status { min-height: 44px; }
+      #marco-life-dashboard .portfolio-milestone { grid-template-columns: 32px minmax(0, 1fr); }
+      #marco-life-dashboard .portfolio-milestone-date { grid-column: 2; }
       #dashboard-status { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -1098,6 +1374,7 @@
     <div class="dash-tabs" role="tablist">
       <button type="button" class="btn btn-primary" id="tab-week" data-view="week" role="tab" aria-controls="panel-week" aria-selected="true"><i data-lucide="calendar-days"></i> This week</button>
       <button type="button" class="btn" id="tab-roadmap" data-view="roadmap" role="tab" aria-controls="panel-roadmap" aria-selected="false" tabindex="-1"><i data-lucide="map"></i> Roadmap</button>
+      <button type="button" class="btn" id="tab-portfolio" data-view="portfolio" role="tab" aria-controls="panel-portfolio" aria-selected="false" tabindex="-1"><i data-lucide="blocks"></i> Portfolio</button>
       <button type="button" class="btn" id="tab-career" data-view="career" role="tab" aria-controls="panel-career" aria-selected="false" tabindex="-1"><i data-lucide="briefcase-business"></i> Career Tracker</button>
       <button type="button" class="btn" id="tab-notes" data-view="notes" role="tab" aria-controls="panel-notes" aria-selected="false" tabindex="-1"><i data-lucide="notebook-pen"></i> Notes</button>
       <button type="button" class="btn" id="tab-settings" data-view="settings" role="tab" aria-controls="panel-settings" aria-selected="false" tabindex="-1"><i data-lucide="sliders-horizontal"></i> Goals & settings</button>
@@ -1141,6 +1418,19 @@
           <button type="button" class="btn btn-ghost" id="edit-week-focus"><i data-lucide="pencil-line"></i> Edit in roadmap</button>
         </div>
       </div>
+
+      <section class="portfolio-week-card" id="portfolio-week-card" aria-labelledby="portfolio-week-title">
+        <div class="portfolio-week-copy">
+          <span class="eyebrow" id="portfolio-week-label">Portfolio plan</span>
+          <h2 id="portfolio-week-title">Projects begin September 1</h2>
+          <p class="text-small" id="portfolio-week-detail">Build four job-search proof points, then freeze development on December 6.</p>
+        </div>
+        <div class="portfolio-week-progress">
+          <div class="portfolio-progress-label"><span id="portfolio-week-progress-label">Overall progress</span><strong id="portfolio-week-progress-value">0%</strong></div>
+          <div class="portfolio-progress-track" id="portfolio-week-progress-track" role="progressbar" aria-label="Portfolio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="portfolio-progress-fill" id="portfolio-week-progress-fill"></span></div>
+        </div>
+        <button type="button" class="btn" id="open-portfolio"><i data-lucide="arrow-right"></i> Open portfolio plan</button>
+      </section>
 
       <section class="card networking-week" aria-labelledby="networking-week-title">
         <div class="networking-week-header">
@@ -1187,6 +1477,7 @@
               <label class="form-label" for="new-task-category">Category
                 <select class="form-select" id="new-task-category">
                   <option value="Work">Work</option><option value="Career">Career</option>
+                  <option value="Portfolio">Portfolio</option>
                   <option value="Training">Training</option><option value="Nutrition">Nutrition</option><option value="Life">Life</option>
                 </select>
               </label>
@@ -1209,7 +1500,7 @@
         <div>
           <span class="eyebrow">July–December 2026</span>
           <h2>Your weekly roadmap</h2>
-          <p class="text-small">Edit each week's Career and Training focus, then choose the peer, team leader, and connector who should become that week's daily networking actions. Every change saves and syncs automatically.</p>
+          <p class="text-small">Edit each week's Career and Training focus, choose the three networking contacts, and follow the linked portfolio milestone from September through the December 6 development freeze. Every change saves and syncs automatically.</p>
         </div>
         <div class="roadmap-toolbar-actions">
           <span class="text-small" id="roadmap-save-status" aria-live="polite">All changes saved</span>
@@ -1218,12 +1509,47 @@
       </div>
       <div class="viz-grid roadmap-summary">
         <div class="card viz-stat"><span class="text-muted">Career objective</span><span class="viz-stat-value">December 15</span><span class="text-small">Signed permanent early-career offer</span></div>
+        <div class="card viz-stat"><span class="text-muted">Portfolio development freeze</span><span class="viz-stat-value">December 6</span><span class="text-small" id="roadmap-portfolio-progress">0 of 0 milestones complete</span></div>
         <div class="card viz-stat"><span class="text-muted">Race decision window</span><span class="viz-stat-value">Aug 24–Oct 4</span><span class="text-small" id="race-summary">Ohio or Musselman; 2027 date TBD</span></div>
         <div class="card viz-stat"><span class="text-muted">New disciplines</span><span class="viz-stat-value" id="discipline-summary">Aug 3 / Sep 28</span><span class="text-small">Bike / swim start</span></div>
       </div>
       <div class="roadmap-column-head" aria-hidden="true"><span>Week</span><span>Career focus</span><span>Training focus</span><span>Networking triangle</span></div>
       <div class="roadmap-list" id="roadmap-list" aria-label="July through December roadmap"></div>
       <p class="assumption-line text-small">The schedule reserves four training blocks per week. Bike and swim replace existing blocks instead of adding more time. Race dates and 2027 registration openings remain to be confirmed.</p>
+    </section>
+
+    <!-- ===== PANEL: PORTFOLIO ===== -->
+    <section id="panel-portfolio" class="is-hidden" role="tabpanel" aria-labelledby="tab-portfolio" hidden>
+      <div class="portfolio-panel-header">
+        <div>
+          <span class="eyebrow">September 1–December 6, 2026</span>
+          <h2>Job-search proof portfolio</h2>
+          <p class="text-small">Four deliverables that prove the Insurance, Project Controls, and Healthcare Analytics lanes—built in focused weekly blocks, documented publicly, then frozen for interview season.</p>
+        </div>
+        <button type="button" class="btn" id="portfolio-jump-current"><i data-lucide="locate-fixed"></i> Jump to current phase</button>
+      </div>
+
+      <div class="viz-grid">
+        <div class="card viz-stat"><span class="text-muted">Overall completion</span><span class="viz-stat-value" id="portfolio-overall-percent">0%</span><span class="text-small" id="portfolio-overall-detail">0 of 0 milestones</span></div>
+        <div class="card viz-stat"><span class="text-muted">Current phase</span><span class="viz-stat-value" id="portfolio-current-phase">Plan</span><span class="text-small" id="portfolio-current-due">Insurance starts Sep 1</span></div>
+        <div class="card viz-stat"><span class="text-muted">Build cadence</span><span class="viz-stat-value">6 hrs</span><span class="text-small">Wednesday · Saturday · Sunday</span></div>
+        <div class="card viz-stat"><span class="text-muted">Development freeze</span><span class="viz-stat-value">Dec 6</span><span class="text-small">Afterward: interviews, not feature creep</span></div>
+      </div>
+
+      <section class="card portfolio-cadence" aria-label="Weekly portfolio work cadence">
+        <div>
+          <span class="eyebrow">Protected weekly workload</span>
+          <h3>One build rhythm for all four deliverables</h3>
+          <p class="text-small">These sessions also appear as normal daily to-dos, so they can be reordered or hidden without changing another day.</p>
+        </div>
+        <div class="portfolio-cadence-block"><strong>Wednesday · 1.5h</strong><span class="text-small">Advance the next build milestone</span></div>
+        <div class="portfolio-cadence-block"><strong>Saturday · 3h</strong><span class="text-small">Deep work on the core function</span></div>
+        <div class="portfolio-cadence-block"><strong>Sunday · 1.5h</strong><span class="text-small">Test, document, and package proof</span></div>
+      </section>
+
+      <div class="portfolio-timeline" id="portfolio-timeline" aria-label="Portfolio timeline"></div>
+      <div class="portfolio-project-grid" id="portfolio-projects"></div>
+      <div id="portfolio-refinement"></div>
     </section>
 
     <!-- ===== PANEL: CAREER TRACKER ===== -->
@@ -1566,6 +1892,140 @@
           { key:"connector", label:"Recruiter / connector", shortLabel:"Connector", dayOffset:4, dayLabel:"Friday", action:"Ask for the best route in", question:"Which role family is the best fit for my background, and who else should I learn from?" }
         ];
 
+        // Portfolio metadata stays in code; only milestone completion lives in
+        // state.careerContent.portfolioProgress and syncs through JSONBin.
+        const PORTFOLIO_PROJECTS = [
+          {
+            id:"insurance-workbench",
+            number:"Project 1",
+            title:"Commercial Underwriting Pricing & Portfolio Workbench",
+            lane:"Insurance / Underwriting",
+            start:"2026-09-01",
+            end:"2026-09-14",
+            dateLabel:"Sep 1–14",
+            hours:"10–14 hours",
+            tools:["Excel", "Power Query", "Power Pivot", "PivotTables", "LET", "XLOOKUP", "Solver", "Data Tables"],
+            summary:"An adjustable commercial-risk pricing model that turns claims and expense assumptions into an underwriting decision and portfolio view.",
+            milestones:[
+              { id:"insurance-source", title:"Create the synthetic policies, claims, and assumptions files with a short data dictionary", due:"2026-09-02" },
+              { id:"insurance-query", title:"Build refreshable Power Query imports and basic data-quality checks", due:"2026-09-05" },
+              { id:"insurance-engine", title:"Build frequency × severity pricing, expense, risk-load, and margin calculations with LET and XLOOKUP", due:"2026-09-09" },
+              { id:"insurance-decision", title:"Add risk tiers, recommended terms, and accept / refer / decline decision logic", due:"2026-09-11" },
+              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable portfolio dashboard", due:"2026-09-13" },
+              { id:"insurance-scenarios", title:"Add scenario comparison, Solver optimization, data tables, QA, and a documented v1 release", due:"2026-09-14" }
+            ]
+          },
+          {
+            id:"project-controls",
+            number:"Project 2",
+            title:"Project Controls & Risk Forecasting Command Center",
+            lane:"Infrastructure / Project Controls",
+            start:"2026-09-15",
+            end:"2026-10-05",
+            dateLabel:"Sep 15–Oct 5",
+            hours:"14–18 hours",
+            tools:["Excel", "Power Query", "Python", "pandas", "NumPy", "Power BI", "DAX"],
+            summary:"A fictional infrastructure command center combining earned-value performance, cost and schedule risk, and an executive decision narrative.",
+            milestones:[
+              { id:"controls-source", title:"Create 8 work packages × 12 periods plus milestones and a red / yellow / green risk register", due:"2026-09-18" },
+              { id:"controls-query", title:"Build the Power Query cleaning and reporting model", due:"2026-09-21" },
+              { id:"controls-evm", title:"Implement PV, EV, AC, CPI, SPI, CV, SV, and EAC measures in DAX", due:"2026-09-26" },
+              { id:"controls-simulation", title:"Run a documented pandas / NumPy Monte Carlo-style simulation and export P50 / P80 estimates", due:"2026-09-30" },
+              { id:"controls-report", title:"Build the Power BI executive report, work-package filters, and risk heatmap", due:"2026-10-03" },
+              { id:"controls-release", title:"Write the executive narrative, validate the numbers, and package the v1 release", due:"2026-10-05" }
+            ]
+          },
+          {
+            id:"pharma-analytics",
+            number:"Project 3",
+            title:"Pharma Commercial Effectiveness & Channel Optimization",
+            lane:"Healthcare Commercial Analytics",
+            start:"2026-10-06",
+            end:"2026-11-02",
+            dateLabel:"Oct 6–Nov 2",
+            hours:"18–24 hours",
+            tools:["SQL", "Python", "pandas", "Excel", "Power BI", "DAX"],
+            summary:"A synthetic oncology commercial-analysis suite that measures channel ROI, simulated lift, and a defensible budget-allocation recommendation.",
+            milestones:[
+              { id:"pharma-source", title:"Create the relational HCP, product, touchpoint, spend, and sales dataset with a data dictionary", due:"2026-10-09" },
+              { id:"pharma-model", title:"Define the SQL schema and validate keys, joins, and record counts", due:"2026-10-13" },
+              { id:"pharma-sql", title:"Build reusable joins, CTEs, window-function analysis, and final reporting views", due:"2026-10-17" },
+              { id:"pharma-simulation", title:"Build the control-vs-exposed Python simulation and confidence-interval output", due:"2026-10-22" },
+              { id:"pharma-allocation", title:"Calculate channel ROI and create the budget-allocation recommendation logic", due:"2026-10-25" },
+              { id:"pharma-report", title:"Build the Power BI / DAX report for lift, ROI, segmentation, and allocation", due:"2026-10-30" },
+              { id:"pharma-release", title:"Write the recommendation narrative, label assumptions, complete QA, and package v1", due:"2026-11-02" }
+            ]
+          },
+          {
+            id:"portfolio-site",
+            number:"Project 4",
+            title:"Shared Public Portfolio Site",
+            lane:"Shared proof layer",
+            start:"2026-11-03",
+            end:"2026-11-15",
+            dateLabel:"Nov 3–15",
+            hours:"6–10 hours",
+            tools:["HTML", "CSS", "JavaScript", "Git", "GitHub", "Power BI embeds", "Video"],
+            summary:"A recruiter-friendly public hub with concise case studies, working proof, architecture context, downloads, and short walkthroughs.",
+            milestones:[
+              { id:"site-shell", title:"Create the GitHub repository, responsive site shell, navigation, and reusable case-study layout", due:"2026-11-05" },
+              { id:"site-cases", title:"Write the three case studies with problem, method, output, recommendation, and architecture diagram", due:"2026-11-08" },
+              { id:"site-embeds", title:"Add Power BI embeds where available plus clear video / image fallbacks", due:"2026-11-10" },
+              { id:"site-assets", title:"Add downloadable files, repository links, tech badges, and synthetic-data disclosures", due:"2026-11-12" },
+              { id:"site-videos", title:"Record one 60–90 second walkthrough for each project", due:"2026-11-14" },
+              { id:"site-release", title:"Complete mobile, link, and accessibility QA; publish the public v1", due:"2026-11-15" }
+            ]
+          }
+        ];
+
+        const PORTFOLIO_REFINEMENT = {
+          id:"portfolio-refinement",
+          number:"Final sprint",
+          title:"Response-led refinement & interview freeze",
+          lane:"Shared",
+          start:"2026-11-16",
+          end:"2026-12-06",
+          dateLabel:"Nov 16–Dec 6",
+          hours:"Up to 18 hours",
+          tools:["Git", "GitHub", "Documentation", "QA"],
+          summary:"Improve only the proof point getting the strongest recruiter or hiring-manager response, then stop building and use the portfolio in interviews.",
+          milestones:[
+            { id:"refine-signals", title:"Collect recruiter, networking, and interview response signals; choose the strongest project", due:"2026-11-20" },
+            { id:"refine-upgrade", title:"Upgrade the single highest-value analytical or usability gap", due:"2026-11-27" },
+            { id:"refine-package", title:"Tighten documentation, résumé bullets, project links, and interview talking points", due:"2026-12-04" },
+            { id:"refine-freeze", title:"Run final QA, tag the releases, and freeze portfolio development", due:"2026-12-06" }
+          ]
+        };
+
+        const PORTFOLIO_PHASES = PORTFOLIO_PROJECTS.concat([PORTFOLIO_REFINEMENT]).concat([{
+          id:"portfolio-freeze",
+          title:"Interview mode",
+          dateLabel:"After Dec 6",
+          start:"2026-12-07",
+          end:"2026-12-31"
+        }]);
+
+        const PORTFOLIO_WEEKLY_FOCUS = {
+          "2026-08-31": { projectId:"insurance-workbench", label:"Insurance Workbench", due:"Sep 14", text:"Build the source workbook, data dictionary, and refreshable claims import." },
+          "2026-09-07": { projectId:"insurance-workbench", label:"Insurance Workbench", due:"Sep 14", text:"Finish the pricing engine, decision logic, portfolio dashboard, and scenarios." },
+          "2026-09-14": { projectId:"project-controls", label:"Insurance → Project Controls", due:"Oct 5", text:"Ship Insurance v1 on Monday, then create the 8-work-package Project Controls source model." },
+          "2026-09-21": { projectId:"project-controls", label:"Project Controls Command Center", due:"Oct 5", text:"Finish the Power Query model and core earned-value DAX measures." },
+          "2026-09-28": { projectId:"project-controls", label:"Project Controls Command Center", due:"Oct 5", text:"Add the P50 / P80 simulation, Power BI report, risk heatmap, and executive narrative." },
+          "2026-10-05": { projectId:"pharma-analytics", label:"Project Controls → Pharma", due:"Nov 2", text:"Ship Project Controls v1, then create the Pharma relational dataset and initial SQL model." },
+          "2026-10-12": { projectId:"pharma-analytics", label:"Pharma Analytics", due:"Nov 2", text:"Build and validate the joins, CTEs, window functions, and reporting views." },
+          "2026-10-19": { projectId:"pharma-analytics", label:"Pharma Analytics", due:"Nov 2", text:"Build the control-vs-exposed simulation, confidence intervals, ROI, and allocation logic." },
+          "2026-10-26": { projectId:"pharma-analytics", label:"Pharma Analytics", due:"Nov 2", text:"Finish the Power BI report, recommendation narrative, assumption labels, and QA." },
+          "2026-11-02": { projectId:"portfolio-site", label:"Pharma → Public Site", due:"Nov 15", text:"Ship Pharma v1, then create the public site shell and case-study template." },
+          "2026-11-09": { projectId:"portfolio-site", label:"Public Portfolio Site", due:"Nov 15", text:"Publish case studies, embeds and fallbacks, downloads, tech badges, videos, and mobile QA." },
+          "2026-11-16": { projectId:"portfolio-refinement", label:"Response-led refinement", due:"Dec 6", text:"Collect response signals and choose the one project worth improving." },
+          "2026-11-23": { projectId:"portfolio-refinement", label:"Response-led refinement", due:"Dec 6", text:"Upgrade the strongest project's single highest-value gap." },
+          "2026-11-30": { projectId:"portfolio-refinement", label:"Final portfolio freeze", due:"Dec 6", text:"Tighten documentation and résumé proof, complete QA, tag releases, and freeze development." },
+          "2026-12-07": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the finished portfolio in applications and interviews; only fix genuine blockers." },
+          "2026-12-14": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Lead with the lane-relevant case study and keep feature work frozen." },
+          "2026-12-21": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Reuse the finished proof and capture lessons for a later, deliberate update." },
+          "2026-12-28": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Close the year with the released versions unchanged and ready to share." }
+        };
+
         const defaultState = {
           settings: {
             race: "undecided",
@@ -1589,6 +2049,7 @@
             weeklyFocus: {},
             networkingContacts: DEFAULT_NETWORKING_CONTACTS,
             weeklyNetworking: DEFAULT_WEEKLY_NETWORKING,
+            portfolioProgress: { completedMilestones: {} },
             targetCompaniesText: "AtkinsRéalis: Data Analyst, Project Controls, Risk Analyst, PMO Analyst\nIntact: Specialty Lines Dev, Commercial Lines Dev, Underwriting Associate\nIQVIA: Associate Consultant, Business Analyst, Commercial Analytics\nMunich Re / HSB: Underwriting Associate, Reinsurance Trainee, Risk Analyst\nAstraZeneca: Business Insights, Commercial Excellence, Omnichannel Analyst\nZurich: Underwriting Trainee, Commercial Insurance Analyst\nSanofi: Commercial Excellence, Transformation Analyst\nMarsh: Graduate Program, Risk Analyst, Broking Analyst\nMetrolinx: Project Controls, PMO Analyst, Risk Analyst\nVeeva: Associate Consultant, Data Operations, Analytics Associate",
             searchLanesText: "Insurance / Reinsurance / Risk: 35%\nInfrastructure / Project Controls: 35%\nHealthcare Commercial Analytics: 25%\nBanking / General Analyst: 5%",
             strategicPlanText: "Week 1 (Jul 8–12): Apply to AtkinsRéalis Data Analyst role. Create master tracker. Set job alerts.\nWeek 2 (Jul 13–19): Build 3 résumé versions (Insurance, Infrastructure, Healthcare). Update LinkedIn.\nWeek 3 (Jul 20–26): Insurance networking (Intact, Munich Re, Zurich, Marsh). 12 messages, 2 calls.\nWeek 4 (Jul 27–Aug 2): Healthcare networking (IQVIA, AstraZeneca, Sanofi, Veeva). 12 messages, 3 calls.\nWeek 5 (Aug 3–9): Infrastructure networking (AtkinsRéalis, Metrolinx, OPG, Aecon, WSP). Learn P6/Power BI basics.\nWeek 6 (Aug 10–16): Prepare 8 STAR stories + 6 career-transition answers. Mock interviews.\nWeek 7 (Aug 17–23): Convert networking to referrals. Follow up with top contacts.\nWeek 8 (Aug 24–30): Prepare for fall recruiting. Identify graduate programs. Prepare transcripts.\nWeek 9 (Aug 31–Sep 6): Fall Application Surge — 12 apps, 15 messages, 3 calls. Target: 60-70 cumulative apps.\nWeek 10 (Sep 7–13): Funnel analysis. Revise weakest résumé. 2 mock interviews.\nWeek 11 (Sep 14–20): Decision Gate 1. Assess pipeline. If no interviews, broaden targets.\nWeek 12 (Sep 21–27): Create technical work sample (Project Controls Dashboard or Healthcare Campaign).\nWeek 13 (Sep 28–Oct 4): Re-engage all \"stay in touch\" contacts. Second application wave.\nWeek 14 (Oct 5–11): Direct recruiter outreach (AtkinsRéalis, Intact, Zurich, IQVIA, AstraZeneca, Marsh).\nWeek 15 (Oct 12–18): Interview conversion prep. Research business units. Thank-you follow-ups.\nWeek 16 (Oct 19–25): Expand company list if needed (Chubb, AIG, Roche, GSK, Hydro One, etc.)\nWeek 17 (Oct 26–Nov 1): Decision Gate 2. Target: 100+ apps, 6+ first-round, 2+ late-stage. If not, expand titles.\nWeek 18 (Nov 2–8): Shift to immediate-start hiring (0-2 yrs, 1-3 yrs roles). Apply to 1-3 year positions with 70% fit.\nWeek 19 (Nov 9–15): Final-round & offer preparation. Salary range, references, resignation language.\nWeek 20 (Nov 16–22): Concentrated referral push. 10 direct messages to strongest relationships.\nWeek 21 (Nov 23–29): December pipeline. Target January starts, backfills, contract-to-perm.\nWeek 22 (Nov 30–Dec 6): Decision Gate 3. Classify all active processes. If no offers, decide whether to continue.\nWeek 23 (Dec 7–13): Close or extend. Review offers. Conduct post-mortem if none.\nWeek 24 (Dec 14–20): Transition. Sign offer, resign professionally, prepare handover."
@@ -1644,7 +2105,7 @@
 
         const els = {
           tabs: Array.from(document.querySelectorAll("[data-view]")),
-          panels: { week: document.getElementById("panel-week"), roadmap: document.getElementById("panel-roadmap"), career: document.getElementById("panel-career"), notes: document.getElementById("panel-notes"), settings: document.getElementById("panel-settings") },
+          panels: { week: document.getElementById("panel-week"), roadmap: document.getElementById("panel-roadmap"), portfolio: document.getElementById("panel-portfolio"), career: document.getElementById("panel-career"), notes: document.getElementById("panel-notes"), settings: document.getElementById("panel-settings") },
           weekSelect: document.getElementById("week-select"),
           previousWeek: document.getElementById("previous-week"),
           nextWeek: document.getElementById("next-week"),
@@ -1671,6 +2132,14 @@
           networkingList: document.getElementById("networking-list"),
           weeklyQuota: document.getElementById("weekly-quota"),
           editWeekFocus: document.getElementById("edit-week-focus"),
+          portfolioWeekLabel: document.getElementById("portfolio-week-label"),
+          portfolioWeekTitle: document.getElementById("portfolio-week-title"),
+          portfolioWeekDetail: document.getElementById("portfolio-week-detail"),
+          portfolioWeekProgressLabel: document.getElementById("portfolio-week-progress-label"),
+          portfolioWeekProgressValue: document.getElementById("portfolio-week-progress-value"),
+          portfolioWeekProgressTrack: document.getElementById("portfolio-week-progress-track"),
+          portfolioWeekProgressFill: document.getElementById("portfolio-week-progress-fill"),
+          openPortfolio: document.getElementById("open-portfolio"),
           statCompletion: document.getElementById("stat-completion"),
           statCompletionDetail: document.getElementById("stat-completion-detail"),
           statApplications: document.getElementById("stat-applications"),
@@ -1683,6 +2152,15 @@
           disciplineSummary: document.getElementById("discipline-summary"),
           roadmapSaveStatus: document.getElementById("roadmap-save-status"),
           roadmapCurrentWeek: document.getElementById("roadmap-current-week"),
+          roadmapPortfolioProgress: document.getElementById("roadmap-portfolio-progress"),
+          portfolioOverallPercent: document.getElementById("portfolio-overall-percent"),
+          portfolioOverallDetail: document.getElementById("portfolio-overall-detail"),
+          portfolioCurrentPhase: document.getElementById("portfolio-current-phase"),
+          portfolioCurrentDue: document.getElementById("portfolio-current-due"),
+          portfolioTimeline: document.getElementById("portfolio-timeline"),
+          portfolioProjects: document.getElementById("portfolio-projects"),
+          portfolioRefinement: document.getElementById("portfolio-refinement"),
+          portfolioJumpCurrent: document.getElementById("portfolio-jump-current"),
           settingsForm: document.getElementById("settings-form"),
           settingsStatus: document.getElementById("settings-status"),
           dashboardStatus: document.getElementById("dashboard-status"),
@@ -1809,6 +2287,84 @@
           return getNetworkingAssignments(week).find(function(assignment) {
             return dateKey(assignment.date) === dateKey(date);
           }) || null;
+        }
+
+        function getPortfolioTracks() {
+          return PORTFOLIO_PROJECTS.concat([PORTFOLIO_REFINEMENT]);
+        }
+
+        function getPortfolioTrack(trackId) {
+          return getPortfolioTracks().find(function(track) { return track.id === trackId; }) || null;
+        }
+
+        function getPortfolioProgressState() {
+          if (!state.careerContent.portfolioProgress || typeof state.careerContent.portfolioProgress !== "object") {
+            state.careerContent.portfolioProgress = { completedMilestones: {} };
+          }
+          if (!state.careerContent.portfolioProgress.completedMilestones || typeof state.careerContent.portfolioProgress.completedMilestones !== "object") {
+            state.careerContent.portfolioProgress.completedMilestones = {};
+          }
+          return state.careerContent.portfolioProgress;
+        }
+
+        function isPortfolioMilestoneComplete(milestoneId) {
+          return Boolean(getPortfolioProgressState().completedMilestones[milestoneId]);
+        }
+
+        function getPortfolioTrackProgress(track) {
+          const total = track.milestones.length;
+          const complete = track.milestones.filter(function(milestone) { return isPortfolioMilestoneComplete(milestone.id); }).length;
+          const percent = total ? Math.round((complete / total) * 100) : 0;
+          const next = track.milestones.find(function(milestone) { return !isPortfolioMilestoneComplete(milestone.id); }) || null;
+          let status = complete === total ? "Complete" : (complete > 0 ? "In progress" : "Not started");
+          if (complete < total && parseDate(todayStr()) > parseDate(track.end)) status = "Needs attention";
+          return { complete:complete, total:total, percent:percent, next:next, status:status };
+        }
+
+        function getPortfolioOverallProgress() {
+          const milestones = getPortfolioTracks().reduce(function(all, track) { return all.concat(track.milestones); }, []);
+          const complete = milestones.filter(function(milestone) { return isPortfolioMilestoneComplete(milestone.id); }).length;
+          return {
+            complete: complete,
+            total: milestones.length,
+            percent: milestones.length ? Math.round((complete / milestones.length) * 100) : 0
+          };
+        }
+
+        function getPortfolioPhaseForDate(date) {
+          const value = parseDate(dateKey(date));
+          return PORTFOLIO_PHASES.find(function(phase) {
+            return value >= parseDate(phase.start) && value <= parseDate(phase.end);
+          }) || null;
+        }
+
+        function getPortfolioWeeklyFocus(week) {
+          const key = dateKey(week);
+          if (PORTFOLIO_WEEKLY_FOCUS[key]) return PORTFOLIO_WEEKLY_FOCUS[key];
+          if (week < parseDate("2026-08-31")) {
+            return { projectId:null, label:"Portfolio plan", due:"Starts Sep 1", text:"Projects are scoped and ready; protect the Wednesday, Saturday, and Sunday build rhythm." };
+          }
+          return { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the released portfolio in interviews and avoid feature creep." };
+        }
+
+        function portfolioTaskForDate(date) {
+          const day = date.getDay();
+          const cadence = {
+            3: { duration:"1.5h", label:"Portfolio build" },
+            6: { duration:"3h", label:"Portfolio deep work" },
+            0: { duration:"1.5h", label:"Portfolio QA + documentation" }
+          }[day];
+          if (!cadence || date < parseDate("2026-09-01") || date > parseDate("2026-12-06")) return null;
+          const phase = getPortfolioPhaseForDate(date);
+          const track = phase ? getPortfolioTrack(phase.id) : null;
+          if (!track) return null;
+          const action = getPortfolioWeeklyFocus(startOfWeek(date)).text;
+          return {
+            id: dateKey(date) + "-portfolio-session",
+            category: "Portfolio",
+            text: cadence.label + " (" + cadence.duration + "): " + action,
+            custom: false
+          };
         }
 
         // ===== SCHEDULE SORTING =====
@@ -1941,6 +2497,14 @@
           Object.keys(savedNetworking).forEach(function(weekKey) {
             merged.weeklyNetworking[weekKey] = Object.assign({}, merged.weeklyNetworking[weekKey] || {}, savedNetworking[weekKey] || {});
           });
+          const savedPortfolio = content && content.portfolioProgress && typeof content.portfolioProgress === "object"
+            ? content.portfolioProgress
+            : {};
+          merged.portfolioProgress = {
+            completedMilestones: savedPortfolio.completedMilestones && typeof savedPortfolio.completedMilestones === "object"
+              ? savedPortfolio.completedMilestones
+              : {}
+          };
           return merged;
         }
 
@@ -2132,6 +2696,8 @@
           if (day === 2 || day === 4) tasks.push({id:key+"-conv", category:"Career", text:"Hold or book one networking conversation", custom:false});
           if ((phase.name === "Convert" || phase.name === "Interview") && day === 3) tasks.push({id:key+"-interview-prep", category:"Career", text:"Practice two interview stories or one case prompt", custom:false});
           if (phase.name === "Offer close" && day === 3) tasks.push({id:key+"-offer-prep", category:"Career", text:"Update interview, reference, and negotiation notes", custom:false});
+          const portfolioTask = portfolioTaskForDate(date);
+          if (portfolioTask) tasks.push(portfolioTask);
           if (isTrainingDay(date)) {
             const tText = key === "2026-07-10" ? "Complete the shortened run immediately after getting home at 6:30 PM" : "Complete the scheduled "+trainingType(date)+" block and commute buffer";
             tasks.push({id:key+"-training", category:"Training", text:tText, custom:false, metricType:"training", metricValue:1});
@@ -2176,10 +2742,29 @@
             ? networkingDone + " / " + networkingAssignments.length + " contacts complete"
             : "No contacts planned";
           els.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 2 conversations";
+          renderPortfolioWeek();
           renderNetworking();
           renderDayStrip();
           renderSelectedDay();
           renderStats();
+        }
+
+        function renderPortfolioWeek() {
+          const focus = getPortfolioWeeklyFocus(selectedWeek);
+          const track = focus.projectId ? getPortfolioTrack(focus.projectId) : null;
+          const progress = track ? getPortfolioTrackProgress(track) : getPortfolioOverallProgress();
+          els.portfolioWeekLabel.textContent = focus.label + " · " + focus.due;
+          els.portfolioWeekTitle.textContent = focus.text;
+          els.portfolioWeekDetail.textContent = track
+            ? track.lane + " · " + track.dateLabel + " · " + track.hours
+            : (selectedWeek < parseDate("2026-08-31")
+              ? "The first build begins September 1; the scoped plan is ready when the protected sessions start."
+              : "Portfolio development is frozen after December 6 so interview conversion stays the priority.");
+          els.portfolioWeekProgressLabel.textContent = track ? track.number + " progress" : "Overall progress";
+          els.portfolioWeekProgressValue.textContent = progress.percent + "%";
+          els.portfolioWeekProgressFill.style.width = progress.percent + "%";
+          els.portfolioWeekProgressTrack.setAttribute("aria-valuenow", String(progress.percent));
+          els.portfolioWeekProgressTrack.setAttribute("aria-label", (track ? track.title : "Overall portfolio") + " progress");
         }
 
         function renderNetworking() {
@@ -2564,10 +3149,193 @@
           else els.statNutritionDetail.textContent = "Set targets in settings";
         }
 
+        function createPortfolioProgressBar(percent, label) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "portfolio-week-progress";
+          const copy = document.createElement("div");
+          copy.className = "portfolio-progress-label";
+          const copyLabel = document.createElement("span");
+          copyLabel.textContent = label;
+          const value = document.createElement("strong");
+          value.textContent = percent + "%";
+          copy.appendChild(copyLabel);
+          copy.appendChild(value);
+
+          const track = document.createElement("div");
+          track.className = "portfolio-progress-track";
+          track.setAttribute("role", "progressbar");
+          track.setAttribute("aria-label", label);
+          track.setAttribute("aria-valuemin", "0");
+          track.setAttribute("aria-valuemax", "100");
+          track.setAttribute("aria-valuenow", String(percent));
+          const fill = document.createElement("span");
+          fill.className = "portfolio-progress-fill";
+          fill.style.width = percent + "%";
+          track.appendChild(fill);
+          wrapper.appendChild(copy);
+          wrapper.appendChild(track);
+          return wrapper;
+        }
+
+        function createPortfolioProjectCard(track, shouldOpen) {
+          const progress = getPortfolioTrackProgress(track);
+          const card = document.createElement("article");
+          card.className = "card portfolio-project-card";
+          if (track.id === PORTFOLIO_REFINEMENT.id) card.classList.add("portfolio-refinement");
+          card.id = "portfolio-track-" + track.id;
+
+          const top = document.createElement("div");
+          top.className = "portfolio-project-top";
+          const headingGroup = document.createElement("div");
+          const number = document.createElement("span");
+          number.className = "eyebrow";
+          number.textContent = track.number + " · " + track.lane;
+          const title = document.createElement("h3");
+          title.textContent = track.title;
+          const meta = document.createElement("p");
+          meta.className = "portfolio-project-meta";
+          meta.textContent = track.dateLabel + " · " + track.hours + " · due " + compactDate(track.end);
+          headingGroup.appendChild(number);
+          headingGroup.appendChild(title);
+          headingGroup.appendChild(meta);
+          const status = document.createElement("span");
+          status.className = "portfolio-status";
+          status.dataset.status = progress.status;
+          status.textContent = progress.status;
+          top.appendChild(headingGroup);
+          top.appendChild(status);
+
+          const summary = document.createElement("p");
+          summary.className = "text-small";
+          summary.textContent = track.summary;
+
+          const tools = document.createElement("div");
+          tools.className = "portfolio-tool-list";
+          tools.setAttribute("aria-label", "Tools used");
+          track.tools.forEach(function(toolName) {
+            const tool = document.createElement("span");
+            tool.className = "portfolio-tool";
+            tool.textContent = toolName;
+            tools.appendChild(tool);
+          });
+
+          card.appendChild(top);
+          card.appendChild(summary);
+          card.appendChild(tools);
+          card.appendChild(createPortfolioProgressBar(progress.percent, progress.complete + " of " + progress.total + " milestones"));
+
+          const next = document.createElement("p");
+          next.className = "portfolio-next text-small";
+          next.textContent = progress.next
+            ? "Next · " + compactDate(progress.next.due) + ": " + progress.next.title
+            : "Released · all planned milestones are complete.";
+          card.appendChild(next);
+
+          const details = document.createElement("details");
+          details.className = "portfolio-milestones";
+          details.open = Boolean(shouldOpen || progress.status === "In progress" || progress.status === "Needs attention");
+          const detailsSummary = document.createElement("summary");
+          detailsSummary.textContent = "Milestones · " + progress.complete + " / " + progress.total + " complete";
+          const list = document.createElement("div");
+          list.className = "portfolio-milestone-list";
+          track.milestones.forEach(function(milestone) {
+            const complete = isPortfolioMilestoneComplete(milestone.id);
+            const label = document.createElement("label");
+            label.className = "portfolio-milestone";
+            label.dataset.complete = String(complete);
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = complete;
+            checkbox.setAttribute("aria-label", milestone.title);
+            const copy = document.createElement("span");
+            copy.className = "portfolio-milestone-copy";
+            copy.textContent = milestone.title;
+            const due = document.createElement("span");
+            due.className = "portfolio-milestone-date";
+            due.textContent = compactDate(milestone.due);
+            label.appendChild(checkbox);
+            label.appendChild(copy);
+            label.appendChild(due);
+            checkbox.addEventListener("change", function() {
+              const completed = getPortfolioProgressState().completedMilestones;
+              if (checkbox.checked) completed[milestone.id] = true;
+              else delete completed[milestone.id];
+              saveState("Portfolio progress saved.");
+              renderAll();
+            });
+            list.appendChild(label);
+          });
+          details.appendChild(detailsSummary);
+          details.appendChild(list);
+          card.appendChild(details);
+          return card;
+        }
+
+        function renderPortfolio() {
+          const overall = getPortfolioOverallProgress();
+          els.portfolioOverallPercent.textContent = overall.percent + "%";
+          els.portfolioOverallDetail.textContent = overall.complete + " of " + overall.total + " milestones";
+
+          const today = parseDate(todayStr());
+          const activePhase = getPortfolioPhaseForDate(today);
+          const activeTrack = activePhase ? getPortfolioTrack(activePhase.id) : null;
+          if (activeTrack) {
+            els.portfolioCurrentPhase.textContent = activeTrack.id === PORTFOLIO_REFINEMENT.id ? "Refine" : activeTrack.number;
+            els.portfolioCurrentDue.textContent = activeTrack.title + " · due " + compactDate(activeTrack.end);
+          } else if (activePhase && activePhase.id === "portfolio-freeze") {
+            els.portfolioCurrentPhase.textContent = "Interview mode";
+            els.portfolioCurrentDue.textContent = "Development frozen since Dec 6";
+          } else {
+            els.portfolioCurrentPhase.textContent = "Planning";
+            els.portfolioCurrentDue.textContent = "Insurance Workbench starts Sep 1";
+          }
+
+          let highlightedPhaseId = activePhase ? activePhase.id : "insurance-workbench";
+          els.portfolioTimeline.innerHTML = "";
+          PORTFOLIO_PHASES.forEach(function(phase) {
+            const track = getPortfolioTrack(phase.id);
+            const item = document.createElement("div");
+            item.className = "portfolio-phase";
+            item.dataset.phaseId = phase.id;
+            item.dataset.active = String(phase.id === highlightedPhaseId);
+            const date = document.createElement("span");
+            date.textContent = phase.dateLabel;
+            const title = document.createElement("strong");
+            title.textContent = phase.title;
+            const detail = document.createElement("p");
+            detail.className = "text-small";
+            if (track) {
+              const progress = getPortfolioTrackProgress(track);
+              detail.textContent = progress.complete + " / " + progress.total + " complete";
+            } else {
+              detail.textContent = "Development frozen";
+            }
+            item.appendChild(date);
+            item.appendChild(title);
+            item.appendChild(detail);
+            els.portfolioTimeline.appendChild(item);
+          });
+
+          let preferredTrackId = activeTrack ? activeTrack.id : null;
+          if (!preferredTrackId) {
+            const firstIncomplete = getPortfolioTracks().find(function(track) { return getPortfolioTrackProgress(track).status !== "Complete"; });
+            preferredTrackId = firstIncomplete ? firstIncomplete.id : PORTFOLIO_REFINEMENT.id;
+          }
+          els.portfolioProjects.innerHTML = "";
+          PORTFOLIO_PROJECTS.forEach(function(track) {
+            els.portfolioProjects.appendChild(createPortfolioProjectCard(track, track.id === preferredTrackId));
+          });
+          els.portfolioRefinement.innerHTML = "";
+          els.portfolioRefinement.appendChild(createPortfolioProjectCard(PORTFOLIO_REFINEMENT, PORTFOLIO_REFINEMENT.id === preferredTrackId));
+          refreshIcons();
+        }
+
         function renderRoadmap() {
           const raceNames = { undecided:"Ohio or Musselman; 2027 date TBD", ohio:"IRONMAN 70.3 Ohio; 2027 date TBD", musselman:"Musselman in Geneva, NY; 2027 date TBD" };
           els.raceSummary.textContent = raceNames[state.settings.race] || raceNames.undecided;
           els.disciplineSummary.textContent = compactDate(state.settings.bikeStart) + " / " + compactDate(state.settings.swimStart);
+          const portfolioOverall = getPortfolioOverallProgress();
+          els.roadmapPortfolioProgress.textContent = portfolioOverall.complete + " of " + portfolioOverall.total + " milestones complete";
           els.roadmapList.innerHTML = "";
           weeks.forEach(function(week) {
             const key = dateKey(week);
@@ -2594,8 +3362,39 @@
             row.appendChild(createRoadmapCell("Career", "career", focus.career, key));
             row.appendChild(createRoadmapCell("Training", "training", focus.training, key));
             row.appendChild(createNetworkingRoadmapCell(key));
+            if (week >= parseDate("2026-08-31")) row.appendChild(createPortfolioRoadmapCell(week));
             els.roadmapList.appendChild(row);
           });
+        }
+
+        function createPortfolioRoadmapCell(week) {
+          const focus = getPortfolioWeeklyFocus(week);
+          const track = focus.projectId ? getPortfolioTrack(focus.projectId) : null;
+          const progress = track ? getPortfolioTrackProgress(track) : getPortfolioOverallProgress();
+          const cell = document.createElement("div");
+          cell.className = "roadmap-portfolio";
+          const copy = document.createElement("div");
+          copy.className = "roadmap-portfolio-copy";
+          const heading = document.createElement("strong");
+          heading.textContent = "Portfolio · " + focus.label + " · " + focus.due;
+          const detail = document.createElement("p");
+          detail.className = "text-small";
+          detail.textContent = focus.text;
+          copy.appendChild(heading);
+          copy.appendChild(detail);
+          const bar = createPortfolioProgressBar(progress.percent, track ? track.number + " progress" : "Overall progress");
+          const open = document.createElement("button");
+          open.type = "button";
+          open.className = "btn";
+          open.innerHTML = '<i data-lucide="arrow-right"></i><span>Open plan</span>';
+          open.addEventListener("click", function() {
+            activateView("portfolio");
+            if (track) setTimeout(function() { scrollToPortfolioTrack(track.id); }, 50);
+          });
+          cell.appendChild(copy);
+          cell.appendChild(bar);
+          cell.appendChild(open);
+          return cell;
         }
 
         function createRoadmapCell(label, field, value, weekKey) {
@@ -2708,7 +3507,7 @@
           renderWeek();
         }
 
-        function renderAll() { renderWeek(); renderRoadmap(); renderCareer(); renderNotes(); }
+        function renderAll() { renderWeek(); renderRoadmap(); renderPortfolio(); renderCareer(); renderNotes(); }
 
         // ===== CAREER TRACKER =====
         function renderCareer() {
@@ -2864,6 +3663,7 @@
             els.panels[panelName].classList.toggle("is-hidden", !active);
           });
           if (view === "roadmap") renderRoadmap();
+          if (view === "portfolio") renderPortfolio();
           if (view === "settings") populateSettings();
           if (view === "career") { renderCareer(); populateCareerEditFields(); }
           if (view === "notes") renderNotes();
@@ -2882,6 +3682,26 @@
             const editor = row.querySelector('[data-focus-field="' + focusField + '"]');
             if (editor) setTimeout(function() { editor.focus(); }, 350);
           }
+        }
+
+        function scrollToPortfolioTrack(trackId) {
+          const card = document.getElementById("portfolio-track-" + trackId);
+          if (!card) return;
+          card.scrollIntoView({ behavior: "smooth", block: "start" });
+          const details = card.querySelector("details");
+          if (details) details.open = true;
+        }
+
+        function scrollToCurrentPortfolioPhase() {
+          const activePhase = getPortfolioPhaseForDate(parseDate(todayStr()));
+          const activeTrack = activePhase ? getPortfolioTrack(activePhase.id) : null;
+          if (activeTrack) {
+            scrollToPortfolioTrack(activeTrack.id);
+            return;
+          }
+          const firstIncomplete = getPortfolioTracks().find(function(track) { return getPortfolioTrackProgress(track).status !== "Complete"; });
+          if (firstIncomplete) scrollToPortfolioTrack(firstIncomplete.id);
+          else els.portfolioTimeline.scrollIntoView({ behavior: "smooth", block: "center" });
         }
 
         function closeScheduleModal() {
@@ -2913,6 +3733,11 @@
             activateView("roadmap");
             setTimeout(function() { scrollToRoadmapWeek("career"); }, 50);
           });
+          els.openPortfolio.addEventListener("click", function() {
+            activateView("portfolio");
+            setTimeout(scrollToCurrentPortfolioPhase, 50);
+          });
+          els.portfolioJumpCurrent.addEventListener("click", scrollToCurrentPortfolioPhase);
           els.roadmapCurrentWeek.addEventListener("click", function() { scrollToRoadmapWeek(); });
           els.roadmapList.addEventListener("change", function(event) {
             const select = event.target.closest(".roadmap-contact-select");
