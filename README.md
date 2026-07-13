@@ -6,6 +6,21 @@ The entire application remains in `index.html`. It is designed to work as a stat
 
 ## Current experience
 
+### Access and account roles
+
+The login screen supports two dashboard accounts:
+
+| Role | Username | Password | Access |
+| --- | --- | --- | --- |
+| Admin | `admin` | `RockOn123` | Full editing, local saving, and JSONBin synchronization |
+| Guest | `guest` | `123` | Read-only preview of every dashboard tab |
+
+The active role is kept in `sessionStorage`, so signing out or closing the browser session returns the viewer to the login screen. A role badge is always visible in the dashboard header, and guest sessions display a read-only banner.
+
+Guest mode can browse the weekly plan, tasks, schedule, Roadmap, portfolio, Career Tracker, notes, and settings. All mutation paths are also guarded in JavaScript: guests cannot complete, reorder, hide, or add tasks; edit schedules or Roadmap content; change networking selections; complete portfolio milestones; edit career data or notes; save settings; write to `localStorage`; or send updates to JSONBin. Guests may still load the latest cloud data for viewing.
+
+> **Security note:** This is client-side access control for a static personal dashboard, not server-backed authentication. Credentials and JSONBin configuration remain visible in the delivered page source. Use a server-side authentication and data proxy if the dashboard ever contains sensitive information or requires access control that cannot be bypassed by a technically advanced visitor.
+
 ### This week
 
 - Weekly progress for checklist completion, applications, outreach, training, and nutrition.
@@ -109,13 +124,13 @@ Live application deadlines, interview preparation, warm follow-ups, and the thre
 
 ### Notes and settings
 
-- Notes save automatically.
-- Settings control job-search quotas, race preference, bike and swim start dates, and nutrition targets.
-- Password protection, locking, sync status, manual cloud sync, and cloud reload remain available.
+- Admin notes save automatically; guests see the synced notes as read-only content.
+- Admin settings control job-search quotas, race preference, bike and swim start dates, and nutrition targets; settings controls are disabled for guests.
+- Two-account login, signing out, role status, sync status, manual admin cloud sync, and read-only cloud reload remain available.
 
 ## Saving and synchronization
 
-The dashboard saves to local storage immediately and uses JSONBin for cross-device synchronization.
+Admin sessions save to local storage immediately and use JSONBin for cross-device synchronization. Guest sessions can read local and cloud-backed dashboard data but cannot write to either persistence layer. Both `saveState` and `saveToJSONBin` enforce the admin role before saving.
 
 The sync payload includes:
 
@@ -139,6 +154,8 @@ When adding future features, store user-editable information in `state` or `stat
 
 The dashboard is designed for regular iPhone use:
 
+- Login fields and the sign-in button are at least 48px tall.
+- Dashboard buttons and role controls retain touch targets of at least 44px.
 - Networking actions and selectors use touch targets of at least 44px.
 - Task drag handles and Hide controls are touch-friendly.
 - Weekly networking cards stack vertically on smaller screens.
@@ -168,7 +185,7 @@ Future updates should preserve these project constraints:
    - Primary: `#214E3B`
    - Secondary: `#82906A`
    - Highlight: `#C5A46D`
-3. Preserve password protection and JSONBin synchronization.
+3. Preserve both account roles, the guest read-only guards, and admin JSONBin synchronization.
 4. Preserve schedule sorting and the pencil-button schedule editor.
 5. Preserve task completion, touch reordering, daily hiding, and restoration.
 6. Preserve Roadmap editing, Career Tracker logs, Notes, and Settings.
@@ -177,6 +194,16 @@ Future updates should preserve these project constraints:
 9. Avoid unnecessary third-party dependencies or abstractions.
 
 ## Update history
+
+### v2.6 — 2026-07-13
+
+- Replaced the single-password gate with username-and-password login for Admin and Guest accounts.
+- Preserved full editing, local persistence, and JSONBin synchronization for the Admin account.
+- Added a read-only Guest preview with access to every dashboard tab.
+- Disabled or hid guest editing controls for tasks, schedules, Roadmap content, networking, portfolio milestones, career data, notes, and settings.
+- Guarded `saveState` and JSONBin writes so guest sessions cannot persist changes even if an event handler is triggered directly.
+- Added session-based role handling, a persistent role badge, a guest-mode banner, and a clearer Sign out action.
+- Kept login and dashboard controls at iPhone-friendly 44–48px touch sizes.
 
 ### v2.5 — 2026-07-13
 
