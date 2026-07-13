@@ -16,7 +16,7 @@ The entire application remains in `index.html`. It is designed to work as a stat
 - Daily tasks can be checked off, reordered, hidden for one day, restored, or supplemented with custom tasks.
 - Drag-and-drop works with a mouse or touch; keyboard users can move tasks with the arrow keys.
 - Task order, hidden tasks, and completion state persist across devices.
-- From September 1 through December 6, portfolio sessions appear as normal Wednesday, Saturday, and Sunday tasks and keep the same reorder, hide, completion, and sync behavior.
+- From September 1 through November 22, portfolio sessions appear as normal Monday, Wednesday, Saturday, and Sunday tasks and keep the same reorder, hide, completion, and sync behavior.
 
 ### Three-person networking triangle
 
@@ -58,37 +58,47 @@ The Portfolio tab tracks four recruiter-facing deliverables and the final respon
 #### Project 1 — Commercial Underwriting Pricing & Portfolio Workbench
 
 - **Lane:** Insurance / Underwriting
-- **Window:** September 1–14 (10–14 hours)
+- **Window:** September 1–10 (10–14 hours)
 - **Tools:** Excel, Power Query, Power Pivot, PivotTables, LET, XLOOKUP, Solver, and data tables
 - **Proof:** Claims import, frequency × severity pricing, expenses and risk load, underwriting decisions, portfolio dashboard, scenario comparison, and Solver optimization
 
 #### Project 2 — Project Controls & Risk Forecasting Command Center
 
 - **Lane:** Infrastructure / Project Controls
-- **Window:** September 15–October 5 (14–18 hours)
+- **Window:** September 15–October 4 (14–18 hours)
 - **Tools:** Excel, Power Query, Python, pandas, NumPy, Power BI, and DAX
 - **Proof:** Eight work packages, twelve periods, earned-value measures, P50/P80 simulation, risk heatmap, Power BI reporting, and an executive narrative
 
 #### Project 3 — Pharma Commercial Effectiveness & Channel Optimization
 
 - **Lane:** Healthcare Commercial Analytics
-- **Window:** October 6–November 2 (18–24 hours)
+- **Window:** October 5–25 (18–24 hours)
 - **Tools:** SQL, Python/pandas, Excel, Power BI, and DAX
 - **Proof:** Relational commercial data, joins/CTEs/window functions, control-vs-exposed simulation, confidence intervals, ROI, and budget-allocation recommendations
 
 #### Project 4 — Shared Public Portfolio Site
 
 - **Lane:** Shared proof layer
-- **Window:** November 3–15 (6–10 hours)
+- **Window:** September 11–14 for the first public shell; October 26–November 8 for the complete site (6–10 hours total)
 - **Tools:** HTML, CSS, basic JavaScript, Git/GitHub, Power BI embeds, downloads, and short walkthrough videos
-- **Proof:** Three concise case studies with working artifacts, architecture context, synthetic-data disclosures, mobile QA, and fallback media where live embedding is unavailable
+- **Proof:** An early live Insurance case study for September outreach, followed by three concise case studies with working artifacts, architecture context, synthetic-data disclosures, mobile QA, and fallback media where live embedding is unavailable
 
 #### Refinement and freeze
 
-- **November 16–December 6:** Improve only the project receiving the strongest response, tighten documentation and résumé proof, run final QA, and tag the releases.
-- **After December 6:** Freeze development and use the finished work for applications and interviews.
+- **November 9–22:** Improve only the project receiving the strongest response, tighten documentation and résumé proof, run final QA, and tag the releases.
+- **After November 22:** Freeze development and use the finished work for applications and interviews.
 
-The protected weekly build rhythm is 1.5 hours Wednesday, 3 hours Saturday, and 1.5 hours Sunday. Milestone completion is stored in `state.careerContent.portfolioProgress.completedMilestones`.
+The protected weekly build rhythm is 1 hour Monday, 1.5 hours Wednesday, 3 hours Saturday, and 1.5 hours Sunday. Monday's live applications and Wednesday's networking action stay first; the portfolio uses the remainder of those existing focus blocks. Saturday deep work ends at 6:30 PM, Sunday is limited to QA/documentation, and Friday remains open. Milestone completion is stored in `state.careerContent.portfolioProgress.completedMilestones`.
+
+The release order is intentionally tied to the job-search funnel:
+
+1. Ship the Insurance MVP and place it on a live portfolio shell by September 14.
+2. Release Project Controls before the early-October recruiter and interview push.
+3. Release Pharma by October 25 while using current WebHealth experience as the healthcare bridge.
+4. Finish the complete public presentation layer by November 8.
+5. Refine only the proof point receiving meaningful response, then freeze development.
+
+Live application deadlines, interview preparation, warm follow-ups, and the three-person networking triangle take priority over portfolio polish.
 
 ### Career Tracker
 
@@ -167,6 +177,15 @@ Future updates should preserve these project constraints:
 9. Avoid unnecessary third-party dependencies or abstractions.
 
 ## Update history
+
+### v2.5 — 2026-07-13
+
+- Accelerated the portfolio plan so all three lane-specific MVPs ship by October 25 and development freezes November 22.
+- Moved the thin public portfolio shell to September 11–14 so the Insurance case study can support active outreach immediately.
+- Added a later October 26–November 8 site-polish phase for the complete case-study hub, embeds, downloads, and walkthroughs.
+- Expanded the build cadence from 6 to 7 hours while keeping applications and networking first in the existing Monday and Wednesday focus blocks.
+- Added the Monday build sprint and placed the Saturday deep-work and Sunday QA blocks directly in the generated schedule.
+- Updated every project milestone, weekly Roadmap focus, due date, current-phase label, and post-freeze message to match the faster release plan.
 
 ### v2.4 — 2026-07-13
 
