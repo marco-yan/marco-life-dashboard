@@ -1,6 +1,6 @@
 # Marco Life Dashboard
 
-A single-file personal planning dashboard for managing weekly priorities, daily tasks, career progress, training, nutrition, and the July–December 2026 roadmap.
+A single-file personal planning dashboard for managing weekly priorities, daily tasks, career progress, a job-search proof portfolio, training, nutrition, and the July–December 2026 roadmap.
 
 The entire application remains in `index.html`. It is designed to work as a static website with no build step or package manager.
 
@@ -10,11 +10,13 @@ The entire application remains in `index.html`. It is designed to work as a stat
 
 - Weekly progress for checklist completion, applications, outreach, training, and nutrition.
 - Career, training, target-company, and networking priorities shown at a glance.
+- The current portfolio phase, weekly deliverable, due date, and progress shown directly below the focus strip.
 - Seven-day picker with a generated daily schedule and task list.
 - Schedule editor opened through the pencil button.
 - Daily tasks can be checked off, reordered, hidden for one day, restored, or supplemented with custom tasks.
 - Drag-and-drop works with a mouse or touch; keyboard users can move tasks with the arrow keys.
 - Task order, hidden tasks, and completion state persist across devices.
+- From September 1 through December 6, portfolio sessions appear as normal Wednesday, Saturday, and Sunday tasks and keep the same reorder, hide, completion, and sync behavior.
 
 ### Three-person networking triangle
 
@@ -45,8 +47,48 @@ Changing a weekly contact in the Roadmap immediately updates both the weekly net
 - Covers every week from July through December 2026.
 - Career and Training text can be edited directly by clicking the text.
 - Weekly networking contacts can be changed with the Peer, Team Lead, and Connector selectors.
+- September–December rows show the linked portfolio deliverable, project progress, and a shortcut to the full plan.
 - Custom weekly text is stored in `state.careerContent.weeklyFocus`.
 - Hardcoded `weekFocus` values remain as fallbacks when no custom text exists.
+
+### Job-search proof portfolio
+
+The Portfolio tab tracks four recruiter-facing deliverables and the final response-led refinement sprint. Each card shows the target lane, tool stack, date window, estimated effort, current status, progress, next milestone, and a measurable checklist.
+
+#### Project 1 — Commercial Underwriting Pricing & Portfolio Workbench
+
+- **Lane:** Insurance / Underwriting
+- **Window:** September 1–14 (10–14 hours)
+- **Tools:** Excel, Power Query, Power Pivot, PivotTables, LET, XLOOKUP, Solver, and data tables
+- **Proof:** Claims import, frequency × severity pricing, expenses and risk load, underwriting decisions, portfolio dashboard, scenario comparison, and Solver optimization
+
+#### Project 2 — Project Controls & Risk Forecasting Command Center
+
+- **Lane:** Infrastructure / Project Controls
+- **Window:** September 15–October 5 (14–18 hours)
+- **Tools:** Excel, Power Query, Python, pandas, NumPy, Power BI, and DAX
+- **Proof:** Eight work packages, twelve periods, earned-value measures, P50/P80 simulation, risk heatmap, Power BI reporting, and an executive narrative
+
+#### Project 3 — Pharma Commercial Effectiveness & Channel Optimization
+
+- **Lane:** Healthcare Commercial Analytics
+- **Window:** October 6–November 2 (18–24 hours)
+- **Tools:** SQL, Python/pandas, Excel, Power BI, and DAX
+- **Proof:** Relational commercial data, joins/CTEs/window functions, control-vs-exposed simulation, confidence intervals, ROI, and budget-allocation recommendations
+
+#### Project 4 — Shared Public Portfolio Site
+
+- **Lane:** Shared proof layer
+- **Window:** November 3–15 (6–10 hours)
+- **Tools:** HTML, CSS, basic JavaScript, Git/GitHub, Power BI embeds, downloads, and short walkthrough videos
+- **Proof:** Three concise case studies with working artifacts, architecture context, synthetic-data disclosures, mobile QA, and fallback media where live embedding is unavailable
+
+#### Refinement and freeze
+
+- **November 16–December 6:** Improve only the project receiving the strongest response, tighten documentation and résumé proof, run final QA, and tag the releases.
+- **After December 6:** Freeze development and use the finished work for applications and interviews.
+
+The protected weekly build rhythm is 1.5 hours Wednesday, 3 hours Saturday, and 1.5 hours Sunday. Milestone completion is stored in `state.careerContent.portfolioProgress.completedMilestones`.
 
 ### Career Tracker
 
@@ -79,6 +121,7 @@ The sync payload includes:
 - Editable career content
 - Weekly Roadmap edits
 - Networking roster and weekly contact selections
+- Portfolio milestone completion
 
 When adding future features, store user-editable information in `state` or `state.careerContent` and confirm that it remains included in the JSONBin payload.
 
@@ -89,6 +132,8 @@ The dashboard is designed for regular iPhone use:
 - Networking actions and selectors use touch targets of at least 44px.
 - Task drag handles and Hide controls are touch-friendly.
 - Weekly networking cards stack vertically on smaller screens.
+- Portfolio projects, timeline phases, and weekly focus content collapse to a single-column layout.
+- Portfolio milestone rows and all portfolio actions use touch-friendly controls of at least 44px.
 - Roadmap fields and contact selectors switch to a single-column layout.
 - Horizontal day navigation remains available without compressing the labels.
 
@@ -122,6 +167,16 @@ Future updates should preserve these project constraints:
 9. Avoid unnecessary third-party dependencies or abstractions.
 
 ## Update history
+
+### v2.4 — 2026-07-13
+
+- Added a dedicated Portfolio tab for the three lane-specific projects, shared public site, and final refinement sprint.
+- Added 29 measurable milestones with per-project and overall progress, due dates, status, tools, and next-action guidance.
+- Added the September 1–December 6 build timeline and post-freeze interview mode.
+- Linked portfolio deliverables into the This week focus area and September–December Roadmap rows.
+- Added Wednesday, Saturday, and Sunday portfolio work sessions to the existing reorderable and hideable daily task system.
+- Stored milestone completion in `state.careerContent.portfolioProgress` for JSONBin synchronization.
+- Added responsive portfolio cards, timeline, progress bars, and 44px mobile controls.
 
 ### v2.3 — 2026-07-13
 
