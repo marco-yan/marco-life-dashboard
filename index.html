@@ -10,6 +10,19 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
+    :root {
+      --background: #F7F6F0;
+      --text: #171A18;
+      --primary: #214E3B;
+      --secondary: #82906A;
+      --highlight: #C5A46D;
+      --surface: color-mix(in srgb, var(--background) 92%, var(--secondary));
+      --surface-strong: color-mix(in srgb, var(--background) 84%, var(--secondary));
+      --border: color-mix(in srgb, var(--background) 62%, var(--secondary));
+      --muted: color-mix(in srgb, var(--text) 58%, var(--secondary));
+      --primary-hover: color-mix(in srgb, var(--primary) 84%, var(--text));
+      --shadow: color-mix(in srgb, var(--primary) 14%, transparent);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
@@ -28,44 +41,44 @@
     }
     #password-screen.hidden { display: none; }
     #password-screen .lock-box {
-      background: white; padding: 48px 40px; border-radius: 24px;
-      border: 1px solid #e8e5db; max-width: 380px; width: 100%; text-align: center;
+      background: var(--background); padding: 48px 40px; border-radius: 24px;
+      border: 1px solid var(--border); max-width: 380px; width: 100%; text-align: center;
     }
     #password-screen .lock-box h1 { font-size: 1.5rem; font-weight: 600; color: #214E3B; margin-bottom: 8px; }
-    #password-screen .lock-box p { color: #5a6b55; font-size: 0.9rem; margin-bottom: 24px; }
+    #password-screen .lock-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
     #password-screen .lock-box input {
-      width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #d6d2c6;
+      width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border);
       font-family: inherit; font-size: 1rem; background: #F7F6F0; margin-bottom: 16px;
     }
     #password-screen .lock-box input:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
     #password-screen .lock-box .btn-unlock {
-      width: 100%; padding: 14px; background: #214E3B; color: white;
+      width: 100%; padding: 14px; background: #214E3B; color: var(--background);
       border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer;
     }
-    #password-screen .lock-box .btn-unlock:hover { background: #16382a; }
-    #password-screen .lock-box .error-msg { color: #b33c3c; font-size: 0.85rem; margin-top: 12px; min-height: 1.5em; }
+    #password-screen .lock-box .btn-unlock:hover { background: var(--primary-hover); }
+    #password-screen .lock-box .error-msg { color: var(--text); font-size: 0.85rem; margin-top: 12px; min-height: 1.5em; }
 
     #marco-life-dashboard { max-width: 1280px; width: 100%; display: none; }
     #marco-life-dashboard.visible { display: block; }
 
     #marco-life-dashboard .is-hidden { display: none !important; }
     #marco-life-dashboard button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-    #marco-life-dashboard .text-small { font-size: 0.8125rem; color: #5a6b55; }
-    #marco-life-dashboard .text-muted { color: #5a6b55; }
+    #marco-life-dashboard .text-small { font-size: 0.8125rem; color: var(--muted); }
+    #marco-life-dashboard .text-muted { color: var(--muted); }
     #marco-life-dashboard .field-span { grid-column: 1 / -1; }
 
     #marco-life-dashboard .card {
-      background: #ffffff;
+      background: var(--background);
       border-radius: 16px;
       box-shadow: 0 1px 3px rgba(33, 78, 59, 0.04), 0 4px 12px rgba(33, 78, 59, 0.03);
       padding: 24px 28px;
-      border: 1px solid #e8e5db;
+      border: 1px solid var(--border);
       transition: box-shadow 0.2s;
       margin-bottom: 24px;
     }
     #marco-life-dashboard .card-soft {
-      background: #fcfcf9;
-      border: 1px solid #e8e5db;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 14px;
       padding: 20px 24px;
     }
@@ -75,7 +88,7 @@
       border-radius: 10px;
       font-weight: 500;
       font-size: 0.875rem;
-      background: #edebe5;
+      background: var(--surface-strong);
       color: #171A18;
       border: 1px solid transparent;
       transition: all 0.15s;
@@ -84,22 +97,22 @@
       gap: 6px;
       line-height: 1.4;
     }
-    #marco-life-dashboard .btn:hover { background: #e0ddd4; }
-    #marco-life-dashboard .btn-primary { background: #214E3B; color: #fff; border-color: #214E3B; }
-    #marco-life-dashboard .btn-primary:hover { background: #16382a; border-color: #16382a; }
-    #marco-life-dashboard .btn-ghost { background: transparent; color: #5a6b55; padding: 6px 10px; }
-    #marco-life-dashboard .btn-ghost:hover { background: #edebe5; color: #171A18; }
-    #marco-life-dashboard .btn-danger { background: #d95c5c; color: white; }
-    #marco-life-dashboard .btn-danger:hover { background: #bf4747; }
-    #marco-life-dashboard .btn-success { background: #2a7a4a; color: white; }
-    #marco-life-dashboard .btn-success:hover { background: #1e5f38; }
+    #marco-life-dashboard .btn:hover { background: var(--surface-strong); }
+    #marco-life-dashboard .btn-primary { background: #214E3B; color: var(--background); border-color: #214E3B; }
+    #marco-life-dashboard .btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+    #marco-life-dashboard .btn-ghost { background: transparent; color: var(--muted); padding: 6px 10px; }
+    #marco-life-dashboard .btn-ghost:hover { background: var(--surface-strong); color: #171A18; }
+    #marco-life-dashboard .btn-danger { background: var(--text); color: var(--background); }
+    #marco-life-dashboard .btn-danger:hover { background: var(--primary-hover); }
+    #marco-life-dashboard .btn-success { background: var(--primary); color: var(--background); }
+    #marco-life-dashboard .btn-success:hover { background: var(--primary); }
     #marco-life-dashboard .btn:disabled { opacity: 0.4; pointer-events: none; }
 
     #marco-life-dashboard .dash-tabs {
       display: flex;
       gap: 10px;
       margin-bottom: 32px;
-      border-bottom: 1px solid #e8e5db;
+      border-bottom: 1px solid var(--border);
       padding-bottom: 16px;
       flex-wrap: wrap;
     }
@@ -108,13 +121,13 @@
       padding: 10px 24px;
       background: transparent;
       font-weight: 500;
-      color: #5a6b55;
+      color: var(--muted);
     }
     #marco-life-dashboard .dash-tabs .btn-primary {
       background: #214E3B;
-      color: #fff;
+      color: var(--background);
     }
-    #marco-life-dashboard .dash-tabs .btn-primary:hover { background: #16382a; }
+    #marco-life-dashboard .dash-tabs .btn-primary:hover { background: var(--primary-hover); }
 
     #marco-life-dashboard .week-nav {
       display: flex;
@@ -135,12 +148,12 @@
     #marco-life-dashboard .form-select {
       padding: 10px 36px 10px 16px;
       border-radius: 10px;
-      border: 1px solid #d6d2c6;
-      background: white;
+      border: 1px solid var(--border);
+      background: var(--background);
       font-family: inherit;
       font-size: 0.875rem;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6b55' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2382906A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 14px center;
       cursor: pointer;
@@ -168,11 +181,11 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 14px;
-      background: #f2efe8;
+      background: var(--surface-strong);
       border-radius: 14px;
       padding: 18px 24px;
       margin-bottom: 28px;
-      border: 1px solid #d6d2c6;
+      border: 1px solid var(--border);
     }
     #marco-life-dashboard .viz-badge {
       background: #C5A46D;
@@ -199,24 +212,24 @@
       margin-bottom: 32px;
     }
     #marco-life-dashboard .viz-tile {
-      background: white;
-      border: 1px solid #e8e5db;
+      background: var(--background);
+      border: 1px solid var(--border);
       border-radius: 30px;
       padding: 12px 6px;
       text-align: center;
       font-weight: 500;
       font-size: 0.8rem;
       transition: all 0.15s;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      box-shadow: 0 1px 2px var(--shadow);
     }
-    #marco-life-dashboard .viz-tile:hover:not(:disabled) { background: #edebe5; border-color: #82906A; }
+    #marco-life-dashboard .viz-tile:hover:not(:disabled) { background: var(--surface-strong); border-color: #82906A; }
     #marco-life-dashboard .viz-tile.is-selected {
       background: #214E3B;
       border-color: #214E3B;
-      color: white;
+      color: var(--background);
       box-shadow: 0 4px 10px rgba(33, 78, 59, 0.25);
     }
-    #marco-life-dashboard .viz-tile:disabled { opacity: 0.3; background: #f8f6f0; }
+    #marco-life-dashboard .viz-tile:disabled { opacity: 0.3; background: var(--surface); }
 
     #marco-life-dashboard .daily-layout {
       display: grid;
@@ -252,7 +265,7 @@
       grid-template-columns: 110px 1fr;
       gap: 16px;
       padding: 14px 0;
-      border-bottom: 1px solid #edebe5;
+      border-bottom: 1px solid var(--surface-strong);
       font-size: 0.9rem;
     }
     #marco-life-dashboard .schedule-item:last-child { border-bottom: none; }
@@ -265,11 +278,11 @@
       gap: 14px;
       align-items: start;
       padding: 14px 0;
-      border-bottom: 1px solid #edebe5;
+      border-bottom: 1px solid var(--surface-strong);
       transition: background 0.1s;
     }
     #marco-life-dashboard .todo-row:hover {
-      background: #fcfcf9;
+      background: var(--surface);
       margin: 0 -12px;
       padding-left: 12px;
       padding-right: 12px;
@@ -293,9 +306,9 @@
     #marco-life-dashboard .add-task-form {
       margin-top: 20px;
       padding: 24px;
-      background: #fcfcf9;
+      background: var(--surface);
       border-radius: 16px;
-      border: 1px solid #e8e5db;
+      border: 1px solid var(--border);
     }
     #marco-life-dashboard .add-task-fields {
       display: grid;
@@ -315,10 +328,10 @@
     #marco-life-dashboard .form-select {
       padding: 12px 16px;
       border-radius: 10px;
-      border: 1px solid #d6d2c6;
+      border: 1px solid var(--border);
       font-family: inherit;
       font-size: 0.9rem;
-      background: white;
+      background: var(--background);
       transition: border 0.15s;
     }
     #marco-life-dashboard .form-control:focus,
@@ -333,7 +346,7 @@
       grid-template-columns: 160px 1fr 1fr 1fr;
       gap: 24px;
       padding: 24px 0;
-      border-bottom: 1px solid #edebe5;
+      border-bottom: 1px solid var(--surface-strong);
     }
     @media (max-width: 740px) {
       #marco-life-dashboard .roadmap-row { grid-template-columns: 1fr; gap: 12px; padding: 20px 0; }
@@ -352,7 +365,7 @@
 
     #marco-life-dashboard .settings-form { display: flex; flex-direction: column; gap: 32px; }
     #marco-life-dashboard .settings-section {
-      border-bottom: 1px solid #e8e5db;
+      border-bottom: 1px solid var(--border);
       padding-bottom: 28px;
     }
     #marco-life-dashboard .settings-section h3 {
@@ -377,8 +390,8 @@
     #marco-life-dashboard .assumption-line {
       margin-top: 24px;
       padding-top: 20px;
-      border-top: 1px solid #e8e5db;
-      color: #5a6b55;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
     }
 
     #marco-life-dashboard .sync-status {
@@ -386,15 +399,15 @@
       margin-top: 12px;
       padding: 12px 16px;
       border-radius: 10px;
-      background: #f2efe8;
+      background: var(--surface-strong);
     }
-    #marco-life-dashboard .sync-status.success { background: #e0f0e6; color: #1e5f38; }
-    #marco-life-dashboard .sync-status.error { background: #fde8e8; color: #b33c3c; }
-    #marco-life-dashboard .sync-status.syncing { background: #fdf6e3; color: #8a7a3a; }
+    #marco-life-dashboard .sync-status.success { background: var(--surface-strong); color: var(--primary); }
+    #marco-life-dashboard .sync-status.error { background: var(--surface-strong); color: var(--text); }
+    #marco-life-dashboard .sync-status.syncing { background: var(--surface-strong); color: var(--text); }
 
     #marco-life-dashboard .status-line {
       min-height: 1.5rem;
-      color: #5a6b55;
+      color: var(--muted);
       font-size: 0.85rem;
     }
     #marco-life-dashboard .viz-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -418,12 +431,12 @@
       max-height: 80vh;
       border-radius: 24px;
       padding: 36px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+      box-shadow: 0 30px 80px var(--shadow);
       overflow-y: auto;
-      border: 1px solid #e8e5db;
+      border: 1px solid var(--border);
     }
     #schedule-modal .modal-box h2 { font-size: 1.3rem; color: #214E3B; margin-bottom: 8px; }
-    #schedule-modal .modal-box .sub { color: #5a6b55; font-size: 0.85rem; margin-bottom: 24px; }
+    #schedule-modal .modal-box .sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
     #schedule-modal .block-list {
       display: flex;
       flex-direction: column;
@@ -438,10 +451,10 @@
       grid-template-columns: 110px 1fr auto;
       gap: 14px;
       align-items: center;
-      background: white;
+      background: var(--background);
       padding: 12px 16px;
       border-radius: 12px;
-      border: 1px solid #e8e5db;
+      border: 1px solid var(--border);
     }
     #schedule-modal .block-row .time { font-weight: 600; color: #214E3B; font-size: 0.85rem; }
     #schedule-modal .block-row .label { font-size: 0.9rem; }
@@ -454,10 +467,10 @@
     #schedule-modal .add-row input {
       padding: 12px 14px;
       border-radius: 10px;
-      border: 1px solid #d6d2c6;
+      border: 1px solid var(--border);
       font-family: inherit;
       font-size: 0.85rem;
-      background: white;
+      background: var(--background);
     }
     #schedule-modal .add-row input:focus {
       outline: none;
@@ -468,62 +481,373 @@
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      border-top: 1px solid #e8e5db;
+      border-top: 1px solid var(--border);
       padding-top: 24px;
     }
     #schedule-modal .modal-actions .btn { flex: 1; justify-content: center; min-width: 100px; }
-    #schedule-modal .btn-reset { background: transparent; color: #b33c3c; border: 1px solid #e8e5db; }
-    #schedule-modal .btn-reset:hover { background: #fde8e8; }
+    #schedule-modal .btn-reset { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    #schedule-modal .btn-reset:hover { background: var(--surface-strong); }
 
     .career-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     @media (max-width: 740px) { .career-grid { grid-template-columns: 1fr; } }
     .company-list { columns: 2; column-gap: 32px; }
     @media (max-width: 500px) { .company-list { columns: 1; } }
-    .company-list li { margin-bottom: 6px; list-style: none; padding: 4px 0; border-bottom: 1px solid #f0f0ea; }
+    .company-list li { margin-bottom: 6px; list-style: none; padding: 4px 0; border-bottom: 1px solid var(--border); }
     .company-list .tier { font-weight: 600; color: #214E3B; }
-    .job-title-tag { display: inline-block; background: #edebe5; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; margin: 2px 4px 2px 0; }
+    .job-title-tag { display: inline-block; background: var(--surface-strong); padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; margin: 2px 4px 2px 0; }
     .tracker-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    .tracker-table th { text-align: left; padding: 10px 8px; border-bottom: 2px solid #e8e5db; color: #5a6b55; font-weight: 600; }
-    .tracker-table td { padding: 10px 8px; border-bottom: 1px solid #edebe5; vertical-align: middle; }
+    .tracker-table th { text-align: left; padding: 10px 8px; border-bottom: 2px solid var(--border); color: var(--muted); font-weight: 600; }
+    .tracker-table td { padding: 10px 8px; border-bottom: 1px solid var(--surface-strong); vertical-align: middle; }
     .tracker-table .status-badge { padding: 2px 12px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
-    .status-badge.applied { background: #e0e7ff; color: #1a3a8a; }
-    .status-badge.screening { background: #fdf6e3; color: #8a7a3a; }
-    .status-badge.interview { background: #e0f0e6; color: #1e5f38; }
-    .status-badge.offer { background: #d4edda; color: #155724; }
-    .status-badge.rejected { background: #fde8e8; color: #b33c3c; }
-    .status-badge.watching { background: #f2efe8; color: #5a6b55; }
+    .status-badge.applied { background: var(--surface-strong); color: var(--primary); }
+    .status-badge.screening { background: var(--surface-strong); color: var(--text); }
+    .status-badge.interview { background: var(--surface-strong); color: var(--primary); }
+    .status-badge.offer { background: var(--surface-strong); color: var(--primary); }
+    .status-badge.rejected { background: var(--surface-strong); color: var(--text); }
+    .status-badge.watching { background: var(--surface-strong); color: var(--muted); }
 
     .plan-details { margin-top: 16px; }
-    .plan-details summary { font-weight: 600; cursor: pointer; color: #214E3B; padding: 12px; background: #fcfcf9; border-radius: 12px; border: 1px solid #e8e5db; }
-    .plan-details summary:hover { background: #f2efe8; }
+    .plan-details summary { font-weight: 600; cursor: pointer; color: #214E3B; padding: 12px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); }
+    .plan-details summary:hover { background: var(--surface-strong); }
     .plan-content { max-height: 600px; overflow-y: auto; padding: 16px 8px; }
-    .plan-content .week-block { padding: 12px 0; border-bottom: 1px solid #edebe5; }
+    .plan-content .week-block { padding: 12px 0; border-bottom: 1px solid var(--surface-strong); }
     .plan-content .week-block:last-child { border-bottom: none; }
     .plan-content .week-title { font-weight: 600; color: #214E3B; }
     .plan-content ul { padding-left: 20px; margin-top: 4px; }
     .plan-content ul li { margin-bottom: 2px; font-size: 0.85rem; }
 
-    .notes-textarea { width: 100%; min-height: 400px; padding: 20px; border-radius: 16px; border: 1px solid #e8e5db; font-family: inherit; font-size: 0.95rem; line-height: 1.6; resize: vertical; background: white; transition: border 0.2s; }
+    .notes-textarea { width: 100%; min-height: 400px; padding: 20px; border-radius: 16px; border: 1px solid var(--border); font-family: inherit; font-size: 0.95rem; line-height: 1.6; resize: vertical; background: var(--background); transition: border 0.2s; }
     .notes-textarea:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
 
     .edit-career-toggle { margin: 16px 0 8px 0; }
-    .edit-career-toggle summary { font-weight: 600; cursor: pointer; color: #214E3B; padding: 10px 16px; background: #fcfcf9; border-radius: 12px; border: 1px solid #e8e5db; }
-    .edit-career-toggle summary:hover { background: #f2efe8; }
+    .edit-career-toggle summary { font-weight: 600; cursor: pointer; color: #214E3B; padding: 10px 16px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); }
+    .edit-career-toggle summary:hover { background: var(--surface-strong); }
     .edit-career-content { padding: 16px 0; }
-    .edit-career-content textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #d6d2c6; font-family: 'Inter', monospace; font-size: 0.85rem; resize: vertical; background: white; margin-bottom: 12px; }
+    .edit-career-content textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); font-family: 'Inter', monospace; font-size: 0.85rem; resize: vertical; background: var(--background); margin-bottom: 12px; }
     .edit-career-content textarea:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
     .edit-career-content .label { font-weight: 600; font-size: 0.85rem; color: #214E3B; display: block; margin-bottom: 4px; }
-    .edit-career-content .hint { font-size: 0.75rem; color: #5a6b55; margin-bottom: 8px; display: block; }
+    .edit-career-content .hint { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; display: block; }
+
+    /* ===== POLISHED DASHBOARD LAYOUT ===== */
+    html { scroll-behavior: smooth; }
+    body {
+      padding: 32px 24px 64px;
+      line-height: 1.5;
+    }
+    ::selection { background: var(--highlight); color: var(--text); }
+    button, input, select, textarea, [contenteditable="true"] { font: inherit; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
+    [contenteditable="true"]:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--highlight);
+      outline-offset: 3px;
+    }
+
+    #marco-life-dashboard { max-width: 1320px; }
+    #marco-life-dashboard .dashboard-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 8px 4px 24px;
+    }
+    #marco-life-dashboard .dashboard-header h1 {
+      color: var(--primary);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      letter-spacing: -0.045em;
+      line-height: 1;
+      margin: 6px 0 10px;
+    }
+    #marco-life-dashboard .eyebrow {
+      color: var(--secondary);
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    #marco-life-dashboard .header-copy { color: var(--muted); font-size: 0.95rem; }
+    #marco-life-dashboard .header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    #marco-life-dashboard .status-chip {
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      display: inline-flex;
+      font-size: 0.78rem;
+      gap: 7px;
+      min-height: 38px;
+      padding: 8px 14px;
+    }
+    #marco-life-dashboard .status-chip svg { color: var(--primary); }
+
+    #marco-life-dashboard .dash-tabs {
+      background: color-mix(in srgb, var(--background) 92%, transparent);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      flex-wrap: nowrap;
+      gap: 6px;
+      margin-bottom: 28px;
+      overflow-x: auto;
+      padding: 7px;
+      position: sticky;
+      scrollbar-width: none;
+      top: 10px;
+      z-index: 100;
+    }
+    #marco-life-dashboard .dash-tabs::-webkit-scrollbar { display: none; }
+    #marco-life-dashboard .dash-tabs .btn {
+      border-radius: 10px;
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 10px 16px;
+    }
+    #marco-life-dashboard .dash-tabs .btn[aria-selected="true"] { box-shadow: 0 5px 16px var(--shadow); }
+
+    #marco-life-dashboard .card,
+    #marco-life-dashboard .card-soft {
+      background: var(--surface);
+      border-color: var(--border);
+    }
+    #marco-life-dashboard .card { border-radius: 18px; }
+    #marco-life-dashboard .card:hover { box-shadow: 0 10px 26px var(--shadow); }
+    #marco-life-dashboard .viz-stat { border-top: 3px solid var(--secondary); min-height: 132px; }
+    #marco-life-dashboard .viz-stat-value { margin: 4px 0 2px; }
+    #marco-life-dashboard .btn { min-height: 38px; }
+    #marco-life-dashboard .btn:active:not(:disabled) { transform: translateY(1px); }
+    #marco-life-dashboard .form-control,
+    #marco-life-dashboard .form-select,
+    .notes-textarea,
+    .edit-career-content textarea {
+      background: var(--background);
+      color: var(--text);
+    }
+
+    #marco-life-dashboard .focus-strip {
+      align-items: stretch;
+      background: var(--primary);
+      border: 0;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px var(--shadow);
+      color: var(--background);
+      display: grid;
+      gap: 0;
+      grid-template-columns: minmax(0, 1.55fr) minmax(240px, 1fr) minmax(210px, auto);
+      padding: 0;
+      overflow: hidden;
+    }
+    #marco-life-dashboard .focus-primary,
+    #marco-life-dashboard .focus-training,
+    #marco-life-dashboard .focus-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 22px 24px;
+    }
+    #marco-life-dashboard .focus-training,
+    #marco-life-dashboard .focus-actions { border-left: 1px solid color-mix(in srgb, var(--background) 25%, transparent); }
+    #marco-life-dashboard .focus-heading {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    #marco-life-dashboard .focus-strip .eyebrow,
+    #marco-life-dashboard .focus-strip .text-small { color: color-mix(in srgb, var(--background) 72%, var(--secondary)); }
+    #marco-life-dashboard .focus-strip strong { color: var(--background); font-size: 1rem; line-height: 1.45; }
+    #marco-life-dashboard .focus-primary > strong { font-size: 1.15rem; }
+    #marco-life-dashboard .focus-label {
+      align-items: center;
+      color: var(--highlight);
+      display: inline-flex;
+      font-size: 0.75rem;
+      font-weight: 700;
+      gap: 7px;
+      letter-spacing: 0.05em;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+    #marco-life-dashboard .focus-actions { align-items: flex-start; gap: 12px; }
+    #marco-life-dashboard .focus-actions .btn {
+      border-color: color-mix(in srgb, var(--background) 36%, transparent);
+      color: var(--background);
+      padding-left: 0;
+    }
+    #marco-life-dashboard .focus-actions .btn:hover { background: transparent; color: var(--highlight); }
+
+    #marco-life-dashboard .day-strip { scrollbar-width: thin; }
+    #marco-life-dashboard .viz-tile { min-height: 46px; }
+    #marco-life-dashboard .schedule-item { align-items: start; }
+    #marco-life-dashboard .todo-copy { display: flex; flex-direction: column; gap: 3px; }
+    #marco-life-dashboard .todo-row[data-complete="true"] { opacity: 0.66; }
+
+    #marco-life-dashboard .roadmap-toolbar {
+      align-items: flex-end;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 8px 0 24px;
+    }
+    #marco-life-dashboard .roadmap-toolbar h2 {
+      color: var(--primary);
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      letter-spacing: -0.025em;
+      margin: 4px 0 7px;
+    }
+    #marco-life-dashboard .roadmap-toolbar .text-small { max-width: 720px; }
+    #marco-life-dashboard .roadmap-toolbar-actions {
+      align-items: flex-end;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+    }
+    #marco-life-dashboard .roadmap-column-head,
+    #marco-life-dashboard .roadmap-row {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 150px minmax(0, 1.15fr) minmax(0, 1fr);
+    }
+    #marco-life-dashboard .roadmap-column-head {
+      color: var(--secondary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0 18px 10px;
+      text-transform: uppercase;
+    }
+    #marco-life-dashboard .roadmap-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    #marco-life-dashboard .roadmap-row {
+      border-bottom: 1px solid var(--border);
+      padding: 18px;
+      scroll-margin-top: 90px;
+    }
+    #marco-life-dashboard .roadmap-row:last-child { border-bottom: 0; }
+    #marco-life-dashboard .roadmap-row[data-current="true"] {
+      background: var(--surface-strong);
+      box-shadow: inset 4px 0 0 var(--highlight);
+    }
+    #marco-life-dashboard .roadmap-period { align-self: start; }
+    #marco-life-dashboard .roadmap-period p { line-height: 1.35; margin-top: 8px; }
+    #marco-life-dashboard .roadmap-cell { min-width: 0; position: relative; }
+    #marco-life-dashboard .roadmap-cell strong { margin-bottom: 7px; }
+    #marco-life-dashboard .roadmap-editable {
+      border: 1px dashed transparent;
+      border-radius: 10px;
+      cursor: text;
+      line-height: 1.5;
+      margin: -7px;
+      min-height: 48px;
+      padding: 7px;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: pre-wrap;
+    }
+    #marco-life-dashboard .roadmap-editable:hover {
+      background: var(--background);
+      border-color: var(--border);
+    }
+    #marco-life-dashboard .roadmap-editable:focus {
+      background: var(--background);
+      border-color: var(--highlight);
+      outline: none;
+    }
+    #marco-life-dashboard .roadmap-editable:empty::before {
+      color: var(--secondary);
+      content: attr(data-placeholder);
+    }
+    #marco-life-dashboard .roadmap-editable.is-saving::after {
+      color: var(--secondary);
+      content: " · saving";
+      font-size: 0.72rem;
+    }
+
+    #career-app-form, #career-contact-form { background: var(--surface); border-radius: 12px; padding: 14px; }
+    .table-scroll { overflow-x: auto; }
+    .tracker-table tbody tr:hover { background: var(--surface-strong); }
+    .tracker-table .status-badge { background: var(--surface-strong); color: var(--primary); }
+    .status-badge.interview, .status-badge.offer { background: var(--primary); color: var(--background); }
+    .status-badge.screening, .status-badge.applied { background: var(--highlight); color: var(--text); }
+    .status-badge.rejected { background: var(--secondary); color: var(--background); }
+    .tracker-empty { color: var(--secondary); padding: 24px 8px !important; text-align: center; }
+
+    #schedule-modal { padding: 18px; }
+    #schedule-modal .modal-box { width: min(620px, 100%); }
+    body.modal-open { overflow: hidden; }
+
+    @media (max-width: 920px) {
+      #marco-life-dashboard .focus-strip { grid-template-columns: 1fr 1fr; }
+      #marco-life-dashboard .focus-actions { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--background) 25%, transparent); grid-column: 1 / -1; }
+      #marco-life-dashboard .roadmap-summary { grid-template-columns: 1fr; }
+      #career-app-form, #career-contact-form { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 740px) {
+      body { padding: 18px 14px 48px; }
+      #marco-life-dashboard .dashboard-header { align-items: flex-start; flex-direction: column; padding-bottom: 18px; }
+      #marco-life-dashboard .header-actions { justify-content: space-between; width: 100%; }
+      #marco-life-dashboard .dash-tabs { margin-left: -4px; margin-right: -4px; }
+      #marco-life-dashboard .viz-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      #marco-life-dashboard .card { padding: 19px; }
+      #marco-life-dashboard .viz-stat { min-height: 118px; }
+      #marco-life-dashboard .viz-stat-value { font-size: 1.55rem; }
+      #marco-life-dashboard .week-nav { align-items: stretch; flex-direction: column; }
+      #marco-life-dashboard .week-nav .viz-row { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+      #marco-life-dashboard .week-nav .btn { justify-content: center; padding: 8px; }
+      #marco-life-dashboard .week-picker { justify-content: space-between; }
+      #marco-life-dashboard .week-picker .form-select { flex: 1; min-width: 0; }
+      #marco-life-dashboard .day-strip {
+        grid-auto-columns: minmax(100px, 1fr);
+        grid-auto-flow: column;
+        grid-template-columns: none;
+        margin-right: -14px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      #marco-life-dashboard .focus-strip { grid-template-columns: 1fr; }
+      #marco-life-dashboard .focus-training,
+      #marco-life-dashboard .focus-actions { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--background) 25%, transparent); grid-column: auto; }
+      #marco-life-dashboard .roadmap-toolbar { align-items: stretch; flex-direction: column; }
+      #marco-life-dashboard .roadmap-toolbar-actions { align-items: flex-start; text-align: left; }
+      #marco-life-dashboard .roadmap-column-head { display: none; }
+      #marco-life-dashboard .roadmap-row { grid-template-columns: 1fr; gap: 14px; }
+      #marco-life-dashboard .roadmap-cell { border-top: 1px solid var(--border); padding-top: 13px; }
+      #marco-life-dashboard .schedule-item { grid-template-columns: 94px 1fr; }
+      #schedule-modal .modal-box { max-height: 92vh; padding: 24px 18px; }
+      #schedule-modal .add-row { grid-template-columns: 1fr; }
+      #schedule-modal .block-row { grid-template-columns: 92px 1fr auto; padding: 11px; }
+    }
+    @media (max-width: 520px) {
+      #marco-life-dashboard .viz-grid { grid-template-columns: 1fr; }
+      #career-app-form, #career-contact-form { grid-template-columns: 1fr !important; }
+      #marco-life-dashboard .status-chip { max-width: calc(100vw - 120px); }
+      #dashboard-status { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
 
   <!-- ===== PASSWORD SCREEN ===== -->
-  <div id="password-screen">
+  <div id="password-screen" role="dialog" aria-modal="true" aria-labelledby="password-title">
     <div class="lock-box">
-      <h1>Marco's Dashboard</h1>
+      <h1 id="password-title">Marco's Dashboard</h1>
       <p>Enter your private access code</p>
-      <input type="password" id="password-input" placeholder="Enter password" autofocus>
+      <input type="password" id="password-input" placeholder="Enter password" aria-label="Dashboard password" autocomplete="current-password" autofocus>
       <button class="btn-unlock" id="unlock-btn">Unlock</button>
       <div class="error-msg" id="password-error"></div>
     </div>
@@ -531,17 +855,29 @@
 
   <!-- ===== DASHBOARD ===== -->
   <div id="marco-life-dashboard">
+    <header class="dashboard-header">
+      <div>
+        <span class="eyebrow">Marco's personal operating system</span>
+        <h1>Life dashboard</h1>
+        <p class="header-copy">Career, training, and life—planned one week at a time.</p>
+      </div>
+      <div class="header-actions">
+        <span class="status-chip"><i data-lucide="cloud-check"></i><span id="dashboard-status" aria-live="polite">Ready.</span></span>
+        <button type="button" class="btn btn-ghost" id="lock-dashboard"><i data-lucide="lock"></i> Lock</button>
+      </div>
+    </header>
+
     <!-- Tabs -->
     <div class="dash-tabs" role="tablist">
-      <button type="button" class="btn btn-primary" id="tab-week" data-view="week">This week</button>
-      <button type="button" class="btn" id="tab-roadmap" data-view="roadmap">July–December</button>
-      <button type="button" class="btn" id="tab-career" data-view="career">Career Tracker</button>
-      <button type="button" class="btn" id="tab-notes" data-view="notes">Notes</button>
-      <button type="button" class="btn" id="tab-settings" data-view="settings">Goals & settings</button>
+      <button type="button" class="btn btn-primary" id="tab-week" data-view="week" role="tab" aria-controls="panel-week" aria-selected="true"><i data-lucide="calendar-days"></i> This week</button>
+      <button type="button" class="btn" id="tab-roadmap" data-view="roadmap" role="tab" aria-controls="panel-roadmap" aria-selected="false" tabindex="-1"><i data-lucide="map"></i> Roadmap</button>
+      <button type="button" class="btn" id="tab-career" data-view="career" role="tab" aria-controls="panel-career" aria-selected="false" tabindex="-1"><i data-lucide="briefcase-business"></i> Career Tracker</button>
+      <button type="button" class="btn" id="tab-notes" data-view="notes" role="tab" aria-controls="panel-notes" aria-selected="false" tabindex="-1"><i data-lucide="notebook-pen"></i> Notes</button>
+      <button type="button" class="btn" id="tab-settings" data-view="settings" role="tab" aria-controls="panel-settings" aria-selected="false" tabindex="-1"><i data-lucide="sliders-horizontal"></i> Goals & settings</button>
     </div>
 
     <!-- ===== PANEL: WEEK ===== -->
-    <section id="panel-week" role="tabpanel">
+    <section id="panel-week" role="tabpanel" aria-labelledby="tab-week">
       <div class="week-nav">
         <div class="viz-row">
           <button type="button" class="btn" id="previous-week"><i data-lucide="chevron-left"></i> Previous</button>
@@ -559,12 +895,22 @@
       </div>
 
       <div class="focus-strip">
-        <div class="focus-copy">
-          <span class="viz-badge" id="phase-badge">Setup</span>
+        <div class="focus-primary">
+          <div class="focus-heading">
+            <span class="viz-badge" id="phase-badge">Setup</span>
+            <span class="eyebrow">Career focus</span>
+          </div>
           <strong id="week-focus">Build the system</strong>
           <span class="text-small" id="target-companies">Target companies</span>
         </div>
-        <span class="text-small" id="weekly-quota">Weekly quota</span>
+        <div class="focus-training">
+          <span class="focus-label"><i data-lucide="activity"></i> Training focus</span>
+          <strong id="training-focus">Keep the current run-and-lift rhythm</strong>
+        </div>
+        <div class="focus-actions">
+          <span class="text-small" id="weekly-quota">Weekly quota</span>
+          <button type="button" class="btn btn-ghost" id="edit-week-focus"><i data-lucide="pencil-line"></i> Edit in roadmap</button>
+        </div>
       </div>
 
       <div class="day-strip" id="day-strip" role="tablist"></div>
@@ -575,7 +921,7 @@
             <h3 id="selected-day-title">Friday, July 10</h3>
             <div class="right-actions">
               <span class="text-small" id="day-status">0 of 0 done</span>
-              <button type="button" class="btn btn-ghost" id="edit-schedule-btn" title="Edit this day's schedule"><i data-lucide="pencil"></i></button>
+              <button type="button" class="btn btn-ghost" id="edit-schedule-btn" title="Edit this day's schedule" aria-label="Edit this day's schedule"><i data-lucide="pencil"></i></button>
             </div>
           </div>
           <div class="card-soft schedule-list" id="schedule-list" aria-label="Daily schedule"></div>
@@ -610,18 +956,30 @@
     </section>
 
     <!-- ===== PANEL: ROADMAP ===== -->
-    <section id="panel-roadmap" class="is-hidden" role="tabpanel" hidden>
+    <section id="panel-roadmap" class="is-hidden" role="tabpanel" aria-labelledby="tab-roadmap" hidden>
+      <div class="roadmap-toolbar">
+        <div>
+          <span class="eyebrow">July–December 2026</span>
+          <h2>Your weekly roadmap</h2>
+          <p class="text-small">Click any Career or Training focus to edit it. Changes save locally immediately, sync to the cloud, and appear in This week.</p>
+        </div>
+        <div class="roadmap-toolbar-actions">
+          <span class="text-small" id="roadmap-save-status" aria-live="polite">All changes saved</span>
+          <button type="button" class="btn" id="roadmap-current-week"><i data-lucide="locate-fixed"></i> Jump to selected week</button>
+        </div>
+      </div>
       <div class="viz-grid roadmap-summary">
         <div class="card viz-stat"><span class="text-muted">Career objective</span><span class="viz-stat-value">December 15</span><span class="text-small">Signed permanent early-career offer</span></div>
         <div class="card viz-stat"><span class="text-muted">Race decision window</span><span class="viz-stat-value">Aug 24–Oct 4</span><span class="text-small" id="race-summary">Ohio or Musselman; 2027 date TBD</span></div>
         <div class="card viz-stat"><span class="text-muted">New disciplines</span><span class="viz-stat-value" id="discipline-summary">Aug 3 / Sep 28</span><span class="text-small">Bike / swim start</span></div>
       </div>
+      <div class="roadmap-column-head" aria-hidden="true"><span>Week</span><span>Career focus</span><span>Training focus</span></div>
       <div class="roadmap-list" id="roadmap-list" aria-label="July through December roadmap"></div>
       <p class="assumption-line text-small">The schedule reserves four training blocks per week. Bike and swim replace existing blocks instead of adding more time. Race dates and 2027 registration openings remain to be confirmed.</p>
     </section>
 
     <!-- ===== PANEL: CAREER TRACKER ===== -->
-    <section id="panel-career" class="is-hidden" role="tabpanel" hidden>
+    <section id="panel-career" class="is-hidden" role="tabpanel" aria-labelledby="tab-career" hidden>
       <!-- Quick Stats -->
       <div class="viz-grid">
         <div class="card viz-stat"><span class="text-muted">Applications</span><span class="viz-stat-value" id="career-apps-count">0</span><span class="text-small">Total submitted</span></div>
@@ -647,7 +1005,7 @@
           <textarea id="edit-strategic-plan" rows="28"></textarea>
           
           <button type="button" class="btn btn-primary" id="save-career-content">Save Career Content</button>
-          <span id="career-edit-status" class="text-small" style="margin-left:16px; color:#5a6b55;"></span>
+          <span id="career-edit-status" class="text-small" style="margin-left:16px; color:var(--muted);"></span>
         </div>
       </details>
 
@@ -664,8 +1022,8 @@
       <div class="card">
         <h3 style="color:#214E3B; margin-bottom:12px;">Application Tracker</h3>
         <form id="career-app-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
-          <label class="form-label">Company <input class="form-control" id="career-app-company" placeholder="e.g. Intact" required></label>
-          <label class="form-label">Job Title <input class="form-control" id="career-app-title" placeholder="e.g. Underwriting Trainee"></label>
+          <label class="form-label">Company <input class="form-control" id="career-app-company" placeholder="e.g. Intact" autocomplete="organization" required></label>
+          <label class="form-label">Job Title <input class="form-control" id="career-app-title" placeholder="e.g. Underwriting Trainee" autocomplete="organization-title" required></label>
           <label class="form-label">Status 
             <select class="form-select" id="career-app-status">
               <option value="Watching">Watching</option>
@@ -678,7 +1036,7 @@
           </label>
           <button type="submit" class="btn btn-primary" style="margin-bottom:2px;">+ Log</button>
         </form>
-        <div style="overflow-x:auto;">
+        <div class="table-scroll">
           <table class="tracker-table" id="career-app-table">
             <thead><tr><th>Company</th><th>Title</th><th>Status</th><th>Date</th><th>Notes</th><th></th></tr></thead>
             <tbody id="career-app-tbody"></tbody>
@@ -690,8 +1048,8 @@
       <div class="card">
         <h3 style="color:#214E3B; margin-bottom:12px;">Networking Tracker</h3>
         <form id="career-contact-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
-          <label class="form-label">Name <input class="form-control" id="career-contact-name" placeholder="e.g. Jane Smith"></label>
-          <label class="form-label">Company <input class="form-control" id="career-contact-company" placeholder="e.g. Zurich"></label>
+          <label class="form-label">Name <input class="form-control" id="career-contact-name" placeholder="e.g. Jane Smith" autocomplete="name" required></label>
+          <label class="form-label">Company <input class="form-control" id="career-contact-company" placeholder="e.g. Zurich" autocomplete="organization" required></label>
           <label class="form-label">Status 
             <select class="form-select" id="career-contact-status">
               <option value="Sent">Message Sent</option>
@@ -703,7 +1061,7 @@
           </label>
           <button type="submit" class="btn btn-primary" style="margin-bottom:2px;">+ Log</button>
         </form>
-        <div style="overflow-x:auto;">
+        <div class="table-scroll">
           <table class="tracker-table" id="career-contact-table">
             <thead><tr><th>Name</th><th>Company</th><th>Status</th><th>Date</th><th>Notes</th><th></th></tr></thead>
             <tbody id="career-contact-tbody"></tbody>
@@ -713,28 +1071,28 @@
 
       <!-- Strategic Plan -->
       <div class="card">
-        <div class="plan-details">
+        <details class="plan-details">
           <summary>View Your 24-Week Strategic Plan</summary>
           <div class="plan-content" id="career-plan-content"></div>
-        </div>
+        </details>
       </div>
     </section>
 
     <!-- ===== PANEL: NOTES ===== -->
-    <section id="panel-notes" class="is-hidden" role="tabpanel" hidden>
+    <section id="panel-notes" class="is-hidden" role="tabpanel" aria-labelledby="tab-notes" hidden>
       <div class="card" style="margin-bottom:0;">
         <h3 style="color:#214E3B; margin-bottom:8px;">Quick Notes</h3>
         <p class="text-small" style="margin-bottom:16px;">Auto-saves locally and syncs. Use it for meeting notes, interview prep, or anything you need to remember.</p>
         <textarea class="notes-textarea" id="notes-textarea" placeholder="Jot down your thoughts, interview notes, reminders..."></textarea>
         <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
           <span class="text-small" id="notes-status">Saved.</span>
-          <span class="text-small" style="color:#5a6b55;">Last saved automatically</span>
+          <span class="text-small" style="color:var(--muted);">Last saved automatically</span>
         </div>
       </div>
     </section>
 
     <!-- ===== PANEL: SETTINGS ===== -->
-    <section id="panel-settings" class="is-hidden" role="tabpanel" hidden>
+    <section id="panel-settings" class="is-hidden" role="tabpanel" aria-labelledby="tab-settings" hidden>
       <form class="settings-form" id="settings-form">
         <div class="settings-section">
           <h3>Career and race</h3>
@@ -796,7 +1154,7 @@
               <button type="button" class="btn" id="load-now-btn">Load from Cloud</button>
             </div>
           </div>
-          <p class="text-small" style="margin-top:12px; color:#5a6b55;">
+          <p class="text-small" style="margin-top:12px; color:var(--muted);">
             Your data is stored securely in the cloud. Changes auto-sync within a few seconds.
             <br>No setup required — just open the link and use the dashboard.
           </p>
@@ -809,24 +1167,23 @@
       </form>
     </section>
 
-    <div class="status-line" id="dashboard-status" aria-live="polite"></div>
   </div>
 
   <!-- ===== SCHEDULE MODAL ===== -->
-  <div id="schedule-modal">
-    <div class="modal-box">
-      <h2>Edit Schedule</h2>
+  <div id="schedule-modal" role="dialog" aria-modal="true" aria-labelledby="schedule-modal-title">
+    <div class="modal-box" tabindex="-1">
+      <h2 id="schedule-modal-title">Edit Schedule</h2>
       <p class="sub" id="modal-day-label">Friday, July 10</p>
       <div class="block-list" id="modal-block-list"></div>
       <div class="add-row">
         <input type="text" id="modal-new-time" placeholder="Time (e.g. 13:00–14:00)">
         <input type="text" id="modal-new-label" placeholder="What are you doing?">
-        <button class="btn btn-primary" id="modal-add-block">+ Add</button>
+        <button type="button" class="btn btn-primary" id="modal-add-block">+ Add</button>
       </div>
       <div class="modal-actions">
-        <button class="btn btn-primary" id="modal-save">Save changes</button>
-        <button class="btn btn-reset" id="modal-reset">Reset to default</button>
-        <button class="btn" id="modal-close">Close</button>
+        <button type="button" class="btn btn-primary" id="modal-save">Save changes</button>
+        <button type="button" class="btn btn-reset" id="modal-reset">Reset to default</button>
+        <button type="button" class="btn" id="modal-close">Close</button>
       </div>
     </div>
   </div>
@@ -842,6 +1199,13 @@
       const passwordInput = document.getElementById('password-input');
       const unlockBtn = document.getElementById('unlock-btn');
       const errorMsg = document.getElementById('password-error');
+      let dashboardInitialized = false;
+
+      function ensureDashboardInitialized() {
+        if (dashboardInitialized) return;
+        initDashboard();
+        dashboardInitialized = true;
+      }
 
       function tryUnlock() {
         if (passwordInput.value.trim() === PASSWORD) {
@@ -849,7 +1213,7 @@
           dashboard.classList.add('visible');
           sessionStorage.setItem('dashboard_unlocked', 'true');
           errorMsg.textContent = '';
-          try { initDashboard(); } catch (e) { console.error(e); }
+          try { ensureDashboardInitialized(); } catch (e) { console.error(e); }
         } else {
           errorMsg.textContent = 'Incorrect password. Try again.';
           passwordInput.value = '';
@@ -860,7 +1224,7 @@
       if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
         passwordScreen.classList.add('hidden');
         dashboard.classList.add('visible');
-        try { initDashboard(); } catch (e) { console.error(e); }
+        try { ensureDashboardInitialized(); } catch (e) { console.error(e); }
       } else { passwordInput.focus(); }
 
       unlockBtn.addEventListener('click', tryUnlock);
@@ -901,39 +1265,42 @@
           careerApps: [],
           careerContacts: [],
           careerContent: {
+            weeklyFocus: {},
             targetCompaniesText: "AtkinsRéalis: Data Analyst, Project Controls, Risk Analyst, PMO Analyst\nIntact: Specialty Lines Dev, Commercial Lines Dev, Underwriting Associate\nIQVIA: Associate Consultant, Business Analyst, Commercial Analytics\nMunich Re / HSB: Underwriting Associate, Reinsurance Trainee, Risk Analyst\nAstraZeneca: Business Insights, Commercial Excellence, Omnichannel Analyst\nZurich: Underwriting Trainee, Commercial Insurance Analyst\nSanofi: Commercial Excellence, Transformation Analyst\nMarsh: Graduate Program, Risk Analyst, Broking Analyst\nMetrolinx: Project Controls, PMO Analyst, Risk Analyst\nVeeva: Associate Consultant, Data Operations, Analytics Associate",
             searchLanesText: "Insurance / Reinsurance / Risk: 35%\nInfrastructure / Project Controls: 35%\nHealthcare Commercial Analytics: 25%\nBanking / General Analyst: 5%",
             strategicPlanText: "Week 1 (Jul 8–12): Apply to AtkinsRéalis Data Analyst role. Create master tracker. Set job alerts.\nWeek 2 (Jul 13–19): Build 3 résumé versions (Insurance, Infrastructure, Healthcare). Update LinkedIn.\nWeek 3 (Jul 20–26): Insurance networking (Intact, Munich Re, Zurich, Marsh). 12 messages, 2 calls.\nWeek 4 (Jul 27–Aug 2): Healthcare networking (IQVIA, AstraZeneca, Sanofi, Veeva). 12 messages, 3 calls.\nWeek 5 (Aug 3–9): Infrastructure networking (AtkinsRéalis, Metrolinx, OPG, Aecon, WSP). Learn P6/Power BI basics.\nWeek 6 (Aug 10–16): Prepare 8 STAR stories + 6 career-transition answers. Mock interviews.\nWeek 7 (Aug 17–23): Convert networking to referrals. Follow up with top contacts.\nWeek 8 (Aug 24–30): Prepare for fall recruiting. Identify graduate programs. Prepare transcripts.\nWeek 9 (Aug 31–Sep 6): Fall Application Surge — 12 apps, 15 messages, 3 calls. Target: 60-70 cumulative apps.\nWeek 10 (Sep 7–13): Funnel analysis. Revise weakest résumé. 2 mock interviews.\nWeek 11 (Sep 14–20): Decision Gate 1. Assess pipeline. If no interviews, broaden targets.\nWeek 12 (Sep 21–27): Create technical work sample (Project Controls Dashboard or Healthcare Campaign).\nWeek 13 (Sep 28–Oct 4): Re-engage all \"stay in touch\" contacts. Second application wave.\nWeek 14 (Oct 5–11): Direct recruiter outreach (AtkinsRéalis, Intact, Zurich, IQVIA, AstraZeneca, Marsh).\nWeek 15 (Oct 12–18): Interview conversion prep. Research business units. Thank-you follow-ups.\nWeek 16 (Oct 19–25): Expand company list if needed (Chubb, AIG, Roche, GSK, Hydro One, etc.)\nWeek 17 (Oct 26–Nov 1): Decision Gate 2. Target: 100+ apps, 6+ first-round, 2+ late-stage. If not, expand titles.\nWeek 18 (Nov 2–8): Shift to immediate-start hiring (0-2 yrs, 1-3 yrs roles). Apply to 1-3 year positions with 70% fit.\nWeek 19 (Nov 9–15): Final-round & offer preparation. Salary range, references, resignation language.\nWeek 20 (Nov 16–22): Concentrated referral push. 10 direct messages to strongest relationships.\nWeek 21 (Nov 23–29): December pipeline. Target January starts, backfills, contract-to-perm.\nWeek 22 (Nov 30–Dec 6): Decision Gate 3. Classify all active processes. If no offers, decide whether to continue.\nWeek 23 (Dec 7–13): Close or extend. Review offers. Conduct post-mortem if none.\nWeek 24 (Dec 14–20): Transition. Sign offer, resign professionally, prepare handover."
           }
         };
 
+        // Hardcoded defaults. Per-week edits are stored separately in
+        // state.careerContent.weeklyFocus and merged by getWeeklyFocus().
         const weekFocus = {
-          "2026-07-06": ["Kick off the dashboard and lock the weekly rhythm", "All 10 primary targets"],
-          "2026-07-13": ["Finish résumé variants, LinkedIn, tracker, and role lanes", "AtkinsRéalis · Intact · IQVIA"],
-          "2026-07-20": ["Launch the first high-quality application sprint", "AtkinsRéalis · Intact"],
-          "2026-07-27": ["Build the analytics and insurance pipeline", "IQVIA · Munich Re / HSB"],
-          "2026-08-03": ["Add bike without increasing the weekly time budget", "AstraZeneca · Zurich"],
-          "2026-08-10": ["Strengthen referrals and application quality", "Sanofi · Marsh"],
-          "2026-08-17": ["Complete the first pass across primary targets", "Metrolinx · Veeva"],
-          "2026-08-24": ["Referral sprint and Musselman registration watch", "AtkinsRéalis · Intact · IQVIA"],
-          "2026-08-31": ["Referral sprint and interview-story practice", "AstraZeneca · Sanofi · Veeva"],
-          "2026-09-07": ["Push insurance, risk, and project roles", "Munich Re / HSB · Zurich · Marsh"],
-          "2026-09-14": ["Convert outreach into live conversations", "AtkinsRéalis · Metrolinx"],
-          "2026-09-21": ["Push healthcare and commercial analytics roles", "IQVIA · AstraZeneca · Sanofi · Veeva"],
-          "2026-09-28": ["Start swim, choose a race, and convert interviews", "Active interview companies"],
-          "2026-10-05": ["Decision gate: double down on responsive lanes", "Top five by response rate"],
-          "2026-10-12": ["Prepare cases, stories, and technical examples", "Active interview companies"],
-          "2026-10-19": ["Deep interview preparation and targeted follow-ups", "Active interview companies"],
-          "2026-10-26": ["Revive stalled applications before November", "Primary targets with warm contacts"],
-          "2026-11-02": ["Open a backup pipeline while interviews continue", "Primary targets plus matched employers"],
-          "2026-11-09": ["Close active interview loops", "Late-stage processes"],
-          "2026-11-16": ["Offer, referral, and reference push", "Late-stage processes"],
-          "2026-11-23": ["Keep a second pipeline alive", "Responsive roles only"],
-          "2026-11-30": ["Final interview push before holiday slowdown", "Late-stage and high-fit roles"],
-          "2026-12-07": ["Drive decisions and prepare negotiation points", "Offer-stage companies"],
-          "2026-12-14": ["Secure the signed offer by December 15", "Best available permanent role"],
-          "2026-12-21": ["Transition cleanly and protect recovery", "Onboarding or active backup"],
-          "2026-12-28": ["Close 2026 and lock the January base plan", "2027 priorities"]
+          "2026-07-06": { career:"Kick off the dashboard and lock the weekly rhythm", training:"Keep the run-and-lift rotation light while the system is set up.", targets:"All 10 primary targets" },
+          "2026-07-13": { career:"Finish résumé variants, LinkedIn, tracker, and role lanes", training:"Hold four reserved run/lift blocks and protect recovery after work.", targets:"AtkinsRéalis · Intact · IQVIA" },
+          "2026-07-20": { career:"Launch the first high-quality application sprint", training:"Prioritize summer running while maintaining the run/lift rotation.", targets:"AtkinsRéalis · Intact" },
+          "2026-07-27": { career:"Build the analytics and insurance pipeline", training:"Complete the final running-heavy week and prepare bike access and fit.", targets:"IQVIA · Munich Re / HSB" },
+          "2026-08-03": { career:"Add bike without increasing the weekly time budget", training:"Start the Saturday outdoor bike; replace one run rather than adding a fifth block.", targets:"AstraZeneca · Zurich" },
+          "2026-08-10": { career:"Strengthen referrals and application quality", training:"Keep one outdoor bike, two runs, and one lift inside four total blocks.", targets:"Sanofi · Marsh" },
+          "2026-08-17": { career:"Complete the first pass across primary targets", training:"Build bike comfort while keeping the remaining sessions easy and consistent.", targets:"Metrolinx · Veeva" },
+          "2026-08-24": { career:"Referral sprint and Musselman registration watch", training:"Continue the weekly outdoor bike and steady summer running volume.", targets:"AtkinsRéalis · Intact · IQVIA" },
+          "2026-08-31": { career:"Referral sprint and interview-story practice", training:"Maintain one outdoor bike, two runs, and one lift with no volume creep.", targets:"AstraZeneca · Sanofi · Veeva" },
+          "2026-09-07": { career:"Push insurance, risk, and project roles", training:"Keep the outdoor bike consistent and begin planning the indoor swim routine.", targets:"Munich Re / HSB · Zurich · Marsh" },
+          "2026-09-14": { career:"Convert outreach into live conversations", training:"Maintain four blocks and confirm pool access, commute, and swim gear.", targets:"AtkinsRéalis · Metrolinx" },
+          "2026-09-21": { career:"Push healthcare and commercial analytics roles", training:"Complete the last pre-swim week with an outdoor bike, runs, and lifting.", targets:"IQVIA · AstraZeneca · Sanofi · Veeva" },
+          "2026-09-28": { career:"Start swim, choose a race, and convert interviews", training:"Start one indoor swim, keep Saturday cycling, and replace—not add—a run.", targets:"Active interview companies" },
+          "2026-10-05": { career:"Decision gate: double down on responsive lanes", training:"Settle into one swim, one bike, one run, and one lift per week.", targets:"Top five by response rate" },
+          "2026-10-12": { career:"Prepare cases, stories, and technical examples", training:"Keep the four-discipline rhythm easy enough to support interview preparation.", targets:"Active interview companies" },
+          "2026-10-19": { career:"Deep interview preparation and targeted follow-ups", training:"Maintain swim, bike, run, and lift consistency without adding volume.", targets:"Active interview companies" },
+          "2026-10-26": { career:"Revive stalled applications before November", training:"Complete the final outdoor-bike week if weather permits and prep the indoor setup.", targets:"Primary targets with warm contacts" },
+          "2026-11-02": { career:"Open a backup pipeline while interviews continue", training:"Move cycling indoors; keep one swim, one bike, one run, and one lift.", targets:"Primary targets plus matched employers" },
+          "2026-11-09": { career:"Close active interview loops", training:"Maintain the indoor rhythm and protect sleep before interviews.", targets:"Late-stage processes" },
+          "2026-11-16": { career:"Offer, referral, and reference push", training:"Keep all four sessions easy and move them around interview commitments.", targets:"Late-stage processes" },
+          "2026-11-23": { career:"Keep a second pipeline alive", training:"Prioritize consistency over intensity during the holiday-shortened week.", targets:"Responsive roles only" },
+          "2026-11-30": { career:"Final interview push before holiday slowdown", training:"Maintain indoor swim and bike plus one run and one lift.", targets:"Late-stage and high-fit roles" },
+          "2026-12-07": { career:"Drive decisions and prepare negotiation points", training:"Keep the four-block base while offer work takes priority.", targets:"Offer-stage companies" },
+          "2026-12-14": { career:"Secure the signed offer by December 15", training:"Use training for recovery and reduce intensity during decision week.", targets:"Best available permanent role" },
+          "2026-12-21": { career:"Transition cleanly and protect recovery", training:"Maintain a flexible holiday rhythm without chasing missed sessions.", targets:"Onboarding or active backup" },
+          "2026-12-28": { career:"Close 2026 and lock the January base plan", training:"Review consistency and set the January 2027 swim-bike-run-lift base.", targets:"2027 priorities" }
         };
 
         let state = loadState();
@@ -941,7 +1308,10 @@
         let selectedWeek = startOfWeek(selectedDate);
         let syncDebounceTimer = null;
         let isSyncing = false;
+        let syncQueued = false;
         let notesSaveTimer = null;
+        let roadmapSaveTimer = null;
+        let lastModalTrigger = null;
 
         const weeks = [];
         for (let cursor = startOfWeek(RANGE_START); cursor <= startOfWeek(RANGE_END); cursor = addDays(cursor, 7)) {
@@ -967,8 +1337,10 @@
           newTaskText: document.getElementById("new-task-text"),
           phaseBadge: document.getElementById("phase-badge"),
           weekFocus: document.getElementById("week-focus"),
+          trainingFocus: document.getElementById("training-focus"),
           targetCompanies: document.getElementById("target-companies"),
           weeklyQuota: document.getElementById("weekly-quota"),
+          editWeekFocus: document.getElementById("edit-week-focus"),
           statCompletion: document.getElementById("stat-completion"),
           statCompletionDetail: document.getElementById("stat-completion-detail"),
           statApplications: document.getElementById("stat-applications"),
@@ -979,6 +1351,8 @@
           roadmapList: document.getElementById("roadmap-list"),
           raceSummary: document.getElementById("race-summary"),
           disciplineSummary: document.getElementById("discipline-summary"),
+          roadmapSaveStatus: document.getElementById("roadmap-save-status"),
+          roadmapCurrentWeek: document.getElementById("roadmap-current-week"),
           settingsForm: document.getElementById("settings-form"),
           settingsStatus: document.getElementById("settings-status"),
           dashboardStatus: document.getElementById("dashboard-status"),
@@ -1027,6 +1401,7 @@
           syncStatus: document.getElementById("sync-status"),
           syncNowBtn: document.getElementById("sync-now-btn"),
           loadNowBtn: document.getElementById("load-now-btn"),
+          lockDashboard: document.getElementById("lock-dashboard"),
         };
 
         // ===== HELPERS =====
@@ -1040,19 +1415,47 @@
         function formatLongDate(d) { return LONG_DAY_NAMES[d.getDay()] + ", " + MONTH_NAMES[d.getMonth()] + " " + d.getDate(); }
         function formatWeek(d) { const e = addDays(d,6); return formatShortDate(d) + "–" + formatShortDate(e); }
         function todayStr() { const d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+        function cleanFocusText(value) { return String(value || "").replace(/\s+/g, " ").trim(); }
+        function escapeHTML(value) {
+          return String(value == null ? "" : value).replace(/[&<>"']/g, function(character) {
+            return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&apos;" }[character];
+          });
+        }
 
-        // ===== NEW SORTING LOGIC (FIXES THE SCHEDULE ORDER) =====
+        function getWeeklyFocus(week) {
+          const key = dateKey(week);
+          const phase = getPhase(week);
+          const fallback = weekFocus[key] || {
+            career: phase.focus,
+            training: "Maintain the four reserved weekly training blocks.",
+            targets: phase.companies
+          };
+          const weeklyFocus = state.careerContent && state.careerContent.weeklyFocus;
+          const custom = weeklyFocus && typeof weeklyFocus[key] === "object" ? weeklyFocus[key] : {};
+          return {
+            career: cleanFocusText(custom.career) || fallback.career,
+            training: cleanFocusText(custom.training) || fallback.training,
+            targets: cleanFocusText(custom.targets) || fallback.targets
+          };
+        }
+
+        // ===== SCHEDULE SORTING =====
         function sortBlocksByTime(blocks) {
           if (!blocks || blocks.length <= 1) return blocks;
           return blocks.slice().sort(function(a, b) {
             function getStartMinutes(timeStr) {
-              // Split by hyphen, en dash, or em dash
-              var parts = timeStr.split(/[-–—]/);
-              if (parts.length < 2) return 0;
-              var startStr = parts[0].trim();
-              var hm = startStr.split(':').map(Number);
-              if (hm.length < 2 || isNaN(hm[0]) || isNaN(hm[1])) return 0;
-              return hm[0] * 60 + hm[1];
+              const value = String(timeStr || "").trim().toLowerCase();
+              if (value === "morning") return 8 * 60;
+              if (value === "noon") return 12 * 60;
+              if (value === "afternoon") return 13 * 60;
+              if (value === "evening") return 18 * 60;
+              const match = value.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/);
+              if (!match) return Number.POSITIVE_INFINITY;
+              let hours = Number(match[1]);
+              const minutes = Number(match[2] || 0);
+              if (match[3] === "pm" && hours < 12) hours += 12;
+              if (match[3] === "am" && hours === 12) hours = 0;
+              return (hours * 60) + minutes + (value.startsWith("after") ? 0.5 : 0);
             }
             return getStartMinutes(a.time) - getStartMinutes(b.time);
           });
@@ -1062,10 +1465,14 @@
         function setSyncStatus(msg, type) {
           els.syncStatus.textContent = msg;
           els.syncStatus.className = "sync-status" + (type ? " " + type : "");
+          if (els.dashboardStatus) els.dashboardStatus.textContent = msg;
         }
 
         async function saveToJSONBin() {
-          if (isSyncing) return;
+          if (isSyncing) {
+            syncQueued = true;
+            return;
+          }
           isSyncing = true;
           setSyncStatus("Saving to cloud...", "syncing");
           try {
@@ -1093,6 +1500,10 @@
             setSyncStatus("Save failed: " + e.message, "error");
           } finally {
             isSyncing = false;
+            if (syncQueued) {
+              syncQueued = false;
+              saveToJSONBin();
+            }
           }
         }
 
@@ -1112,14 +1523,14 @@
             const json = await res.json();
             const data = json.record;
             if (data) {
-              if (data.settings) state.settings = data.settings;
+              if (data.settings) state.settings = Object.assign({}, defaultState.settings, data.settings);
               if (data.completed) state.completed = data.completed;
               if (data.customTasks) state.customTasks = data.customTasks;
               if (data.scheduleOverrides) state.scheduleOverrides = data.scheduleOverrides;
               if (data.notes !== undefined) state.notes = data.notes;
               if (data.careerApps) state.careerApps = data.careerApps;
               if (data.careerContacts) state.careerContacts = data.careerContacts;
-              if (data.careerContent) state.careerContent = Object.assign({}, defaultState.careerContent, data.careerContent);
+              if (data.careerContent) state.careerContent = mergeCareerContent(data.careerContent);
               saveState("Loaded from cloud.");
               renderAll();
               populateSettings();
@@ -1139,6 +1550,14 @@
         }
 
         // ===== STATE MANAGEMENT =====
+        function mergeCareerContent(content) {
+          const merged = Object.assign({}, defaultState.careerContent, content || {});
+          merged.weeklyFocus = content && content.weeklyFocus && typeof content.weeklyFocus === "object"
+            ? content.weeklyFocus
+            : {};
+          return merged;
+        }
+
         function loadState() {
           try {
             const saved = localStorage.getItem(STORAGE_KEY);
@@ -1152,7 +1571,7 @@
               notes: parsed.notes || "",
               careerApps: parsed.careerApps || [],
               careerContacts: parsed.careerContacts || [],
-              careerContent: Object.assign({}, defaultState.careerContent, parsed.careerContent || {})
+              careerContent: mergeCareerContent(parsed.careerContent)
             };
           } catch (e) { return JSON.parse(JSON.stringify(defaultState)); }
         }
@@ -1308,7 +1727,10 @@
           tasks.push({id:key+"-nutrition", category:"Nutrition", text:nutritionTaskText(), custom:false, metricType:"nutrition", metricValue:1});
           if (key === "2026-07-10") tasks.push({id:key+"-friends-event", category:"Life", text:"Friends' event at 8:00 PM", custom:false});
           if (day === 0) { tasks.push({id:key+"-meal-prep", category:"Nutrition", text:"Meal prep for Monday through Thursday", custom:false}); tasks.push({id:key+"-weekly-review", category:"Life", text:"Review the dashboard and lock next week's calendar", custom:false}); }
-          if (day === 6) { const f = weekFocus[dateKey(week)]; if (f) tasks.push({id:key+"-company-research", category:"Career", text:"Research the week's focus: "+f[1], custom:false}); }
+          if (day === 6) {
+            const focus = getWeeklyFocus(week);
+            tasks.push({id:key+"-company-research", category:"Career", text:"Research the week's focus: "+focus.targets, custom:false});
+          }
           state.customTasks.filter(item => item.date === key).forEach(item => { tasks.push({id:item.id, category:item.category, text:item.text, custom:true}); });
           return tasks;
         }
@@ -1319,18 +1741,19 @@
 
         function compactDate(value) { if(!value) return "TBD"; const d=parseDate(value); return MONTH_NAMES[d.getMonth()].slice(0,3)+" "+d.getDate(); }
 
-        // ===== RENDER FUNCTIONS (UPDATED WITH SORTING) =====
+        // ===== RENDER FUNCTIONS =====
         function renderWeek() {
           els.weekSelect.value = dateKey(selectedWeek);
           const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek));
           els.previousWeek.disabled = idx <= 0;
           els.nextWeek.disabled = idx >= weeks.length - 1;
           const phase = getPhase(selectedWeek);
-          const focus = weekFocus[dateKey(selectedWeek)] || [phase.focus, phase.companies];
+          const focus = getWeeklyFocus(selectedWeek);
           const targets = getWeekTargets(selectedWeek);
           els.phaseBadge.textContent = phase.name;
-          els.weekFocus.textContent = focus[0];
-          els.targetCompanies.textContent = "Focus: " + focus[1];
+          els.weekFocus.textContent = focus.career;
+          els.trainingFocus.textContent = focus.training;
+          els.targetCompanies.textContent = "Targets: " + focus.targets;
           els.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 2 conversations";
           renderDayStrip();
           renderSelectedDay();
@@ -1347,10 +1770,27 @@
             const btn = document.createElement("button");
             btn.type = "button"; btn.className = "btn viz-tile"; btn.disabled = !valid;
             btn.setAttribute("role", "tab");
-            btn.setAttribute("aria-selected", String(valid && dateKey(date) === dateKey(selectedDate)));
+            const selected = valid && dateKey(date) === dateKey(selectedDate);
+            btn.setAttribute("aria-selected", String(selected));
+            btn.tabIndex = selected ? 0 : -1;
             btn.textContent = DAY_NAMES[date.getDay()] + " " + date.getDate() + (valid ? " · "+done+"/"+tasks.length : " · —");
-            if (valid && dateKey(date) === dateKey(selectedDate)) btn.classList.add("is-selected");
-            if (valid) btn.addEventListener("click", function() { selectedDate = date; renderWeek(); });
+            if (valid) btn.setAttribute("aria-label", formatLongDate(date) + ", " + done + " of " + tasks.length + " tasks complete");
+            if (selected) btn.classList.add("is-selected");
+            if (valid) {
+              btn.addEventListener("click", function() { selectedDate = date; renderWeek(); });
+              btn.addEventListener("keydown", function(event) {
+                if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+                event.preventDefault();
+                const direction = event.key === "ArrowLeft" ? -1 : 1;
+                const next = addDays(date, direction);
+                if (inRange(next) && dateKey(startOfWeek(next)) === dateKey(selectedWeek)) {
+                  selectedDate = next;
+                  renderWeek();
+                  const selectedButton = els.dayStrip.querySelector('[aria-selected="true"]');
+                  if (selectedButton) selectedButton.focus();
+                }
+              });
+            }
             els.dayStrip.appendChild(btn);
           }
         }
@@ -1361,11 +1801,10 @@
           renderTodos();
         }
 
-        // *** FIXED: SORT SCHEDULE BLOCKS BEFORE DISPLAY ***
         function renderSchedule() {
           const key = dateKey(selectedDate);
           let blocks = getCurrentBlocks(key);
-          blocks = sortBlocksByTime(blocks); // <-- SORT HERE
+          blocks = sortBlocksByTime(blocks);
           els.scheduleList.innerHTML = "";
           blocks.forEach(function(block) {
             const row = document.createElement("div");
@@ -1388,12 +1827,40 @@
           tasks.forEach(task => {
             const row = document.createElement("div"); row.className = "todo-row"; row.dataset.complete = String(isComplete(task));
             const checked = isComplete(task); const id = "task-"+ (task.id || "t"+Date.now()+Math.random());
-            row.innerHTML = `<div class="form-check"><input class="form-check-input" type="checkbox" id="${id}" ${checked?"checked":""}></div>
-              <div class="todo-copy"><label class="form-check-label todo-text" for="${id}">${task.text}</label><span class="text-small text-muted">${task.category}</span></div>
-              ${task.custom ? '<button class="btn btn-ghost" data-remove="'+task.id+'"><i data-lucide="trash-2"></i></button>' : '<span></span>'}`;
-            const cb = row.querySelector('input[type="checkbox"]');
+            const checkWrap = document.createElement("div");
+            checkWrap.className = "form-check";
+            const cb = document.createElement("input");
+            cb.className = "form-check-input";
+            cb.type = "checkbox";
+            cb.id = id;
+            cb.checked = checked;
+            checkWrap.appendChild(cb);
+
+            const copy = document.createElement("div");
+            copy.className = "todo-copy";
+            const label = document.createElement("label");
+            label.className = "form-check-label todo-text";
+            label.htmlFor = id;
+            label.textContent = task.text;
+            const category = document.createElement("span");
+            category.className = "text-small text-muted";
+            category.textContent = task.category;
+            copy.appendChild(label);
+            copy.appendChild(category);
+
+            const action = document.createElement(task.custom ? "button" : "span");
+            if (task.custom) {
+              action.type = "button";
+              action.className = "btn btn-ghost";
+              action.dataset.remove = task.id;
+              action.setAttribute("aria-label", "Remove task: " + task.text);
+              action.innerHTML = '<i data-lucide="trash-2"></i>';
+            }
+            row.appendChild(checkWrap);
+            row.appendChild(copy);
+            row.appendChild(action);
             cb.addEventListener("change", function() { state.completed[task.id] = this.checked; saveState("Progress saved."); renderWeek(); });
-            if (task.custom) { const del = row.querySelector('[data-remove]'); del.addEventListener("click", function() { state.customTasks = state.customTasks.filter(t => t.id !== task.id); delete state.completed[task.id]; saveState("Task removed."); renderWeek(); }); }
+            if (task.custom) { action.addEventListener("click", function() { state.customTasks = state.customTasks.filter(t => t.id !== task.id); delete state.completed[task.id]; saveState("Task removed."); renderWeek(); }); }
             els.todoList.appendChild(row);
           });
           const done = tasks.filter(isComplete).length;
@@ -1423,24 +1890,82 @@
           const raceNames = { undecided:"Ohio or Musselman; 2027 date TBD", ohio:"IRONMAN 70.3 Ohio; 2027 date TBD", musselman:"Musselman in Geneva, NY; 2027 date TBD" };
           els.raceSummary.textContent = raceNames[state.settings.race] || raceNames.undecided;
           els.disciplineSummary.textContent = compactDate(state.settings.bikeStart) + " / " + compactDate(state.settings.swimStart);
-          const rows = [
-            { phase:"Setup", dates:"Jul 10–19", career:"Build the tracker, résumé variants, LinkedIn, and first four applications. Role lanes: Project Coordinator / Junior PM, Business / Data / Operations Analyst, Strategy / Consulting Analyst, and graduate or rotational programs. Primary list: AtkinsRéalis, Intact, IQVIA, Munich Re / HSB, AstraZeneca, Zurich, Sanofi, Marsh, Metrolinx, and Veeva.", training:"Keep the current run-and-lift emphasis inside four reserved weekly blocks.", life:"Set calorie and protein targets, log a baseline week, and protect Friday night as the pressure-release valve." },
-            { phase:"Launch", dates:"Jul 20–Aug 2", career:"Reach "+state.settings.applications+" high-quality applications, "+state.settings.outreach+" targeted outreach messages, and 2 live conversations per week.", training:"Continue summer running; confirm bike access, route, fit, and indoor option before August.", life:"Use Sunday for groceries, meal prep, and the weekly dashboard review." },
-            { phase:"Build", dates:"Aug 3–Sep 13", career:"Complete the first pass across all 10 primary companies, then run two referral sprints. Watch Musselman registration from late August.", training:"Bike begins "+compactDate(state.settings.bikeStart)+". The Saturday bike replaces one run block; it does not create a fifth block.", life:"Keep weekday meals repetitive and easy to log while application volume is highest." },
-            { phase:"Convert", dates:"Sep 14–Oct 11", career:"Convert outreach to interviews, practice stories and cases, and double down on the job lanes producing responses. Choose and register for the race when 2027 entry opens.", training:"Swim begins "+compactDate(state.settings.swimStart)+" in an indoor pool, replacing a weekday run slot.", life:"Schedule interviews before adding optional commitments; keep one recovery evening untouched." },
-            { phase:"Interview", dates:"Oct 12–Nov 15", career:"Shift time from broad applications toward cases, technical examples, follow-ups, references, and late-stage interviews. Open a backup pipeline in early November.", training:"Move the bike indoors around "+compactDate(state.settings.indoorBikeStart)+"; keep four total blocks and avoid volume creep.", life:"Protect sleep before interviews and prepare meals on Sunday rather than relying on weekday decisions." },
-            { phase:"Offer close", dates:"Nov 16–Dec 15", career:"Drive decisions, prepare references and negotiation points, and secure a signed permanent early-career offer by December 15.", training:"Maintain the established indoor rhythm; interviews and offer work take priority over adding sessions.", life:"Keep food logging simple and preserve open time for interviews, references, and decision-making." },
-            { phase:"Transition", dates:"Dec 16–31", career:"Transition cleanly, prepare onboarding, and keep the backup pipeline active until the signed offer is secure.", training:"Maintain consistency and set the January 2027 base schedule after the work situation is known.", life:"Review the year, set January targets, and leave room for holidays and recovery." }
-          ];
           els.roadmapList.innerHTML = "";
-          rows.forEach(item => {
-            const row = document.createElement("div"); row.className = "roadmap-row";
-            row.innerHTML = `<div class="roadmap-period"><span class="viz-badge">${item.phase}</span><p class="text-small">${item.dates}</p></div>
-              <div class="roadmap-cell"><strong>Career</strong><p class="text-small">${item.career}</p></div>
-              <div class="roadmap-cell"><strong>Training schedule</strong><p class="text-small">${item.training}</p></div>
-              <div class="roadmap-cell"><strong>Diet & life</strong><p class="text-small">${item.life}</p></div>`;
+          weeks.forEach(function(week) {
+            const key = dateKey(week);
+            const phase = getPhase(week);
+            const focus = getWeeklyFocus(week);
+            const row = document.createElement("div");
+            row.className = "roadmap-row";
+            row.id = "roadmap-week-" + key;
+            row.dataset.weekKey = key;
+            row.dataset.current = String(key === dateKey(selectedWeek));
+
+            const period = document.createElement("div");
+            period.className = "roadmap-period";
+            const badge = document.createElement("span");
+            badge.className = "viz-badge";
+            badge.textContent = phase.name;
+            const date = document.createElement("p");
+            date.className = "text-small";
+            date.textContent = formatWeek(week);
+            period.appendChild(badge);
+            period.appendChild(date);
+
+            row.appendChild(period);
+            row.appendChild(createRoadmapCell("Career", "career", focus.career, key));
+            row.appendChild(createRoadmapCell("Training", "training", focus.training, key));
             els.roadmapList.appendChild(row);
           });
+        }
+
+        function createRoadmapCell(label, field, value, weekKey) {
+          const cell = document.createElement("div");
+          cell.className = "roadmap-cell";
+          const heading = document.createElement("strong");
+          heading.textContent = label;
+          const editor = document.createElement("p");
+          editor.className = "roadmap-editable text-small";
+          editor.contentEditable = "true";
+          editor.spellcheck = true;
+          editor.setAttribute("role", "textbox");
+          editor.setAttribute("aria-label", label + " focus for " + formatWeek(parseDate(weekKey)));
+          editor.dataset.weekKey = weekKey;
+          editor.dataset.focusField = field;
+          editor.dataset.placeholder = "Click to add a focus";
+          editor.textContent = value;
+          cell.appendChild(heading);
+          cell.appendChild(editor);
+          return cell;
+        }
+
+        function saveRoadmapFocus(editor) {
+          if (!editor || !editor.dataset.weekKey) return;
+          const weekKey = editor.dataset.weekKey;
+          const field = editor.dataset.focusField;
+          const fallback = weekFocus[weekKey] || {};
+          const value = cleanFocusText(editor.textContent);
+          if (!state.careerContent.weeklyFocus || typeof state.careerContent.weeklyFocus !== "object") {
+            state.careerContent.weeklyFocus = {};
+          }
+          if (!state.careerContent.weeklyFocus[weekKey]) state.careerContent.weeklyFocus[weekKey] = {};
+
+          if (!value || value === fallback[field]) {
+            delete state.careerContent.weeklyFocus[weekKey][field];
+          } else {
+            state.careerContent.weeklyFocus[weekKey][field] = value;
+          }
+          if (Object.keys(state.careerContent.weeklyFocus[weekKey]).length === 0) {
+            delete state.careerContent.weeklyFocus[weekKey];
+          }
+
+          if (document.activeElement !== editor) {
+            editor.textContent = getWeeklyFocus(parseDate(weekKey))[field];
+          }
+          editor.classList.remove("is-saving");
+          els.roadmapSaveStatus.textContent = "Saved just now";
+          saveState("Weekly focus saved.");
+          renderWeek();
         }
 
         function renderAll() { renderWeek(); renderRoadmap(); renderCareer(); renderNotes(); }
@@ -1470,9 +1995,9 @@
               const parts = line.split(':');
               const company = parts[0].trim();
               const titles = parts.slice(1).join(':').trim().split(',').map(t => t.trim()).filter(t => t);
-              els.careerTargetList.innerHTML += `<li><span class="tier">${company}</span><br>`;
+              els.careerTargetList.innerHTML += `<li><span class="tier">${escapeHTML(company)}</span><br>`;
               titles.forEach(title => {
-                els.careerTargetList.innerHTML += `<span class="job-title-tag">${title}</span>`;
+                els.careerTargetList.innerHTML += `<span class="job-title-tag">${escapeHTML(title)}</span>`;
               });
               els.careerTargetList.innerHTML += `</li>`;
             });
@@ -1485,7 +2010,7 @@
             els.careerLanesList.innerHTML += `<li class="text-small">No lanes defined.</li>`;
           } else {
             laneLines.forEach(line => {
-              els.careerLanesList.innerHTML += `<li><strong>${line}</strong></li>`;
+              els.careerLanesList.innerHTML += `<li><strong>${escapeHTML(line)}</strong></li>`;
             });
           }
           els.careerLanesList.innerHTML += `</ul>`;
@@ -1500,19 +2025,25 @@
               div.className = 'week-block';
               const isWeek = line.match(/^Week \d+/i);
               if (isWeek) {
-                div.innerHTML = `<span class="week-title">${line}</span>`;
+                const title = document.createElement("span");
+                title.className = "week-title";
+                title.textContent = line;
+                div.appendChild(title);
               } else {
-                div.innerHTML = line;
+                div.textContent = line;
               }
               els.careerPlanContent.appendChild(div);
             });
           }
 
           els.careerAppTbody.innerHTML = "";
+          if (apps.length === 0) {
+            els.careerAppTbody.innerHTML = '<tr><td class="tracker-empty" colspan="6">No applications logged yet.</td></tr>';
+          }
           apps.slice().reverse().forEach((app, idx) => {
             const row = document.createElement("tr");
-            const statusClass = app.status.toLowerCase();
-            row.innerHTML = `<td><strong>${app.company}</strong></td><td>${app.title}</td><td><span class="status-badge ${statusClass}">${app.status}</span></td><td>${app.date || ''}</td><td>${app.notes || ''}</td><td><button class="btn btn-ghost btn-danger" data-app-idx="${apps.length - 1 - idx}" style="color:#b33c3c; padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
+            const statusClass = String(app.status || "watching").toLowerCase().replace(/[^a-z-]/g, "");
+            row.innerHTML = `<td><strong>${escapeHTML(app.company)}</strong></td><td>${escapeHTML(app.title)}</td><td><span class="status-badge ${statusClass}">${escapeHTML(app.status)}</span></td><td>${escapeHTML(app.date)}</td><td>${escapeHTML(app.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger" aria-label="Remove ${escapeHTML(app.company)} application" data-app-idx="${apps.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
             row.querySelector('[data-app-idx]').addEventListener('click', function() {
               const realIdx = parseInt(this.dataset.appIdx);
               state.careerApps.splice(realIdx, 1);
@@ -1523,9 +2054,12 @@
           });
 
           els.careerContactTbody.innerHTML = "";
+          if (contacts.length === 0) {
+            els.careerContactTbody.innerHTML = '<tr><td class="tracker-empty" colspan="6">No networking contacts logged yet.</td></tr>';
+          }
           contacts.slice().reverse().forEach((c, idx) => {
             const row = document.createElement("tr");
-            row.innerHTML = `<td><strong>${c.name}</strong></td><td>${c.company}</td><td>${c.status}</td><td>${c.date || ''}</td><td>${c.notes || ''}</td><td><button class="btn btn-ghost btn-danger" data-contact-idx="${contacts.length - 1 - idx}" style="color:#b33c3c; padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
+            row.innerHTML = `<td><strong>${escapeHTML(c.name)}</strong></td><td>${escapeHTML(c.company)}</td><td>${escapeHTML(c.status)}</td><td>${escapeHTML(c.date)}</td><td>${escapeHTML(c.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger" aria-label="Remove ${escapeHTML(c.name)} contact" data-contact-idx="${contacts.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
             row.querySelector('[data-contact-idx]').addEventListener('click', function() {
               const realIdx = parseInt(this.dataset.contactIdx);
               state.careerContacts.splice(realIdx, 1);
@@ -1576,22 +2110,109 @@
           els.settingProtein.value = state.settings.protein;
         }
 
+        function activateView(view, options) {
+          if (!els.panels[view]) return;
+          els.tabs.forEach(function(tab) {
+            const active = tab.dataset.view === view;
+            tab.classList.toggle("btn-primary", active);
+            tab.setAttribute("aria-selected", String(active));
+            tab.tabIndex = active ? 0 : -1;
+          });
+          Object.keys(els.panels).forEach(function(panelName) {
+            const active = panelName === view;
+            els.panels[panelName].hidden = !active;
+            els.panels[panelName].classList.toggle("is-hidden", !active);
+          });
+          if (view === "roadmap") renderRoadmap();
+          if (view === "settings") populateSettings();
+          if (view === "career") { renderCareer(); populateCareerEditFields(); }
+          if (view === "notes") renderNotes();
+          if (options && options.focusTab) {
+            const activeTab = els.tabs.find(function(tab) { return tab.dataset.view === view; });
+            if (activeTab) activeTab.focus();
+          }
+          refreshIcons();
+        }
+
+        function scrollToRoadmapWeek(focusField) {
+          const row = document.getElementById("roadmap-week-" + dateKey(selectedWeek));
+          if (!row) return;
+          row.scrollIntoView({ behavior: "smooth", block: "center" });
+          if (focusField) {
+            const editor = row.querySelector('[data-focus-field="' + focusField + '"]');
+            if (editor) setTimeout(function() { editor.focus(); }, 350);
+          }
+        }
+
+        function closeScheduleModal() {
+          els.modal.classList.remove("active");
+          document.body.classList.remove("modal-open");
+          if (lastModalTrigger) lastModalTrigger.focus();
+        }
+
         // ===== EVENTS =====
         function bindEvents() {
-          els.tabs.forEach(tab => {
+          els.tabs.forEach(function(tab, tabIndex) {
             tab.addEventListener("click", function() {
-              const view = this.dataset.view;
-              els.tabs.forEach(t => { t.classList.toggle("btn-primary", t === this); t.setAttribute("aria-selected", String(t === this)); });
-              Object.keys(els.panels).forEach(p => {
-                const active = p === view;
-                els.panels[p].hidden = !active;
-                els.panels[p].classList.toggle("is-hidden", !active);
-              });
-              if (view === "roadmap") renderRoadmap();
-              if (view === "settings") populateSettings();
-              if (view === "career") { renderCareer(); populateCareerEditFields(); }
-              if (view === "notes") renderNotes();
+              activateView(this.dataset.view);
             });
+            tab.addEventListener("keydown", function(event) {
+              const key = event.key;
+              if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(key)) return;
+              event.preventDefault();
+              let nextIndex = tabIndex;
+              if (key === "ArrowLeft") nextIndex = (tabIndex - 1 + els.tabs.length) % els.tabs.length;
+              if (key === "ArrowRight") nextIndex = (tabIndex + 1) % els.tabs.length;
+              if (key === "Home") nextIndex = 0;
+              if (key === "End") nextIndex = els.tabs.length - 1;
+              activateView(els.tabs[nextIndex].dataset.view, { focusTab: true });
+            });
+          });
+
+          els.editWeekFocus.addEventListener("click", function() {
+            activateView("roadmap");
+            setTimeout(function() { scrollToRoadmapWeek("career"); }, 50);
+          });
+          els.roadmapCurrentWeek.addEventListener("click", function() { scrollToRoadmapWeek(); });
+          els.roadmapList.addEventListener("focusin", function(event) {
+            if (event.target.matches(".roadmap-editable")) event.target.dataset.originalValue = event.target.textContent;
+          });
+          els.roadmapList.addEventListener("input", function(event) {
+            const editor = event.target.closest(".roadmap-editable");
+            if (!editor) return;
+            editor.classList.add("is-saving");
+            els.roadmapSaveStatus.textContent = "Saving…";
+            if (roadmapSaveTimer) clearTimeout(roadmapSaveTimer);
+            roadmapSaveTimer = setTimeout(function() { saveRoadmapFocus(editor); }, 400);
+          });
+          els.roadmapList.addEventListener("focusout", function(event) {
+            const editor = event.target.closest(".roadmap-editable");
+            if (!editor) return;
+            if (roadmapSaveTimer) clearTimeout(roadmapSaveTimer);
+            saveRoadmapFocus(editor);
+          });
+          els.roadmapList.addEventListener("keydown", function(event) {
+            const editor = event.target.closest(".roadmap-editable");
+            if (!editor) return;
+            if (event.key === "Enter") {
+              event.preventDefault();
+              editor.blur();
+            }
+            if (event.key === "Escape") {
+              event.preventDefault();
+              if (roadmapSaveTimer) clearTimeout(roadmapSaveTimer);
+              editor.textContent = editor.dataset.originalValue || getWeeklyFocus(parseDate(editor.dataset.weekKey))[editor.dataset.focusField];
+              saveRoadmapFocus(editor);
+              editor.blur();
+            }
+          });
+
+          els.lockDashboard.addEventListener("click", function() {
+            sessionStorage.removeItem("dashboard_unlocked");
+            dashboard.classList.remove("visible");
+            passwordScreen.classList.remove("hidden");
+            passwordInput.value = "";
+            passwordInput.focus();
           });
 
           els.previousWeek.addEventListener("click", function() { const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek)); if(idx>0) { selectedWeek = weeks[idx-1]; selectedDate = selectedWeek; renderAll(); } });
@@ -1629,26 +2250,28 @@
 
           // Schedule Editor
           els.editScheduleBtn.addEventListener("click", function() {
+            lastModalTrigger = this;
             const key = dateKey(selectedDate);
             els.modalDayLabel.textContent = formatLongDate(selectedDate);
             let blocks = getCurrentBlocks(key);
-            blocks = sortBlocksByTime(blocks); // SORT when opening modal
+            blocks = sortBlocksByTime(blocks);
             renderModalBlocks(blocks);
             els.modal.classList.add("active");
+            document.body.classList.add("modal-open");
+            setTimeout(function() { els.modal.querySelector(".modal-box").focus(); }, 0);
           });
-          els.modalClose.addEventListener("click", function() { els.modal.classList.remove("active"); });
+          els.modalClose.addEventListener("click", closeScheduleModal);
           
-          // *** FIXED: SORT BEFORE SAVING ***
           els.modalSave.addEventListener("click", function() {
             const key = dateKey(selectedDate);
             const blocksJson = els.modalBlockList.dataset.blocks;
             if (blocksJson) {
               let blocks = JSON.parse(blocksJson);
-              blocks = sortBlocksByTime(blocks); // SORT before saving
+              blocks = sortBlocksByTime(blocks);
               if (blocks.length === 0) delete state.scheduleOverrides[key];
               else state.scheduleOverrides[key] = blocks;
               saveState("Schedule updated.");
-              els.modal.classList.remove("active");
+              closeScheduleModal();
               renderWeek();
             }
           });
@@ -1657,7 +2280,7 @@
             const key = dateKey(selectedDate);
             delete state.scheduleOverrides[key];
             saveState("Schedule reset to default.");
-            els.modal.classList.remove("active");
+            closeScheduleModal();
             renderWeek();
           });
           els.modalAddBlock.addEventListener("click", function() {
@@ -1667,25 +2290,47 @@
             const key = dateKey(selectedDate);
             let blocks = getCurrentBlocks(key);
             blocks.push({ time, label });
-            blocks = sortBlocksByTime(blocks); // SORT after adding in modal
+            blocks = sortBlocksByTime(blocks);
             renderModalBlocks(blocks);
             els.modalNewTime.value = "";
             els.modalNewLabel.value = "";
+            els.modalNewTime.focus();
           });
-          els.modal.addEventListener("click", function(e) { if (e.target === els.modal) els.modal.classList.remove("active"); });
+          [els.modalNewTime, els.modalNewLabel].forEach(function(input) {
+            input.addEventListener("keydown", function(event) {
+              if (event.key === "Enter") { event.preventDefault(); els.modalAddBlock.click(); }
+            });
+          });
+          els.modal.addEventListener("click", function(e) { if (e.target === els.modal) closeScheduleModal(); });
+          document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape" && els.modal.classList.contains("active")) closeScheduleModal();
+          });
 
-          // *** FIXED: SORT IN MODAL RENDER ***
           function renderModalBlocks(blocks) {
-            blocks = sortBlocksByTime(blocks); // SORT before rendering modal list
+            blocks = sortBlocksByTime(blocks);
             els.modalBlockList.innerHTML = "";
             blocks.forEach((block, idx) => {
               const row = document.createElement("div");
               row.className = "block-row";
-              row.innerHTML = `<span class="time">${block.time}</span><span class="label">${block.label}</span><button class="btn btn-danger" data-idx="${idx}"><i data-lucide="trash-2"></i></button>`;
-              row.querySelector('[data-idx]').addEventListener("click", function() {
+              const time = document.createElement("span");
+              time.className = "time";
+              time.textContent = block.time;
+              const label = document.createElement("span");
+              label.className = "label";
+              label.textContent = block.label;
+              const remove = document.createElement("button");
+              remove.type = "button";
+              remove.className = "btn btn-danger";
+              remove.dataset.idx = idx;
+              remove.setAttribute("aria-label", "Remove " + block.label);
+              remove.innerHTML = '<i data-lucide="trash-2"></i>';
+              remove.addEventListener("click", function() {
                 blocks.splice(Number(this.dataset.idx), 1);
                 renderModalBlocks(blocks);
               });
+              row.appendChild(time);
+              row.appendChild(label);
+              row.appendChild(remove);
               els.modalBlockList.appendChild(row);
             });
             els.modalBlockList.dataset.blocks = JSON.stringify(blocks);
