@@ -749,12 +749,126 @@
       text-transform: uppercase;
     }
     #marco-life-dashboard .focus-actions { align-items: flex-start; gap: 12px; }
+    #marco-life-dashboard .focus-actions > strong { font-size: 1.05rem; }
     #marco-life-dashboard .focus-actions .btn {
       border-color: color-mix(in srgb, var(--background) 36%, transparent);
       color: var(--background);
       padding-left: 0;
     }
     #marco-life-dashboard .focus-actions .btn:hover { background: transparent; color: var(--highlight); }
+
+    #marco-life-dashboard .networking-week {
+      margin-bottom: 28px;
+      padding: 22px 24px;
+    }
+    #marco-life-dashboard .networking-week-header {
+      align-items: flex-end;
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    #marco-life-dashboard .networking-week-header h2 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      letter-spacing: -0.015em;
+      margin: 4px 0 5px;
+    }
+    #marco-life-dashboard .networking-progress {
+      align-items: center;
+      background: var(--surface-strong);
+      border-radius: 30px;
+      color: var(--primary);
+      display: inline-flex;
+      font-size: 0.78rem;
+      font-weight: 700;
+      min-height: 44px;
+      padding: 0 16px;
+      white-space: nowrap;
+    }
+    #marco-life-dashboard .networking-list {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    #marco-life-dashboard .networking-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+      padding: 16px;
+    }
+    #marco-life-dashboard .networking-card[data-complete="true"] { background: var(--surface-strong); }
+    #marco-life-dashboard .networking-card-top,
+    #marco-life-dashboard .networking-card-actions {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+    }
+    #marco-life-dashboard .networking-slot {
+      color: var(--secondary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    #marco-life-dashboard .networking-card-name {
+      color: var(--text);
+      font-size: 0.96rem;
+      line-height: 1.35;
+    }
+    #marco-life-dashboard .networking-card-role { line-height: 1.45; min-height: 2.9em; }
+    #marco-life-dashboard .networking-question {
+      border-left: 3px solid var(--highlight);
+      line-height: 1.5;
+      margin-top: 1px;
+      padding-left: 10px;
+    }
+    #marco-life-dashboard .networking-card-actions { margin-top: auto; }
+    #marco-life-dashboard .networking-card-actions .btn,
+    #marco-life-dashboard .networking-done-btn {
+      justify-content: center;
+      min-height: 44px;
+    }
+    #marco-life-dashboard .networking-card-actions .btn { flex: 1; padding: 9px 12px; }
+    #marco-life-dashboard .networking-done-btn {
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--primary);
+      display: inline-flex;
+      flex: 1;
+      font-size: 0.82rem;
+      font-weight: 600;
+      gap: 6px;
+      padding: 8px 10px;
+    }
+    #marco-life-dashboard .networking-done-btn:hover,
+    #marco-life-dashboard .networking-done-btn[aria-pressed="true"] { background: var(--primary); color: var(--background); }
+    #marco-life-dashboard .networking-empty {
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      color: var(--secondary);
+      grid-column: 1 / -1;
+      padding: 20px;
+      text-align: center;
+    }
+    #marco-life-dashboard .networking-task-link {
+      align-items: center;
+      color: var(--primary);
+      display: inline-flex;
+      font-size: 0.78rem;
+      font-weight: 600;
+      gap: 5px;
+      min-height: 44px;
+      text-decoration: none;
+      width: fit-content;
+    }
+    #marco-life-dashboard .networking-task-link:hover { text-decoration: underline; }
 
     #marco-life-dashboard .day-strip { scrollbar-width: thin; }
     #marco-life-dashboard .viz-tile { min-height: 46px; }
@@ -787,7 +901,7 @@
     #marco-life-dashboard .roadmap-row {
       display: grid;
       gap: 18px;
-      grid-template-columns: 150px minmax(0, 1.15fr) minmax(0, 1fr);
+      grid-template-columns: 140px minmax(0, 1.05fr) minmax(0, 0.95fr) minmax(250px, 1.15fr);
     }
     #marco-life-dashboard .roadmap-column-head {
       color: var(--secondary);
@@ -846,6 +960,30 @@
       content: " · saving";
       font-size: 0.72rem;
     }
+    #marco-life-dashboard .roadmap-networking {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #marco-life-dashboard .roadmap-contact-label {
+      align-items: center;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 92px minmax(0, 1fr);
+    }
+    #marco-life-dashboard .roadmap-contact-label > span {
+      color: var(--secondary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    #marco-life-dashboard .roadmap-contact-select {
+      min-height: 44px;
+      min-width: 0;
+      padding-bottom: 9px;
+      padding-top: 9px;
+      width: 100%;
+    }
 
     #career-app-form, #career-contact-form { background: var(--surface); border-radius: 12px; padding: 14px; }
     .table-scroll { overflow-x: auto; }
@@ -863,6 +1001,7 @@
     @media (max-width: 920px) {
       #marco-life-dashboard .focus-strip { grid-template-columns: 1fr 1fr; }
       #marco-life-dashboard .focus-actions { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--background) 25%, transparent); grid-column: 1 / -1; }
+      #marco-life-dashboard .networking-list { grid-template-columns: 1fr; }
       #marco-life-dashboard .roadmap-summary { grid-template-columns: 1fr; }
       #career-app-form, #career-contact-form { grid-template-columns: 1fr 1fr !important; }
     }
@@ -891,11 +1030,16 @@
       #marco-life-dashboard .focus-strip { grid-template-columns: 1fr; }
       #marco-life-dashboard .focus-training,
       #marco-life-dashboard .focus-actions { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--background) 25%, transparent); grid-column: auto; }
+      #marco-life-dashboard .networking-week { padding: 18px; }
+      #marco-life-dashboard .networking-week-header { align-items: flex-start; flex-direction: column; gap: 12px; }
+      #marco-life-dashboard .networking-progress { width: 100%; }
+      #marco-life-dashboard .networking-card-role { min-height: 0; }
       #marco-life-dashboard .roadmap-toolbar { align-items: stretch; flex-direction: column; }
       #marco-life-dashboard .roadmap-toolbar-actions { align-items: flex-start; text-align: left; }
       #marco-life-dashboard .roadmap-column-head { display: none; }
       #marco-life-dashboard .roadmap-row { grid-template-columns: 1fr; gap: 14px; }
       #marco-life-dashboard .roadmap-cell { border-top: 1px solid var(--border); padding-top: 13px; }
+      #marco-life-dashboard .roadmap-contact-label { grid-template-columns: 90px minmax(0, 1fr); }
       #marco-life-dashboard #todo-list.card-soft { padding: 8px 10px; }
       #marco-life-dashboard .todo-row {
         gap: 4px;
@@ -991,10 +1135,24 @@
           <strong id="training-focus">Keep the current run-and-lift rhythm</strong>
         </div>
         <div class="focus-actions">
+          <span class="focus-label"><i data-lucide="users-round"></i> Networking triangle</span>
+          <strong id="networking-focus">3 planned contacts</strong>
           <span class="text-small" id="weekly-quota">Weekly quota</span>
           <button type="button" class="btn btn-ghost" id="edit-week-focus"><i data-lucide="pencil-line"></i> Edit in roadmap</button>
         </div>
       </div>
+
+      <section class="card networking-week" aria-labelledby="networking-week-title">
+        <div class="networking-week-header">
+          <div>
+            <span class="eyebrow">Weekly networking target</span>
+            <h2 id="networking-week-title">Your three-person triangle</h2>
+            <p class="text-small">One peer, one team leader, and one recruiter or connector—each becomes a named daily action.</p>
+          </div>
+          <span class="networking-progress" id="networking-progress" aria-live="polite">0 of 3 complete</span>
+        </div>
+        <div class="networking-list" id="networking-list"></div>
+      </section>
 
       <div class="day-strip" id="day-strip" role="tablist"></div>
 
@@ -1051,7 +1209,7 @@
         <div>
           <span class="eyebrow">July–December 2026</span>
           <h2>Your weekly roadmap</h2>
-          <p class="text-small">Click any Career or Training focus to edit it. Changes save locally immediately, sync to the cloud, and appear in This week.</p>
+          <p class="text-small">Edit each week's Career and Training focus, then choose the peer, team leader, and connector who should become that week's daily networking actions. Every change saves and syncs automatically.</p>
         </div>
         <div class="roadmap-toolbar-actions">
           <span class="text-small" id="roadmap-save-status" aria-live="polite">All changes saved</span>
@@ -1063,7 +1221,7 @@
         <div class="card viz-stat"><span class="text-muted">Race decision window</span><span class="viz-stat-value">Aug 24–Oct 4</span><span class="text-small" id="race-summary">Ohio or Musselman; 2027 date TBD</span></div>
         <div class="card viz-stat"><span class="text-muted">New disciplines</span><span class="viz-stat-value" id="discipline-summary">Aug 3 / Sep 28</span><span class="text-small">Bike / swim start</span></div>
       </div>
-      <div class="roadmap-column-head" aria-hidden="true"><span>Week</span><span>Career focus</span><span>Training focus</span></div>
+      <div class="roadmap-column-head" aria-hidden="true"><span>Week</span><span>Career focus</span><span>Training focus</span><span>Networking triangle</span></div>
       <div class="roadmap-list" id="roadmap-list" aria-label="July through December roadmap"></div>
       <p class="assumption-line text-small">The schedule reserves four training blocks per week. Bike and swim replace existing blocks instead of adding more time. Race dates and 2027 registration openings remain to be confirmed.</p>
     </section>
@@ -1337,6 +1495,77 @@
         const LONG_DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+        // Curated from Marco's outreach research. The roster lives in state so
+        // weekly selections and future edits travel through the existing sync.
+        const DEFAULT_NETWORKING_CONTACTS = [
+          { id:"kynan-dsilva", name:"Kynan D’Silva", company:"AtkinsRéalis", title:"Risk Analyst", lane:"Infrastructure / Project Controls", role:"peer", url:"https://ca.linkedin.com/in/kynandsilva" },
+          { id:"connor-hay", name:"Connor Hay", company:"Intact", title:"Junior Commercial Underwriter", lane:"Insurance / Reinsurance / Risk", role:"peer", url:"https://ca.linkedin.com/in/connor-hay-920627295" },
+          { id:"emma-samarze", name:"Emma Samarze", company:"HSB Canada", title:"Cyber Underwriter", lane:"Insurance / Reinsurance / Risk", role:"peer", url:"https://ca.linkedin.com/in/emma-samarze-658476170" },
+          { id:"patrick-broscatean", name:"Patrick Broscatean", company:"Zurich", title:"Financial Lines Underwriter", lane:"Insurance / Reinsurance / Risk", role:"peer", url:"https://ca.linkedin.com/in/patrick-broscatean-b51874186" },
+          { id:"niki-m", name:"Niki M., RIBO", company:"Marsh", title:"Commercial Client Service Associate", lane:"Insurance / Reinsurance / Risk", role:"peer", url:"https://ca.linkedin.com/in/nikitamore17" },
+          { id:"jillian-elman", name:"Jillian Elman", company:"IQVIA", title:"Associate Consultant", lane:"Healthcare Commercial Analytics", role:"peer", url:"https://ca.linkedin.com/in/jillian-elman" },
+          { id:"alexa-hadley", name:"Alexa Hadley", company:"Veeva", title:"Associate Consultant", lane:"Healthcare Commercial Analytics", role:"peer", url:"https://www.linkedin.com/in/alexa-hadley-965009203" },
+          { id:"harpreet-kaur", name:"Harpreet Kaur", company:"Sanofi", title:"Medical Affairs / Data Analytics", lane:"Healthcare Commercial Analytics", role:"peer", url:"https://ca.linkedin.com/in/hkaur05" },
+          { id:"yash-contractor", name:"Yash Contractor", company:"CANDU / AtkinsRéalis", title:"Project Controls Reporting Analyst", lane:"Infrastructure / Project Controls", role:"peer", url:"https://ca.linkedin.com/in/yashcontractor" },
+          { id:"mariana-brasil", name:"Mariana Brasil", company:"Metrolinx", title:"Project Controls Analyst", lane:"Infrastructure / Project Controls", role:"peer", url:"https://ca.linkedin.com/in/marianavbrasilpv" },
+          { id:"katherine-wainman", name:"Katherine Wainman", company:"RBC", title:"Analyst, Commercial Mortgage Finance & Securitization", lane:"Banking / General Analyst", role:"peer", url:"https://ca.linkedin.com/in/katherine-wainman-18679a316" },
+          { id:"tim-sun", name:"Tim Sun", company:"BMO", title:"Credit Analyst, Income Property Finance", lane:"Banking / General Analyst", role:"peer", url:"https://ca.linkedin.com/in/timyjsun" },
+
+          { id:"christian-eyram", name:"Christian Eyram", company:"Zurich", title:"Senior Surety Underwriter", lane:"Insurance / Reinsurance / Risk", role:"manager", url:"https://ca.linkedin.com/in/ceyram" },
+          { id:"julia-flaherty", name:"Julia Flaherty", company:"Marsh Canada", title:"AVP, FINPRO", lane:"Insurance / Reinsurance / Risk", role:"manager", url:"https://ca.linkedin.com/in/julia-flaherty-532049181" },
+          { id:"stephanie-lenguyen", name:"Stephanie LeNguyen", company:"Zurich", title:"Underwriting Specialist, Programs", lane:"Insurance / Reinsurance / Risk", role:"manager", url:"https://ca.linkedin.com/in/stephanie-lenguyen-57480313" },
+          { id:"ibi-singh", name:"Ibi Singh", company:"Metrolinx", title:"Analytics / Operations Professional", lane:"Infrastructure / Project Controls", role:"manager", url:"https://ca.linkedin.com/in/ibisingh" },
+          { id:"dwayne-francis", name:"Dwayne Francis", company:"AstraZeneca", title:"Manager, Patient Data & Analytics", lane:"Healthcare Commercial Analytics", role:"manager", url:"https://ca.linkedin.com/in/dwayne-francis-987b09182" },
+          { id:"yossra-zaza", name:"Yossra Zaza", company:"AstraZeneca", title:"Oncology Insights Manager", lane:"Healthcare Commercial Analytics", role:"manager", url:"https://ca.linkedin.com/in/yossrazaza" },
+          { id:"danish-narang", name:"Danish Narang", company:"Sanofi", title:"Digital Transformation / Program Management", lane:"Healthcare Commercial Analytics", role:"manager", url:"https://www.linkedin.com/in/danishnarang" },
+          { id:"abdullah-jailawi", name:"Abdullah Jailawi", company:"WSP / former Metrolinx", title:"Systems Integration and Risk", lane:"Infrastructure / Project Controls", role:"manager", url:"https://ca.linkedin.com/in/abdullah-jailawi" },
+
+          { id:"robert-longo", name:"Robert A. Longo", company:"Intact", title:"HR Specialist", lane:"Insurance / Reinsurance / Risk", role:"connector", url:"https://ca.linkedin.com/in/robert-a-longo" },
+          { id:"dassler-coutinho", name:"Dassler Coutinho", company:"HSB Canada", title:"Talent Acquisition Lead", lane:"Insurance / Reinsurance / Risk", role:"connector", url:"https://ca.linkedin.com/in/dassler-coutinho" },
+          { id:"natalie-oneal", name:"Natalie O’Neal", company:"Veeva Systems", title:"Talent and early-career connector", lane:"Healthcare Commercial Analytics", role:"connector", url:"https://www.linkedin.com/in/natalieoneal12" },
+          { id:"hailey-schincariol", name:"Hailey Schincariol", company:"IQVIA", title:"Commercial Solutions", lane:"Healthcare Commercial Analytics", role:"connector", url:"https://ca.linkedin.com/in/hailey-schincariol-9a2b3b1a2" },
+          { id:"shreekavya-mittal", name:"Shreekavya Mittal", company:"Marsh Canada", title:"Risk Analyst", lane:"Insurance / Reinsurance / Risk", role:"connector", url:"https://ca.linkedin.com/in/shreekavyamittal" },
+          { id:"aakshi-aggarwal", name:"Aakshi Aggarwal", company:"Project Controls", title:"Project Controls / Cost Controller", lane:"Infrastructure / Project Controls", role:"connector", url:"https://ca.linkedin.com/in/aakshi9" },
+          { id:"meeth-shah", name:"Meeth Shah", company:"BMO", title:"Business Reporting Analyst", lane:"Banking / General Analyst", role:"connector", url:"https://ca.linkedin.com/in/meeth-shah" },
+          { id:"marcus-mersch", name:"Marcus Mersch", company:"RBC", title:"Associate, Corporate Client Group", lane:"Banking / General Analyst", role:"connector", url:"https://ca.linkedin.com/in/marcus-mersch-488833252" },
+          { id:"ryan-mckay", name:"Ryan McKay", company:"BMO", title:"Associate, Corporate Finance", lane:"Banking / General Analyst", role:"connector", url:"https://ca.linkedin.com/in/ryan-pmckay" }
+        ];
+
+        const DEFAULT_WEEKLY_NETWORKING = {
+          "2026-07-06": { peer:"kynan-dsilva", manager:"christian-eyram", connector:"robert-longo" },
+          "2026-07-13": { peer:"kynan-dsilva", manager:"dwayne-francis", connector:"hailey-schincariol" },
+          "2026-07-20": { peer:"connor-hay", manager:"christian-eyram", connector:"robert-longo" },
+          "2026-07-27": { peer:"jillian-elman", manager:"yossra-zaza", connector:"hailey-schincariol" },
+          "2026-08-03": { peer:"patrick-broscatean", manager:"dwayne-francis", connector:"dassler-coutinho" },
+          "2026-08-10": { peer:"niki-m", manager:"danish-narang", connector:"shreekavya-mittal" },
+          "2026-08-17": { peer:"mariana-brasil", manager:"ibi-singh", connector:"natalie-oneal" },
+          "2026-08-24": { peer:"kynan-dsilva", manager:"christian-eyram", connector:"robert-longo" },
+          "2026-08-31": { peer:"harpreet-kaur", manager:"dwayne-francis", connector:"natalie-oneal" },
+          "2026-09-07": { peer:"emma-samarze", manager:"christian-eyram", connector:"dassler-coutinho" },
+          "2026-09-14": { peer:"yash-contractor", manager:"ibi-singh", connector:"aakshi-aggarwal" },
+          "2026-09-21": { peer:"jillian-elman", manager:"yossra-zaza", connector:"hailey-schincariol" },
+          "2026-09-28": { peer:"alexa-hadley", manager:"dwayne-francis", connector:"natalie-oneal" },
+          "2026-10-05": { peer:"connor-hay", manager:"julia-flaherty", connector:"robert-longo" },
+          "2026-10-12": { peer:"niki-m", manager:"stephanie-lenguyen", connector:"dassler-coutinho" },
+          "2026-10-19": { peer:"kynan-dsilva", manager:"abdullah-jailawi", connector:"aakshi-aggarwal" },
+          "2026-10-26": { peer:"emma-samarze", manager:"christian-eyram", connector:"robert-longo" },
+          "2026-11-02": { peer:"katherine-wainman", manager:"julia-flaherty", connector:"meeth-shah" },
+          "2026-11-09": { peer:"jillian-elman", manager:"dwayne-francis", connector:"hailey-schincariol" },
+          "2026-11-16": { peer:"patrick-broscatean", manager:"julia-flaherty", connector:"dassler-coutinho" },
+          "2026-11-23": { peer:"tim-sun", manager:"abdullah-jailawi", connector:"marcus-mersch" },
+          "2026-11-30": { peer:"connor-hay", manager:"stephanie-lenguyen", connector:"robert-longo" },
+          "2026-12-07": { peer:"alexa-hadley", manager:"danish-narang", connector:"natalie-oneal" },
+          "2026-12-14": { peer:"kynan-dsilva", manager:"ibi-singh", connector:"aakshi-aggarwal" },
+          "2026-12-21": { peer:"emma-samarze", manager:"julia-flaherty", connector:"dassler-coutinho" },
+          "2026-12-28": { peer:"katherine-wainman", manager:"dwayne-francis", connector:"natalie-oneal" }
+        };
+
+        const NETWORKING_SLOTS = [
+          { key:"peer", label:"Peer / recent hire", shortLabel:"Peer", dayOffset:0, dayLabel:"Monday", action:"Ask about their path into the role", question:"What helped you get traction in your first year, and what would you prioritize if you were applying now?" },
+          { key:"manager", label:"Manager / senior", shortLabel:"Team lead", dayOffset:2, dayLabel:"Wednesday", action:"Ask what the team values", question:"Which skills make an early-career candidate useful quickly on your team?" },
+          { key:"connector", label:"Recruiter / connector", shortLabel:"Connector", dayOffset:4, dayLabel:"Friday", action:"Ask for the best route in", question:"Which role family is the best fit for my background, and who else should I learn from?" }
+        ];
+
         const defaultState = {
           settings: {
             race: "undecided",
@@ -1358,6 +1587,8 @@
           careerContacts: [],
           careerContent: {
             weeklyFocus: {},
+            networkingContacts: DEFAULT_NETWORKING_CONTACTS,
+            weeklyNetworking: DEFAULT_WEEKLY_NETWORKING,
             targetCompaniesText: "AtkinsRéalis: Data Analyst, Project Controls, Risk Analyst, PMO Analyst\nIntact: Specialty Lines Dev, Commercial Lines Dev, Underwriting Associate\nIQVIA: Associate Consultant, Business Analyst, Commercial Analytics\nMunich Re / HSB: Underwriting Associate, Reinsurance Trainee, Risk Analyst\nAstraZeneca: Business Insights, Commercial Excellence, Omnichannel Analyst\nZurich: Underwriting Trainee, Commercial Insurance Analyst\nSanofi: Commercial Excellence, Transformation Analyst\nMarsh: Graduate Program, Risk Analyst, Broking Analyst\nMetrolinx: Project Controls, PMO Analyst, Risk Analyst\nVeeva: Associate Consultant, Data Operations, Analytics Associate",
             searchLanesText: "Insurance / Reinsurance / Risk: 35%\nInfrastructure / Project Controls: 35%\nHealthcare Commercial Analytics: 25%\nBanking / General Analyst: 5%",
             strategicPlanText: "Week 1 (Jul 8–12): Apply to AtkinsRéalis Data Analyst role. Create master tracker. Set job alerts.\nWeek 2 (Jul 13–19): Build 3 résumé versions (Insurance, Infrastructure, Healthcare). Update LinkedIn.\nWeek 3 (Jul 20–26): Insurance networking (Intact, Munich Re, Zurich, Marsh). 12 messages, 2 calls.\nWeek 4 (Jul 27–Aug 2): Healthcare networking (IQVIA, AstraZeneca, Sanofi, Veeva). 12 messages, 3 calls.\nWeek 5 (Aug 3–9): Infrastructure networking (AtkinsRéalis, Metrolinx, OPG, Aecon, WSP). Learn P6/Power BI basics.\nWeek 6 (Aug 10–16): Prepare 8 STAR stories + 6 career-transition answers. Mock interviews.\nWeek 7 (Aug 17–23): Convert networking to referrals. Follow up with top contacts.\nWeek 8 (Aug 24–30): Prepare for fall recruiting. Identify graduate programs. Prepare transcripts.\nWeek 9 (Aug 31–Sep 6): Fall Application Surge — 12 apps, 15 messages, 3 calls. Target: 60-70 cumulative apps.\nWeek 10 (Sep 7–13): Funnel analysis. Revise weakest résumé. 2 mock interviews.\nWeek 11 (Sep 14–20): Decision Gate 1. Assess pipeline. If no interviews, broaden targets.\nWeek 12 (Sep 21–27): Create technical work sample (Project Controls Dashboard or Healthcare Campaign).\nWeek 13 (Sep 28–Oct 4): Re-engage all \"stay in touch\" contacts. Second application wave.\nWeek 14 (Oct 5–11): Direct recruiter outreach (AtkinsRéalis, Intact, Zurich, IQVIA, AstraZeneca, Marsh).\nWeek 15 (Oct 12–18): Interview conversion prep. Research business units. Thank-you follow-ups.\nWeek 16 (Oct 19–25): Expand company list if needed (Chubb, AIG, Roche, GSK, Hydro One, etc.)\nWeek 17 (Oct 26–Nov 1): Decision Gate 2. Target: 100+ apps, 6+ first-round, 2+ late-stage. If not, expand titles.\nWeek 18 (Nov 2–8): Shift to immediate-start hiring (0-2 yrs, 1-3 yrs roles). Apply to 1-3 year positions with 70% fit.\nWeek 19 (Nov 9–15): Final-round & offer preparation. Salary range, references, resignation language.\nWeek 20 (Nov 16–22): Concentrated referral push. 10 direct messages to strongest relationships.\nWeek 21 (Nov 23–29): December pipeline. Target January starts, backfills, contract-to-perm.\nWeek 22 (Nov 30–Dec 6): Decision Gate 3. Classify all active processes. If no offers, decide whether to continue.\nWeek 23 (Dec 7–13): Close or extend. Review offers. Conduct post-mortem if none.\nWeek 24 (Dec 14–20): Transition. Sign offer, resign professionally, prepare handover."
@@ -1435,6 +1666,9 @@
           weekFocus: document.getElementById("week-focus"),
           trainingFocus: document.getElementById("training-focus"),
           targetCompanies: document.getElementById("target-companies"),
+          networkingFocus: document.getElementById("networking-focus"),
+          networkingProgress: document.getElementById("networking-progress"),
+          networkingList: document.getElementById("networking-list"),
           weeklyQuota: document.getElementById("weekly-quota"),
           editWeekFocus: document.getElementById("edit-week-focus"),
           statCompletion: document.getElementById("stat-completion"),
@@ -1533,6 +1767,48 @@
             training: cleanFocusText(custom.training) || fallback.training,
             targets: cleanFocusText(custom.targets) || fallback.targets
           };
+        }
+
+        function getNetworkingContacts() {
+          const contacts = state.careerContent && state.careerContent.networkingContacts;
+          return Array.isArray(contacts) ? contacts : [];
+        }
+
+        function getNetworkingContact(contactId) {
+          return getNetworkingContacts().find(function(contact) { return contact.id === contactId; }) || null;
+        }
+
+        function getWeeklyNetworking(week) {
+          const key = dateKey(week);
+          const fallback = DEFAULT_WEEKLY_NETWORKING[key] || {};
+          const plans = state.careerContent && state.careerContent.weeklyNetworking;
+          const custom = plans && typeof plans[key] === "object" ? plans[key] : {};
+          return Object.assign({}, fallback, custom);
+        }
+
+        function networkingTaskId(week, slotKey, contactId) {
+          return "network-" + dateKey(week) + "-" + slotKey + "-" + contactId;
+        }
+
+        function getNetworkingAssignments(week) {
+          const plan = getWeeklyNetworking(week);
+          return NETWORKING_SLOTS.map(function(slot) {
+            const contact = getNetworkingContact(plan[slot.key]);
+            if (!contact) return null;
+            return {
+              slot: slot,
+              contact: contact,
+              date: addDays(week, slot.dayOffset),
+              taskId: networkingTaskId(week, slot.key, contact.id)
+            };
+          }).filter(Boolean);
+        }
+
+        function getNetworkingAssignmentForDate(date) {
+          const week = startOfWeek(date);
+          return getNetworkingAssignments(week).find(function(assignment) {
+            return dateKey(assignment.date) === dateKey(date);
+          }) || null;
         }
 
         // ===== SCHEDULE SORTING =====
@@ -1655,6 +1931,16 @@
           merged.weeklyFocus = content && content.weeklyFocus && typeof content.weeklyFocus === "object"
             ? content.weeklyFocus
             : {};
+          merged.networkingContacts = content && Array.isArray(content.networkingContacts) && content.networkingContacts.length
+            ? content.networkingContacts
+            : JSON.parse(JSON.stringify(DEFAULT_NETWORKING_CONTACTS));
+          const savedNetworking = content && content.weeklyNetworking && typeof content.weeklyNetworking === "object"
+            ? content.weeklyNetworking
+            : {};
+          merged.weeklyNetworking = JSON.parse(JSON.stringify(DEFAULT_WEEKLY_NETWORKING));
+          Object.keys(savedNetworking).forEach(function(weekKey) {
+            merged.weeklyNetworking[weekKey] = Object.assign({}, merged.weeklyNetworking[weekKey] || {}, savedNetworking[weekKey] || {});
+          });
           return merged;
         }
 
@@ -1826,7 +2112,23 @@
           const appCount = appAlloc[key] || 0;
           if (appCount > 0) tasks.push({id:key+"-apps", category:"Career", text:"Submit "+appCount+" tailored application"+(appCount===1?"":"s"), custom:false, metricType:"application", metricValue:appCount});
           const outCount = outAlloc[key] || 0;
-          if (outCount > 0) tasks.push({id:key+"-out", category:"Career", text:"Send "+outCount+" targeted outreach or follow-up message"+(outCount===1?"":"s"), custom:false, metricType:"outreach", metricValue:outCount});
+          const networkingAssignment = getNetworkingAssignmentForDate(date);
+          const networkingCredit = networkingAssignment && outCount > 0 ? 1 : 0;
+          if (networkingAssignment) {
+            const contact = networkingAssignment.contact;
+            tasks.push({
+              id: networkingAssignment.taskId,
+              category: "Networking",
+              text: "Message " + contact.name + " — " + networkingAssignment.slot.shortLabel + " at " + contact.company,
+              custom: false,
+              contactUrl: contact.url,
+              contactMeta: contact.title + " · " + networkingAssignment.slot.action,
+              metricType: networkingCredit ? "outreach" : undefined,
+              metricValue: networkingCredit || undefined
+            });
+          }
+          const remainingOutreach = Math.max(0, outCount - networkingCredit);
+          if (remainingOutreach > 0) tasks.push({id:key+"-out", category:"Career", text:"Send "+remainingOutreach+" additional targeted outreach or follow-up message"+(remainingOutreach===1?"":"s"), custom:false, metricType:"outreach", metricValue:remainingOutreach});
           if (day === 2 || day === 4) tasks.push({id:key+"-conv", category:"Career", text:"Hold or book one networking conversation", custom:false});
           if ((phase.name === "Convert" || phase.name === "Interview") && day === 3) tasks.push({id:key+"-interview-prep", category:"Career", text:"Practice two interview stories or one case prompt", custom:false});
           if (phase.name === "Offer close" && day === 3) tasks.push({id:key+"-offer-prep", category:"Career", text:"Update interview, reference, and negotiation notes", custom:false});
@@ -1868,10 +2170,90 @@
           els.weekFocus.textContent = focus.career;
           els.trainingFocus.textContent = focus.training;
           els.targetCompanies.textContent = "Targets: " + focus.targets;
+          const networkingAssignments = getNetworkingAssignments(selectedWeek);
+          const networkingDone = networkingAssignments.filter(function(assignment) { return Boolean(state.completed[assignment.taskId]); }).length;
+          els.networkingFocus.textContent = networkingAssignments.length
+            ? networkingDone + " / " + networkingAssignments.length + " contacts complete"
+            : "No contacts planned";
           els.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 2 conversations";
+          renderNetworking();
           renderDayStrip();
           renderSelectedDay();
           renderStats();
+        }
+
+        function renderNetworking() {
+          const assignments = getNetworkingAssignments(selectedWeek);
+          const completed = assignments.filter(function(assignment) { return Boolean(state.completed[assignment.taskId]); }).length;
+          els.networkingProgress.textContent = completed + " of " + assignments.length + " complete";
+          els.networkingList.innerHTML = "";
+
+          if (!assignments.length) {
+            const empty = document.createElement("div");
+            empty.className = "networking-empty text-small";
+            empty.textContent = "No contacts are planned for this week. Choose them in the Roadmap.";
+            els.networkingList.appendChild(empty);
+            return;
+          }
+
+          assignments.forEach(function(assignment) {
+            const contact = assignment.contact;
+            const done = Boolean(state.completed[assignment.taskId]);
+            const card = document.createElement("article");
+            card.className = "networking-card";
+            card.dataset.complete = String(done);
+
+            const top = document.createElement("div");
+            top.className = "networking-card-top";
+            const slot = document.createElement("span");
+            slot.className = "networking-slot";
+            slot.textContent = assignment.slot.dayLabel + " · " + assignment.slot.label;
+            top.appendChild(slot);
+
+            const name = document.createElement("strong");
+            name.className = "networking-card-name";
+            name.textContent = contact.name;
+            const role = document.createElement("p");
+            role.className = "networking-card-role text-small";
+            role.textContent = contact.title + " · " + contact.company;
+            const question = document.createElement("p");
+            question.className = "networking-question text-small";
+            question.textContent = "Ask: “" + assignment.slot.question + "”";
+
+            const actions = document.createElement("div");
+            actions.className = "networking-card-actions";
+            const profile = document.createElement("a");
+            profile.className = "btn";
+            profile.href = contact.url;
+            profile.target = "_blank";
+            profile.rel = "noopener noreferrer";
+            profile.innerHTML = '<i data-lucide="linkedin"></i><span>Profile</span>';
+            profile.setAttribute("aria-label", "Open " + contact.name + " on LinkedIn");
+
+            const doneButton = document.createElement("button");
+            doneButton.type = "button";
+            doneButton.className = "networking-done-btn";
+            doneButton.setAttribute("aria-pressed", String(done));
+            doneButton.setAttribute("aria-label", (done ? "Mark incomplete: " : "Mark complete: ") + contact.name);
+            doneButton.innerHTML = done
+              ? '<i data-lucide="check"></i><span>Done</span>'
+              : '<i data-lucide="circle"></i><span>Mark done</span>';
+            doneButton.addEventListener("click", function() {
+              state.completed[assignment.taskId] = !done;
+              saveState("Networking progress saved.");
+              renderWeek();
+            });
+
+            actions.appendChild(profile);
+            actions.appendChild(doneButton);
+            card.appendChild(top);
+            card.appendChild(name);
+            card.appendChild(role);
+            card.appendChild(question);
+            card.appendChild(actions);
+            els.networkingList.appendChild(card);
+          });
+          refreshIcons();
         }
 
         function renderDayStrip() {
@@ -2128,9 +2510,19 @@
             label.textContent = task.text;
             const category = document.createElement("span");
             category.className = "text-small text-muted";
-            category.textContent = task.category;
+            category.textContent = task.contactMeta ? task.category + " · " + task.contactMeta : task.category;
             copy.appendChild(label);
             copy.appendChild(category);
+            if (task.contactUrl) {
+              const profileLink = document.createElement("a");
+              profileLink.className = "networking-task-link";
+              profileLink.href = task.contactUrl;
+              profileLink.target = "_blank";
+              profileLink.rel = "noopener noreferrer";
+              profileLink.innerHTML = '<i data-lucide="linkedin"></i><span>Open profile</span>';
+              profileLink.setAttribute("aria-label", "Open LinkedIn profile for " + task.text.replace(/^Message\s+/, ""));
+              copy.appendChild(profileLink);
+            }
 
             const action = document.createElement("button");
             action.type = "button";
@@ -2201,6 +2593,7 @@
             row.appendChild(period);
             row.appendChild(createRoadmapCell("Career", "career", focus.career, key));
             row.appendChild(createRoadmapCell("Training", "training", focus.training, key));
+            row.appendChild(createNetworkingRoadmapCell(key));
             els.roadmapList.appendChild(row);
           });
         }
@@ -2223,6 +2616,67 @@
           cell.appendChild(heading);
           cell.appendChild(editor);
           return cell;
+        }
+
+        function createNetworkingRoadmapCell(weekKey) {
+          const cell = document.createElement("div");
+          cell.className = "roadmap-cell";
+          const heading = document.createElement("strong");
+          heading.textContent = "Networking triangle";
+          const fields = document.createElement("div");
+          fields.className = "roadmap-networking";
+          const plan = getWeeklyNetworking(parseDate(weekKey));
+          const contacts = getNetworkingContacts();
+
+          NETWORKING_SLOTS.forEach(function(slot) {
+            const label = document.createElement("label");
+            label.className = "roadmap-contact-label";
+            const copy = document.createElement("span");
+            copy.textContent = slot.dayLabel.slice(0, 3) + " · " + slot.shortLabel;
+            const select = document.createElement("select");
+            select.className = "form-select roadmap-contact-select";
+            select.dataset.weekKey = weekKey;
+            select.dataset.networkingSlot = slot.key;
+            select.setAttribute("aria-label", slot.label + " for " + formatWeek(parseDate(weekKey)));
+
+            const none = document.createElement("option");
+            none.value = "";
+            none.textContent = "No contact planned";
+            select.appendChild(none);
+            contacts
+              .filter(function(contact) { return contact.role === slot.key || contact.id === plan[slot.key]; })
+              .sort(function(a, b) { return (a.company + a.name).localeCompare(b.company + b.name); })
+              .forEach(function(contact) {
+                const option = document.createElement("option");
+                option.value = contact.id;
+                option.textContent = contact.name + " · " + contact.company;
+                option.title = contact.title;
+                select.appendChild(option);
+              });
+            select.value = plan[slot.key] || "";
+            label.appendChild(copy);
+            label.appendChild(select);
+            fields.appendChild(label);
+          });
+          cell.appendChild(heading);
+          cell.appendChild(fields);
+          return cell;
+        }
+
+        function saveWeeklyNetworkingSelection(select) {
+          if (!select || !select.dataset.weekKey || !select.dataset.networkingSlot) return;
+          const weekKey = select.dataset.weekKey;
+          const slotKey = select.dataset.networkingSlot;
+          if (!state.careerContent.weeklyNetworking || typeof state.careerContent.weeklyNetworking !== "object") {
+            state.careerContent.weeklyNetworking = {};
+          }
+          if (!state.careerContent.weeklyNetworking[weekKey]) {
+            state.careerContent.weeklyNetworking[weekKey] = Object.assign({}, getWeeklyNetworking(parseDate(weekKey)));
+          }
+          state.careerContent.weeklyNetworking[weekKey][slotKey] = select.value;
+          els.roadmapSaveStatus.textContent = "Networking plan saved";
+          saveState("Networking plan saved.");
+          renderWeek();
         }
 
         function saveRoadmapFocus(editor) {
@@ -2460,6 +2914,10 @@
             setTimeout(function() { scrollToRoadmapWeek("career"); }, 50);
           });
           els.roadmapCurrentWeek.addEventListener("click", function() { scrollToRoadmapWeek(); });
+          els.roadmapList.addEventListener("change", function(event) {
+            const select = event.target.closest(".roadmap-contact-select");
+            if (select) saveWeeklyNetworkingSelection(select);
+          });
           els.roadmapList.addEventListener("focusin", function(event) {
             if (event.target.matches(".roadmap-editable")) event.target.dataset.originalValue = event.target.textContent;
           });
