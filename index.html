@@ -294,6 +294,82 @@
     #marco-life-dashboard .schedule-item:last-child { border-bottom: none; }
     #marco-life-dashboard .schedule-time { font-weight: 600; color: #214E3B; }
 
+    #marco-life-dashboard .calendar-agenda { margin-top: 12px; }
+    #marco-life-dashboard .calendar-agenda-header {
+      align-items: flex-start;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    #marco-life-dashboard .calendar-agenda-title {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      margin-bottom: 3px;
+    }
+    #marco-life-dashboard .calendar-agenda-title i { color: var(--primary); }
+    #marco-life-dashboard .calendar-agenda-title strong { color: var(--primary); font-size: 0.95rem; }
+    #marco-life-dashboard .calendar-actions { display: flex; flex: 0 0 auto; gap: 6px; }
+    #marco-life-dashboard .calendar-actions .btn { justify-content: center; padding-left: 12px; padding-right: 12px; }
+    #marco-life-dashboard .calendar-event-list { display: grid; gap: 8px; }
+    #marco-life-dashboard .calendar-event {
+      align-items: start;
+      background: var(--background);
+      border-left: 3px solid var(--highlight);
+      border-radius: 10px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 102px minmax(0, 1fr);
+      min-height: 58px;
+      padding: 11px 12px;
+    }
+    #marco-life-dashboard .calendar-event[data-all-day="true"] { border-left-color: var(--secondary); }
+    #marco-life-dashboard .calendar-event-time {
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    #marco-life-dashboard .calendar-event-copy { min-width: 0; }
+    #marco-life-dashboard .calendar-event-title {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+    #marco-life-dashboard .calendar-event-meta {
+      color: var(--muted);
+      display: block;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      margin-top: 3px;
+      overflow-wrap: anywhere;
+    }
+    #marco-life-dashboard .calendar-empty {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.5;
+      padding: 12px 2px 4px;
+    }
+    #marco-life-dashboard .calendar-empty .btn { margin-top: 10px; }
+    #marco-life-dashboard .calendar-settings-row {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 520px) {
+      #marco-life-dashboard .calendar-agenda-header { align-items: stretch; flex-direction: column; }
+      #marco-life-dashboard .calendar-actions { align-self: stretch; }
+      #marco-life-dashboard .calendar-actions .btn { flex: 1; }
+      #marco-life-dashboard .calendar-event { grid-template-columns: 84px minmax(0, 1fr); }
+    }
+
     #marco-life-dashboard .todo-list { display: flex; flex-direction: column; gap: 0; position: relative; }
     #marco-life-dashboard .todo-row {
       display: grid;
@@ -1494,6 +1570,20 @@
             </div>
           </div>
           <div class="card-soft schedule-list" id="schedule-list" aria-label="Daily schedule"></div>
+          <section class="card-soft calendar-agenda" aria-labelledby="calendar-agenda-title">
+            <div class="calendar-agenda-header">
+              <div>
+                <div class="calendar-agenda-title"><i data-lucide="calendar-sync"></i><strong id="calendar-agenda-title">Google Calendar</strong></div>
+                <span class="text-small" id="calendar-status" aria-live="polite">Not connected</span>
+              </div>
+              <div class="calendar-actions">
+                <a class="btn btn-ghost" id="calendar-open-link" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener noreferrer" aria-label="Open Google Calendar for the selected day"><i data-lucide="external-link"></i><span>Open</span></a>
+                <button type="button" class="btn btn-ghost" id="calendar-refresh-btn" aria-label="Refresh Google Calendar events"><i data-lucide="refresh-cw"></i><span class="sr-only">Refresh</span></button>
+              </div>
+            </div>
+            <div class="calendar-event-list" id="calendar-event-list" role="list"></div>
+            <button type="button" class="btn admin-only is-hidden" id="calendar-setup-btn"><i data-lucide="plug-zap"></i> Connect in settings</button>
+          </section>
         </section>
 
         <section aria-labelledby="todo-heading">
@@ -1754,6 +1844,20 @@
           </div>
         </div>
 
+        <div class="settings-section">
+          <h3>Google Calendar</h3>
+          <p class="text-small" style="margin-bottom:14px;">Connect the read-only Apps Script feed described in the README. Events refresh automatically and appear beside the selected day's dashboard schedule.</p>
+          <div class="settings-grid">
+            <label class="form-label field-span" for="setting-calendar-feed-url">Apps Script deployment URL
+              <input class="form-control" id="setting-calendar-feed-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://script.google.com/macros/s/.../exec">
+            </label>
+          </div>
+          <div class="calendar-settings-row">
+            <span class="text-small" id="calendar-settings-status" aria-live="polite">Not connected.</span>
+            <button type="button" class="btn admin-only" id="test-calendar-feed"><i data-lucide="plug-zap"></i> Test connection</button>
+          </div>
+        </div>
+
         <!-- ===== JSONBIN SYNC ===== -->
         <div class="settings-section">
           <h3>Sync (Cloud)</h3>
@@ -1768,8 +1872,8 @@
             </div>
           </div>
           <p class="text-small" style="margin-top:12px; color:var(--muted);">
-            Your data is stored securely in the cloud. Changes auto-sync within a few seconds.
-            <br>No setup required — just open the link and use the dashboard.
+            Your dashboard state is stored in JSONBin. Changes auto-sync within a few seconds.
+            <br>Dashboard data sync needs no setup; Google Calendar uses the one-time connection above.
           </p>
         </div>
 
@@ -2111,7 +2215,8 @@
             swimStart: "2026-09-28",
             indoorBikeStart: "2026-11-02",
             calories: "",
-            protein: ""
+            protein: "",
+            calendarFeedUrl: ""
           },
           completed: {},
           taskOrder: {},
@@ -2173,6 +2278,16 @@
         let roadmapSaveTimer = null;
         let lastModalTrigger = null;
         let taskDragState = null;
+        let calendarRefreshTimer = null;
+        let calendarRuntime = {
+          events: [],
+          feedUrl: "",
+          rangeKey: "",
+          status: "setup",
+          message: "Not connected",
+          updatedAt: 0,
+          requestId: 0
+        };
 
         const weeks = [];
         for (let cursor = startOfWeek(RANGE_START); cursor <= startOfWeek(RANGE_END); cursor = addDays(cursor, 7)) {
@@ -2188,6 +2303,11 @@
           currentWeek: document.getElementById("current-week"),
           dayStrip: document.getElementById("day-strip"),
           scheduleList: document.getElementById("schedule-list"),
+          calendarEventList: document.getElementById("calendar-event-list"),
+          calendarStatus: document.getElementById("calendar-status"),
+          calendarOpenLink: document.getElementById("calendar-open-link"),
+          calendarRefreshBtn: document.getElementById("calendar-refresh-btn"),
+          calendarSetupBtn: document.getElementById("calendar-setup-btn"),
           todoList: document.getElementById("todo-list"),
           selectedDayTitle: document.getElementById("selected-day-title"),
           dayStatus: document.getElementById("day-status"),
@@ -2250,6 +2370,9 @@
           settingIndoorBikeStart: document.getElementById("setting-indoor-bike-start"),
           settingCalories: document.getElementById("setting-calories"),
           settingProtein: document.getElementById("setting-protein"),
+          settingCalendarFeedUrl: document.getElementById("setting-calendar-feed-url"),
+          calendarSettingsStatus: document.getElementById("calendar-settings-status"),
+          testCalendarFeed: document.getElementById("test-calendar-feed"),
           editScheduleBtn: document.getElementById("edit-schedule-btn"),
           modal: document.getElementById("schedule-modal"),
           modalDayLabel: document.getElementById("modal-day-label"),
@@ -2355,6 +2478,277 @@
           return String(value == null ? "" : value).replace(/[&<>"']/g, function(character) {
             return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&apos;" }[character];
           });
+        }
+
+        // ===== GOOGLE CALENDAR (READ-ONLY APPS SCRIPT FEED) =====
+        function normalizeCalendarFeedUrl(value) {
+          const raw = String(value || "").trim();
+          if (!raw) return "";
+          try {
+            const url = new URL(raw);
+            const validPath = url.pathname.includes("/macros/s/") && url.pathname.endsWith("/exec");
+            if (url.protocol !== "https:" || url.hostname !== "script.google.com" || !validPath) return "";
+            return url.origin + url.pathname;
+          } catch (e) {
+            return "";
+          }
+        }
+
+        function getCalendarWeekRange() {
+          const start = startOfWeek(selectedWeek);
+          start.setHours(0, 0, 0, 0);
+          const end = addDays(start, 7);
+          end.setHours(0, 0, 0, 0);
+          return { start: start, end: end, key: dateKey(start) };
+        }
+
+        function getCalendarDayLink(date) {
+          return "https://calendar.google.com/calendar/u/0/r/day/" + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+        }
+
+        function formatCalendarClock(date) {
+          return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+        }
+
+        function formatCalendarEventTime(event, dayStart, dayEnd) {
+          if (event.allDay) return "All day";
+          if (event.start < dayStart && event.end >= dayEnd) return "Ongoing";
+          if (event.start < dayStart) return "Until " + formatCalendarClock(event.end);
+          if (event.end > dayEnd) return formatCalendarClock(event.start) + " onward";
+          return formatCalendarClock(event.start) + "–" + formatCalendarClock(event.end);
+        }
+
+        function getCalendarEventsForDate(date) {
+          const dayStart = new Date(date);
+          dayStart.setHours(0, 0, 0, 0);
+          const dayEnd = addDays(dayStart, 1);
+          return calendarRuntime.events
+            .filter(function(event) {
+              return event.start < dayEnd && event.end > dayStart;
+            })
+            .sort(function(a, b) {
+              if (a.allDay !== b.allDay) return a.allDay ? -1 : 1;
+              return a.start - b.start || a.end - b.end || a.title.localeCompare(b.title);
+            });
+        }
+
+        function updateCalendarSettingsStatus() {
+          if (!els.calendarSettingsStatus) return;
+          if (calendarRuntime.status === "loading") {
+            els.calendarSettingsStatus.textContent = "Checking the calendar feed…";
+          } else if (calendarRuntime.status === "success") {
+            els.calendarSettingsStatus.textContent = "Connected · " + calendarRuntime.events.length + " event" + (calendarRuntime.events.length === 1 ? "" : "s") + " loaded for the selected week.";
+          } else if (calendarRuntime.status === "error") {
+            els.calendarSettingsStatus.textContent = calendarRuntime.message;
+          } else {
+            els.calendarSettingsStatus.textContent = "Not connected. Add the deployed /exec URL, test it, then save settings.";
+          }
+        }
+
+        function renderCalendarEvents() {
+          const configuredUrl = normalizeCalendarFeedUrl(state.settings.calendarFeedUrl) || calendarRuntime.feedUrl;
+          const events = getCalendarEventsForDate(selectedDate);
+          const dayStart = new Date(selectedDate);
+          dayStart.setHours(0, 0, 0, 0);
+          const dayEnd = addDays(dayStart, 1);
+
+          els.calendarOpenLink.href = getCalendarDayLink(selectedDate);
+          els.calendarRefreshBtn.disabled = !configuredUrl || calendarRuntime.status === "loading";
+          els.calendarSetupBtn.classList.toggle("is-hidden", Boolean(configuredUrl) || !isAdmin());
+          els.calendarEventList.setAttribute("aria-busy", String(calendarRuntime.status === "loading"));
+          els.calendarEventList.innerHTML = "";
+
+          if (!configuredUrl) {
+            if (calendarRuntime.status === "error") {
+              els.calendarStatus.textContent = "Calendar unavailable";
+              const errorState = document.createElement("p");
+              errorState.className = "calendar-empty";
+              errorState.textContent = calendarRuntime.message;
+              els.calendarEventList.appendChild(errorState);
+              updateCalendarSettingsStatus();
+              return;
+            }
+            calendarRuntime.status = "setup";
+            calendarRuntime.message = "Not connected";
+            els.calendarStatus.textContent = "Not connected";
+            const empty = document.createElement("p");
+            empty.className = "calendar-empty";
+            empty.textContent = isAdmin()
+              ? "Connect the read-only feed once to show live events here."
+              : "Google Calendar has not been connected yet.";
+            els.calendarEventList.appendChild(empty);
+            updateCalendarSettingsStatus();
+            return;
+          }
+
+          if (calendarRuntime.status === "loading") {
+            els.calendarStatus.textContent = events.length ? "Refreshing…" : "Loading events…";
+          } else if (calendarRuntime.status === "error") {
+            els.calendarStatus.textContent = events.length ? "Showing cached events · refresh failed" : "Calendar unavailable";
+          } else if (calendarRuntime.status === "success") {
+            const refreshed = new Date(calendarRuntime.updatedAt);
+            els.calendarStatus.textContent = "Live · refreshed " + formatCalendarClock(refreshed);
+          } else {
+            els.calendarStatus.textContent = "Ready to connect";
+          }
+
+          if (!events.length) {
+            const empty = document.createElement("p");
+            empty.className = "calendar-empty";
+            if (calendarRuntime.status === "loading") empty.textContent = "Loading this week's events…";
+            else if (calendarRuntime.status === "error") empty.textContent = calendarRuntime.message;
+            else empty.textContent = "No Google Calendar events on this day.";
+            els.calendarEventList.appendChild(empty);
+          } else {
+            events.forEach(function(event) {
+              const row = document.createElement("article");
+              row.className = "calendar-event";
+              row.dataset.allDay = String(event.allDay);
+              row.setAttribute("role", "listitem");
+              const time = document.createElement("span");
+              time.className = "calendar-event-time";
+              time.textContent = formatCalendarEventTime(event, dayStart, dayEnd);
+              const copy = document.createElement("div");
+              copy.className = "calendar-event-copy";
+              const title = document.createElement("span");
+              title.className = "calendar-event-title";
+              title.textContent = event.title;
+              copy.appendChild(title);
+              const metaText = [event.location, event.calendar].filter(Boolean).join(" · ");
+              if (metaText) {
+                const meta = document.createElement("span");
+                meta.className = "calendar-event-meta";
+                meta.textContent = metaText;
+                copy.appendChild(meta);
+              }
+              row.appendChild(time);
+              row.appendChild(copy);
+              els.calendarEventList.appendChild(row);
+            });
+          }
+          updateCalendarSettingsStatus();
+        }
+
+        function requestCalendarFeed(feedUrl, start, end) {
+          return new Promise(function(resolve, reject) {
+            const callbackName = "__marcoCalendarCallback_" + Date.now() + "_" + Math.floor(Math.random() * 1000000);
+            const script = document.createElement("script");
+            let settled = false;
+            const timeout = setTimeout(function() {
+              finish(new Error("Calendar connection timed out. Check the deployment access and URL."));
+            }, 15000);
+
+            function cleanup() {
+              clearTimeout(timeout);
+              script.remove();
+              try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+            }
+
+            function finish(error, payload) {
+              if (settled) return;
+              settled = true;
+              cleanup();
+              if (error) reject(error);
+              else resolve(payload);
+            }
+
+            window[callbackName] = function(payload) { finish(null, payload); };
+            script.onerror = function() {
+              finish(new Error("Calendar feed could not load. Confirm the /exec URL and anonymous deployment access."));
+            };
+            const url = new URL(feedUrl);
+            url.searchParams.set("start", String(start.getTime()));
+            url.searchParams.set("end", String(end.getTime()));
+            url.searchParams.set("prefix", callbackName);
+            url.searchParams.set("cache", String(Date.now()));
+            script.src = url.toString();
+            script.async = true;
+            document.head.appendChild(script);
+          });
+        }
+
+        function normalizeCalendarEvents(payload) {
+          if (!payload || payload.ok !== true || !Array.isArray(payload.events)) {
+            throw new Error(payload && payload.error ? String(payload.error) : "The calendar feed returned an invalid response.");
+          }
+          return payload.events.slice(0, 250).map(function(event, index) {
+            const start = new Date(event.start);
+            const end = new Date(event.end);
+            if (!Number.isFinite(start.getTime()) || !Number.isFinite(end.getTime()) || end <= start) return null;
+            return {
+              id: String(event.id || index),
+              title: String(event.title || "Busy").slice(0, 240),
+              start: start,
+              end: end,
+              allDay: Boolean(event.allDay),
+              location: String(event.location || "").slice(0, 240),
+              calendar: String(event.calendar || "").slice(0, 120)
+            };
+          }).filter(Boolean);
+        }
+
+        async function loadCalendarEvents(options) {
+          options = options || {};
+          const rawUrl = options.url !== undefined ? options.url : state.settings.calendarFeedUrl;
+          const feedUrl = normalizeCalendarFeedUrl(rawUrl);
+          const range = getCalendarWeekRange();
+          const cacheKey = feedUrl + "|" + range.key;
+
+          if (String(rawUrl || "").trim() && !feedUrl) {
+            calendarRuntime.feedUrl = "";
+            calendarRuntime.events = [];
+            calendarRuntime.status = "error";
+            calendarRuntime.message = "Use the HTTPS Apps Script deployment URL ending in /exec.";
+            renderCalendarEvents();
+            return false;
+          }
+          if (!feedUrl) {
+            calendarRuntime.events = [];
+            calendarRuntime.feedUrl = "";
+            calendarRuntime.rangeKey = "";
+            calendarRuntime.status = "setup";
+            calendarRuntime.message = "Not connected";
+            calendarRuntime.requestId += 1;
+            renderCalendarEvents();
+            return false;
+          }
+          if (!options.force && calendarRuntime.rangeKey === cacheKey && (calendarRuntime.status === "loading" || calendarRuntime.status === "success")) {
+            renderCalendarEvents();
+            return calendarRuntime.status === "success";
+          }
+
+          const requestId = calendarRuntime.requestId + 1;
+          if (calendarRuntime.rangeKey !== cacheKey) calendarRuntime.events = [];
+          calendarRuntime.requestId = requestId;
+          calendarRuntime.feedUrl = feedUrl;
+          calendarRuntime.rangeKey = cacheKey;
+          calendarRuntime.status = "loading";
+          calendarRuntime.message = "Loading events…";
+          renderCalendarEvents();
+
+          try {
+            const payload = await requestCalendarFeed(feedUrl, range.start, range.end);
+            if (requestId !== calendarRuntime.requestId) return false;
+            calendarRuntime.events = normalizeCalendarEvents(payload);
+            calendarRuntime.status = "success";
+            calendarRuntime.message = "Connected";
+            calendarRuntime.updatedAt = Date.now();
+            renderCalendarEvents();
+            return true;
+          } catch (error) {
+            if (requestId !== calendarRuntime.requestId) return false;
+            calendarRuntime.status = "error";
+            calendarRuntime.message = error && error.message ? error.message : "Google Calendar could not be loaded.";
+            renderCalendarEvents();
+            return false;
+          }
+        }
+
+        function startCalendarAutoRefresh() {
+          if (calendarRefreshTimer) clearInterval(calendarRefreshTimer);
+          calendarRefreshTimer = setInterval(function() {
+            if (document.visibilityState !== "hidden") loadCalendarEvents({ force: true });
+          }, 10 * 60 * 1000);
         }
 
         function getWeeklyFocus(week) {
@@ -2898,6 +3292,7 @@
           renderDayStrip();
           renderSelectedDay();
           renderStats();
+          loadCalendarEvents();
         }
 
         function renderPortfolioWeek() {
@@ -3032,6 +3427,7 @@
         function renderSelectedDay() {
           els.selectedDayTitle.textContent = formatLongDate(selectedDate);
           renderSchedule();
+          renderCalendarEvents();
           renderTodos();
         }
 
@@ -3838,6 +4234,8 @@
           els.settingIndoorBikeStart.value = state.settings.indoorBikeStart;
           els.settingCalories.value = state.settings.calories;
           els.settingProtein.value = state.settings.protein;
+          els.settingCalendarFeedUrl.value = state.settings.calendarFeedUrl || "";
+          updateCalendarSettingsStatus();
         }
 
         function activateView(view, options) {
@@ -4013,6 +4411,14 @@
           els.settingsForm.addEventListener("submit", function(e) {
             e.preventDefault();
             if (!requireAdmin()) return;
+            const rawCalendarUrl = els.settingCalendarFeedUrl.value.trim();
+            const calendarUrl = normalizeCalendarFeedUrl(rawCalendarUrl);
+            if (rawCalendarUrl && !calendarUrl) {
+              els.settingsStatus.textContent = "Use the HTTPS Apps Script deployment URL ending in /exec.";
+              els.settingCalendarFeedUrl.focus();
+              return;
+            }
+            const calendarUrlChanged = calendarUrl !== (state.settings.calendarFeedUrl || "");
             state.settings.race = els.settingRace.value;
             state.settings.applications = Number(els.settingApplications.value) || 8;
             state.settings.outreach = Number(els.settingOutreach.value) || 10;
@@ -4021,9 +4427,39 @@
             state.settings.indoorBikeStart = els.settingIndoorBikeStart.value || defaultState.settings.indoorBikeStart;
             state.settings.calories = els.settingCalories.value;
             state.settings.protein = els.settingProtein.value;
+            state.settings.calendarFeedUrl = calendarUrl;
             saveState("Settings saved.");
             els.settingsStatus.textContent = "Saved.";
+            if (calendarUrlChanged) {
+              calendarRuntime.events = [];
+              calendarRuntime.feedUrl = calendarUrl;
+              calendarRuntime.rangeKey = "";
+              calendarRuntime.status = calendarUrl ? "loading" : "setup";
+            }
             renderAll();
+          });
+
+          els.calendarRefreshBtn.addEventListener("click", function() {
+            loadCalendarEvents({ force: true });
+          });
+          els.calendarSetupBtn.addEventListener("click", function() {
+            if (!requireAdmin()) return;
+            activateView("settings");
+            setTimeout(function() { els.settingCalendarFeedUrl.focus(); }, 50);
+          });
+          els.testCalendarFeed.addEventListener("click", async function() {
+            if (!requireAdmin()) return;
+            const rawUrl = els.settingCalendarFeedUrl.value.trim();
+            const feedUrl = normalizeCalendarFeedUrl(rawUrl);
+            if (!feedUrl) {
+              els.calendarSettingsStatus.textContent = "Paste the HTTPS Apps Script deployment URL ending in /exec.";
+              els.settingCalendarFeedUrl.focus();
+              return;
+            }
+            const connected = await loadCalendarEvents({ force: true, url: feedUrl });
+            els.calendarSettingsStatus.textContent = connected
+              ? "Connection successful. Save settings to keep this feed on every device."
+              : calendarRuntime.message;
           });
 
           // Schedule Editor
@@ -4192,6 +4628,11 @@
               populateCareerEditFields();
             });
           }, 1000);
+          document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === "visible" && Date.now() - calendarRuntime.updatedAt > 10 * 60 * 1000) {
+              loadCalendarEvents({ force: true });
+            }
+          });
         }
 
         function refreshIcons() {
@@ -4214,6 +4655,7 @@
           });
           els.weekSelect.value = dateKey(selectedWeek);
           renderAll();
+          startCalendarAutoRefresh();
         }
 
         init();
