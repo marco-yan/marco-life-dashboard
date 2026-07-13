@@ -271,37 +271,109 @@
     #marco-life-dashboard .schedule-item:last-child { border-bottom: none; }
     #marco-life-dashboard .schedule-time { font-weight: 600; color: #214E3B; }
 
-    #marco-life-dashboard .todo-list { display: flex; flex-direction: column; gap: 0; }
+    #marco-life-dashboard .todo-list { display: flex; flex-direction: column; gap: 0; position: relative; }
     #marco-life-dashboard .todo-row {
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 14px;
-      align-items: start;
-      padding: 14px 0;
+      grid-template-columns: 44px 44px minmax(0, 1fr) minmax(44px, auto);
+      gap: 8px;
+      align-items: center;
+      min-height: 64px;
+      padding: 10px 0;
       border-bottom: 1px solid var(--surface-strong);
-      transition: background 0.1s;
+      transition: background 0.15s, box-shadow 0.15s, opacity 0.15s;
     }
     #marco-life-dashboard .todo-row:hover {
-      background: var(--surface);
-      margin: 0 -12px;
-      padding-left: 12px;
-      padding-right: 12px;
+      background: var(--surface-strong);
       border-radius: 10px;
     }
-    #marco-life-dashboard .todo-row .form-check { padding-top: 2px; }
+    #marco-life-dashboard .todo-row .form-check {
+      align-items: center;
+      display: flex;
+      height: 44px;
+      justify-content: center;
+      width: 44px;
+    }
     #marco-life-dashboard .todo-row input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       accent-color: #214E3B;
       border-radius: 6px;
       cursor: pointer;
     }
-    #marco-life-dashboard .todo-text { font-weight: 500; font-size: 0.9rem; cursor: pointer; }
+    #marco-life-dashboard .todo-copy { min-width: 0; }
+    #marco-life-dashboard .todo-text { font-weight: 500; font-size: 0.9rem; line-height: 1.45; cursor: pointer; }
     #marco-life-dashboard .todo-row[data-complete="true"] .todo-text {
       color: #82906A;
       text-decoration: line-through;
     }
     #marco-life-dashboard .empty-state { color: #82906A; padding: 28px 0; text-align: center; font-size: 0.9rem; }
+    #marco-life-dashboard .todo-help { margin-top: 3px; }
+    #marco-life-dashboard .task-drag-handle,
+    #marco-life-dashboard .btn.task-hide-btn {
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      display: inline-flex;
+      height: 44px;
+      justify-content: center;
+      min-height: 44px;
+    }
+    #marco-life-dashboard .task-drag-handle {
+      color: #82906A;
+      cursor: grab;
+      padding: 0;
+      touch-action: none;
+      user-select: none;
+      width: 44px;
+    }
+    #marco-life-dashboard .task-drag-handle:hover,
+    #marco-life-dashboard .task-drag-handle:focus-visible {
+      background: var(--background);
+      border-color: var(--border);
+      color: #214E3B;
+    }
+    #marco-life-dashboard .task-drag-handle:active { cursor: grabbing; }
+    #marco-life-dashboard .task-drag-handle svg { height: 21px; width: 21px; }
+    #marco-life-dashboard .task-hide-btn {
+      color: var(--muted);
+      gap: 6px;
+      min-width: 68px;
+      padding: 0 10px;
+    }
+    #marco-life-dashboard .task-hide-btn:hover,
+    #marco-life-dashboard .task-hide-btn:focus-visible {
+      background: var(--background);
+      border-color: var(--border);
+      color: #171A18;
+    }
+    #marco-life-dashboard .todo-row.is-dragging { opacity: 0.24; }
+    #marco-life-dashboard .todo-list.is-sorting { user-select: none; }
+    #marco-life-dashboard .todo-drag-ghost {
+      background: var(--background);
+      border: 1px solid #C5A46D;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px var(--shadow);
+      margin: 0;
+      opacity: 0.97;
+      pointer-events: none;
+      position: fixed;
+      transform: scale(1.015);
+      z-index: 10001;
+    }
+    #marco-life-dashboard .todo-drop-flash { animation: todo-drop-flash 0.35s ease; }
+    @keyframes todo-drop-flash {
+      from { box-shadow: inset 4px 0 0 #C5A46D; }
+      to { box-shadow: inset 0 0 0 transparent; }
+    }
+    #marco-life-dashboard .sr-only {
+      clip: rect(0, 0, 0, 0);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
 
     #marco-life-dashboard .add-task-form {
       margin-top: 20px;
@@ -621,6 +693,7 @@
     #marco-life-dashboard .viz-stat { border-top: 3px solid var(--secondary); min-height: 132px; }
     #marco-life-dashboard .viz-stat-value { margin: 4px 0 2px; }
     #marco-life-dashboard .btn { min-height: 38px; }
+    #marco-life-dashboard .btn.task-hide-btn { min-height: 44px; }
     #marco-life-dashboard .btn:active:not(:disabled) { transform: translateY(1px); }
     #marco-life-dashboard .form-control,
     #marco-life-dashboard .form-select,
@@ -823,6 +896,16 @@
       #marco-life-dashboard .roadmap-column-head { display: none; }
       #marco-life-dashboard .roadmap-row { grid-template-columns: 1fr; gap: 14px; }
       #marco-life-dashboard .roadmap-cell { border-top: 1px solid var(--border); padding-top: 13px; }
+      #marco-life-dashboard #todo-list.card-soft { padding: 8px 10px; }
+      #marco-life-dashboard .todo-row {
+        gap: 4px;
+        grid-template-columns: 44px 40px minmax(0, 1fr) 64px;
+        min-height: 68px;
+        padding: 8px 0;
+      }
+      #marco-life-dashboard .todo-row .form-check { width: 40px; }
+      #marco-life-dashboard .task-hide-btn { min-width: 64px; padding: 0 6px; width: 64px; }
+      #marco-life-dashboard .todo-text { font-size: 0.9rem; }
       #marco-life-dashboard .schedule-item { grid-template-columns: 94px 1fr; }
       #schedule-modal .modal-box { max-height: 92vh; padding: 24px 18px; }
       #schedule-modal .add-row { grid-template-columns: 1fr; }
@@ -929,10 +1012,17 @@
 
         <section aria-labelledby="todo-heading">
           <div class="section-heading">
-            <h3 id="todo-heading">Daily to-dos</h3>
-            <button type="button" class="btn btn-ghost" id="show-add-task"><i data-lucide="plus"></i> Add task</button>
+            <div>
+              <h3 id="todo-heading">Daily to-dos</h3>
+              <p class="text-small todo-help">Drag the handle to reprioritize. Hide removes a task from this day only.</p>
+            </div>
+            <div class="right-actions">
+              <button type="button" class="btn btn-ghost is-hidden" id="restore-hidden-tasks"><i data-lucide="rotate-ccw"></i> Restore hidden <span id="hidden-task-count"></span></button>
+              <button type="button" class="btn btn-ghost" id="show-add-task"><i data-lucide="plus"></i> Add task</button>
+            </div>
           </div>
-          <div class="card-soft todo-list" id="todo-list"></div>
+          <span class="sr-only" id="task-sort-status" aria-live="assertive"></span>
+          <div class="card-soft todo-list" id="todo-list" role="list"></div>
 
           <form class="add-task-form is-hidden" id="add-task-form">
             <div class="add-task-fields">
@@ -1259,6 +1349,8 @@
             protein: ""
           },
           completed: {},
+          taskOrder: {},
+          hiddenTasks: {},
           customTasks: [],
           scheduleOverrides: {},
           notes: "",
@@ -1312,6 +1404,7 @@
         let notesSaveTimer = null;
         let roadmapSaveTimer = null;
         let lastModalTrigger = null;
+        let taskDragState = null;
 
         const weeks = [];
         for (let cursor = startOfWeek(RANGE_START); cursor <= startOfWeek(RANGE_END); cursor = addDays(cursor, 7)) {
@@ -1331,6 +1424,9 @@
           selectedDayTitle: document.getElementById("selected-day-title"),
           dayStatus: document.getElementById("day-status"),
           showAddTask: document.getElementById("show-add-task"),
+          restoreHiddenTasks: document.getElementById("restore-hidden-tasks"),
+          hiddenTaskCount: document.getElementById("hidden-task-count"),
+          taskSortStatus: document.getElementById("task-sort-status"),
           addTaskForm: document.getElementById("add-task-form"),
           cancelAddTask: document.getElementById("cancel-add-task"),
           newTaskCategory: document.getElementById("new-task-category"),
@@ -1479,6 +1575,8 @@
             const data = {
               settings: state.settings,
               completed: state.completed,
+              taskOrder: state.taskOrder,
+              hiddenTasks: state.hiddenTasks,
               customTasks: state.customTasks,
               scheduleOverrides: state.scheduleOverrides,
               notes: state.notes,
@@ -1525,6 +1623,8 @@
             if (data) {
               if (data.settings) state.settings = Object.assign({}, defaultState.settings, data.settings);
               if (data.completed) state.completed = data.completed;
+              if (data.taskOrder && typeof data.taskOrder === "object") state.taskOrder = data.taskOrder;
+              if (data.hiddenTasks && typeof data.hiddenTasks === "object") state.hiddenTasks = data.hiddenTasks;
               if (data.customTasks) state.customTasks = data.customTasks;
               if (data.scheduleOverrides) state.scheduleOverrides = data.scheduleOverrides;
               if (data.notes !== undefined) state.notes = data.notes;
@@ -1566,6 +1666,8 @@
             return {
               settings: Object.assign({}, defaultState.settings, parsed.settings || {}),
               completed: parsed.completed || {},
+              taskOrder: parsed.taskOrder && typeof parsed.taskOrder === "object" ? parsed.taskOrder : {},
+              hiddenTasks: parsed.hiddenTasks && typeof parsed.hiddenTasks === "object" ? parsed.hiddenTasks : {},
               customTasks: parsed.customTasks || [],
               scheduleOverrides: parsed.scheduleOverrides || {},
               notes: parsed.notes || "",
@@ -1696,7 +1798,19 @@
           return "Log meals and check " + c + " / " + p;
         }
 
-        function tasksForDate(date) {
+        function applyTaskPreferences(tasks, key, includeHidden) {
+          const savedOrder = Array.isArray(state.taskOrder[key]) ? state.taskOrder[key] : [];
+          const orderRank = new Map(savedOrder.map(function(taskId, index) { return [taskId, index]; }));
+          const hidden = new Set(Array.isArray(state.hiddenTasks[key]) ? state.hiddenTasks[key] : []);
+          const ordered = tasks.slice().sort(function(a, b) {
+            const aRank = orderRank.has(a.id) ? orderRank.get(a.id) : Number.POSITIVE_INFINITY;
+            const bRank = orderRank.has(b.id) ? orderRank.get(b.id) : Number.POSITIVE_INFINITY;
+            return aRank - bRank;
+          });
+          return includeHidden ? ordered : ordered.filter(function(task) { return !hidden.has(task.id); });
+        }
+
+        function tasksForDate(date, options) {
           const key = dateKey(date);
           const week = startOfWeek(date);
           const targets = getWeekTargets(week);
@@ -1732,7 +1846,7 @@
             tasks.push({id:key+"-company-research", category:"Career", text:"Research the week's focus: "+focus.targets, custom:false});
           }
           state.customTasks.filter(item => item.date === key).forEach(item => { tasks.push({id:item.id, category:item.category, text:item.text, custom:true}); });
-          return tasks;
+          return applyTaskPreferences(tasks, key, Boolean(options && options.includeHidden));
         }
 
         function tasksForWeek(week) { let t=[]; weekDates(week).forEach(d => { if(inRange(d)) t = t.concat(tasksForDate(d)); }); return t; }
@@ -1820,13 +1934,183 @@
           });
         }
 
+        function announceTaskChange(message) {
+          els.taskSortStatus.textContent = "";
+          requestAnimationFrame(function() { els.taskSortStatus.textContent = message; });
+        }
+
+        function taskIdsInDOM() {
+          return Array.from(els.todoList.querySelectorAll(".todo-row")).map(function(row) { return row.dataset.taskId; });
+        }
+
+        function persistTaskOrder(message) {
+          const key = dateKey(selectedDate);
+          const visibleIds = taskIdsInDOM();
+          const allIds = tasksForDate(selectedDate, { includeHidden: true }).map(function(task) { return task.id; });
+          const hidden = new Set(Array.isArray(state.hiddenTasks[key]) ? state.hiddenTasks[key] : []);
+          let visibleIndex = 0;
+          const nextOrder = allIds.map(function(taskId) {
+            if (hidden.has(taskId)) return taskId;
+            const replacement = visibleIds[visibleIndex];
+            visibleIndex += 1;
+            return replacement;
+          }).filter(Boolean);
+          while (visibleIndex < visibleIds.length) {
+            nextOrder.push(visibleIds[visibleIndex]);
+            visibleIndex += 1;
+          }
+          const changed = nextOrder.join("|") !== allIds.join("|");
+          if (!changed) return false;
+          state.taskOrder[key] = nextOrder;
+          saveState(message || "Task order saved.");
+          return true;
+        }
+
+        function hideTaskForSelectedDate(task) {
+          const key = dateKey(selectedDate);
+          const hidden = Array.isArray(state.hiddenTasks[key]) ? state.hiddenTasks[key].slice() : [];
+          if (!hidden.includes(task.id)) hidden.push(task.id);
+          state.hiddenTasks[key] = hidden;
+          saveState("Task hidden for " + formatLongDate(selectedDate) + ".");
+          renderWeek();
+          announceTaskChange("Hidden: " + task.text + ". Use Restore hidden to bring it back.");
+        }
+
+        function restoreHiddenTasksForSelectedDate() {
+          const key = dateKey(selectedDate);
+          const count = Array.isArray(state.hiddenTasks[key]) ? state.hiddenTasks[key].length : 0;
+          if (!count) return;
+          delete state.hiddenTasks[key];
+          saveState("Hidden tasks restored.");
+          renderWeek();
+          announceTaskChange(count + " hidden task" + (count === 1 ? "" : "s") + " restored.");
+        }
+
+        function createTaskDragGhost(row, rect) {
+          const ghost = row.cloneNode(true);
+          ghost.classList.remove("is-dragging");
+          ghost.classList.add("todo-drag-ghost");
+          ghost.setAttribute("aria-hidden", "true");
+          ghost.querySelectorAll("[id]").forEach(function(element) { element.removeAttribute("id"); });
+          ghost.querySelectorAll("[for]").forEach(function(element) { element.removeAttribute("for"); });
+          ghost.style.left = rect.left + "px";
+          ghost.style.top = rect.top + "px";
+          ghost.style.width = rect.width + "px";
+          ghost.style.height = rect.height + "px";
+          document.getElementById("marco-life-dashboard").appendChild(ghost);
+          return ghost;
+        }
+
+        function beginTaskDrag(event, handle) {
+          if (taskDragState || (event.pointerType === "mouse" && event.button !== 0)) return;
+          const row = handle.closest(".todo-row");
+          if (!row) return;
+          event.preventDefault();
+          const rect = row.getBoundingClientRect();
+          taskDragState = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            startY: event.clientY,
+            offsetY: event.clientY - rect.top,
+            row: row,
+            handle: handle,
+            rect: rect,
+            started: false,
+            ghost: null
+          };
+          try { handle.setPointerCapture(event.pointerId); } catch (e) {}
+        }
+
+        function moveTaskDrag(event) {
+          const drag = taskDragState;
+          if (!drag || event.pointerId !== drag.pointerId) return;
+          const distance = Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY);
+          if (!drag.started && distance < 5) return;
+          event.preventDefault();
+          if (!drag.started) {
+            drag.started = true;
+            drag.row.classList.add("is-dragging");
+            els.todoList.classList.add("is-sorting");
+            document.body.classList.add("task-dragging");
+            drag.ghost = createTaskDragGhost(drag.row, drag.rect);
+          }
+          drag.ghost.style.top = (event.clientY - drag.offsetY) + "px";
+
+          const hit = document.elementFromPoint(event.clientX, event.clientY);
+          const target = hit && hit.closest ? hit.closest(".todo-row") : null;
+          if (target && target !== drag.row && target.parentElement === els.todoList) {
+            const targetRect = target.getBoundingClientRect();
+            const insertAfter = event.clientY > targetRect.top + (targetRect.height / 2);
+            els.todoList.insertBefore(drag.row, insertAfter ? target.nextElementSibling : target);
+          }
+
+          const edge = 86;
+          if (event.clientY < edge) window.scrollBy(0, -14);
+          if (event.clientY > window.innerHeight - edge) window.scrollBy(0, 14);
+        }
+
+        function finishTaskDrag(event) {
+          const drag = taskDragState;
+          if (!drag || (event.pointerId != null && event.pointerId !== drag.pointerId)) return;
+          taskDragState = null;
+          if (drag.ghost) drag.ghost.remove();
+          drag.row.classList.remove("is-dragging");
+          els.todoList.classList.remove("is-sorting");
+          document.body.classList.remove("task-dragging");
+          try {
+            if (drag.handle.hasPointerCapture(drag.pointerId)) drag.handle.releasePointerCapture(drag.pointerId);
+          } catch (e) {}
+          if (!drag.started) return;
+          const changed = persistTaskOrder("Task order saved.");
+          drag.row.classList.add("todo-drop-flash");
+          setTimeout(function() { drag.row.classList.remove("todo-drop-flash"); }, 400);
+          announceTaskChange(changed ? "Task moved. New order saved." : "Task returned to its original position.");
+        }
+
+        function moveTaskWithKeyboard(event, handle) {
+          if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
+          event.preventDefault();
+          const row = handle.closest(".todo-row");
+          const sibling = event.key === "ArrowUp" ? row.previousElementSibling : row.nextElementSibling;
+          if (!sibling || !sibling.classList.contains("todo-row")) {
+            announceTaskChange(event.key === "ArrowUp" ? "Task is already first." : "Task is already last.");
+            return;
+          }
+          if (event.key === "ArrowUp") els.todoList.insertBefore(row, sibling);
+          else els.todoList.insertBefore(sibling, row);
+          persistTaskOrder("Task order saved.");
+          row.classList.add("todo-drop-flash");
+          setTimeout(function() { row.classList.remove("todo-drop-flash"); }, 400);
+          handle.focus();
+          announceTaskChange("Task moved " + (event.key === "ArrowUp" ? "up" : "down") + ". New order saved.");
+        }
+
         function renderTodos() {
+          const allTasks = tasksForDate(selectedDate, { includeHidden: true });
           const tasks = tasksForDate(selectedDate);
+          const hiddenCount = allTasks.length - tasks.length;
           els.todoList.innerHTML = "";
-          if (!tasks.length) { els.todoList.innerHTML = '<div class="empty-state">No tasks planned.</div>'; }
+          els.restoreHiddenTasks.classList.toggle("is-hidden", hiddenCount === 0);
+          els.hiddenTaskCount.textContent = hiddenCount ? "(" + hiddenCount + ")" : "";
+          if (!tasks.length) {
+            els.todoList.innerHTML = '<div class="empty-state">' + (hiddenCount ? 'All tasks are hidden for this day.' : 'No tasks planned.') + '</div>';
+          }
           tasks.forEach(task => {
-            const row = document.createElement("div"); row.className = "todo-row"; row.dataset.complete = String(isComplete(task));
+            const row = document.createElement("div");
+            row.className = "todo-row";
+            row.dataset.complete = String(isComplete(task));
+            row.dataset.taskId = task.id;
+            row.setAttribute("role", "listitem");
+            row.setAttribute("aria-roledescription", "sortable task");
             const checked = isComplete(task); const id = "task-"+ (task.id || "t"+Date.now()+Math.random());
+
+            const dragHandle = document.createElement("button");
+            dragHandle.type = "button";
+            dragHandle.className = "task-drag-handle";
+            dragHandle.title = "Drag to reorder";
+            dragHandle.setAttribute("aria-label", "Reorder task: " + task.text + ". Use up or down arrow keys, or drag.");
+            dragHandle.setAttribute("aria-keyshortcuts", "ArrowUp ArrowDown");
+            dragHandle.innerHTML = '<i data-lucide="grip-vertical"></i>';
             const checkWrap = document.createElement("div");
             checkWrap.className = "form-check";
             const cb = document.createElement("input");
@@ -1848,23 +2132,25 @@
             copy.appendChild(label);
             copy.appendChild(category);
 
-            const action = document.createElement(task.custom ? "button" : "span");
-            if (task.custom) {
-              action.type = "button";
-              action.className = "btn btn-ghost";
-              action.dataset.remove = task.id;
-              action.setAttribute("aria-label", "Remove task: " + task.text);
-              action.innerHTML = '<i data-lucide="trash-2"></i>';
-            }
+            const action = document.createElement("button");
+            action.type = "button";
+            action.className = "btn btn-ghost task-hide-btn";
+            action.title = "Hide for this day";
+            action.setAttribute("aria-label", "Hide task for this day: " + task.text);
+            action.innerHTML = '<i data-lucide="eye-off"></i><span>Hide</span>';
+
+            row.appendChild(dragHandle);
             row.appendChild(checkWrap);
             row.appendChild(copy);
             row.appendChild(action);
+            dragHandle.addEventListener("pointerdown", function(event) { beginTaskDrag(event, dragHandle); });
+            dragHandle.addEventListener("keydown", function(event) { moveTaskWithKeyboard(event, dragHandle); });
             cb.addEventListener("change", function() { state.completed[task.id] = this.checked; saveState("Progress saved."); renderWeek(); });
-            if (task.custom) { action.addEventListener("click", function() { state.customTasks = state.customTasks.filter(t => t.id !== task.id); delete state.completed[task.id]; saveState("Task removed."); renderWeek(); }); }
+            action.addEventListener("click", function() { hideTaskForSelectedDate(task); });
             els.todoList.appendChild(row);
           });
           const done = tasks.filter(isComplete).length;
-          els.dayStatus.textContent = done + " of " + tasks.length + " done";
+          els.dayStatus.textContent = done + " of " + tasks.length + " done" + (hiddenCount ? " · " + hiddenCount + " hidden" : "");
           refreshIcons();
         }
 
@@ -2219,6 +2505,12 @@
           els.nextWeek.addEventListener("click", function() { const idx = weeks.findIndex(w => dateKey(w) === dateKey(selectedWeek)); if(idx<weeks.length-1) { selectedWeek = weeks[idx+1]; selectedDate = selectedWeek; renderAll(); } });
           els.currentWeek.addEventListener("click", function() { selectedDate = clampDate(new Date()); selectedWeek = startOfWeek(selectedDate); renderAll(); });
           els.weekSelect.addEventListener("change", function() { selectedWeek = parseDate(this.value); selectedDate = selectedWeek; renderAll(); });
+
+          els.restoreHiddenTasks.addEventListener("click", restoreHiddenTasksForSelectedDate);
+          document.addEventListener("pointermove", moveTaskDrag, { passive: false });
+          document.addEventListener("pointerup", finishTaskDrag);
+          document.addEventListener("pointercancel", finishTaskDrag);
+          window.addEventListener("blur", finishTaskDrag);
 
           els.showAddTask.addEventListener("click", function() { els.addTaskForm.classList.remove("is-hidden"); els.newTaskText.focus(); });
           els.cancelAddTask.addEventListener("click", function() { els.addTaskForm.classList.add("is-hidden"); els.newTaskText.value = ""; });
