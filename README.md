@@ -12,7 +12,7 @@ The login screen supports two dashboard accounts:
 
 | Role | Username | Password | Access |
 | --- | --- | --- | --- |
-| Admin | `admin` | `RockOn123` | Full editing, local saving, and JSONBin synchronization |
+| Admin | `` | `` | Full editing, local saving, and JSONBin synchronization |
 | Guest | `guest` | `123` | Read-only preview of every dashboard tab |
 
 The active role is kept in `sessionStorage`, so signing out or closing the browser session returns the viewer to the login screen. A role badge is always visible in the dashboard header, and guest sessions display a read-only banner.
