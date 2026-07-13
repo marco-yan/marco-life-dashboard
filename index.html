@@ -936,7 +936,7 @@
       align-items: center;
       display: grid;
       gap: 18px;
-      grid-template-columns: minmax(0, 1fr) repeat(3, minmax(140px, 0.55fr));
+      grid-template-columns: minmax(0, 1.1fr) repeat(4, minmax(125px, 0.5fr));
       margin-bottom: 24px;
     }
     #marco-life-dashboard .portfolio-cadence h3 {
@@ -956,7 +956,7 @@
     #marco-life-dashboard .portfolio-timeline {
       display: grid;
       gap: 10px;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(7, minmax(0, 1fr));
       margin-bottom: 24px;
     }
     #marco-life-dashboard .portfolio-phase {
@@ -1260,7 +1260,7 @@
       #marco-life-dashboard .networking-list { grid-template-columns: 1fr; }
       #marco-life-dashboard .roadmap-summary { grid-template-columns: 1fr; }
       #marco-life-dashboard .portfolio-timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      #marco-life-dashboard .portfolio-cadence { grid-template-columns: 1fr 1fr 1fr; }
+      #marco-life-dashboard .portfolio-cadence { grid-template-columns: 1fr 1fr; }
       #marco-life-dashboard .portfolio-cadence > div:first-child { grid-column: 1 / -1; }
       #career-app-form, #career-contact-form { grid-template-columns: 1fr 1fr !important; }
     }
@@ -1423,7 +1423,7 @@
         <div class="portfolio-week-copy">
           <span class="eyebrow" id="portfolio-week-label">Portfolio plan</span>
           <h2 id="portfolio-week-title">Projects begin September 1</h2>
-          <p class="text-small" id="portfolio-week-detail">Build four job-search proof points, then freeze development on December 6.</p>
+          <p class="text-small" id="portfolio-week-detail">Ship proof early, publish the first case study in September, and freeze development on November 22.</p>
         </div>
         <div class="portfolio-week-progress">
           <div class="portfolio-progress-label"><span id="portfolio-week-progress-label">Overall progress</span><strong id="portfolio-week-progress-value">0%</strong></div>
@@ -1500,7 +1500,7 @@
         <div>
           <span class="eyebrow">July–December 2026</span>
           <h2>Your weekly roadmap</h2>
-          <p class="text-small">Edit each week's Career and Training focus, choose the three networking contacts, and follow the linked portfolio milestone from September through the December 6 development freeze. Every change saves and syncs automatically.</p>
+          <p class="text-small">Edit each week's Career and Training focus, choose the three networking contacts, and follow the linked portfolio milestone from September through the November 22 development freeze. Every change saves and syncs automatically.</p>
         </div>
         <div class="roadmap-toolbar-actions">
           <span class="text-small" id="roadmap-save-status" aria-live="polite">All changes saved</span>
@@ -1509,7 +1509,7 @@
       </div>
       <div class="viz-grid roadmap-summary">
         <div class="card viz-stat"><span class="text-muted">Career objective</span><span class="viz-stat-value">December 15</span><span class="text-small">Signed permanent early-career offer</span></div>
-        <div class="card viz-stat"><span class="text-muted">Portfolio development freeze</span><span class="viz-stat-value">December 6</span><span class="text-small" id="roadmap-portfolio-progress">0 of 0 milestones complete</span></div>
+        <div class="card viz-stat"><span class="text-muted">Portfolio development freeze</span><span class="viz-stat-value">November 22</span><span class="text-small" id="roadmap-portfolio-progress">0 of 0 milestones complete</span></div>
         <div class="card viz-stat"><span class="text-muted">Race decision window</span><span class="viz-stat-value">Aug 24–Oct 4</span><span class="text-small" id="race-summary">Ohio or Musselman; 2027 date TBD</span></div>
         <div class="card viz-stat"><span class="text-muted">New disciplines</span><span class="viz-stat-value" id="discipline-summary">Aug 3 / Sep 28</span><span class="text-small">Bike / swim start</span></div>
       </div>
@@ -1522,7 +1522,7 @@
     <section id="panel-portfolio" class="is-hidden" role="tabpanel" aria-labelledby="tab-portfolio" hidden>
       <div class="portfolio-panel-header">
         <div>
-          <span class="eyebrow">September 1–December 6, 2026</span>
+          <span class="eyebrow">September 1–November 22, 2026</span>
           <h2>Job-search proof portfolio</h2>
           <p class="text-small">Four deliverables that prove the Insurance, Project Controls, and Healthcare Analytics lanes—built in focused weekly blocks, documented publicly, then frozen for interview season.</p>
         </div>
@@ -1532,18 +1532,19 @@
       <div class="viz-grid">
         <div class="card viz-stat"><span class="text-muted">Overall completion</span><span class="viz-stat-value" id="portfolio-overall-percent">0%</span><span class="text-small" id="portfolio-overall-detail">0 of 0 milestones</span></div>
         <div class="card viz-stat"><span class="text-muted">Current phase</span><span class="viz-stat-value" id="portfolio-current-phase">Plan</span><span class="text-small" id="portfolio-current-due">Insurance starts Sep 1</span></div>
-        <div class="card viz-stat"><span class="text-muted">Build cadence</span><span class="viz-stat-value">6 hrs</span><span class="text-small">Wednesday · Saturday · Sunday</span></div>
-        <div class="card viz-stat"><span class="text-muted">Development freeze</span><span class="viz-stat-value">Dec 6</span><span class="text-small">Afterward: interviews, not feature creep</span></div>
+        <div class="card viz-stat"><span class="text-muted">Build cadence</span><span class="viz-stat-value">7 hrs</span><span class="text-small">Monday · Wednesday · Saturday · Sunday</span></div>
+        <div class="card viz-stat"><span class="text-muted">Development freeze</span><span class="viz-stat-value">Nov 22</span><span class="text-small">Afterward: interviews, not feature creep</span></div>
       </div>
 
       <section class="card portfolio-cadence" aria-label="Weekly portfolio work cadence">
         <div>
           <span class="eyebrow">Protected weekly workload</span>
-          <h3>One build rhythm for all four deliverables</h3>
-          <p class="text-small">These sessions also appear as normal daily to-dos, so they can be reordered or hidden without changing another day.</p>
+          <h3>Build faster without displacing the job hunt</h3>
+          <p class="text-small">Applications stay first on Monday, networking stays first on Wednesday, and the weekend blocks end before protected social time. Every session also appears as a reorderable daily to-do.</p>
         </div>
-        <div class="portfolio-cadence-block"><strong>Wednesday · 1.5h</strong><span class="text-small">Advance the next build milestone</span></div>
-        <div class="portfolio-cadence-block"><strong>Saturday · 3h</strong><span class="text-small">Deep work on the core function</span></div>
+        <div class="portfolio-cadence-block"><strong>Monday · 1h</strong><span class="text-small">Applications first, then one focused build sprint</span></div>
+        <div class="portfolio-cadence-block"><strong>Wednesday · 1.5h</strong><span class="text-small">Networking first, then advance the core feature</span></div>
+        <div class="portfolio-cadence-block"><strong>Saturday · 3h</strong><span class="text-small">Deep work after applications; finish by 6:30 PM</span></div>
         <div class="portfolio-cadence-block"><strong>Sunday · 1.5h</strong><span class="text-small">Test, document, and package proof</span></div>
       </section>
 
@@ -1901,18 +1902,18 @@
             title:"Commercial Underwriting Pricing & Portfolio Workbench",
             lane:"Insurance / Underwriting",
             start:"2026-09-01",
-            end:"2026-09-14",
-            dateLabel:"Sep 1–14",
+            end:"2026-09-10",
+            dateLabel:"Sep 1–10",
             hours:"10–14 hours",
             tools:["Excel", "Power Query", "Power Pivot", "PivotTables", "LET", "XLOOKUP", "Solver", "Data Tables"],
             summary:"An adjustable commercial-risk pricing model that turns claims and expense assumptions into an underwriting decision and portfolio view.",
             milestones:[
               { id:"insurance-source", title:"Create the synthetic policies, claims, and assumptions files with a short data dictionary", due:"2026-09-02" },
               { id:"insurance-query", title:"Build refreshable Power Query imports and basic data-quality checks", due:"2026-09-05" },
-              { id:"insurance-engine", title:"Build frequency × severity pricing, expense, risk-load, and margin calculations with LET and XLOOKUP", due:"2026-09-09" },
-              { id:"insurance-decision", title:"Add risk tiers, recommended terms, and accept / refer / decline decision logic", due:"2026-09-11" },
-              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable portfolio dashboard", due:"2026-09-13" },
-              { id:"insurance-scenarios", title:"Add scenario comparison, Solver optimization, data tables, QA, and a documented v1 release", due:"2026-09-14" }
+              { id:"insurance-engine", title:"Build frequency × severity pricing, expense, risk-load, and margin calculations with LET and XLOOKUP", due:"2026-09-07" },
+              { id:"insurance-decision", title:"Add risk tiers, recommended terms, and accept / refer / decline decision logic", due:"2026-09-08" },
+              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable portfolio dashboard", due:"2026-09-09" },
+              { id:"insurance-scenarios", title:"Add scenario comparison, Solver optimization, data tables, QA, and a documented v1 release", due:"2026-09-10" }
             ]
           },
           {
@@ -1921,18 +1922,18 @@
             title:"Project Controls & Risk Forecasting Command Center",
             lane:"Infrastructure / Project Controls",
             start:"2026-09-15",
-            end:"2026-10-05",
-            dateLabel:"Sep 15–Oct 5",
+            end:"2026-10-04",
+            dateLabel:"Sep 15–Oct 4",
             hours:"14–18 hours",
             tools:["Excel", "Power Query", "Python", "pandas", "NumPy", "Power BI", "DAX"],
             summary:"A fictional infrastructure command center combining earned-value performance, cost and schedule risk, and an executive decision narrative.",
             milestones:[
               { id:"controls-source", title:"Create 8 work packages × 12 periods plus milestones and a red / yellow / green risk register", due:"2026-09-18" },
-              { id:"controls-query", title:"Build the Power Query cleaning and reporting model", due:"2026-09-21" },
-              { id:"controls-evm", title:"Implement PV, EV, AC, CPI, SPI, CV, SV, and EAC measures in DAX", due:"2026-09-26" },
-              { id:"controls-simulation", title:"Run a documented pandas / NumPy Monte Carlo-style simulation and export P50 / P80 estimates", due:"2026-09-30" },
-              { id:"controls-report", title:"Build the Power BI executive report, work-package filters, and risk heatmap", due:"2026-10-03" },
-              { id:"controls-release", title:"Write the executive narrative, validate the numbers, and package the v1 release", due:"2026-10-05" }
+              { id:"controls-query", title:"Build the Power Query cleaning and reporting model", due:"2026-09-20" },
+              { id:"controls-evm", title:"Implement PV, EV, AC, CPI, SPI, CV, SV, and EAC measures in DAX", due:"2026-09-25" },
+              { id:"controls-simulation", title:"Run a documented pandas / NumPy Monte Carlo-style simulation and export P50 / P80 estimates", due:"2026-09-29" },
+              { id:"controls-report", title:"Build the Power BI executive report, work-package filters, and risk heatmap", due:"2026-10-02" },
+              { id:"controls-release", title:"Write the executive narrative, validate the numbers, and package the v1 release", due:"2026-10-04" }
             ]
           },
           {
@@ -1940,20 +1941,20 @@
             number:"Project 3",
             title:"Pharma Commercial Effectiveness & Channel Optimization",
             lane:"Healthcare Commercial Analytics",
-            start:"2026-10-06",
-            end:"2026-11-02",
-            dateLabel:"Oct 6–Nov 2",
+            start:"2026-10-05",
+            end:"2026-10-25",
+            dateLabel:"Oct 5–25",
             hours:"18–24 hours",
             tools:["SQL", "Python", "pandas", "Excel", "Power BI", "DAX"],
             summary:"A synthetic oncology commercial-analysis suite that measures channel ROI, simulated lift, and a defensible budget-allocation recommendation.",
             milestones:[
-              { id:"pharma-source", title:"Create the relational HCP, product, touchpoint, spend, and sales dataset with a data dictionary", due:"2026-10-09" },
-              { id:"pharma-model", title:"Define the SQL schema and validate keys, joins, and record counts", due:"2026-10-13" },
-              { id:"pharma-sql", title:"Build reusable joins, CTEs, window-function analysis, and final reporting views", due:"2026-10-17" },
-              { id:"pharma-simulation", title:"Build the control-vs-exposed Python simulation and confidence-interval output", due:"2026-10-22" },
-              { id:"pharma-allocation", title:"Calculate channel ROI and create the budget-allocation recommendation logic", due:"2026-10-25" },
-              { id:"pharma-report", title:"Build the Power BI / DAX report for lift, ROI, segmentation, and allocation", due:"2026-10-30" },
-              { id:"pharma-release", title:"Write the recommendation narrative, label assumptions, complete QA, and package v1", due:"2026-11-02" }
+              { id:"pharma-source", title:"Create the relational HCP, product, touchpoint, spend, and sales dataset with a data dictionary", due:"2026-10-07" },
+              { id:"pharma-model", title:"Define the SQL schema and validate keys, joins, and record counts", due:"2026-10-10" },
+              { id:"pharma-sql", title:"Build reusable joins, CTEs, window-function analysis, and final reporting views", due:"2026-10-14" },
+              { id:"pharma-simulation", title:"Build the control-vs-exposed Python simulation and confidence-interval output", due:"2026-10-18" },
+              { id:"pharma-allocation", title:"Calculate channel ROI and create the budget-allocation recommendation logic", due:"2026-10-21" },
+              { id:"pharma-report", title:"Build the Power BI / DAX report for lift, ROI, segmentation, and allocation", due:"2026-10-24" },
+              { id:"pharma-release", title:"Write the recommendation narrative, label assumptions, complete QA, and package v1", due:"2026-10-25" }
             ]
           },
           {
@@ -1961,19 +1962,20 @@
             number:"Project 4",
             title:"Shared Public Portfolio Site",
             lane:"Shared proof layer",
-            start:"2026-11-03",
-            end:"2026-11-15",
-            dateLabel:"Nov 3–15",
+            start:"2026-09-11",
+            end:"2026-11-08",
+            dateLabel:"Sep 11–14 shell · Oct 26–Nov 8 polish",
             hours:"6–10 hours",
             tools:["HTML", "CSS", "JavaScript", "Git", "GitHub", "Power BI embeds", "Video"],
             summary:"A recruiter-friendly public hub with concise case studies, working proof, architecture context, downloads, and short walkthroughs.",
             milestones:[
-              { id:"site-shell", title:"Create the GitHub repository, responsive site shell, navigation, and reusable case-study layout", due:"2026-11-05" },
-              { id:"site-cases", title:"Write the three case studies with problem, method, output, recommendation, and architecture diagram", due:"2026-11-08" },
-              { id:"site-embeds", title:"Add Power BI embeds where available plus clear video / image fallbacks", due:"2026-11-10" },
-              { id:"site-assets", title:"Add downloadable files, repository links, tech badges, and synthetic-data disclosures", due:"2026-11-12" },
-              { id:"site-videos", title:"Record one 60–90 second walkthrough for each project", due:"2026-11-14" },
-              { id:"site-release", title:"Complete mobile, link, and accessibility QA; publish the public v1", due:"2026-11-15" }
+              { id:"site-shell", title:"Create the GitHub repository, responsive site shell, navigation, and reusable case-study layout", due:"2026-09-13" },
+              { id:"site-initial-release", title:"Publish the Insurance case study and coming-soon cards so outreach has a live link", due:"2026-09-14" },
+              { id:"site-cases", title:"Write the three case studies with problem, method, output, recommendation, and architecture diagram", due:"2026-10-30" },
+              { id:"site-embeds", title:"Add Power BI embeds where available plus clear video / image fallbacks", due:"2026-11-01" },
+              { id:"site-assets", title:"Add downloadable files, repository links, tech badges, and synthetic-data disclosures", due:"2026-11-03" },
+              { id:"site-videos", title:"Record one 60–90 second walkthrough for each project", due:"2026-11-06" },
+              { id:"site-release", title:"Complete mobile, link, and accessibility QA; publish the complete public v1", due:"2026-11-08" }
             ]
           }
         ];
@@ -1983,43 +1985,47 @@
           number:"Final sprint",
           title:"Response-led refinement & interview freeze",
           lane:"Shared",
-          start:"2026-11-16",
-          end:"2026-12-06",
-          dateLabel:"Nov 16–Dec 6",
-          hours:"Up to 18 hours",
+          start:"2026-11-09",
+          end:"2026-11-22",
+          dateLabel:"Nov 9–22",
+          hours:"Up to 14 hours",
           tools:["Git", "GitHub", "Documentation", "QA"],
           summary:"Improve only the proof point getting the strongest recruiter or hiring-manager response, then stop building and use the portfolio in interviews.",
           milestones:[
-            { id:"refine-signals", title:"Collect recruiter, networking, and interview response signals; choose the strongest project", due:"2026-11-20" },
-            { id:"refine-upgrade", title:"Upgrade the single highest-value analytical or usability gap", due:"2026-11-27" },
-            { id:"refine-package", title:"Tighten documentation, résumé bullets, project links, and interview talking points", due:"2026-12-04" },
-            { id:"refine-freeze", title:"Run final QA, tag the releases, and freeze portfolio development", due:"2026-12-06" }
+            { id:"refine-signals", title:"Collect recruiter, networking, and interview response signals; choose the strongest project", due:"2026-11-11" },
+            { id:"refine-upgrade", title:"Upgrade the single highest-value analytical or usability gap", due:"2026-11-15" },
+            { id:"refine-package", title:"Tighten documentation, résumé bullets, project links, and interview talking points", due:"2026-11-20" },
+            { id:"refine-freeze", title:"Run final QA, tag the releases, and freeze portfolio development", due:"2026-11-22" }
           ]
         };
 
-        const PORTFOLIO_PHASES = PORTFOLIO_PROJECTS.concat([PORTFOLIO_REFINEMENT]).concat([{
-          id:"portfolio-freeze",
-          title:"Interview mode",
-          dateLabel:"After Dec 6",
-          start:"2026-12-07",
-          end:"2026-12-31"
-        }]);
+        // The public site has two phases: publish a thin shell as soon as the
+        // first project ships, then add the complete case studies after Project 3.
+        const PORTFOLIO_PHASES = [
+          { id:"insurance-workbench", title:"Insurance MVP", dateLabel:"Sep 1–10", start:"2026-09-01", end:"2026-09-10" },
+          { id:"portfolio-site", title:"Public shell", dateLabel:"Sep 11–14", start:"2026-09-11", end:"2026-09-14" },
+          { id:"project-controls", title:"Project Controls MVP", dateLabel:"Sep 15–Oct 4", start:"2026-09-15", end:"2026-10-04" },
+          { id:"pharma-analytics", title:"Pharma MVP", dateLabel:"Oct 5–25", start:"2026-10-05", end:"2026-10-25" },
+          { id:"portfolio-site", title:"Site polish", dateLabel:"Oct 26–Nov 8", start:"2026-10-26", end:"2026-11-08" },
+          { id:"portfolio-refinement", title:"Response-led refinement", dateLabel:"Nov 9–22", start:"2026-11-09", end:"2026-11-22" },
+          { id:"portfolio-freeze", title:"Interview mode", dateLabel:"After Nov 22", start:"2026-11-23", end:"2026-12-31" }
+        ];
 
         const PORTFOLIO_WEEKLY_FOCUS = {
-          "2026-08-31": { projectId:"insurance-workbench", label:"Insurance Workbench", due:"Sep 14", text:"Build the source workbook, data dictionary, and refreshable claims import." },
-          "2026-09-07": { projectId:"insurance-workbench", label:"Insurance Workbench", due:"Sep 14", text:"Finish the pricing engine, decision logic, portfolio dashboard, and scenarios." },
-          "2026-09-14": { projectId:"project-controls", label:"Insurance → Project Controls", due:"Oct 5", text:"Ship Insurance v1 on Monday, then create the 8-work-package Project Controls source model." },
-          "2026-09-21": { projectId:"project-controls", label:"Project Controls Command Center", due:"Oct 5", text:"Finish the Power Query model and core earned-value DAX measures." },
-          "2026-09-28": { projectId:"project-controls", label:"Project Controls Command Center", due:"Oct 5", text:"Add the P50 / P80 simulation, Power BI report, risk heatmap, and executive narrative." },
-          "2026-10-05": { projectId:"pharma-analytics", label:"Project Controls → Pharma", due:"Nov 2", text:"Ship Project Controls v1, then create the Pharma relational dataset and initial SQL model." },
-          "2026-10-12": { projectId:"pharma-analytics", label:"Pharma Analytics", due:"Nov 2", text:"Build and validate the joins, CTEs, window functions, and reporting views." },
-          "2026-10-19": { projectId:"pharma-analytics", label:"Pharma Analytics", due:"Nov 2", text:"Build the control-vs-exposed simulation, confidence intervals, ROI, and allocation logic." },
-          "2026-10-26": { projectId:"pharma-analytics", label:"Pharma Analytics", due:"Nov 2", text:"Finish the Power BI report, recommendation narrative, assumption labels, and QA." },
-          "2026-11-02": { projectId:"portfolio-site", label:"Pharma → Public Site", due:"Nov 15", text:"Ship Pharma v1, then create the public site shell and case-study template." },
-          "2026-11-09": { projectId:"portfolio-site", label:"Public Portfolio Site", due:"Nov 15", text:"Publish case studies, embeds and fallbacks, downloads, tech badges, videos, and mobile QA." },
-          "2026-11-16": { projectId:"portfolio-refinement", label:"Response-led refinement", due:"Dec 6", text:"Collect response signals and choose the one project worth improving." },
-          "2026-11-23": { projectId:"portfolio-refinement", label:"Response-led refinement", due:"Dec 6", text:"Upgrade the strongest project's single highest-value gap." },
-          "2026-11-30": { projectId:"portfolio-refinement", label:"Final portfolio freeze", due:"Dec 6", text:"Tighten documentation and résumé proof, complete QA, tag releases, and freeze development." },
+          "2026-08-31": { projectId:"insurance-workbench", label:"Insurance MVP", due:"Sep 10", text:"Build the refreshable claims import, pricing engine, decision logic, and first dashboard." },
+          "2026-09-07": { projectId:"insurance-workbench", label:"Insurance → live portfolio", due:"Sep 14", text:"Ship Insurance v1 by Thursday, then publish the thin portfolio shell and first case study." },
+          "2026-09-14": { projectId:"project-controls", label:"Project Controls MVP", due:"Oct 4", text:"Publish the Insurance link, then create the 8-work-package Project Controls source model." },
+          "2026-09-21": { projectId:"project-controls", label:"Project Controls MVP", due:"Oct 4", text:"Finish the Power Query model, earned-value DAX measures, and first executive report view." },
+          "2026-09-28": { projectId:"project-controls", label:"Project Controls MVP", due:"Oct 4", text:"Add the P50 / P80 simulation, risk heatmap, executive narrative, QA, and v1 release." },
+          "2026-10-05": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Oct 25", text:"Share Project Controls in outreach, then build the Pharma relational dataset and SQL model." },
+          "2026-10-12": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Oct 25", text:"Finish the SQL views, control-vs-exposed simulation, confidence intervals, and ROI logic." },
+          "2026-10-19": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Oct 25", text:"Finish the Power BI report, allocation recommendation, narrative, QA, and v1 release." },
+          "2026-10-26": { projectId:"portfolio-site", label:"Public portfolio polish", due:"Nov 8", text:"Add all three case studies, downloads, repository links, architecture context, and embeds." },
+          "2026-11-02": { projectId:"portfolio-site", label:"Public portfolio polish", due:"Nov 8", text:"Record short walkthroughs, test fallbacks and mobile behavior, and publish the complete site." },
+          "2026-11-09": { projectId:"portfolio-refinement", label:"Response-led refinement", due:"Nov 22", text:"Review recruiter and networking signals, then choose the one project worth improving." },
+          "2026-11-16": { projectId:"portfolio-refinement", label:"Final refinement", due:"Nov 22", text:"Upgrade the highest-value gap, tighten interview proof, run QA, tag releases, and freeze." },
+          "2026-11-23": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the finished portfolio in applications and interviews; only fix genuine blockers." },
+          "2026-11-30": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Lead with the lane-relevant case study and keep feature work frozen." },
           "2026-12-07": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the finished portfolio in applications and interviews; only fix genuine blockers." },
           "2026-12-14": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Lead with the lane-relevant case study and keep feature work frozen." },
           "2026-12-21": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Reuse the finished proof and capture lessons for a later, deliberate update." },
@@ -2342,7 +2348,7 @@
           const key = dateKey(week);
           if (PORTFOLIO_WEEKLY_FOCUS[key]) return PORTFOLIO_WEEKLY_FOCUS[key];
           if (week < parseDate("2026-08-31")) {
-            return { projectId:null, label:"Portfolio plan", due:"Starts Sep 1", text:"Projects are scoped and ready; protect the Wednesday, Saturday, and Sunday build rhythm." };
+            return { projectId:null, label:"Portfolio plan", due:"Starts Sep 1", text:"Projects are scoped and ready; protect the Monday, Wednesday, Saturday, and Sunday build rhythm." };
           }
           return { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the released portfolio in interviews and avoid feature creep." };
         }
@@ -2350,15 +2356,17 @@
         function portfolioTaskForDate(date) {
           const day = date.getDay();
           const cadence = {
+            1: { duration:"1h", label:"Portfolio build sprint" },
             3: { duration:"1.5h", label:"Portfolio build" },
             6: { duration:"3h", label:"Portfolio deep work" },
             0: { duration:"1.5h", label:"Portfolio QA + documentation" }
           }[day];
-          if (!cadence || date < parseDate("2026-09-01") || date > parseDate("2026-12-06")) return null;
+          if (!cadence || date < parseDate("2026-09-01") || date > parseDate("2026-11-22")) return null;
           const phase = getPortfolioPhaseForDate(date);
           const track = phase ? getPortfolioTrack(phase.id) : null;
           if (!track) return null;
-          const action = getPortfolioWeeklyFocus(startOfWeek(date)).text;
+          const progress = getPortfolioTrackProgress(track);
+          const action = progress.next ? progress.next.title : getPortfolioWeeklyFocus(startOfWeek(date)).text;
           return {
             id: dateKey(date) + "-portfolio-session",
             category: "Portfolio",
@@ -2585,6 +2593,10 @@
           return "run";
         }
 
+        function isPortfolioBuildDate(date) {
+          return date >= parseDate("2026-09-01") && date <= parseDate("2026-11-22");
+        }
+
         function scheduleForDate(date) {
           const day = date.getDay(); const blocks = [];
           if (dateKey(date) === "2026-07-10") {
@@ -2600,7 +2612,15 @@
             } else if (day === 1 || day === 3) {
               blocks.push({time:"18:00–18:30",label:"Commute home"});
               blocks.push({time:"18:30–19:00",label:"Dinner and reset"});
-              blocks.push({time:"19:00–21:00",label:"Job-search focus block"});
+              if (isPortfolioBuildDate(date) && day === 1) {
+                blocks.push({time:"19:00–20:00",label:"Applications and live-role priorities"});
+                blocks.push({time:"20:00–21:00",label:"Portfolio build sprint"});
+              } else if (isPortfolioBuildDate(date)) {
+                blocks.push({time:"19:00–19:30",label:"Networking and follow-ups"});
+                blocks.push({time:"19:30–21:00",label:"Portfolio build block"});
+              } else {
+                blocks.push({time:"19:00–21:00",label:"Job-search focus block"});
+              }
             } else {
               blocks.push({time:"18:00–18:30",label:"Commute home"});
               blocks.push({time:"19:00–19:30",label:"Follow-ups and weekly close"});
@@ -2611,15 +2631,18 @@
             blocks.push({time:"9:00–11:30",label:"Training block: "+trainingType(date)});
             blocks.push({time:"11:30–12:00",label:"Commute home"});
             blocks.push({time:"13:30–15:30",label:"Applications and target-company research"});
+            if (isPortfolioBuildDate(date)) blocks.push({time:"15:30–18:30",label:"Portfolio deep-work block"});
           } else if (isTrainingDay(date)) {
             blocks.push({time:"8:30–9:00",label:"Commute to training"});
             blocks.push({time:"9:00–11:30",label:"Training block: "+trainingType(date)});
             blocks.push({time:"11:30–12:00",label:"Commute home"});
             blocks.push({time:"13:30–14:30",label:"One high-fit application or follow-up"});
+            if (isPortfolioBuildDate(date)) blocks.push({time:"14:30–16:00",label:"Portfolio QA and documentation"});
             blocks.push({time:"16:00–18:00",label:"Meal prep, weekly review, and calendar lock"});
           } else {
             blocks.push({time:"Morning",label:"Rest and recovery"});
             blocks.push({time:"13:30–14:30",label:"One high-fit application or follow-up"});
+            if (isPortfolioBuildDate(date)) blocks.push({time:"14:30–16:00",label:"Portfolio QA and documentation"});
             blocks.push({time:"16:00–18:00",label:"Meal prep, weekly review, and calendar lock"});
           }
           return blocks;
@@ -2759,7 +2782,7 @@
             ? track.lane + " · " + track.dateLabel + " · " + track.hours
             : (selectedWeek < parseDate("2026-08-31")
               ? "The first build begins September 1; the scoped plan is ready when the protected sessions start."
-              : "Portfolio development is frozen after December 6 so interview conversion stays the priority.");
+              : "Portfolio development is frozen after November 22 so interview conversion stays the priority.");
           els.portfolioWeekProgressLabel.textContent = track ? track.number + " progress" : "Overall progress";
           els.portfolioWeekProgressValue.textContent = progress.percent + "%";
           els.portfolioWeekProgressFill.style.width = progress.percent + "%";
@@ -3281,23 +3304,24 @@
           const activeTrack = activePhase ? getPortfolioTrack(activePhase.id) : null;
           if (activeTrack) {
             els.portfolioCurrentPhase.textContent = activeTrack.id === PORTFOLIO_REFINEMENT.id ? "Refine" : activeTrack.number;
-            els.portfolioCurrentDue.textContent = activeTrack.title + " · due " + compactDate(activeTrack.end);
+            els.portfolioCurrentDue.textContent = activePhase.title + " · due " + compactDate(activePhase.end);
           } else if (activePhase && activePhase.id === "portfolio-freeze") {
             els.portfolioCurrentPhase.textContent = "Interview mode";
-            els.portfolioCurrentDue.textContent = "Development frozen since Dec 6";
+            els.portfolioCurrentDue.textContent = "Development frozen since Nov 22";
           } else {
             els.portfolioCurrentPhase.textContent = "Planning";
             els.portfolioCurrentDue.textContent = "Insurance Workbench starts Sep 1";
           }
 
-          let highlightedPhaseId = activePhase ? activePhase.id : "insurance-workbench";
           els.portfolioTimeline.innerHTML = "";
           PORTFOLIO_PHASES.forEach(function(phase) {
             const track = getPortfolioTrack(phase.id);
             const item = document.createElement("div");
             item.className = "portfolio-phase";
             item.dataset.phaseId = phase.id;
-            item.dataset.active = String(phase.id === highlightedPhaseId);
+            item.dataset.active = String(activePhase
+              ? phase.id === activePhase.id && phase.start === activePhase.start
+              : phase.id === "insurance-workbench");
             const date = document.createElement("span");
             date.textContent = phase.dateLabel;
             const title = document.createElement("strong");
