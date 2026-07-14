@@ -370,6 +370,143 @@
       #marco-life-dashboard .calendar-event { grid-template-columns: 84px minmax(0, 1fr); }
     }
 
+    /* ===== PRIORITY MATRIX ===== */
+    #marco-life-dashboard .matrix-toolbar {
+      align-items: flex-end;
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      margin: 8px 0 24px;
+    }
+    #marco-life-dashboard .matrix-toolbar h2 {
+      color: var(--primary);
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      letter-spacing: -0.025em;
+      margin: 4px 0 7px;
+    }
+    #marco-life-dashboard .matrix-toolbar-copy { max-width: 760px; }
+    #marco-life-dashboard .matrix-summary {
+      color: var(--primary);
+      flex: 0 0 auto;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-align: right;
+    }
+    #marco-life-dashboard .matrix-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    #marco-life-dashboard .matrix-quadrant {
+      border-top: 4px solid var(--primary);
+      margin-bottom: 0;
+      min-width: 0;
+    }
+    #marco-life-dashboard .matrix-quadrant[data-quadrant="schedule"] { border-top-color: var(--secondary); }
+    #marco-life-dashboard .matrix-quadrant[data-quadrant="delegate"] { border-top-color: var(--highlight); }
+    #marco-life-dashboard .matrix-quadrant[data-quadrant="delete"] { border-top-color: var(--text); }
+    #marco-life-dashboard .matrix-quadrant-header {
+      align-items: flex-start;
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    #marco-life-dashboard .matrix-quadrant-title {
+      color: var(--primary);
+      font-size: 1.12rem;
+      margin-bottom: 4px;
+    }
+    #marco-life-dashboard .matrix-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    #marco-life-dashboard .matrix-tag {
+      background: var(--surface-strong);
+      border-radius: 30px;
+      color: var(--text);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 9px;
+    }
+    #marco-life-dashboard .matrix-count {
+      color: var(--secondary);
+      font-size: 0.74rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    #marco-life-dashboard .matrix-task-list { display: grid; gap: 8px; }
+    #marco-life-dashboard .matrix-task {
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      min-height: 64px;
+      padding: 9px 10px;
+    }
+    #marco-life-dashboard .matrix-task[data-complete="true"] { opacity: 0.68; }
+    #marco-life-dashboard .matrix-check {
+      align-items: center;
+      display: flex;
+      height: 44px;
+      justify-content: center;
+      width: 44px;
+    }
+    #marco-life-dashboard .matrix-check input {
+      accent-color: var(--primary);
+      height: 23px;
+      width: 23px;
+    }
+    #marco-life-dashboard .matrix-task-text {
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.45;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    #marco-life-dashboard .matrix-task[data-complete="true"] .matrix-task-text {
+      color: var(--secondary);
+      text-decoration: line-through;
+    }
+    #marco-life-dashboard .matrix-task-actions { align-items: center; display: flex; gap: 6px; }
+    #marco-life-dashboard .matrix-move-select {
+      min-height: 44px;
+      min-width: 126px;
+      padding-bottom: 8px;
+      padding-top: 8px;
+    }
+    #marco-life-dashboard .matrix-delete-btn {
+      height: 44px;
+      justify-content: center;
+      min-width: 44px;
+      padding: 0;
+      width: 44px;
+    }
+    #marco-life-dashboard .matrix-add-form {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      margin-top: 12px;
+    }
+    #marco-life-dashboard .matrix-add-form .form-control { min-height: 44px; }
+    #marco-life-dashboard .matrix-empty {
+      color: var(--secondary);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      padding: 16px 4px;
+    }
+
+    @media (max-width: 740px) {
+      #marco-life-dashboard .matrix-toolbar { align-items: flex-start; flex-direction: column; }
+      #marco-life-dashboard .matrix-summary { text-align: left; }
+      #marco-life-dashboard .matrix-grid { grid-template-columns: 1fr; }
+      #marco-life-dashboard .matrix-task { grid-template-columns: 44px minmax(0, 1fr); }
+      #marco-life-dashboard .matrix-task-actions { grid-column: 2; width: 100%; }
+      #marco-life-dashboard .matrix-move-select { flex: 1; min-width: 0; width: 100%; }
+      #marco-life-dashboard .matrix-add-form { grid-template-columns: 1fr; }
+      #marco-life-dashboard .matrix-add-form .btn { justify-content: center; width: 100%; }
+    }
+
     #marco-life-dashboard .todo-list { display: flex; flex-direction: column; gap: 0; position: relative; }
     #marco-life-dashboard .todo-row {
       display: grid;
@@ -1487,6 +1624,7 @@
     <!-- Tabs -->
     <div class="dash-tabs" role="tablist">
       <button type="button" class="btn btn-primary" id="tab-week" data-view="week" role="tab" aria-controls="panel-week" aria-selected="true"><i data-lucide="calendar-days"></i> This week</button>
+      <button type="button" class="btn" id="tab-matrix" data-view="matrix" role="tab" aria-controls="panel-matrix" aria-selected="false" tabindex="-1"><i data-lucide="layout-grid"></i> Priority Matrix</button>
       <button type="button" class="btn" id="tab-roadmap" data-view="roadmap" role="tab" aria-controls="panel-roadmap" aria-selected="false" tabindex="-1"><i data-lucide="map"></i> Roadmap</button>
       <button type="button" class="btn" id="tab-portfolio" data-view="portfolio" role="tab" aria-controls="panel-portfolio" aria-selected="false" tabindex="-1"><i data-lucide="blocks"></i> Portfolio</button>
       <button type="button" class="btn" id="tab-career" data-view="career" role="tab" aria-controls="panel-career" aria-selected="false" tabindex="-1"><i data-lucide="briefcase-business"></i> Career Tracker</button>
@@ -1620,6 +1758,20 @@
           </form>
         </section>
       </div>
+    </section>
+
+    <!-- ===== PANEL: PRIORITY MATRIX ===== -->
+    <section id="panel-matrix" class="is-hidden" role="tabpanel" aria-labelledby="tab-matrix" hidden>
+      <div class="matrix-toolbar">
+        <div class="matrix-toolbar-copy">
+          <span class="eyebrow">Decide what deserves your attention</span>
+          <h2>Eisenhower priority matrix</h2>
+          <p class="text-small">Sort work by urgency and importance. Start with Do, protect time for Schedule, move quick handoffs to Delegate, and remove low-value work through Delete.</p>
+        </div>
+        <span class="matrix-summary" id="matrix-summary" aria-live="polite">0 open · 0 complete</span>
+      </div>
+      <span class="sr-only" id="matrix-status" aria-live="assertive"></span>
+      <div class="matrix-grid" id="priority-matrix-grid" aria-label="Eisenhower priority matrix"></div>
     </section>
 
     <!-- ===== PANEL: ROADMAP ===== -->
@@ -1995,6 +2147,12 @@
         const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         const LONG_DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const MATRIX_QUADRANTS = [
+          { id:"do", title:"Do", subtitle:"Act now", urgent:"Urgent", important:"Important" },
+          { id:"schedule", title:"Schedule", subtitle:"Protect time for it", urgent:"Not urgent", important:"Important" },
+          { id:"delegate", title:"Delegate", subtitle:"Hand it off", urgent:"Urgent", important:"Not important" },
+          { id:"delete", title:"Delete", subtitle:"Remove or decline it", urgent:"Not urgent", important:"Not important" }
+        ];
 
         // Curated from Marco's outreach research. The roster lives in state so
         // weekly selections and future edits travel through the existing sync.
@@ -2223,6 +2381,7 @@
           hiddenTasks: {},
           customTasks: [],
           scheduleOverrides: {},
+          priorityMatrix: { tasks: [] },
           notes: "",
           careerApps: [],
           careerContacts: [],
@@ -2296,7 +2455,7 @@
 
         const els = {
           tabs: Array.from(document.querySelectorAll("[data-view]")),
-          panels: { week: document.getElementById("panel-week"), roadmap: document.getElementById("panel-roadmap"), portfolio: document.getElementById("panel-portfolio"), career: document.getElementById("panel-career"), notes: document.getElementById("panel-notes"), settings: document.getElementById("panel-settings") },
+          panels: { week: document.getElementById("panel-week"), matrix: document.getElementById("panel-matrix"), roadmap: document.getElementById("panel-roadmap"), portfolio: document.getElementById("panel-portfolio"), career: document.getElementById("panel-career"), notes: document.getElementById("panel-notes"), settings: document.getElementById("panel-settings") },
           weekSelect: document.getElementById("week-select"),
           previousWeek: document.getElementById("previous-week"),
           nextWeek: document.getElementById("next-week"),
@@ -2308,6 +2467,9 @@
           calendarOpenLink: document.getElementById("calendar-open-link"),
           calendarRefreshBtn: document.getElementById("calendar-refresh-btn"),
           calendarSetupBtn: document.getElementById("calendar-setup-btn"),
+          priorityMatrixGrid: document.getElementById("priority-matrix-grid"),
+          matrixSummary: document.getElementById("matrix-summary"),
+          matrixStatus: document.getElementById("matrix-status"),
           todoList: document.getElementById("todo-list"),
           selectedDayTitle: document.getElementById("selected-day-title"),
           dayStatus: document.getElementById("day-status"),
@@ -2935,6 +3097,7 @@
               hiddenTasks: state.hiddenTasks,
               customTasks: state.customTasks,
               scheduleOverrides: state.scheduleOverrides,
+              priorityMatrix: state.priorityMatrix,
               notes: state.notes,
               careerApps: state.careerApps,
               careerContacts: state.careerContacts,
@@ -2983,6 +3146,7 @@
               if (data.hiddenTasks && typeof data.hiddenTasks === "object") state.hiddenTasks = data.hiddenTasks;
               if (data.customTasks) state.customTasks = data.customTasks;
               if (data.scheduleOverrides) state.scheduleOverrides = data.scheduleOverrides;
+              if (data.priorityMatrix) state.priorityMatrix = normalizePriorityMatrix(data.priorityMatrix);
               if (data.notes !== undefined) state.notes = data.notes;
               if (data.careerApps) state.careerApps = data.careerApps;
               if (data.careerContacts) state.careerContacts = data.careerContacts;
@@ -3033,6 +3197,28 @@
           return merged;
         }
 
+        function normalizePriorityMatrix(value) {
+          const validQuadrants = new Set(MATRIX_QUADRANTS.map(function(quadrant) { return quadrant.id; }));
+          const source = value && Array.isArray(value.tasks) ? value.tasks : [];
+          const seen = new Set();
+          const tasks = source.map(function(task, index) {
+            const text = String(task && task.text || "").replace(/\s+/g, " ").trim().slice(0, 160);
+            const quadrant = validQuadrants.has(task && task.quadrant) ? task.quadrant : "schedule";
+            let id = String(task && task.id || "matrix-import-" + index);
+            if (seen.has(id)) id += "-" + index;
+            seen.add(id);
+            if (!text) return null;
+            return {
+              id: id,
+              text: text,
+              quadrant: quadrant,
+              completed: Boolean(task && task.completed),
+              createdAt: Number(task && task.createdAt) || Date.now() + index
+            };
+          }).filter(Boolean);
+          return { tasks: tasks };
+        }
+
         function loadState() {
           try {
             const saved = localStorage.getItem(STORAGE_KEY);
@@ -3045,6 +3231,7 @@
               hiddenTasks: parsed.hiddenTasks && typeof parsed.hiddenTasks === "object" ? parsed.hiddenTasks : {},
               customTasks: parsed.customTasks || [],
               scheduleOverrides: parsed.scheduleOverrides || {},
+              priorityMatrix: normalizePriorityMatrix(parsed.priorityMatrix),
               notes: parsed.notes || "",
               careerApps: parsed.careerApps || [],
               careerContacts: parsed.careerContacts || [],
@@ -3713,6 +3900,198 @@
           else els.statNutritionDetail.textContent = "Set targets in settings";
         }
 
+        // ===== EISENHOWER PRIORITY MATRIX =====
+        function getPriorityMatrixTasks() {
+          if (!state.priorityMatrix || !Array.isArray(state.priorityMatrix.tasks)) {
+            state.priorityMatrix = normalizePriorityMatrix(state.priorityMatrix);
+          }
+          return state.priorityMatrix.tasks;
+        }
+
+        function announceMatrixChange(message) {
+          els.matrixStatus.textContent = "";
+          requestAnimationFrame(function() { els.matrixStatus.textContent = message; });
+        }
+
+        function createMatrixTask(task) {
+          const row = document.createElement("article");
+          row.className = "matrix-task";
+          row.dataset.complete = String(task.completed);
+          row.dataset.taskId = task.id;
+          row.setAttribute("role", "listitem");
+
+          const checkLabel = document.createElement("label");
+          checkLabel.className = "matrix-check";
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = task.completed;
+          checkbox.disabled = !isAdmin();
+          checkbox.setAttribute("aria-label", (task.completed ? "Mark incomplete: " : "Mark complete: ") + task.text);
+          checkLabel.appendChild(checkbox);
+
+          const text = document.createElement("span");
+          text.className = "matrix-task-text";
+          text.textContent = task.text;
+
+          const actions = document.createElement("div");
+          actions.className = "matrix-task-actions admin-only";
+          actions.hidden = !isAdmin();
+          const move = document.createElement("select");
+          move.className = "form-select matrix-move-select";
+          move.disabled = !isAdmin();
+          move.setAttribute("aria-label", "Move " + task.text + " to another quadrant");
+          MATRIX_QUADRANTS.forEach(function(quadrant) {
+            const option = document.createElement("option");
+            option.value = quadrant.id;
+            option.textContent = "Move: " + quadrant.title;
+            move.appendChild(option);
+          });
+          move.value = task.quadrant;
+
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "btn btn-ghost matrix-delete-btn";
+          remove.disabled = !isAdmin();
+          remove.setAttribute("aria-label", "Delete priority task: " + task.text);
+          remove.innerHTML = '<i data-lucide="trash-2"></i>';
+
+          checkbox.addEventListener("change", function() {
+            if (!requireAdmin()) { checkbox.checked = task.completed; return; }
+            task.completed = checkbox.checked;
+            saveState("Priority task updated.");
+            renderPriorityMatrix();
+            announceMatrixChange((task.completed ? "Completed: " : "Reopened: ") + task.text);
+          });
+          move.addEventListener("change", function() {
+            if (!requireAdmin()) { move.value = task.quadrant; return; }
+            const destination = MATRIX_QUADRANTS.find(function(quadrant) { return quadrant.id === move.value; });
+            if (!destination || destination.id === task.quadrant) return;
+            task.quadrant = destination.id;
+            saveState("Priority task moved.");
+            renderPriorityMatrix();
+            announceMatrixChange("Moved to " + destination.title + ": " + task.text);
+          });
+          remove.addEventListener("click", function() {
+            if (!requireAdmin()) return;
+            const tasks = getPriorityMatrixTasks();
+            const index = tasks.findIndex(function(item) { return item.id === task.id; });
+            if (index < 0) return;
+            tasks.splice(index, 1);
+            saveState("Priority task deleted.");
+            renderPriorityMatrix();
+            announceMatrixChange("Deleted: " + task.text);
+          });
+
+          actions.appendChild(move);
+          actions.appendChild(remove);
+          row.appendChild(checkLabel);
+          row.appendChild(text);
+          row.appendChild(actions);
+          return row;
+        }
+
+        function createMatrixQuadrant(quadrant, tasks) {
+          const card = document.createElement("section");
+          card.className = "card matrix-quadrant";
+          card.dataset.quadrant = quadrant.id;
+          card.setAttribute("aria-labelledby", "matrix-title-" + quadrant.id);
+
+          const header = document.createElement("div");
+          header.className = "matrix-quadrant-header";
+          const headingGroup = document.createElement("div");
+          const title = document.createElement("h3");
+          title.className = "matrix-quadrant-title";
+          title.id = "matrix-title-" + quadrant.id;
+          title.textContent = quadrant.title;
+          const subtitle = document.createElement("p");
+          subtitle.className = "text-small";
+          subtitle.textContent = quadrant.subtitle;
+          const tags = document.createElement("div");
+          tags.className = "matrix-tags";
+          [quadrant.urgent, quadrant.important].forEach(function(label) {
+            const tag = document.createElement("span");
+            tag.className = "matrix-tag";
+            tag.textContent = label;
+            tags.appendChild(tag);
+          });
+          headingGroup.appendChild(title);
+          headingGroup.appendChild(subtitle);
+          headingGroup.appendChild(tags);
+          const count = document.createElement("span");
+          count.className = "matrix-count";
+          const open = tasks.filter(function(task) { return !task.completed; }).length;
+          count.textContent = open + " open · " + (tasks.length - open) + " done";
+          header.appendChild(headingGroup);
+          header.appendChild(count);
+
+          const list = document.createElement("div");
+          list.className = "matrix-task-list";
+          list.setAttribute("role", "list");
+          list.setAttribute("aria-label", quadrant.title + " tasks");
+          if (!tasks.length) {
+            const empty = document.createElement("p");
+            empty.className = "matrix-empty";
+            empty.textContent = "No tasks in this quadrant yet.";
+            list.appendChild(empty);
+          } else {
+            tasks.forEach(function(task) { list.appendChild(createMatrixTask(task)); });
+          }
+
+          const form = document.createElement("form");
+          form.className = "matrix-add-form admin-only";
+          form.dataset.quadrant = quadrant.id;
+          form.hidden = !isAdmin();
+          const input = document.createElement("input");
+          input.className = "form-control";
+          input.id = "matrix-add-" + quadrant.id;
+          input.type = "text";
+          input.maxLength = 160;
+          input.placeholder = "Add to " + quadrant.title;
+          input.setAttribute("aria-label", "Add a task to " + quadrant.title);
+          input.required = true;
+          const add = document.createElement("button");
+          add.type = "submit";
+          add.className = "btn btn-primary";
+          add.innerHTML = '<i data-lucide="plus"></i> Add';
+          form.appendChild(input);
+          form.appendChild(add);
+          form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            if (!requireAdmin()) return;
+            const value = input.value.replace(/\s+/g, " ").trim();
+            if (!value) return;
+            getPriorityMatrixTasks().push({
+              id: "matrix-" + Date.now() + "-" + Math.floor(Math.random() * 100000),
+              text: value,
+              quadrant: quadrant.id,
+              completed: false,
+              createdAt: Date.now()
+            });
+            saveState("Priority task added.");
+            renderPriorityMatrix();
+            const nextInput = document.getElementById("matrix-add-" + quadrant.id);
+            if (nextInput) nextInput.focus();
+            announceMatrixChange("Added to " + quadrant.title + ": " + value);
+          });
+
+          card.appendChild(header);
+          card.appendChild(list);
+          card.appendChild(form);
+          return card;
+        }
+
+        function renderPriorityMatrix() {
+          const tasks = getPriorityMatrixTasks();
+          const complete = tasks.filter(function(task) { return task.completed; }).length;
+          els.matrixSummary.textContent = (tasks.length - complete) + " open · " + complete + " complete";
+          els.priorityMatrixGrid.innerHTML = "";
+          MATRIX_QUADRANTS.forEach(function(quadrant) {
+            const quadrantTasks = tasks.filter(function(task) { return task.quadrant === quadrant.id; });
+            els.priorityMatrixGrid.appendChild(createMatrixQuadrant(quadrant, quadrantTasks));
+          });
+          refreshIcons();
+        }
+
         function createPortfolioProgressBar(percent, label) {
           const wrapper = document.createElement("div");
           wrapper.className = "portfolio-week-progress";
@@ -4081,6 +4460,7 @@
 
         function renderAll() {
           renderWeek();
+          renderPriorityMatrix();
           renderRoadmap();
           renderPortfolio();
           renderCareer();
@@ -4251,6 +4631,7 @@
             els.panels[panelName].hidden = !active;
             els.panels[panelName].classList.toggle("is-hidden", !active);
           });
+          if (view === "matrix") renderPriorityMatrix();
           if (view === "roadmap") renderRoadmap();
           if (view === "portfolio") renderPortfolio();
           if (view === "settings") populateSettings();
