@@ -1,6 +1,6 @@
 # Marco Life Dashboard
 
-A single-file personal planning dashboard for managing weekly priorities, daily tasks, career progress, a job-search proof portfolio, training, nutrition, and the July–December 2026 roadmap.
+A single-file personal planning dashboard for managing weekly priorities, an Eisenhower Matrix, daily tasks, career progress, a job-search proof portfolio, training, nutrition, and the July–December 2026 roadmap.
 
 The entire application remains in `index.html`. It is designed to work as a static website with no build step or package manager.
 
@@ -17,7 +17,7 @@ The login screen supports two dashboard accounts:
 
 The active role is kept in `sessionStorage`, so signing out or closing the browser session returns the viewer to the login screen. A role badge is always visible in the dashboard header, and guest sessions display a read-only banner.
 
-Guest mode can browse the weekly plan, tasks, schedule, Roadmap, portfolio, Career Tracker, notes, and settings. All mutation paths are also guarded in JavaScript: guests cannot complete, reorder, hide, or add tasks; edit schedules or Roadmap content; change networking selections; complete portfolio milestones; edit career data or notes; save settings; write to `localStorage`; or send updates to JSONBin. Guests may still load the latest cloud data for viewing.
+Guest mode can browse the weekly plan, Priority Matrix, tasks, schedule, Roadmap, portfolio, Career Tracker, notes, and settings. All mutation paths are also guarded in JavaScript: guests cannot complete, move, add, or delete Priority Matrix tasks; complete, reorder, hide, or add daily tasks; edit schedules or Roadmap content; change networking selections; complete portfolio milestones; edit career data or notes; save settings; write to `localStorage`; or send updates to JSONBin. Guests may still load the latest cloud data for viewing.
 
 > **Security note:** This is client-side access control for a static personal dashboard, not server-backed authentication. Credentials and JSONBin configuration remain visible in the delivered page source. Use a server-side authentication and data proxy if the dashboard ever contains sensitive information or requires access control that cannot be bypassed by a technically advanced visitor.
 
@@ -32,6 +32,18 @@ Guest mode can browse the weekly plan, tasks, schedule, Roadmap, portfolio, Care
 - Drag-and-drop works with a mouse or touch; keyboard users can move tasks with the arrow keys.
 - Task order, hidden tasks, and completion state persist across devices.
 - From September 1 through November 22, portfolio sessions appear as normal Monday, Wednesday, Saturday, and Sunday tasks and keep the same reorder, hide, completion, and sync behavior.
+
+### Priority Matrix
+
+The Priority Matrix tab adds a dedicated Eisenhower Matrix for work that needs prioritization before it becomes part of a specific day's plan.
+
+- Four clear quadrants: **Do**, **Schedule**, **Delegate**, and **Delete**.
+- Add tasks directly inside any quadrant.
+- Mark tasks complete, permanently delete them, or move them with the native quadrant selector.
+- Open and completed totals appear for the full matrix and each quadrant.
+- Data is stored in `state.priorityMatrix.tasks`, saved locally, and included in the existing JSONBin payload for cross-device sync.
+- Guests can view task placement and completion but all matrix controls remain read-only.
+- The board is 2×2 on larger screens and stacks into one comfortable column on iPhone.
 
 ### Google Calendar
 
@@ -256,6 +268,7 @@ The sync payload includes:
 - Hidden daily tasks
 - Custom tasks
 - Schedule overrides
+- Priority Matrix tasks, quadrant placement, and completion
 - Notes
 - Career applications
 - Networking-log entries
@@ -274,6 +287,7 @@ The dashboard is designed for regular iPhone use:
 - Login fields and the sign-in button are at least 48px tall.
 - Dashboard buttons and role controls retain touch targets of at least 44px.
 - Calendar event rows collapse cleanly on narrow screens, and calendar actions retain 44px touch targets.
+- Priority Matrix quadrants stack vertically, while add, move, complete, and delete controls retain 44px touch targets.
 - Networking actions and selectors use touch targets of at least 44px.
 - Task drag handles and Hide controls are touch-friendly.
 - Weekly networking cards stack vertically on smaller screens.
@@ -311,8 +325,17 @@ Future updates should preserve these project constraints:
 8. Keep interactive mobile controls at least 44px tall.
 9. Avoid unnecessary third-party dependencies or abstractions.
 10. Keep Google Calendar event data read-only and transient; persist only the validated Apps Script `/exec` URL.
+11. Keep Priority Matrix tasks in `state.priorityMatrix` and preserve Guest read-only guards for every matrix action.
 
 ## Update history
+
+### v2.8 — 2026-07-14
+
+- Added a dedicated Priority Matrix tab with the four Eisenhower quadrants: Do, Schedule, Delegate, and Delete.
+- Added per-quadrant task creation, completion, permanent deletion, and reliable mouse/iPhone movement through native selectors.
+- Added overall and per-quadrant open/completed counts, empty states, and accessible status announcements.
+- Stored matrix tasks, quadrant placement, and completion in `state.priorityMatrix` for local and JSONBin synchronization.
+- Preserved Guest as a fully read-only preview and added responsive 2×2-to-single-column behavior with 44px controls.
 
 ### v2.7 — 2026-07-13
 
