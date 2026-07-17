@@ -827,6 +827,169 @@
     .notes-textarea { width: 100%; min-height: 400px; padding: 20px; border-radius: 16px; border: 1px solid var(--border); font-family: inherit; font-size: 0.95rem; line-height: 1.6; resize: vertical; background: var(--background); transition: border 0.2s; }
     .notes-textarea:focus { outline: none; border-color: #214E3B; box-shadow: 0 0 0 3px rgba(33,78,59,0.1); }
 
+
+    /* ===== DAILY JOURNAL ===== */
+    #marco-life-dashboard .journal-layout {
+      align-items: start;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: minmax(0, 1fr) 290px;
+    }
+    #marco-life-dashboard .journal-page {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      min-width: 0;
+      padding: clamp(22px, 4vw, 42px);
+    }
+    #marco-life-dashboard .journal-page-header {
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+    }
+    #marco-life-dashboard .journal-date-heading {
+      color: var(--primary);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-top: 7px;
+    }
+    #marco-life-dashboard .journal-date-controls {
+      align-items: center;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 44px minmax(170px, 1fr) 44px auto;
+      margin-bottom: 16px;
+    }
+    #marco-life-dashboard .journal-date-controls .btn {
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px 12px;
+    }
+    #marco-life-dashboard .journal-date-input {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      min-height: 44px;
+      padding: 9px 12px;
+      width: 100%;
+    }
+    #marco-life-dashboard .journal-helper { margin-bottom: 10px; }
+    #marco-life-dashboard .journal-textarea {
+      background: transparent;
+      border: 0;
+      color: var(--text);
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      min-height: 510px;
+      resize: vertical;
+      width: 100%;
+    }
+    #marco-life-dashboard .journal-textarea:focus { outline: none; }
+    #marco-life-dashboard .journal-textarea::placeholder { color: var(--muted); }
+    #marco-life-dashboard .journal-meta {
+      align-items: center;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      justify-content: space-between;
+      margin-top: 18px;
+      padding-top: 14px;
+    }
+    #marco-life-dashboard .journal-history {
+      margin-bottom: 0;
+      max-height: calc(100vh - 130px);
+      overflow: hidden;
+      padding: 18px;
+      position: sticky;
+      top: 94px;
+    }
+    #marco-life-dashboard .journal-history-header {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    #marco-life-dashboard .journal-history-header h3 {
+      color: var(--primary);
+      font-size: 1rem;
+    }
+    #marco-life-dashboard .journal-entry-list {
+      display: grid;
+      gap: 7px;
+      max-height: calc(100vh - 220px);
+      overflow-y: auto;
+      padding-right: 3px;
+    }
+    #marco-life-dashboard .journal-history-button {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: var(--text);
+      min-height: 64px;
+      padding: 10px 12px;
+      text-align: left;
+      width: 100%;
+    }
+    #marco-life-dashboard .journal-history-button:hover {
+      background: var(--surface-strong);
+    }
+    #marco-life-dashboard .journal-history-button[aria-current="date"] {
+      background: var(--surface-strong);
+      border-color: var(--highlight);
+    }
+    #marco-life-dashboard .journal-history-date {
+      color: var(--primary);
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    #marco-life-dashboard .journal-history-excerpt {
+      color: var(--muted);
+      display: block;
+      font-size: 0.76rem;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #marco-life-dashboard .journal-empty {
+      color: var(--muted);
+      line-height: 1.5;
+      padding: 18px 6px;
+      text-align: center;
+    }
+    body[data-dashboard-role="guest"] #marco-life-dashboard .journal-textarea { cursor: default; }
+
+    @media (max-width: 740px) {
+      #marco-life-dashboard .journal-layout { grid-template-columns: 1fr; }
+      #marco-life-dashboard .journal-page { padding: 22px 18px; }
+      #marco-life-dashboard .journal-date-controls {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+      }
+      #marco-life-dashboard .journal-date-controls .journal-today-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+      #marco-life-dashboard .journal-textarea {
+        font-size: 1rem;
+        min-height: 430px;
+      }
+      #marco-life-dashboard .journal-history {
+        max-height: none;
+        position: static;
+      }
+      #marco-life-dashboard .journal-entry-list { max-height: 360px; }
+    }
+
     .edit-career-toggle { margin: 16px 0 8px 0; }
     .edit-career-toggle summary { font-weight: 600; cursor: pointer; color: #214E3B; padding: 10px 16px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); }
     .edit-career-toggle summary:hover { background: var(--surface-strong); }
@@ -1625,6 +1788,7 @@
     <div class="dash-tabs" role="tablist">
       <button type="button" class="btn btn-primary" id="tab-week" data-view="week" role="tab" aria-controls="panel-week" aria-selected="true"><i data-lucide="calendar-days"></i> This week</button>
       <button type="button" class="btn" id="tab-matrix" data-view="matrix" role="tab" aria-controls="panel-matrix" aria-selected="false" tabindex="-1"><i data-lucide="layout-grid"></i> Priority Matrix</button>
+      <button type="button" class="btn" id="tab-journal" data-view="journal" role="tab" aria-controls="panel-journal" aria-selected="false" tabindex="-1"><i data-lucide="book-open"></i> Journal</button>
       <button type="button" class="btn" id="tab-roadmap" data-view="roadmap" role="tab" aria-controls="panel-roadmap" aria-selected="false" tabindex="-1"><i data-lucide="map"></i> Roadmap</button>
       <button type="button" class="btn" id="tab-portfolio" data-view="portfolio" role="tab" aria-controls="panel-portfolio" aria-selected="false" tabindex="-1"><i data-lucide="blocks"></i> Portfolio</button>
       <button type="button" class="btn" id="tab-career" data-view="career" role="tab" aria-controls="panel-career" aria-selected="false" tabindex="-1"><i data-lucide="briefcase-business"></i> Career Tracker</button>
@@ -1930,6 +2094,45 @@
           <summary>View Your 24-Week Strategic Plan</summary>
           <div class="plan-content" id="career-plan-content"></div>
         </details>
+      </div>
+    </section>
+
+
+    <!-- ===== PANEL: JOURNAL ===== -->
+    <section id="panel-journal" class="is-hidden" role="tabpanel" aria-labelledby="tab-journal" hidden>
+      <div class="journal-layout">
+        <article class="journal-page">
+          <header class="journal-page-header">
+            <span class="eyebrow">Daily journal</span>
+            <h2 class="journal-date-heading" id="journal-date-heading">Today</h2>
+          </header>
+
+          <div class="journal-date-controls" aria-label="Browse journal days">
+            <button type="button" class="btn btn-ghost" id="journal-previous-day" aria-label="Previous day"><i data-lucide="chevron-left"></i></button>
+            <label for="journal-date-input">
+              <span class="sr-only">Journal date</span>
+              <input class="journal-date-input" id="journal-date-input" type="date">
+            </label>
+            <button type="button" class="btn btn-ghost" id="journal-next-day" aria-label="Next day"><i data-lucide="chevron-right"></i></button>
+            <button type="button" class="btn journal-today-btn" id="journal-today">Today</button>
+          </div>
+
+          <p class="text-small journal-helper" id="journal-helper">Write freely. Your entry saves automatically as you type.</p>
+          <textarea class="journal-textarea" id="journal-textarea" aria-labelledby="journal-date-heading" placeholder="What happened today? What mattered? What do you want to remember?"></textarea>
+
+          <footer class="journal-meta">
+            <span class="text-small" id="journal-status" aria-live="polite">Saved automatically.</span>
+            <span class="text-small" id="journal-word-count">0 words</span>
+          </footer>
+        </article>
+
+        <aside class="card journal-history" aria-labelledby="journal-history-title">
+          <div class="journal-history-header">
+            <h3 id="journal-history-title">Past entries</h3>
+            <span class="text-small" id="journal-entry-count">0 entries</span>
+          </div>
+          <div class="journal-entry-list" id="journal-entry-list"></div>
+        </aside>
       </div>
     </section>
 
@@ -2382,6 +2585,7 @@
           customTasks: [],
           scheduleOverrides: {},
           priorityMatrix: { tasks: [] },
+          journal: { entries: {} },
           notes: "",
           careerApps: [],
           careerContacts: [],
@@ -2434,6 +2638,8 @@
         let isSyncing = false;
         let syncQueued = false;
         let notesSaveTimer = null;
+        let journalSaveTimer = null;
+        let selectedJournalDate = todayStr();
         let roadmapSaveTimer = null;
         let lastModalTrigger = null;
         let taskDragState = null;
@@ -2455,7 +2661,7 @@
 
         const els = {
           tabs: Array.from(document.querySelectorAll("[data-view]")),
-          panels: { week: document.getElementById("panel-week"), matrix: document.getElementById("panel-matrix"), roadmap: document.getElementById("panel-roadmap"), portfolio: document.getElementById("panel-portfolio"), career: document.getElementById("panel-career"), notes: document.getElementById("panel-notes"), settings: document.getElementById("panel-settings") },
+          panels: { week: document.getElementById("panel-week"), matrix: document.getElementById("panel-matrix"), journal: document.getElementById("panel-journal"), roadmap: document.getElementById("panel-roadmap"), portfolio: document.getElementById("panel-portfolio"), career: document.getElementById("panel-career"), notes: document.getElementById("panel-notes"), settings: document.getElementById("panel-settings") },
           weekSelect: document.getElementById("week-select"),
           previousWeek: document.getElementById("previous-week"),
           nextWeek: document.getElementById("next-week"),
@@ -2545,6 +2751,17 @@
           modalSave: document.getElementById("modal-save"),
           modalReset: document.getElementById("modal-reset"),
           modalClose: document.getElementById("modal-close"),
+          journalDateHeading: document.getElementById("journal-date-heading"),
+          journalDateInput: document.getElementById("journal-date-input"),
+          journalPreviousDay: document.getElementById("journal-previous-day"),
+          journalNextDay: document.getElementById("journal-next-day"),
+          journalToday: document.getElementById("journal-today"),
+          journalTextarea: document.getElementById("journal-textarea"),
+          journalHelper: document.getElementById("journal-helper"),
+          journalStatus: document.getElementById("journal-status"),
+          journalWordCount: document.getElementById("journal-word-count"),
+          journalEntryCount: document.getElementById("journal-entry-count"),
+          journalEntryList: document.getElementById("journal-entry-list"),
           notesTextarea: document.getElementById("notes-textarea"),
           notesStatus: document.getElementById("notes-status"),
           notesHelper: document.getElementById("notes-helper"),
@@ -2597,6 +2814,12 @@
           els.settingsForm.querySelectorAll("input, select, textarea").forEach(function(control) {
             control.disabled = !admin;
           });
+          els.journalTextarea.readOnly = !admin;
+          els.journalTextarea.setAttribute("aria-readonly", String(!admin));
+          els.journalHelper.textContent = admin
+            ? "Write freely. Your entry saves automatically as you type."
+            : "Read-only preview of the synced journal.";
+          els.journalStatus.textContent = admin ? "Saved automatically." : "Read-only preview.";
           els.notesTextarea.readOnly = !admin;
           els.notesTextarea.setAttribute("aria-readonly", String(!admin));
           els.notesHelper.textContent = admin
@@ -3098,6 +3321,7 @@
               customTasks: state.customTasks,
               scheduleOverrides: state.scheduleOverrides,
               priorityMatrix: state.priorityMatrix,
+              journal: state.journal,
               notes: state.notes,
               careerApps: state.careerApps,
               careerContacts: state.careerContacts,
@@ -3147,6 +3371,7 @@
               if (data.customTasks) state.customTasks = data.customTasks;
               if (data.scheduleOverrides) state.scheduleOverrides = data.scheduleOverrides;
               if (data.priorityMatrix) state.priorityMatrix = normalizePriorityMatrix(data.priorityMatrix);
+              if (data.journal) state.journal = normalizeJournal(data.journal);
               if (data.notes !== undefined) state.notes = data.notes;
               if (data.careerApps) state.careerApps = data.careerApps;
               if (data.careerContacts) state.careerContacts = data.careerContacts;
@@ -3219,6 +3444,29 @@
           return { tasks: tasks };
         }
 
+
+        function normalizeJournal(value) {
+          const source = value && value.entries && typeof value.entries === "object" && !Array.isArray(value.entries)
+            ? value.entries
+            : {};
+          const entries = {};
+          Object.keys(source).forEach(function(entryDate) {
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(entryDate)) return;
+            const parsedDate = parseDate(entryDate);
+            if (Number.isNaN(parsedDate.getTime()) || dateKey(parsedDate) !== entryDate) return;
+            const savedEntry = source[entryDate];
+            const text = typeof savedEntry === "string"
+              ? savedEntry
+              : String(savedEntry && savedEntry.text || "");
+            if (!text.trim()) return;
+            entries[entryDate] = {
+              text: text,
+              updatedAt: Number(savedEntry && savedEntry.updatedAt) || 0
+            };
+          });
+          return { entries: entries };
+        }
+
         function loadState() {
           try {
             const saved = localStorage.getItem(STORAGE_KEY);
@@ -3232,6 +3480,7 @@
               customTasks: parsed.customTasks || [],
               scheduleOverrides: parsed.scheduleOverrides || {},
               priorityMatrix: normalizePriorityMatrix(parsed.priorityMatrix),
+              journal: normalizeJournal(parsed.journal),
               notes: parsed.notes || "",
               careerApps: parsed.careerApps || [],
               careerContacts: parsed.careerContacts || [],
@@ -4462,6 +4711,7 @@
         function renderAll() {
           renderWeek();
           renderPriorityMatrix();
+          renderJournal();
           renderRoadmap();
           renderPortfolio();
           renderCareer();
@@ -4589,6 +4839,134 @@
           renderCareer();
         }
 
+
+        // ===== DAILY JOURNAL =====
+        function isValidJournalDate(value) {
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return false;
+          const parsed = parseDate(value);
+          return !Number.isNaN(parsed.getTime()) && dateKey(parsed) === value && value <= todayStr();
+        }
+
+        function ensureJournalState() {
+          if (!state.journal || !state.journal.entries || typeof state.journal.entries !== "object") {
+            state.journal = normalizeJournal(state.journal);
+          }
+        }
+
+        function formatJournalDate(value) {
+          const date = parseDate(value);
+          return date.toLocaleDateString(undefined, {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+          });
+        }
+
+        function journalWordCount(text) {
+          const trimmed = String(text || "").trim();
+          return trimmed ? trimmed.split(/\s+/).length : 0;
+        }
+
+        function updateJournalMeta(text) {
+          const count = journalWordCount(text);
+          els.journalWordCount.textContent = count + (count === 1 ? " word" : " words");
+        }
+
+        function renderJournalHistory() {
+          ensureJournalState();
+          const entryDates = Object.keys(state.journal.entries).sort().reverse();
+          els.journalEntryCount.textContent = entryDates.length + (entryDates.length === 1 ? " entry" : " entries");
+          els.journalEntryList.innerHTML = "";
+
+          if (!entryDates.length) {
+            const empty = document.createElement("p");
+            empty.className = "journal-empty text-small";
+            empty.textContent = isAdmin()
+              ? "Your dated entries will appear here as you write."
+              : "No journal entries have been written yet.";
+            els.journalEntryList.appendChild(empty);
+            return;
+          }
+
+          entryDates.forEach(function(entryDate) {
+            const entry = state.journal.entries[entryDate];
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "journal-history-button";
+            button.dataset.journalDate = entryDate;
+            button.setAttribute("aria-current", entryDate === selectedJournalDate ? "date" : "false");
+
+            const dateLabel = document.createElement("span");
+            dateLabel.className = "journal-history-date";
+            dateLabel.textContent = formatJournalDate(entryDate);
+
+            const excerpt = document.createElement("span");
+            excerpt.className = "journal-history-excerpt";
+            excerpt.textContent = String(entry.text || "").replace(/\s+/g, " ").trim().slice(0, 90);
+
+            button.appendChild(dateLabel);
+            button.appendChild(excerpt);
+            els.journalEntryList.appendChild(button);
+          });
+        }
+
+        function renderJournal() {
+          ensureJournalState();
+          if (!isValidJournalDate(selectedJournalDate)) selectedJournalDate = todayStr();
+          const entry = state.journal.entries[selectedJournalDate];
+          const text = entry ? entry.text : "";
+
+          els.journalDateInput.max = todayStr();
+          els.journalDateInput.value = selectedJournalDate;
+          els.journalDateHeading.textContent = formatJournalDate(selectedJournalDate);
+          els.journalTextarea.value = text;
+          els.journalNextDay.disabled = selectedJournalDate >= todayStr();
+          updateJournalMeta(text);
+          els.journalStatus.textContent = isAdmin() ? "Saved automatically." : "Read-only preview.";
+          renderJournalHistory();
+        }
+
+        function updateJournalDraft() {
+          ensureJournalState();
+          const text = els.journalTextarea.value;
+          if (text.trim()) {
+            state.journal.entries[selectedJournalDate] = {
+              text: text,
+              updatedAt: Date.now()
+            };
+          } else {
+            delete state.journal.entries[selectedJournalDate];
+          }
+          updateJournalMeta(text);
+        }
+
+        function saveJournalEntry() {
+          if (!requireAdmin()) {
+            renderJournal();
+            return false;
+          }
+          updateJournalDraft();
+          const saved = saveState("Journal saved.");
+          els.journalStatus.textContent = saved ? "Saved automatically." : "Save unavailable.";
+          renderJournalHistory();
+          return saved;
+        }
+
+        function flushJournalSave() {
+          if (!journalSaveTimer) return;
+          clearTimeout(journalSaveTimer);
+          journalSaveTimer = null;
+          saveJournalEntry();
+        }
+
+        function selectJournalDate(value) {
+          if (!isValidJournalDate(value)) return;
+          flushJournalSave();
+          selectedJournalDate = value;
+          renderJournal();
+        }
+
         // ===== NOTES =====
         function renderNotes() {
           els.notesTextarea.value = state.notes || "";
@@ -4637,6 +5015,7 @@
           if (view === "portfolio") renderPortfolio();
           if (view === "settings") populateSettings();
           if (view === "career") { renderCareer(); populateCareerEditFields(); }
+          if (view === "journal") renderJournal();
           if (view === "notes") renderNotes();
           if (options && options.focusTab) {
             const activeTab = els.tabs.find(function(tab) { return tab.dataset.view === view; });
@@ -4990,6 +5369,41 @@
             notesSaveTimer = setTimeout(function() {
               saveNotes();
             }, 500);
+          });
+
+
+          els.journalTextarea.addEventListener("input", function() {
+            if (!isAdmin()) {
+              renderJournal();
+              return;
+            }
+            updateJournalDraft();
+            els.journalStatus.textContent = "Saving...";
+            if (journalSaveTimer) clearTimeout(journalSaveTimer);
+            journalSaveTimer = setTimeout(function() {
+              journalSaveTimer = null;
+              saveJournalEntry();
+            }, 600);
+          });
+          els.journalDateInput.addEventListener("change", function() {
+            selectJournalDate(this.value);
+          });
+          els.journalPreviousDay.addEventListener("click", function() {
+            selectJournalDate(dateKey(addDays(parseDate(selectedJournalDate), -1)));
+          });
+          els.journalNextDay.addEventListener("click", function() {
+            const nextDate = dateKey(addDays(parseDate(selectedJournalDate), 1));
+            if (nextDate <= todayStr()) selectJournalDate(nextDate);
+          });
+          els.journalToday.addEventListener("click", function() {
+            selectJournalDate(todayStr());
+          });
+          els.journalEntryList.addEventListener("click", function(event) {
+            const button = event.target.closest("[data-journal-date]");
+            if (button) selectJournalDate(button.dataset.journalDate);
+          });
+          window.addEventListener("beforeunload", function() {
+            if (isAdmin() && journalSaveTimer) flushJournalSave();
           });
 
           els.syncNowBtn.addEventListener("click", function() {
