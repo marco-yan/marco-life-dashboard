@@ -1,6 +1,6 @@
 # Marco Life Dashboard
 
-A single-file personal planning dashboard for managing weekly priorities, an Eisenhower Matrix, daily tasks, career progress, a job-search proof portfolio, training, nutrition, and the July–December 2026 roadmap.
+A single-file personal planning dashboard for managing weekly priorities, an Eisenhower Matrix, daily tasks, dated journal entries, career progress, a job-search proof portfolio, training, nutrition, and the July–December 2026 roadmap.
 
 The entire application remains in `index.html`. It is designed to work as a static website with no build step or package manager.
 
@@ -17,7 +17,7 @@ The login screen supports two dashboard accounts:
 
 The active role is kept in `sessionStorage`, so signing out or closing the browser session returns the viewer to the login screen. A role badge is always visible in the dashboard header, and guest sessions display a read-only banner.
 
-Guest mode can browse the weekly plan, Priority Matrix, tasks, schedule, Roadmap, portfolio, Career Tracker, notes, and settings. All mutation paths are also guarded in JavaScript: guests cannot complete, move, add, or delete Priority Matrix tasks; complete, reorder, hide, or add daily tasks; edit schedules or Roadmap content; change networking selections; complete portfolio milestones; edit career data or notes; save settings; write to `localStorage`; or send updates to JSONBin. Guests may still load the latest cloud data for viewing.
+Guest mode can browse the weekly plan, Priority Matrix, Journal, tasks, schedule, Roadmap, portfolio, Career Tracker, notes, and settings. All mutation paths are also guarded in JavaScript: guests cannot complete, move, add, or delete Priority Matrix tasks; complete, reorder, hide, or add daily tasks; edit schedules or Roadmap content; change networking selections; complete portfolio milestones; edit Journal entries, career data, or notes; save settings; write to `localStorage`; or send updates to JSONBin. Guests may still load the latest cloud data for viewing.
 
 > **Security note:** This is client-side access control for a static personal dashboard, not server-backed authentication. Credentials and JSONBin configuration remain visible in the delivered page source. Use a server-side authentication and data proxy if the dashboard ever contains sensitive information or requires access control that cannot be bypassed by a technically advanced visitor.
 
@@ -44,6 +44,21 @@ The Priority Matrix tab adds a dedicated Eisenhower Matrix for work that needs p
 - Data is stored in `state.priorityMatrix.tasks`, saved locally, and included in the existing JSONBin payload for cross-device sync.
 - Guests can view task placement and completion but all matrix controls remain read-only.
 - The board is 2×2 on larger screens and stacks into one comfortable column on iPhone.
+
+
+### Journal
+
+The Journal tab provides a calm, date-based writing space for daily thoughts, ideas, and reflections.
+
+- Open today or select any earlier date with the date picker.
+- Move one day at a time with the previous and next controls, or return directly to today.
+- Browse all written dates from the **Past entries** list, with a short preview of each entry.
+- Writing is stored in `state.journal.entries` by ISO date, such as `2026-07-17`.
+- Entries save automatically after a short typing pause, persist locally, and use the existing JSONBin synchronization path.
+- Erasing all text for a date removes that empty entry from the history list.
+- Word count and save status remain visible without adding a manual Save button.
+- Guests can browse every synced entry and date, but the writing area remains read-only.
+- On iPhone, the writing page and history stack vertically, with date controls and history rows retaining touch-friendly targets.
 
 ### Google Calendar
 
@@ -269,6 +284,7 @@ The sync payload includes:
 - Custom tasks
 - Schedule overrides
 - Priority Matrix tasks, quadrant placement, and completion
+- Dated Journal entries and automatic-save metadata
 - Notes
 - Career applications
 - Networking-log entries
@@ -288,6 +304,7 @@ The dashboard is designed for regular iPhone use:
 - Dashboard buttons and role controls retain touch targets of at least 44px.
 - Calendar event rows collapse cleanly on narrow screens, and calendar actions retain 44px touch targets.
 - Priority Matrix quadrants stack vertically, while add, move, complete, and delete controls retain 44px touch targets.
+- Journal writing and entry history stack into one column, while date navigation and entry buttons retain 44px touch targets.
 - Networking actions and selectors use touch targets of at least 44px.
 - Task drag handles and Hide controls are touch-friendly.
 - Weekly networking cards stack vertically on smaller screens.
@@ -326,8 +343,17 @@ Future updates should preserve these project constraints:
 9. Avoid unnecessary third-party dependencies or abstractions.
 10. Keep Google Calendar event data read-only and transient; persist only the validated Apps Script `/exec` URL.
 11. Keep Priority Matrix tasks in `state.priorityMatrix` and preserve Guest read-only guards for every matrix action.
+12. Keep dated Journal entries in `state.journal.entries`, include them in JSONBin synchronization, and preserve the Guest read-only guard.
 
 ## Update history
+
+### v2.9 — 2026-07-17
+
+- Added a dedicated Journal tab with a calm, date-focused writing surface.
+- Added a date picker, previous/next day navigation, a Today shortcut, and a browsable history of written dates.
+- Added debounced automatic saving, word count, save feedback, and blank-entry cleanup without requiring a Save button.
+- Stored dated entries in `state.journal.entries` for local persistence and JSONBin synchronization.
+- Preserved Guest as a read-only journal viewer and added responsive iPhone layouts with touch-friendly controls.
 
 ### v2.8 — 2026-07-14
 
