@@ -24,14 +24,17 @@ Guest mode can browse the weekly plan, Priority Matrix, Journal, tasks, schedule
 ### This week
 
 - Weekly progress for checklist completion, applications, outreach, training, and nutrition.
-- Career, training, target-company, and networking priorities shown at a glance.
+- Career, training, target-company, and networking priorities shown at a glance, with the job hunt organized around a **45% Nuclear Project Delivery / 30% Insurance / 25% Healthcare Analytics** allocation.
 - The current portfolio phase, weekly deliverable, due date, and progress shown directly below the focus strip.
 - Seven-day picker with a generated daily schedule and task list.
 - Schedule editor opened through the pencil button.
 - Daily tasks can be checked off, reordered, hidden for one day, restored, or supplemented with custom tasks.
 - Drag-and-drop works with a mouse or touch; keyboard users can move tasks with the arrow keys.
 - Task order, hidden tasks, and completion state persist across devices.
-- From September 1 through November 22, portfolio sessions appear as normal Monday, Wednesday, Saturday, and Sunday tasks and keep the same reorder, hide, completion, and sync behavior.
+- Generated work tasks name concrete planning or close-out actions instead of vague daily productivity prompts.
+- Applications are distributed across Monday, Thursday, and Sunday; Tuesday and Thursday lunch windows support lane-specific outreach or booked calls.
+- Portfolio sessions run from July 20 through October 25 on Wednesday, Saturday morning, and Sunday. They keep the same reorder, hide, completion, and sync behavior as every other task.
+- Friday after work and Saturday after 2:00 PM remain protected by the default schedule.
 
 ### Priority Matrix
 
@@ -183,8 +186,8 @@ Networking is part of weekly planning rather than a separate static contact tabl
 Each week has three planned contacts:
 
 1. **Monday — Peer or recent hire**
-2. **Wednesday — Manager or senior team member**
-3. **Friday — Recruiter or connector**
+2. **Tuesday — Manager or senior team member**
+3. **Thursday — Recruiter or connector**
 
 The weekly networking cards show:
 
@@ -193,7 +196,7 @@ The weekly networking cards show:
 - A direct LinkedIn profile button.
 - Shared completion status with the corresponding daily task.
 
-The default roster contains 29 curated contacts across the Insurance, Infrastructure, Healthcare Analytics, and Banking lanes. Contact data is stored in:
+The default roster contains 29 curated contacts. Future weekly assignments follow the 45 / 30 / 25 Nuclear, Insurance, and Healthcare allocation; Banking contacts remain available in the roster but are not part of the default campaign. Contact data is stored in:
 
 - `state.careerContent.networkingContacts`
 - `state.careerContent.weeklyNetworking`
@@ -205,7 +208,7 @@ Changing a weekly contact in the Roadmap immediately updates both the weekly net
 - Covers every week from July through December 2026.
 - Career and Training text can be edited directly by clicking the text.
 - Weekly networking contacts can be changed with the Peer, Team Lead, and Connector selectors.
-- September–December rows show the linked portfolio deliverable, project progress, and a shortcut to the full plan.
+- July 20–October 25 rows show the linked portfolio deliverable, project progress, and a shortcut to the full plan. Later rows show the development freeze and interview mode.
 - Custom weekly text is stored in `state.careerContent.weeklyFocus`.
 - Hardcoded `weekFocus` values remain as fallbacks when no custom text exists.
 
@@ -213,57 +216,60 @@ Changing a weekly contact in the Roadmap immediately updates both the weekly net
 
 The Portfolio tab tracks four recruiter-facing deliverables and the final response-led refinement sprint. Each card shows the target lane, tool stack, date window, estimated effort, current status, progress, next milestone, and a measurable checklist.
 
-#### Project 1 — Commercial Underwriting Pricing & Portfolio Workbench
+#### Project 1 — Nuclear Project Controls & Risk Forecasting Command Center
+
+- **Lane:** Nuclear Project Delivery / Project Controls
+- **Window:** July 20–August 9, with a thin MVP by August 2 (14–18 hours)
+- **Tools:** Primavera P6 or Microsoft Project, Excel, Power Query, Python, pandas, NumPy, Power BI, and DAX
+- **Proof:** A mock nuclear-refurbishment WBS and logic-linked schedule, baseline and critical path, earned-value measures, P50/P80 risk simulation, risk heatmap, Power BI reporting, and an executive narrative
+
+#### Project 2 — Commercial Underwriting Pricing & Portfolio Workbench
 
 - **Lane:** Insurance / Underwriting
-- **Window:** September 1–10 (10–14 hours)
+- **Window:** August 10–23 (10–14 hours)
 - **Tools:** Excel, Power Query, Power Pivot, PivotTables, LET, XLOOKUP, Solver, and data tables
 - **Proof:** Claims import, frequency × severity pricing, expenses and risk load, underwriting decisions, portfolio dashboard, scenario comparison, and Solver optimization
-
-#### Project 2 — Project Controls & Risk Forecasting Command Center
-
-- **Lane:** Infrastructure / Project Controls
-- **Window:** September 15–October 4 (14–18 hours)
-- **Tools:** Excel, Power Query, Python, pandas, NumPy, Power BI, and DAX
-- **Proof:** Eight work packages, twelve periods, earned-value measures, P50/P80 simulation, risk heatmap, Power BI reporting, and an executive narrative
 
 #### Project 3 — Pharma Commercial Effectiveness & Channel Optimization
 
 - **Lane:** Healthcare Commercial Analytics
-- **Window:** October 5–25 (18–24 hours)
+- **Window:** August 31–September 27 (18–24 hours)
 - **Tools:** SQL, Python/pandas, Excel, Power BI, and DAX
 - **Proof:** Relational commercial data, joins/CTEs/window functions, control-vs-exposed simulation, confidence intervals, ROI, and budget-allocation recommendations
 
 #### Project 4 — Shared Public Portfolio Site
 
 - **Lane:** Shared proof layer
-- **Window:** September 11–14 for the first public shell; October 26–November 8 for the complete site (6–10 hours total)
+- **Window:** August 24–30 for the first public shell; September 28–October 11 for the complete site (6–10 hours total)
 - **Tools:** HTML, CSS, basic JavaScript, Git/GitHub, Power BI embeds, downloads, and short walkthrough videos
-- **Proof:** An early live Insurance case study for September outreach, followed by three concise case studies with working artifacts, architecture context, synthetic-data disclosures, mobile QA, and fallback media where live embedding is unavailable
+- **Proof:** Early live Nuclear and Insurance case studies, followed by all three concise case studies with working artifacts, architecture context, synthetic-data disclosures, mobile QA, and fallback media where live embedding is unavailable
 
 #### Refinement and freeze
 
-- **November 9–22:** Improve only the project receiving the strongest response, tighten documentation and résumé proof, run final QA, and tag the releases.
-- **After November 22:** Freeze development and use the finished work for applications and interviews.
+- **October 12–25:** Improve only the project receiving the strongest response, tighten documentation and résumé proof, run final QA, and tag the releases.
+- **After October 25:** Freeze development and use the finished work for applications and interviews.
 
-The protected weekly build rhythm is 1 hour Monday, 1.5 hours Wednesday, 3 hours Saturday, and 1.5 hours Sunday. Monday's live applications and Wednesday's networking action stay first; the portfolio uses the remainder of those existing focus blocks. Saturday deep work ends at 6:30 PM, Sunday is limited to QA/documentation, and Friday remains open. Milestone completion is stored in `state.careerContent.portfolioProgress.completedMilestones`.
+The protected weekly build rhythm is 1.5 hours Wednesday, 3 hours Saturday morning, and 1.5 hours Sunday. Monday remains an application block, Tuesday a nuclear outreach block, and Thursday an insurance outreach/application block. Friday after work and Saturday afternoon stay protected. Milestone completion is stored in `state.careerContent.portfolioProgress.completedMilestones`.
 
 The release order is intentionally tied to the job-search funnel:
 
-1. Ship the Insurance MVP and place it on a live portfolio shell by September 14.
-2. Release Project Controls before the early-October recruiter and interview push.
-3. Release Pharma by October 25 while using current WebHealth experience as the healthcare bridge.
-4. Finish the complete public presentation layer by November 8.
-5. Refine only the proof point receiving meaningful response, then freeze development.
+1. Ship a thin Nuclear Project Controls MVP by August 2 and the validated v1 by August 9.
+2. Release the Insurance Workbench by August 23.
+3. Publish the first public portfolio shell by August 30.
+4. Release Pharma by September 27 while using current WebHealth experience as the healthcare bridge.
+5. Finish the public presentation layer by October 11, refine only the proof receiving meaningful response, and freeze development October 25.
 
 Live application deadlines, interview preparation, warm follow-ups, and the three-person networking triangle take priority over portfolio polish.
 
 ### Career Tracker
 
-- Editable target companies, search lanes, and strategic plan.
-- Application log with company, role, status, date, and notes.
-- Networking log with contact, company, status, date, and notes.
-- Tracker content and log entries continue to sync automatically.
+- A campaign summary keeps the 45% Nuclear, 30% Insurance, and 25% Healthcare allocation visible, with Banking explicitly paused except for unusually strong warm leads.
+- Application cards are grouped into **Targets**, **In progress**, and **Interviews & outcomes**. Stage and lane selectors move a card immediately without requiring deletion or re-entry.
+- Networking cards are grouped into **To contact**, **In motion**, and **Completed & referred**, with directly editable next actions and notes.
+- One lane filter narrows both pipelines, and all stage, lane, next-action, and note changes save automatically.
+- Existing records are migrated safely with stable IDs and an inferred lane; application and networking history is not discarded.
+- Editable target companies, role families, lane allocations, and campaign decision gates remain available in the source-text editor.
+- Tracker content and log entries continue to sync automatically through JSONBin, while Guest sees the same pipelines with every mutation control disabled.
 
 ### Notes and settings
 
@@ -286,8 +292,8 @@ The sync payload includes:
 - Priority Matrix tasks, quadrant placement, and completion
 - Dated Journal entries and automatic-save metadata
 - Notes
-- Career applications
-- Networking-log entries
+- Career applications, including stable IDs, lane, stage, and notes
+- Networking-log entries, including lane, stage, next action, and notes
 - Editable career content
 - Weekly Roadmap edits
 - Networking roster and weekly contact selections
@@ -306,6 +312,7 @@ The dashboard is designed for regular iPhone use:
 - Priority Matrix quadrants stack vertically, while add, move, complete, and delete controls retain 44px touch targets.
 - Journal writing and entry history stack into one column, while date navigation and entry buttons retain 44px touch targets.
 - Networking actions and selectors use touch targets of at least 44px.
+- Career pipeline cards stack into one column; their stage, lane, next-action, notes, and remove controls retain touch-friendly targets.
 - Task drag handles and Hide controls are touch-friendly.
 - Weekly networking cards stack vertically on smaller screens.
 - Portfolio projects, timeline phases, and weekly focus content collapse to a single-column layout.
@@ -344,8 +351,18 @@ Future updates should preserve these project constraints:
 10. Keep Google Calendar event data read-only and transient; persist only the validated Apps Script `/exec` URL.
 11. Keep Priority Matrix tasks in `state.priorityMatrix` and preserve Guest read-only guards for every matrix action.
 12. Keep dated Journal entries in `state.journal.entries`, include them in JSONBin synchronization, and preserve the Guest read-only guard.
+13. Keep Career Tracker records in `state.careerApps` and `state.careerContacts`; preserve stable IDs, lane/stage fields, direct editing, and Guest read-only guards.
 
 ## Update history
+
+### v3.0 — 2026-07-17
+
+- Reorganized the job hunt around a visible 45% Nuclear Project Delivery, 30% Insurance / Underwriting, and 25% Healthcare Analytics campaign; paused Banking by default.
+- Rebuilt the application and networking logs as responsive three-stage pipelines with direct stage movement, lane changes, next actions, notes, filtering, and automatic JSONBin synchronization.
+- Added a safe strategy migration that preserves existing records and milestone progress while replacing outdated campaign text and future networking defaults.
+- Moved the Nuclear Project Controls project to the front, added Primavera P6 / Microsoft Project schedule proof, set a thin MVP for August 2, and accelerated the overall development freeze to October 25.
+- Reworked the weekly rhythm around Monday applications, Tuesday nuclear outreach, Wednesday build work, Thursday insurance activity, Sunday review, a protected Friday evening, and a protected Saturday afternoon.
+- Removed vague generated WebHealth prompts and replaced them with concrete Monday planning and Friday close-out actions.
 
 ### v2.9 — 2026-07-17
 
