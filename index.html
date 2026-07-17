@@ -935,7 +935,7 @@
     #schedule-modal .btn-reset { background: transparent; color: var(--text); border: 1px solid var(--border); }
     #schedule-modal .btn-reset:hover { background: var(--surface-strong); }
 
-    .career-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .career-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.55fr); gap: 24px; }
     @media (max-width: 740px) { .career-grid { grid-template-columns: 1fr; } }
     .company-list { columns: 2; column-gap: 32px; }
     @media (max-width: 500px) { .company-list { columns: 1; } }
@@ -952,6 +952,156 @@
     .status-badge.offer { background: var(--surface-strong); color: var(--primary); }
     .status-badge.rejected { background: var(--surface-strong); color: var(--text); }
     .status-badge.watching { background: var(--surface-strong); color: var(--muted); }
+
+    /* ===== CAREER CAMPAIGN + PIPELINES ===== */
+    #marco-life-dashboard .career-command {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    #marco-life-dashboard .career-command-header {
+      align-items: flex-start;
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+    }
+    #marco-life-dashboard .career-command-header h2,
+    #marco-life-dashboard .career-pipeline-header h3 { color: var(--primary); margin: 0; }
+    #marco-life-dashboard .career-command-copy { max-width: 760px; }
+    #marco-life-dashboard .career-lane-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    #marco-life-dashboard .career-lane-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: grid;
+      gap: 7px;
+      min-height: 164px;
+      padding: 16px;
+    }
+    #marco-life-dashboard .career-lane-top {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+    #marco-life-dashboard .career-lane-top strong { color: var(--primary); }
+    #marco-life-dashboard .career-lane-share {
+      align-items: center;
+      background: var(--primary);
+      border-radius: 999px;
+      color: var(--background);
+      display: inline-flex;
+      font-size: 0.78rem;
+      font-weight: 800;
+      justify-content: center;
+      min-height: 44px;
+      min-width: 54px;
+      padding: 0 12px;
+    }
+    #marco-life-dashboard .career-lane-card .text-small { line-height: 1.45; }
+    #marco-life-dashboard .career-pause-note {
+      align-items: center;
+      background: var(--surface-strong);
+      border-radius: 12px;
+      display: flex;
+      gap: 10px;
+      min-height: 44px;
+      padding: 10px 14px;
+    }
+    #marco-life-dashboard .career-pause-note i { color: var(--secondary); flex: 0 0 auto; }
+    #marco-life-dashboard .career-pipeline-card { margin-bottom: 20px; }
+    #marco-life-dashboard .career-pipeline-header {
+      align-items: flex-start;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    #marco-life-dashboard .career-pipeline-header .text-small { margin-top: 4px; max-width: 720px; }
+    #marco-life-dashboard .career-filter {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    #marco-life-dashboard .career-filter .form-select { min-height: 44px; min-width: 210px; }
+    #marco-life-dashboard .career-entry-form {
+      background: var(--surface);
+      border-radius: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1.1fr 1.2fr 1fr 0.85fr auto;
+      margin-bottom: 16px;
+      padding: 14px;
+    }
+    #marco-life-dashboard .career-entry-form .btn { align-self: end; min-height: 44px; }
+    #marco-life-dashboard .career-pipeline {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    #marco-life-dashboard .career-stage {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      min-width: 0;
+      padding: 12px;
+    }
+    #marco-life-dashboard .career-stage-heading {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      min-height: 44px;
+    }
+    #marco-life-dashboard .career-stage-heading strong { color: var(--primary); }
+    #marco-life-dashboard .career-stage-count {
+      background: var(--surface-strong);
+      border-radius: 999px;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 5px 9px;
+    }
+    #marco-life-dashboard .career-stage-list { display: grid; gap: 10px; }
+    #marco-life-dashboard .career-record {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      gap: 10px;
+      padding: 13px;
+    }
+    #marco-life-dashboard .career-record-top {
+      align-items: flex-start;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    #marco-life-dashboard .career-record-title { min-width: 0; }
+    #marco-life-dashboard .career-record-title strong,
+    #marco-life-dashboard .career-record-title span { display: block; overflow-wrap: anywhere; }
+    #marco-life-dashboard .career-record-title span { color: var(--secondary); font-size: 0.78rem; margin-top: 2px; }
+    #marco-life-dashboard .career-record-remove { flex: 0 0 44px; height: 44px; padding: 0; width: 44px; }
+    #marco-life-dashboard .career-record-grid { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
+    #marco-life-dashboard .career-record .form-label { margin: 0; }
+    #marco-life-dashboard .career-record .form-select,
+    #marco-life-dashboard .career-record .form-control { font-size: 0.82rem; min-height: 44px; width: 100%; }
+    #marco-life-dashboard .career-record textarea.form-control { line-height: 1.4; min-height: 72px; resize: vertical; }
+    #marco-life-dashboard .career-record-wide { grid-column: 1 / -1; }
+    #marco-life-dashboard .career-record-meta { color: var(--secondary); font-size: 0.72rem; }
+    #marco-life-dashboard .career-stage-empty {
+      color: var(--secondary);
+      font-size: 0.82rem;
+      line-height: 1.45;
+      padding: 14px 6px;
+      text-align: center;
+    }
 
     .plan-details { margin-top: 16px; }
     .plan-details summary { font-weight: 600; cursor: pointer; color: #214E3B; padding: 12px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); }
@@ -1800,7 +1950,10 @@
       #marco-life-dashboard .portfolio-timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       #marco-life-dashboard .portfolio-cadence { grid-template-columns: 1fr 1fr; }
       #marco-life-dashboard .portfolio-cadence > div:first-child { grid-column: 1 / -1; }
-      #career-app-form, #career-contact-form { grid-template-columns: 1fr 1fr !important; }
+      #marco-life-dashboard .career-lane-grid,
+      #marco-life-dashboard .career-pipeline { grid-template-columns: 1fr; }
+      #marco-life-dashboard .career-entry-form { grid-template-columns: 1fr 1fr; }
+      #marco-life-dashboard .career-entry-form .btn { width: 100%; }
     }
     @media (max-width: 740px) {
       body { padding: 18px 14px 48px; }
@@ -1849,6 +2002,10 @@
         grid-template-columns: 1fr;
       }
       #marco-life-dashboard .roadmap-portfolio .btn { justify-content: center; width: 100%; }
+      #marco-life-dashboard .career-command-header,
+      #marco-life-dashboard .career-pipeline-header { flex-direction: column; }
+      #marco-life-dashboard .career-filter { align-items: stretch; flex-direction: column; width: 100%; }
+      #marco-life-dashboard .career-filter .form-select { min-width: 0; width: 100%; }
       #marco-life-dashboard #todo-list.card-soft { padding: 8px 10px; }
       #marco-life-dashboard .todo-row {
         gap: 4px;
@@ -1866,7 +2023,9 @@
     }
     @media (max-width: 520px) {
       #marco-life-dashboard .viz-grid { grid-template-columns: 1fr; }
-      #career-app-form, #career-contact-form { grid-template-columns: 1fr !important; }
+      #marco-life-dashboard .career-entry-form,
+      #marco-life-dashboard .career-record-grid { grid-template-columns: 1fr; }
+      #marco-life-dashboard .career-record-wide { grid-column: auto; }
       #marco-life-dashboard .status-chip { max-width: calc(100vw - 120px); }
       #marco-life-dashboard .portfolio-timeline { grid-template-columns: 1fr; }
       #marco-life-dashboard .portfolio-project-top { flex-direction: column; gap: 10px; }
@@ -1977,8 +2136,8 @@
       <section class="portfolio-week-card" id="portfolio-week-card" aria-labelledby="portfolio-week-title">
         <div class="portfolio-week-copy">
           <span class="eyebrow" id="portfolio-week-label">Portfolio plan</span>
-          <h2 id="portfolio-week-title">Projects begin September 1</h2>
-          <p class="text-small" id="portfolio-week-detail">Ship proof early, publish the first case study in September, and freeze development on November 22.</p>
+          <h2 id="portfolio-week-title">Nuclear project-controls MVP starts July 20</h2>
+          <p class="text-small" id="portfolio-week-detail">Build the credibility gap first, release proof in small increments, and freeze development on October 25.</p>
         </div>
         <div class="portfolio-week-progress">
           <div class="portfolio-progress-label"><span id="portfolio-week-progress-label">Overall progress</span><strong id="portfolio-week-progress-value">0%</strong></div>
@@ -2095,7 +2254,7 @@
         <div>
           <span class="eyebrow">July–December 2026</span>
           <h2>Your weekly roadmap</h2>
-          <p class="text-small">Edit each week's Career and Training focus, choose the three networking contacts, and follow the linked portfolio milestone from September through the November 22 development freeze. Every change saves and syncs automatically.</p>
+          <p class="text-small">Edit each week's Career and Training focus, choose the three networking contacts, and follow the linked portfolio milestone through the October 25 development freeze. Every change saves and syncs automatically.</p>
         </div>
         <div class="roadmap-toolbar-actions">
           <span class="text-small" id="roadmap-save-status" aria-live="polite">All changes saved</span>
@@ -2104,7 +2263,7 @@
       </div>
       <div class="viz-grid roadmap-summary">
         <div class="card viz-stat"><span class="text-muted">Career objective</span><span class="viz-stat-value">December 15</span><span class="text-small">Signed permanent early-career offer</span></div>
-        <div class="card viz-stat"><span class="text-muted">Portfolio development freeze</span><span class="viz-stat-value">November 22</span><span class="text-small" id="roadmap-portfolio-progress">0 of 0 milestones complete</span></div>
+        <div class="card viz-stat"><span class="text-muted">Portfolio development freeze</span><span class="viz-stat-value">October 25</span><span class="text-small" id="roadmap-portfolio-progress">0 of 0 milestones complete</span></div>
         <div class="card viz-stat"><span class="text-muted">Race decision window</span><span class="viz-stat-value">Aug 24–Oct 4</span><span class="text-small" id="race-summary">Ohio or Musselman; 2027 date TBD</span></div>
         <div class="card viz-stat"><span class="text-muted">New disciplines</span><span class="viz-stat-value" id="discipline-summary">Aug 3 / Sep 28</span><span class="text-small">Bike / swim start</span></div>
       </div>
@@ -2117,29 +2276,28 @@
     <section id="panel-portfolio" class="is-hidden" role="tabpanel" aria-labelledby="tab-portfolio" hidden>
       <div class="portfolio-panel-header">
         <div>
-          <span class="eyebrow">September 1–November 22, 2026</span>
+          <span class="eyebrow">July 20–October 25, 2026</span>
           <h2>Job-search proof portfolio</h2>
-          <p class="text-small">Four deliverables that prove the Insurance, Project Controls, and Healthcare Analytics lanes—built in focused weekly blocks, documented publicly, then frozen for interview season.</p>
+          <p class="text-small">Build the Nuclear Project Controls proof first, then Insurance and Healthcare Analytics. Release each MVP quickly, document it publicly, and freeze development for interview season.</p>
         </div>
         <button type="button" class="btn" id="portfolio-jump-current"><i data-lucide="locate-fixed"></i> Jump to current phase</button>
       </div>
 
       <div class="viz-grid">
         <div class="card viz-stat"><span class="text-muted">Overall completion</span><span class="viz-stat-value" id="portfolio-overall-percent">0%</span><span class="text-small" id="portfolio-overall-detail">0 of 0 milestones</span></div>
-        <div class="card viz-stat"><span class="text-muted">Current phase</span><span class="viz-stat-value" id="portfolio-current-phase">Plan</span><span class="text-small" id="portfolio-current-due">Insurance starts Sep 1</span></div>
-        <div class="card viz-stat"><span class="text-muted">Build cadence</span><span class="viz-stat-value">7 hrs</span><span class="text-small">Monday · Wednesday · Saturday · Sunday</span></div>
-        <div class="card viz-stat"><span class="text-muted">Development freeze</span><span class="viz-stat-value">Nov 22</span><span class="text-small">Afterward: interviews, not feature creep</span></div>
+        <div class="card viz-stat"><span class="text-muted">Current phase</span><span class="viz-stat-value" id="portfolio-current-phase">Plan</span><span class="text-small" id="portfolio-current-due">Nuclear MVP starts Jul 20</span></div>
+        <div class="card viz-stat"><span class="text-muted">Build cadence</span><span class="viz-stat-value">6 hrs</span><span class="text-small">Wednesday · Saturday morning · Sunday</span></div>
+        <div class="card viz-stat"><span class="text-muted">Development freeze</span><span class="viz-stat-value">Oct 25</span><span class="text-small">Afterward: interviews, not feature creep</span></div>
       </div>
 
       <section class="card portfolio-cadence" aria-label="Weekly portfolio work cadence">
         <div>
           <span class="eyebrow">Protected weekly workload</span>
           <h3>Build faster without displacing the job hunt</h3>
-          <p class="text-small">Applications stay first on Monday, networking stays first on Wednesday, and the weekend blocks end before protected social time. Every session also appears as a reorderable daily to-do.</p>
+          <p class="text-small">Monday and Thursday drive applications, Tuesday drives nuclear outreach, and build work stays inside three defined blocks. Friday afternoon and Saturday afternoon remain protected. Every build session also appears as a reorderable daily to-do.</p>
         </div>
-        <div class="portfolio-cadence-block"><strong>Monday · 1h</strong><span class="text-small">Applications first, then one focused build sprint</span></div>
-        <div class="portfolio-cadence-block"><strong>Wednesday · 1.5h</strong><span class="text-small">Networking first, then advance the core feature</span></div>
-        <div class="portfolio-cadence-block"><strong>Saturday · 3h</strong><span class="text-small">Deep work after applications; finish by 6:30 PM</span></div>
+        <div class="portfolio-cadence-block"><strong>Wednesday · 1.5h</strong><span class="text-small">Advance the next demonstrable feature</span></div>
+        <div class="portfolio-cadence-block"><strong>Saturday · 3h</strong><span class="text-small">Deep work in the morning; afternoon protected</span></div>
         <div class="portfolio-cadence-block"><strong>Sunday · 1.5h</strong><span class="text-small">Test, document, and package proof</span></div>
       </section>
 
@@ -2150,17 +2308,46 @@
 
     <!-- ===== PANEL: CAREER TRACKER ===== -->
     <section id="panel-career" class="is-hidden" role="tabpanel" aria-labelledby="tab-career" hidden>
+      <section class="card career-command" aria-labelledby="career-command-title">
+        <div class="career-command-header">
+          <div class="career-command-copy">
+            <span class="eyebrow">Three-lane campaign</span>
+            <h2 id="career-command-title">Concentrate effort where it can compound</h2>
+            <p class="text-small">Nuclear Project Delivery is the conviction lane, Insurance is the probability lane, and Healthcare Analytics protects the strongest bridge from current experience.</p>
+          </div>
+          <span class="viz-badge">Decision gate · Aug 30</span>
+        </div>
+        <div class="career-lane-grid">
+          <article class="career-lane-card">
+            <div class="career-lane-top"><strong>Nuclear Project Delivery</strong><span class="career-lane-share">45%</span></div>
+            <span class="text-small">Project Controls, Project Coordinator, PMO, Cost, Risk, Change, Reporting, Commercial, and junior Planning roles.</span>
+            <span class="text-small"><strong>Weekly:</strong> 4–6 contacts · 2–3 applications</span>
+          </article>
+          <article class="career-lane-card">
+            <div class="career-lane-top"><strong>Insurance / Underwriting</strong><span class="career-lane-share">30%</span></div>
+            <span class="text-small">Commercial and specialty underwriting, reinsurance, broking, risk, and early-career development roles.</span>
+            <span class="text-small"><strong>Weekly:</strong> 3–4 contacts · 3–4 applications</span>
+          </article>
+          <article class="career-lane-card">
+            <div class="career-lane-top"><strong>Healthcare Analytics</strong><span class="career-lane-share">25%</span></div>
+            <span class="text-small">Commercial analytics, insights, commercial excellence, associate consulting, and data-enabled marketing roles.</span>
+            <span class="text-small"><strong>Weekly:</strong> 1–2 contacts · 1–2 applications</span>
+          </article>
+        </div>
+        <div class="career-pause-note"><i data-lucide="pause-circle"></i><span class="text-small"><strong>Banking is paused.</strong> Keep only unusually strong warm leads or roles with a direct fit.</span></div>
+      </section>
+
       <!-- Quick Stats -->
       <div class="viz-grid">
-        <div class="card viz-stat"><span class="text-muted">Applications</span><span class="viz-stat-value" id="career-apps-count">0</span><span class="text-small">Total submitted</span></div>
-        <div class="card viz-stat"><span class="text-muted">Interviews</span><span class="viz-stat-value" id="career-interviews-count">0</span><span class="text-small">Scheduled / completed</span></div>
-        <div class="card viz-stat"><span class="text-muted">Networking</span><span class="viz-stat-value" id="career-contacts-count">0</span><span class="text-small">People contacted</span></div>
+        <div class="card viz-stat"><span class="text-muted">Applications</span><span class="viz-stat-value" id="career-apps-count">0</span><span class="text-small">Open and closed records</span></div>
+        <div class="card viz-stat"><span class="text-muted">Interviews</span><span class="viz-stat-value" id="career-interviews-count">0</span><span class="text-small">Interview / offer stage</span></div>
+        <div class="card viz-stat"><span class="text-muted">Networking</span><span class="viz-stat-value" id="career-contacts-count">0</span><span class="text-small">People in the pipeline</span></div>
         <div class="card viz-stat"><span class="text-muted">Referrals</span><span class="viz-stat-value" id="career-referrals-count">0</span><span class="text-small">Received</span></div>
       </div>
 
       <!-- Editable Content Section -->
       <details class="edit-career-toggle admin-only">
-        <summary>Edit Career Content (Companies, Lanes, Plan)</summary>
+        <summary>Edit campaign source text</summary>
         <div class="edit-career-content">
           <span class="label">Target Companies & Roles</span>
           <span class="hint">One company per line. Format: Company: Title1, Title2, Title3</span>
@@ -2170,9 +2357,9 @@
           <span class="hint">One lane per line. Format: Lane Name: Percentage</span>
           <textarea id="edit-search-lanes" rows="4"></textarea>
           
-          <span class="label">24-Week Strategic Plan</span>
-          <span class="hint">One week per line. Format: Week X (Date): Description</span>
-          <textarea id="edit-strategic-plan" rows="28"></textarea>
+          <span class="label">Campaign Plan</span>
+          <span class="hint">One phase per line. Start each line with a date or phase name.</span>
+          <textarea id="edit-strategic-plan" rows="16"></textarea>
           
           <button type="button" class="btn btn-primary" id="save-career-content">Save Career Content</button>
           <span id="career-edit-status" class="text-small" style="margin-left:16px; color:var(--muted);"></span>
@@ -2188,12 +2375,31 @@
         </div>
       </div>
 
-      <!-- Application Tracker -->
-      <div class="card">
-        <h3 style="color:#214E3B; margin-bottom:12px;">Application Tracker</h3>
-        <form class="admin-only" id="career-app-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
+      <!-- Application Pipeline -->
+      <section class="card career-pipeline-card" aria-labelledby="career-app-title-heading">
+        <div class="career-pipeline-header">
+          <div><h3 id="career-app-title-heading">Application pipeline</h3><p class="text-small">Change the stage or lane directly on any card. It will move to the right group and sync automatically.</p></div>
+          <label class="career-filter">Show lane
+            <select class="form-select" id="career-lane-filter">
+              <option value="all">All lanes</option>
+              <option value="Nuclear Project Delivery">Nuclear Project Delivery</option>
+              <option value="Insurance / Underwriting">Insurance / Underwriting</option>
+              <option value="Healthcare Commercial Analytics">Healthcare Commercial Analytics</option>
+              <option value="Opportunistic / Other">Opportunistic / Other</option>
+            </select>
+          </label>
+        </div>
+        <form class="admin-only career-entry-form" id="career-app-form">
           <label class="form-label">Company <input class="form-control" id="career-app-company" placeholder="e.g. Intact" autocomplete="organization" required></label>
-          <label class="form-label">Job Title <input class="form-control" id="career-app-title" placeholder="e.g. Underwriting Trainee" autocomplete="organization-title" required></label>
+          <label class="form-label">Job Title <input class="form-control" id="career-app-title" placeholder="e.g. Project Controls Analyst" autocomplete="organization-title" required></label>
+          <label class="form-label">Lane
+            <select class="form-select" id="career-app-lane">
+              <option value="Nuclear Project Delivery">Nuclear Project Delivery</option>
+              <option value="Insurance / Underwriting">Insurance / Underwriting</option>
+              <option value="Healthcare Commercial Analytics">Healthcare Commercial Analytics</option>
+              <option value="Opportunistic / Other">Opportunistic / Other</option>
+            </select>
+          </label>
           <label class="form-label">Status 
             <select class="form-select" id="career-app-status">
               <option value="Watching">Watching</option>
@@ -2204,24 +2410,28 @@
               <option value="Rejected">Rejected</option>
             </select>
           </label>
-          <button type="submit" class="btn btn-primary" style="margin-bottom:2px;">+ Log</button>
+          <button type="submit" class="btn btn-primary"><i data-lucide="plus"></i> Add</button>
         </form>
-        <div class="table-scroll">
-          <table class="tracker-table" id="career-app-table">
-            <thead><tr><th>Company</th><th>Title</th><th>Status</th><th>Date</th><th>Notes</th><th></th></tr></thead>
-            <tbody id="career-app-tbody"></tbody>
-          </table>
-        </div>
-      </div>
+        <div class="career-pipeline" id="career-app-pipeline"></div>
+      </section>
 
-      <!-- Networking Tracker -->
-      <div class="card">
-        <h3 style="color:#214E3B; margin-bottom:12px;">Networking Tracker</h3>
-        <form class="admin-only" id="career-contact-form" style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; margin-bottom:16px; align-items:end;">
+      <!-- Networking Pipeline -->
+      <section class="card career-pipeline-card" aria-labelledby="career-contact-title-heading">
+        <div class="career-pipeline-header"><div><h3 id="career-contact-title-heading">Networking pipeline</h3><p class="text-small">Keep the next action visible. Update the status after every reply, call, referral, or follow-up.</p></div></div>
+        <form class="admin-only career-entry-form" id="career-contact-form">
           <label class="form-label">Name <input class="form-control" id="career-contact-name" placeholder="e.g. Jane Smith" autocomplete="name" required></label>
-          <label class="form-label">Company <input class="form-control" id="career-contact-company" placeholder="e.g. Zurich" autocomplete="organization" required></label>
+          <label class="form-label">Company <input class="form-control" id="career-contact-company" placeholder="e.g. OPG" autocomplete="organization" required></label>
+          <label class="form-label">Lane
+            <select class="form-select" id="career-contact-lane">
+              <option value="Nuclear Project Delivery">Nuclear Project Delivery</option>
+              <option value="Insurance / Underwriting">Insurance / Underwriting</option>
+              <option value="Healthcare Commercial Analytics">Healthcare Commercial Analytics</option>
+              <option value="Opportunistic / Other">Opportunistic / Other</option>
+            </select>
+          </label>
           <label class="form-label">Status 
             <select class="form-select" id="career-contact-status">
+              <option value="Planned">Planned</option>
               <option value="Sent">Message Sent</option>
               <option value="Call">Call Booked</option>
               <option value="Done">Call Done</option>
@@ -2229,20 +2439,16 @@
               <option value="Referral">Referral Given</option>
             </select>
           </label>
-          <button type="submit" class="btn btn-primary" style="margin-bottom:2px;">+ Log</button>
+          <button type="submit" class="btn btn-primary"><i data-lucide="plus"></i> Add</button>
         </form>
-        <div class="table-scroll">
-          <table class="tracker-table" id="career-contact-table">
-            <thead><tr><th>Name</th><th>Company</th><th>Status</th><th>Date</th><th>Notes</th><th></th></tr></thead>
-            <tbody id="career-contact-tbody"></tbody>
-          </table>
-        </div>
-      </div>
+        <div class="career-pipeline" id="career-contact-pipeline"></div>
+        <span class="sr-only" id="career-tracker-status" aria-live="polite"></span>
+      </section>
 
       <!-- Strategic Plan -->
       <div class="card">
         <details class="plan-details">
-          <summary>View Your 24-Week Strategic Plan</summary>
+          <summary>View the campaign plan and decision gates</summary>
           <div class="plan-content" id="career-plan-content"></div>
         </details>
       </div>
@@ -2513,6 +2719,15 @@
           { id:"weekly", label:"Repeat weekly", shortLabel:"Weekly" },
           { id:"monthly", label:"Repeat monthly", shortLabel:"Monthly" }
         ];
+        const CAREER_STRATEGY_VERSION = 2;
+        const CAREER_LANES = [
+          "Nuclear Project Delivery",
+          "Insurance / Underwriting",
+          "Healthcare Commercial Analytics",
+          "Opportunistic / Other"
+        ];
+        const APPLICATION_STATUSES = ["Watching", "Applied", "Screening", "Interview", "Offer", "Rejected"];
+        const NETWORKING_STATUSES = ["Planned", "Sent", "Call", "Done", "Follow-up", "Referral"];
 
         // Curated from Marco's outreach research. The roster lives in state so
         // weekly selections and future edits travel through the existing sync.
@@ -2553,79 +2768,79 @@
         const DEFAULT_WEEKLY_NETWORKING = {
           "2026-07-06": { peer:"kynan-dsilva", manager:"christian-eyram", connector:"robert-longo" },
           "2026-07-13": { peer:"kynan-dsilva", manager:"dwayne-francis", connector:"hailey-schincariol" },
-          "2026-07-20": { peer:"connor-hay", manager:"christian-eyram", connector:"robert-longo" },
-          "2026-07-27": { peer:"jillian-elman", manager:"yossra-zaza", connector:"hailey-schincariol" },
-          "2026-08-03": { peer:"patrick-broscatean", manager:"dwayne-francis", connector:"dassler-coutinho" },
-          "2026-08-10": { peer:"niki-m", manager:"danish-narang", connector:"shreekavya-mittal" },
-          "2026-08-17": { peer:"mariana-brasil", manager:"ibi-singh", connector:"natalie-oneal" },
-          "2026-08-24": { peer:"kynan-dsilva", manager:"christian-eyram", connector:"robert-longo" },
-          "2026-08-31": { peer:"harpreet-kaur", manager:"dwayne-francis", connector:"natalie-oneal" },
-          "2026-09-07": { peer:"emma-samarze", manager:"christian-eyram", connector:"dassler-coutinho" },
-          "2026-09-14": { peer:"yash-contractor", manager:"ibi-singh", connector:"aakshi-aggarwal" },
-          "2026-09-21": { peer:"jillian-elman", manager:"yossra-zaza", connector:"hailey-schincariol" },
-          "2026-09-28": { peer:"alexa-hadley", manager:"dwayne-francis", connector:"natalie-oneal" },
-          "2026-10-05": { peer:"connor-hay", manager:"julia-flaherty", connector:"robert-longo" },
-          "2026-10-12": { peer:"niki-m", manager:"stephanie-lenguyen", connector:"dassler-coutinho" },
-          "2026-10-19": { peer:"kynan-dsilva", manager:"abdullah-jailawi", connector:"aakshi-aggarwal" },
-          "2026-10-26": { peer:"emma-samarze", manager:"christian-eyram", connector:"robert-longo" },
-          "2026-11-02": { peer:"katherine-wainman", manager:"julia-flaherty", connector:"meeth-shah" },
-          "2026-11-09": { peer:"jillian-elman", manager:"dwayne-francis", connector:"hailey-schincariol" },
-          "2026-11-16": { peer:"patrick-broscatean", manager:"julia-flaherty", connector:"dassler-coutinho" },
-          "2026-11-23": { peer:"tim-sun", manager:"abdullah-jailawi", connector:"marcus-mersch" },
+          "2026-07-20": { peer:"yash-contractor", manager:"ibi-singh", connector:"aakshi-aggarwal" },
+          "2026-07-27": { peer:"connor-hay", manager:"christian-eyram", connector:"robert-longo" },
+          "2026-08-03": { peer:"kynan-dsilva", manager:"abdullah-jailawi", connector:"aakshi-aggarwal" },
+          "2026-08-10": { peer:"jillian-elman", manager:"dwayne-francis", connector:"hailey-schincariol" },
+          "2026-08-17": { peer:"mariana-brasil", manager:"ibi-singh", connector:"aakshi-aggarwal" },
+          "2026-08-24": { peer:"emma-samarze", manager:"julia-flaherty", connector:"dassler-coutinho" },
+          "2026-08-31": { peer:"yash-contractor", manager:"abdullah-jailawi", connector:"aakshi-aggarwal" },
+          "2026-09-07": { peer:"alexa-hadley", manager:"yossra-zaza", connector:"natalie-oneal" },
+          "2026-09-14": { peer:"kynan-dsilva", manager:"ibi-singh", connector:"aakshi-aggarwal" },
+          "2026-09-21": { peer:"patrick-broscatean", manager:"stephanie-lenguyen", connector:"shreekavya-mittal" },
+          "2026-09-28": { peer:"mariana-brasil", manager:"abdullah-jailawi", connector:"aakshi-aggarwal" },
+          "2026-10-05": { peer:"harpreet-kaur", manager:"danish-narang", connector:"hailey-schincariol" },
+          "2026-10-12": { peer:"niki-m", manager:"christian-eyram", connector:"robert-longo" },
+          "2026-10-19": { peer:"yash-contractor", manager:"ibi-singh", connector:"aakshi-aggarwal" },
+          "2026-10-26": { peer:"jillian-elman", manager:"dwayne-francis", connector:"natalie-oneal" },
+          "2026-11-02": { peer:"kynan-dsilva", manager:"abdullah-jailawi", connector:"aakshi-aggarwal" },
+          "2026-11-09": { peer:"emma-samarze", manager:"julia-flaherty", connector:"dassler-coutinho" },
+          "2026-11-16": { peer:"mariana-brasil", manager:"ibi-singh", connector:"aakshi-aggarwal" },
+          "2026-11-23": { peer:"alexa-hadley", manager:"yossra-zaza", connector:"hailey-schincariol" },
           "2026-11-30": { peer:"connor-hay", manager:"stephanie-lenguyen", connector:"robert-longo" },
-          "2026-12-07": { peer:"alexa-hadley", manager:"danish-narang", connector:"natalie-oneal" },
-          "2026-12-14": { peer:"kynan-dsilva", manager:"ibi-singh", connector:"aakshi-aggarwal" },
-          "2026-12-21": { peer:"emma-samarze", manager:"julia-flaherty", connector:"dassler-coutinho" },
-          "2026-12-28": { peer:"katherine-wainman", manager:"dwayne-francis", connector:"natalie-oneal" }
+          "2026-12-07": { peer:"yash-contractor", manager:"abdullah-jailawi", connector:"aakshi-aggarwal" },
+          "2026-12-14": { peer:"harpreet-kaur", manager:"dwayne-francis", connector:"natalie-oneal" },
+          "2026-12-21": { peer:"patrick-broscatean", manager:"christian-eyram", connector:"shreekavya-mittal" },
+          "2026-12-28": { peer:"kynan-dsilva", manager:"ibi-singh", connector:"aakshi-aggarwal" }
         };
 
         const NETWORKING_SLOTS = [
           { key:"peer", label:"Peer / recent hire", shortLabel:"Peer", dayOffset:0, dayLabel:"Monday", action:"Ask about their path into the role", question:"What helped you get traction in your first year, and what would you prioritize if you were applying now?" },
-          { key:"manager", label:"Manager / senior", shortLabel:"Team lead", dayOffset:2, dayLabel:"Wednesday", action:"Ask what the team values", question:"Which skills make an early-career candidate useful quickly on your team?" },
-          { key:"connector", label:"Recruiter / connector", shortLabel:"Connector", dayOffset:4, dayLabel:"Friday", action:"Ask for the best route in", question:"Which role family is the best fit for my background, and who else should I learn from?" }
+          { key:"manager", label:"Manager / senior", shortLabel:"Team lead", dayOffset:1, dayLabel:"Tuesday", action:"Ask what the team values", question:"Which skills make an early-career candidate useful quickly on your team?" },
+          { key:"connector", label:"Recruiter / connector", shortLabel:"Connector", dayOffset:3, dayLabel:"Thursday", action:"Ask for the best route in", question:"Which role family is the best fit for my background, and who else should I learn from?" }
         ];
 
         // Portfolio metadata stays in code; only milestone completion lives in
         // state.careerContent.portfolioProgress and syncs through JSONBin.
         const PORTFOLIO_PROJECTS = [
           {
-            id:"insurance-workbench",
+            id:"project-controls",
             number:"Project 1",
+            title:"Nuclear Project Controls & Risk Forecasting Command Center",
+            lane:"Nuclear Project Delivery / Project Controls",
+            start:"2026-07-20",
+            end:"2026-08-09",
+            dateLabel:"Jul 20–Aug 9 · thin MVP Aug 2",
+            hours:"14–18 hours",
+            tools:["Primavera P6", "Microsoft Project", "Excel", "Power Query", "Python", "pandas", "NumPy", "Power BI", "DAX"],
+            summary:"A fictional nuclear refurbishment schedule and controls command center combining WBS logic, critical path, earned value, risk forecasting, and an executive decision narrative.",
+            milestones:[
+              { id:"controls-source", title:"Define the mock nuclear scope, WBS, 8 work packages, 12 periods, milestones, and risk register", due:"2026-07-22" },
+              { id:"controls-query", title:"Build the first P6 or Microsoft Project schedule with logic links, constraints, baseline, and critical path", due:"2026-07-25" },
+              { id:"controls-evm", title:"Create the Excel / Power Query model and implement PV, EV, AC, CPI, SPI, CV, SV, and EAC", due:"2026-07-29" },
+              { id:"controls-report", title:"Publish a thin Power BI MVP with schedule, cost, milestone, and risk views", due:"2026-08-02" },
+              { id:"controls-simulation", title:"Add the documented pandas / NumPy P50 and P80 schedule-risk simulation", due:"2026-08-06" },
+              { id:"controls-release", title:"Validate the schedule and numbers, write the executive narrative, and package v1", due:"2026-08-09" }
+            ]
+          },
+          {
+            id:"insurance-workbench",
+            number:"Project 2",
             title:"Commercial Underwriting Pricing & Portfolio Workbench",
             lane:"Insurance / Underwriting",
-            start:"2026-09-01",
-            end:"2026-09-10",
-            dateLabel:"Sep 1–10",
+            start:"2026-08-10",
+            end:"2026-08-23",
+            dateLabel:"Aug 10–23",
             hours:"10–14 hours",
             tools:["Excel", "Power Query", "Power Pivot", "PivotTables", "LET", "XLOOKUP", "Solver", "Data Tables"],
             summary:"An adjustable commercial-risk pricing model that turns claims and expense assumptions into an underwriting decision and portfolio view.",
             milestones:[
-              { id:"insurance-source", title:"Create the synthetic policies, claims, and assumptions files with a short data dictionary", due:"2026-09-02" },
-              { id:"insurance-query", title:"Build refreshable Power Query imports and basic data-quality checks", due:"2026-09-05" },
-              { id:"insurance-engine", title:"Build frequency × severity pricing, expense, risk-load, and margin calculations with LET and XLOOKUP", due:"2026-09-07" },
-              { id:"insurance-decision", title:"Add risk tiers, recommended terms, and accept / refer / decline decision logic", due:"2026-09-08" },
-              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable portfolio dashboard", due:"2026-09-09" },
-              { id:"insurance-scenarios", title:"Add scenario comparison, Solver optimization, data tables, QA, and a documented v1 release", due:"2026-09-10" }
-            ]
-          },
-          {
-            id:"project-controls",
-            number:"Project 2",
-            title:"Project Controls & Risk Forecasting Command Center",
-            lane:"Infrastructure / Project Controls",
-            start:"2026-09-15",
-            end:"2026-10-04",
-            dateLabel:"Sep 15–Oct 4",
-            hours:"14–18 hours",
-            tools:["Excel", "Power Query", "Python", "pandas", "NumPy", "Power BI", "DAX"],
-            summary:"A fictional infrastructure command center combining earned-value performance, cost and schedule risk, and an executive decision narrative.",
-            milestones:[
-              { id:"controls-source", title:"Create 8 work packages × 12 periods plus milestones and a red / yellow / green risk register", due:"2026-09-18" },
-              { id:"controls-query", title:"Build the Power Query cleaning and reporting model", due:"2026-09-20" },
-              { id:"controls-evm", title:"Implement PV, EV, AC, CPI, SPI, CV, SV, and EAC measures in DAX", due:"2026-09-25" },
-              { id:"controls-simulation", title:"Run a documented pandas / NumPy Monte Carlo-style simulation and export P50 / P80 estimates", due:"2026-09-29" },
-              { id:"controls-report", title:"Build the Power BI executive report, work-package filters, and risk heatmap", due:"2026-10-02" },
-              { id:"controls-release", title:"Write the executive narrative, validate the numbers, and package the v1 release", due:"2026-10-04" }
+              { id:"insurance-source", title:"Create the synthetic policies, claims, and assumptions files with a short data dictionary", due:"2026-08-11" },
+              { id:"insurance-query", title:"Build refreshable Power Query imports and basic data-quality checks", due:"2026-08-13" },
+              { id:"insurance-engine", title:"Build frequency × severity pricing, expense, risk-load, and margin calculations with LET and XLOOKUP", due:"2026-08-16" },
+              { id:"insurance-decision", title:"Add risk tiers, recommended terms, and accept / refer / decline decision logic", due:"2026-08-18" },
+              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable portfolio dashboard", due:"2026-08-21" },
+              { id:"insurance-scenarios", title:"Add scenario comparison, Solver optimization, data tables, QA, and a documented v1 release", due:"2026-08-23" }
             ]
           },
           {
@@ -2633,20 +2848,20 @@
             number:"Project 3",
             title:"Pharma Commercial Effectiveness & Channel Optimization",
             lane:"Healthcare Commercial Analytics",
-            start:"2026-10-05",
-            end:"2026-10-25",
-            dateLabel:"Oct 5–25",
+            start:"2026-08-31",
+            end:"2026-09-27",
+            dateLabel:"Aug 31–Sep 27",
             hours:"18–24 hours",
             tools:["SQL", "Python", "pandas", "Excel", "Power BI", "DAX"],
             summary:"A synthetic oncology commercial-analysis suite that measures channel ROI, simulated lift, and a defensible budget-allocation recommendation.",
             milestones:[
-              { id:"pharma-source", title:"Create the relational HCP, product, touchpoint, spend, and sales dataset with a data dictionary", due:"2026-10-07" },
-              { id:"pharma-model", title:"Define the SQL schema and validate keys, joins, and record counts", due:"2026-10-10" },
-              { id:"pharma-sql", title:"Build reusable joins, CTEs, window-function analysis, and final reporting views", due:"2026-10-14" },
-              { id:"pharma-simulation", title:"Build the control-vs-exposed Python simulation and confidence-interval output", due:"2026-10-18" },
-              { id:"pharma-allocation", title:"Calculate channel ROI and create the budget-allocation recommendation logic", due:"2026-10-21" },
-              { id:"pharma-report", title:"Build the Power BI / DAX report for lift, ROI, segmentation, and allocation", due:"2026-10-24" },
-              { id:"pharma-release", title:"Write the recommendation narrative, label assumptions, complete QA, and package v1", due:"2026-10-25" }
+              { id:"pharma-source", title:"Create the relational HCP, product, touchpoint, spend, and sales dataset with a data dictionary", due:"2026-09-03" },
+              { id:"pharma-model", title:"Define the SQL schema and validate keys, joins, and record counts", due:"2026-09-07" },
+              { id:"pharma-sql", title:"Build reusable joins, CTEs, window-function analysis, and final reporting views", due:"2026-09-12" },
+              { id:"pharma-simulation", title:"Build the control-vs-exposed Python simulation and confidence-interval output", due:"2026-09-17" },
+              { id:"pharma-allocation", title:"Calculate channel ROI and create the budget-allocation recommendation logic", due:"2026-09-21" },
+              { id:"pharma-report", title:"Build the Power BI / DAX report for lift, ROI, segmentation, and allocation", due:"2026-09-25" },
+              { id:"pharma-release", title:"Write the recommendation narrative, label assumptions, complete QA, and package v1", due:"2026-09-27" }
             ]
           },
           {
@@ -2654,20 +2869,20 @@
             number:"Project 4",
             title:"Shared Public Portfolio Site",
             lane:"Shared proof layer",
-            start:"2026-09-11",
-            end:"2026-11-08",
-            dateLabel:"Sep 11–14 shell · Oct 26–Nov 8 polish",
+            start:"2026-08-24",
+            end:"2026-10-11",
+            dateLabel:"Aug 24–30 shell · Sep 28–Oct 11 polish",
             hours:"6–10 hours",
             tools:["HTML", "CSS", "JavaScript", "Git", "GitHub", "Power BI embeds", "Video"],
             summary:"A recruiter-friendly public hub with concise case studies, working proof, architecture context, downloads, and short walkthroughs.",
             milestones:[
-              { id:"site-shell", title:"Create the GitHub repository, responsive site shell, navigation, and reusable case-study layout", due:"2026-09-13" },
-              { id:"site-initial-release", title:"Publish the Insurance case study and coming-soon cards so outreach has a live link", due:"2026-09-14" },
-              { id:"site-cases", title:"Write the three case studies with problem, method, output, recommendation, and architecture diagram", due:"2026-10-30" },
-              { id:"site-embeds", title:"Add Power BI embeds where available plus clear video / image fallbacks", due:"2026-11-01" },
-              { id:"site-assets", title:"Add downloadable files, repository links, tech badges, and synthetic-data disclosures", due:"2026-11-03" },
-              { id:"site-videos", title:"Record one 60–90 second walkthrough for each project", due:"2026-11-06" },
-              { id:"site-release", title:"Complete mobile, link, and accessibility QA; publish the complete public v1", due:"2026-11-08" }
+              { id:"site-shell", title:"Create the GitHub repository, responsive site shell, navigation, and reusable case-study layout", due:"2026-08-27" },
+              { id:"site-initial-release", title:"Publish the Nuclear and Insurance case studies with working artifacts and coming-soon Pharma proof", due:"2026-08-30" },
+              { id:"site-cases", title:"Write the three case studies with problem, method, output, recommendation, and architecture diagram", due:"2026-10-02" },
+              { id:"site-embeds", title:"Add Power BI embeds where available plus clear video / image fallbacks", due:"2026-10-04" },
+              { id:"site-assets", title:"Add downloadable files, repository links, tech badges, and synthetic-data disclosures", due:"2026-10-06" },
+              { id:"site-videos", title:"Record one 60–90 second walkthrough for each project", due:"2026-10-09" },
+              { id:"site-release", title:"Complete mobile, link, and accessibility QA; publish the complete public v1", due:"2026-10-11" }
             ]
           }
         ];
@@ -2677,47 +2892,53 @@
           number:"Final sprint",
           title:"Response-led refinement & interview freeze",
           lane:"Shared",
-          start:"2026-11-09",
-          end:"2026-11-22",
-          dateLabel:"Nov 9–22",
+          start:"2026-10-12",
+          end:"2026-10-25",
+          dateLabel:"Oct 12–25",
           hours:"Up to 14 hours",
           tools:["Git", "GitHub", "Documentation", "QA"],
           summary:"Improve only the proof point getting the strongest recruiter or hiring-manager response, then stop building and use the portfolio in interviews.",
           milestones:[
-            { id:"refine-signals", title:"Collect recruiter, networking, and interview response signals; choose the strongest project", due:"2026-11-11" },
-            { id:"refine-upgrade", title:"Upgrade the single highest-value analytical or usability gap", due:"2026-11-15" },
-            { id:"refine-package", title:"Tighten documentation, résumé bullets, project links, and interview talking points", due:"2026-11-20" },
-            { id:"refine-freeze", title:"Run final QA, tag the releases, and freeze portfolio development", due:"2026-11-22" }
+            { id:"refine-signals", title:"Collect recruiter, networking, and interview response signals; choose the strongest project", due:"2026-10-14" },
+            { id:"refine-upgrade", title:"Upgrade the single highest-value analytical or usability gap", due:"2026-10-18" },
+            { id:"refine-package", title:"Tighten documentation, résumé bullets, project links, and interview talking points", due:"2026-10-23" },
+            { id:"refine-freeze", title:"Run final QA, tag the releases, and freeze portfolio development", due:"2026-10-25" }
           ]
         };
 
-        // The public site has two phases: publish a thin shell as soon as the
-        // first project ships, then add the complete case studies after Project 3.
+        // Ship the largest credibility-gap project first, then publish a thin
+        // public shell once Nuclear and Insurance proof are both available.
         const PORTFOLIO_PHASES = [
-          { id:"insurance-workbench", title:"Insurance MVP", dateLabel:"Sep 1–10", start:"2026-09-01", end:"2026-09-10" },
-          { id:"portfolio-site", title:"Public shell", dateLabel:"Sep 11–14", start:"2026-09-11", end:"2026-09-14" },
-          { id:"project-controls", title:"Project Controls MVP", dateLabel:"Sep 15–Oct 4", start:"2026-09-15", end:"2026-10-04" },
-          { id:"pharma-analytics", title:"Pharma MVP", dateLabel:"Oct 5–25", start:"2026-10-05", end:"2026-10-25" },
-          { id:"portfolio-site", title:"Site polish", dateLabel:"Oct 26–Nov 8", start:"2026-10-26", end:"2026-11-08" },
-          { id:"portfolio-refinement", title:"Response-led refinement", dateLabel:"Nov 9–22", start:"2026-11-09", end:"2026-11-22" },
-          { id:"portfolio-freeze", title:"Interview mode", dateLabel:"After Nov 22", start:"2026-11-23", end:"2026-12-31" }
+          { id:"project-controls", title:"Nuclear Controls MVP", dateLabel:"Jul 20–Aug 9", start:"2026-07-20", end:"2026-08-09" },
+          { id:"insurance-workbench", title:"Insurance MVP", dateLabel:"Aug 10–23", start:"2026-08-10", end:"2026-08-23" },
+          { id:"portfolio-site", title:"Public shell", dateLabel:"Aug 24–30", start:"2026-08-24", end:"2026-08-30" },
+          { id:"pharma-analytics", title:"Pharma MVP", dateLabel:"Aug 31–Sep 27", start:"2026-08-31", end:"2026-09-27" },
+          { id:"portfolio-site", title:"Site polish", dateLabel:"Sep 28–Oct 11", start:"2026-09-28", end:"2026-10-11" },
+          { id:"portfolio-refinement", title:"Response-led refinement", dateLabel:"Oct 12–25", start:"2026-10-12", end:"2026-10-25" },
+          { id:"portfolio-freeze", title:"Interview mode", dateLabel:"After Oct 25", start:"2026-10-26", end:"2026-12-31" }
         ];
 
         const PORTFOLIO_WEEKLY_FOCUS = {
-          "2026-08-31": { projectId:"insurance-workbench", label:"Insurance MVP", due:"Sep 10", text:"Build the refreshable claims import, pricing engine, decision logic, and first dashboard." },
-          "2026-09-07": { projectId:"insurance-workbench", label:"Insurance → live portfolio", due:"Sep 14", text:"Ship Insurance v1 by Thursday, then publish the thin portfolio shell and first case study." },
-          "2026-09-14": { projectId:"project-controls", label:"Project Controls MVP", due:"Oct 4", text:"Publish the Insurance link, then create the 8-work-package Project Controls source model." },
-          "2026-09-21": { projectId:"project-controls", label:"Project Controls MVP", due:"Oct 4", text:"Finish the Power Query model, earned-value DAX measures, and first executive report view." },
-          "2026-09-28": { projectId:"project-controls", label:"Project Controls MVP", due:"Oct 4", text:"Add the P50 / P80 simulation, risk heatmap, executive narrative, QA, and v1 release." },
-          "2026-10-05": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Oct 25", text:"Share Project Controls in outreach, then build the Pharma relational dataset and SQL model." },
-          "2026-10-12": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Oct 25", text:"Finish the SQL views, control-vs-exposed simulation, confidence intervals, and ROI logic." },
-          "2026-10-19": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Oct 25", text:"Finish the Power BI report, allocation recommendation, narrative, QA, and v1 release." },
-          "2026-10-26": { projectId:"portfolio-site", label:"Public portfolio polish", due:"Nov 8", text:"Add all three case studies, downloads, repository links, architecture context, and embeds." },
-          "2026-11-02": { projectId:"portfolio-site", label:"Public portfolio polish", due:"Nov 8", text:"Record short walkthroughs, test fallbacks and mobile behavior, and publish the complete site." },
-          "2026-11-09": { projectId:"portfolio-refinement", label:"Response-led refinement", due:"Nov 22", text:"Review recruiter and networking signals, then choose the one project worth improving." },
-          "2026-11-16": { projectId:"portfolio-refinement", label:"Final refinement", due:"Nov 22", text:"Upgrade the highest-value gap, tighten interview proof, run QA, tag releases, and freeze." },
-          "2026-11-23": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the finished portfolio in applications and interviews; only fix genuine blockers." },
-          "2026-11-30": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Lead with the lane-relevant case study and keep feature work frozen." },
+          "2026-07-20": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 2", text:"Define the mock refurbishment WBS and build the first logic-linked P6 or Microsoft Project schedule." },
+          "2026-07-27": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 2", text:"Build earned-value measures and publish the first schedule, cost, milestone, and risk view." },
+          "2026-08-03": { projectId:"project-controls", label:"Nuclear Controls v1", due:"Aug 9", text:"Add P50 / P80 risk simulation, validate the schedule, and package the executive narrative." },
+          "2026-08-10": { projectId:"insurance-workbench", label:"Insurance MVP", due:"Aug 23", text:"Build the refreshable claims import, pricing engine, and underwriting decision logic." },
+          "2026-08-17": { projectId:"insurance-workbench", label:"Insurance MVP", due:"Aug 23", text:"Finish the portfolio dashboard, scenarios, Solver optimization, QA, and documented v1." },
+          "2026-08-24": { projectId:"portfolio-site", label:"Public portfolio shell", due:"Aug 30", text:"Publish Nuclear and Insurance case studies with working artifacts and a Pharma coming-soon card." },
+          "2026-08-31": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Create the relational commercial dataset, SQL schema, and quality checks." },
+          "2026-09-07": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Build reusable joins, CTEs, window functions, and the first reporting views." },
+          "2026-09-14": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Build the control-vs-exposed simulation, confidence intervals, ROI, and allocation logic." },
+          "2026-09-21": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Finish Power BI, the recommendation narrative, QA, and the documented v1 release." },
+          "2026-09-28": { projectId:"portfolio-site", label:"Public portfolio polish", due:"Oct 11", text:"Write all three case studies and add downloads, repository links, architecture context, and embeds." },
+          "2026-10-05": { projectId:"portfolio-site", label:"Public portfolio polish", due:"Oct 11", text:"Record walkthroughs, test fallbacks and mobile behavior, and publish the complete site." },
+          "2026-10-12": { projectId:"portfolio-refinement", label:"Response-led refinement", due:"Oct 25", text:"Review recruiter and networking signals, then choose the one project worth improving." },
+          "2026-10-19": { projectId:"portfolio-refinement", label:"Final refinement", due:"Oct 25", text:"Upgrade the highest-value gap, tighten interview proof, run QA, tag releases, and freeze." },
+          "2026-10-26": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the finished portfolio in applications and interviews; only fix genuine blockers." },
+          "2026-11-02": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Lead with the lane-relevant case study and keep feature work frozen." },
+          "2026-11-09": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the finished portfolio in applications and interviews; only fix genuine blockers." },
+          "2026-11-16": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Lead with the lane-relevant case study and keep feature work frozen." },
+          "2026-11-23": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Reuse the finished proof and capture lessons for a later, deliberate update." },
+          "2026-11-30": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Keep development frozen and focus on applications, conversations, and interview conversion." },
           "2026-12-07": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the finished portfolio in applications and interviews; only fix genuine blockers." },
           "2026-12-14": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Lead with the lane-relevant case study and keep feature work frozen." },
           "2026-12-21": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Reuse the finished proof and capture lessons for a later, deliberate update." },
@@ -2747,13 +2968,14 @@
           careerApps: [],
           careerContacts: [],
           careerContent: {
+            strategyVersion: CAREER_STRATEGY_VERSION,
             weeklyFocus: {},
             networkingContacts: DEFAULT_NETWORKING_CONTACTS,
             weeklyNetworking: DEFAULT_WEEKLY_NETWORKING,
             portfolioProgress: { completedMilestones: {} },
-            targetCompaniesText: "AtkinsRéalis: Data Analyst, Project Controls, Risk Analyst, PMO Analyst\nIntact: Specialty Lines Dev, Commercial Lines Dev, Underwriting Associate\nIQVIA: Associate Consultant, Business Analyst, Commercial Analytics\nMunich Re / HSB: Underwriting Associate, Reinsurance Trainee, Risk Analyst\nAstraZeneca: Business Insights, Commercial Excellence, Omnichannel Analyst\nZurich: Underwriting Trainee, Commercial Insurance Analyst\nSanofi: Commercial Excellence, Transformation Analyst\nMarsh: Graduate Program, Risk Analyst, Broking Analyst\nMetrolinx: Project Controls, PMO Analyst, Risk Analyst\nVeeva: Associate Consultant, Data Operations, Analytics Associate",
-            searchLanesText: "Insurance / Reinsurance / Risk: 35%\nInfrastructure / Project Controls: 35%\nHealthcare Commercial Analytics: 25%\nBanking / General Analyst: 5%",
-            strategicPlanText: "Week 1 (Jul 8–12): Apply to AtkinsRéalis Data Analyst role. Create master tracker. Set job alerts.\nWeek 2 (Jul 13–19): Build 3 résumé versions (Insurance, Infrastructure, Healthcare). Update LinkedIn.\nWeek 3 (Jul 20–26): Insurance networking (Intact, Munich Re, Zurich, Marsh). 12 messages, 2 calls.\nWeek 4 (Jul 27–Aug 2): Healthcare networking (IQVIA, AstraZeneca, Sanofi, Veeva). 12 messages, 3 calls.\nWeek 5 (Aug 3–9): Infrastructure networking (AtkinsRéalis, Metrolinx, OPG, Aecon, WSP). Learn P6/Power BI basics.\nWeek 6 (Aug 10–16): Prepare 8 STAR stories + 6 career-transition answers. Mock interviews.\nWeek 7 (Aug 17–23): Convert networking to referrals. Follow up with top contacts.\nWeek 8 (Aug 24–30): Prepare for fall recruiting. Identify graduate programs. Prepare transcripts.\nWeek 9 (Aug 31–Sep 6): Fall Application Surge — 12 apps, 15 messages, 3 calls. Target: 60-70 cumulative apps.\nWeek 10 (Sep 7–13): Funnel analysis. Revise weakest résumé. 2 mock interviews.\nWeek 11 (Sep 14–20): Decision Gate 1. Assess pipeline. If no interviews, broaden targets.\nWeek 12 (Sep 21–27): Create technical work sample (Project Controls Dashboard or Healthcare Campaign).\nWeek 13 (Sep 28–Oct 4): Re-engage all \"stay in touch\" contacts. Second application wave.\nWeek 14 (Oct 5–11): Direct recruiter outreach (AtkinsRéalis, Intact, Zurich, IQVIA, AstraZeneca, Marsh).\nWeek 15 (Oct 12–18): Interview conversion prep. Research business units. Thank-you follow-ups.\nWeek 16 (Oct 19–25): Expand company list if needed (Chubb, AIG, Roche, GSK, Hydro One, etc.)\nWeek 17 (Oct 26–Nov 1): Decision Gate 2. Target: 100+ apps, 6+ first-round, 2+ late-stage. If not, expand titles.\nWeek 18 (Nov 2–8): Shift to immediate-start hiring (0-2 yrs, 1-3 yrs roles). Apply to 1-3 year positions with 70% fit.\nWeek 19 (Nov 9–15): Final-round & offer preparation. Salary range, references, resignation language.\nWeek 20 (Nov 16–22): Concentrated referral push. 10 direct messages to strongest relationships.\nWeek 21 (Nov 23–29): December pipeline. Target January starts, backfills, contract-to-perm.\nWeek 22 (Nov 30–Dec 6): Decision Gate 3. Classify all active processes. If no offers, decide whether to continue.\nWeek 23 (Dec 7–13): Close or extend. Review offers. Conduct post-mortem if none.\nWeek 24 (Dec 14–20): Transition. Sign offer, resign professionally, prepare handover."
+            targetCompaniesText: "OPG: Project Coordinator, Project Analyst, Project Controls, Procurement / Commercial Coordinator\nAtkinsRéalis / Candu Energy: Project Controls Analyst, Junior Planner / Scheduler, Risk Analyst, PMO Coordinator\nAecon: Project Coordinator, Project Controls Analyst, Cost Control Analyst, Project Reporting\nBruce Power: Project Coordinator, Project Controls, Business Analyst, Change Control\nCanadian Nuclear Laboratories: Project Controls Coordinator, Project Analyst, PMO Coordinator\nKinectrics / BWXT Canada: Project Coordinator, Project Analyst, Commercial Coordinator\nIntact: Underwriting Associate, Commercial Lines Development, Specialty Lines Development\nMunich Re / HSB: Underwriting Associate, Reinsurance Trainee, Risk Analyst\nZurich / Marsh: Underwriting Trainee, Broking Analyst, Commercial Insurance Analyst\nIQVIA: Associate Consultant, Business Analyst, Commercial Analytics\nAstraZeneca / Sanofi: Business Insights, Commercial Excellence, Omnichannel Analytics\nVeeva: Associate Consultant, Data Operations, Analytics Associate",
+            searchLanesText: "Nuclear Project Delivery / Project Controls: 45%\nInsurance / Underwriting: 30%\nHealthcare Commercial Analytics: 25%\nBanking / General Analyst: Paused except unusually strong warm leads",
+            strategicPlanText: "Jul 20–Aug 2 · Nuclear proof: Build a thin P6 or Microsoft Project schedule, EVM model, and first Power BI view while contacting 4–6 nuclear professionals each week.\nAug 3–9 · Nuclear release: Add risk simulation and executive narrative; publish the Project Controls v1 and begin using it in outreach.\nAug 10–23 · Insurance proof: Build and release the underwriting workbench while maintaining nuclear applications and insurance conversations.\nAug 24–30 · Decision gate 1: Publish the public portfolio shell. Compare conversations, recruiter replies, referrals, and interviews by lane; reallocate effort only if the evidence is clear.\nAug 31–Sep 27 · Healthcare proof: Build the Pharma Analytics v1 while keeping the 45 / 30 / 25 application and outreach mix.\nSep 28–Oct 11 · Public proof: Finish all three case studies, downloads, walkthroughs, and mobile QA.\nOct 12–25 · Response-led refinement: Improve only the project receiving meaningful market response, tighten résumé bullets and interview stories, then freeze development.\nOct 26–Nov 30 · Conversion: Use the finished proof in targeted applications, referrals, interviews, and follow-ups. Expand titles before expanding into a fourth lane.\nDecember · Close: Prioritize active processes, references, offer evaluation, and a clean transition. Keep a smaller backup pipeline alive until an offer is signed."
           }
         };
 
@@ -2762,27 +2984,27 @@
         const weekFocus = {
           "2026-07-06": { career:"Kick off the dashboard and lock the weekly rhythm", training:"Keep the run-and-lift rotation light while the system is set up.", targets:"All 10 primary targets" },
           "2026-07-13": { career:"Finish résumé variants, LinkedIn, tracker, and role lanes", training:"Hold four reserved run/lift blocks and protect recovery after work.", targets:"AtkinsRéalis · Intact · IQVIA" },
-          "2026-07-20": { career:"Launch the first high-quality application sprint", training:"Prioritize summer running while maintaining the run/lift rotation.", targets:"AtkinsRéalis · Intact" },
-          "2026-07-27": { career:"Build the analytics and insurance pipeline", training:"Complete the final running-heavy week and prepare bike access and fit.", targets:"IQVIA · Munich Re / HSB" },
-          "2026-08-03": { career:"Add bike without increasing the weekly time budget", training:"Start the Saturday outdoor bike; replace one run rather than adding a fifth block.", targets:"AstraZeneca · Zurich" },
-          "2026-08-10": { career:"Strengthen referrals and application quality", training:"Keep one outdoor bike, two runs, and one lift inside four total blocks.", targets:"Sanofi · Marsh" },
-          "2026-08-17": { career:"Complete the first pass across primary targets", training:"Build bike comfort while keeping the remaining sessions easy and consistent.", targets:"Metrolinx · Veeva" },
-          "2026-08-24": { career:"Referral sprint and Musselman registration watch", training:"Continue the weekly outdoor bike and steady summer running volume.", targets:"AtkinsRéalis · Intact · IQVIA" },
-          "2026-08-31": { career:"Referral sprint and interview-story practice", training:"Maintain one outdoor bike, two runs, and one lift with no volume creep.", targets:"AstraZeneca · Sanofi · Veeva" },
-          "2026-09-07": { career:"Push insurance, risk, and project roles", training:"Keep the outdoor bike consistent and begin planning the indoor swim routine.", targets:"Munich Re / HSB · Zurich · Marsh" },
-          "2026-09-14": { career:"Convert outreach into live conversations", training:"Maintain four blocks and confirm pool access, commute, and swim gear.", targets:"AtkinsRéalis · Metrolinx" },
-          "2026-09-21": { career:"Push healthcare and commercial analytics roles", training:"Complete the last pre-swim week with an outdoor bike, runs, and lifting.", targets:"IQVIA · AstraZeneca · Sanofi · Veeva" },
-          "2026-09-28": { career:"Start swim, choose a race, and convert interviews", training:"Start one indoor swim, keep Saturday cycling, and replace—not add—a run.", targets:"Active interview companies" },
-          "2026-10-05": { career:"Decision gate: double down on responsive lanes", training:"Settle into one swim, one bike, one run, and one lift per week.", targets:"Top five by response rate" },
-          "2026-10-12": { career:"Prepare cases, stories, and technical examples", training:"Keep the four-discipline rhythm easy enough to support interview preparation.", targets:"Active interview companies" },
-          "2026-10-19": { career:"Deep interview preparation and targeted follow-ups", training:"Maintain swim, bike, run, and lift consistency without adding volume.", targets:"Active interview companies" },
-          "2026-10-26": { career:"Revive stalled applications before November", training:"Complete the final outdoor-bike week if weather permits and prep the indoor setup.", targets:"Primary targets with warm contacts" },
-          "2026-11-02": { career:"Open a backup pipeline while interviews continue", training:"Move cycling indoors; keep one swim, one bike, one run, and one lift.", targets:"Primary targets plus matched employers" },
-          "2026-11-09": { career:"Close active interview loops", training:"Maintain the indoor rhythm and protect sleep before interviews.", targets:"Late-stage processes" },
-          "2026-11-16": { career:"Offer, referral, and reference push", training:"Keep all four sessions easy and move them around interview commitments.", targets:"Late-stage processes" },
-          "2026-11-23": { career:"Keep a second pipeline alive", training:"Prioritize consistency over intensity during the holiday-shortened week.", targets:"Responsive roles only" },
-          "2026-11-30": { career:"Final interview push before holiday slowdown", training:"Maintain indoor swim and bike plus one run and one lift.", targets:"Late-stage and high-fit roles" },
-          "2026-12-07": { career:"Drive decisions and prepare negotiation points", training:"Keep the four-block base while offer work takes priority.", targets:"Offer-stage companies" },
+          "2026-07-20": { career:"Launch the nuclear-first campaign: map roles, send warm outreach, and start the schedule MVP", training:"Prioritize summer running while maintaining the run/lift rotation.", targets:"OPG · AtkinsRéalis / Candu · Aecon · CNL" },
+          "2026-07-27": { career:"Turn nuclear conversations into sharper applications and ship the thin Project Controls MVP", training:"Complete the final running-heavy week and prepare bike access and fit.", targets:"Bruce Power · OPG · BWXT · Kinectrics" },
+          "2026-08-03": { career:"Release Nuclear Controls v1 and use it in targeted follow-ups", training:"Start the Saturday outdoor bike; replace one run rather than adding a fifth block.", targets:"AtkinsRéalis / Candu · Aecon · CNL" },
+          "2026-08-10": { career:"Build the insurance proof while keeping the nuclear pipeline moving", training:"Keep one outdoor bike, two runs, and one lift inside four total blocks.", targets:"Intact · Munich Re / HSB · OPG" },
+          "2026-08-17": { career:"Release the underwriting workbench and convert the strongest conversations into referrals", training:"Build bike comfort while keeping the remaining sessions easy and consistent.", targets:"Zurich · Marsh · Aecon · Bruce Power" },
+          "2026-08-24": { career:"Publish the first portfolio shell and run the August lane decision gate", training:"Continue the weekly outdoor bike and steady summer running volume.", targets:"Responsive Nuclear · Insurance · Healthcare leads" },
+          "2026-08-31": { career:"Start the Pharma Analytics MVP without diluting the 45 / 30 / 25 search mix", training:"Maintain one outdoor bike, two runs, and one lift with no volume creep.", targets:"OPG · Intact · IQVIA" },
+          "2026-09-07": { career:"Use released proof in applications and deepen the healthcare bridge", training:"Keep the outdoor bike consistent and begin planning the indoor swim routine.", targets:"AtkinsRéalis / Candu · Zurich · AstraZeneca" },
+          "2026-09-14": { career:"Convert warm nuclear and insurance contacts while building the Pharma analysis", training:"Maintain four blocks and confirm pool access, commute, and swim gear.", targets:"Aecon · HSB · IQVIA · Sanofi" },
+          "2026-09-21": { career:"Release Pharma v1 and prepare lane-specific proof for interviews", training:"Complete the last pre-swim week with an outdoor bike, runs, and lifting.", targets:"CNL · Intact · Veeva · AstraZeneca" },
+          "2026-09-28": { career:"Polish the public case studies and follow the lanes producing real conversations", training:"Start one indoor swim, keep Saturday cycling, and replace—not add—a run.", targets:"Top employers by response signal" },
+          "2026-10-05": { career:"Finish the public portfolio and make every application evidence-backed", training:"Settle into one swim, one bike, one run, and one lift per week.", targets:"Top five by response rate" },
+          "2026-10-12": { career:"Refine only the proof point getting market response; prioritize interview conversion", training:"Keep the four-discipline rhythm easy enough to support interview preparation.", targets:"Active and warm processes" },
+          "2026-10-19": { career:"Freeze portfolio development and tighten stories, references, and follow-ups", training:"Maintain swim, bike, run, and lift consistency without adding volume.", targets:"Active interview companies" },
+          "2026-10-26": { career:"Run a targeted November pipeline using finished proof", training:"Complete the final outdoor-bike week if weather permits and prep the indoor setup.", targets:"Nuclear 45% · Insurance 30% · Healthcare 25%" },
+          "2026-11-02": { career:"Keep applications selective and move warm relationships toward referrals", training:"Move cycling indoors; keep one swim, one bike, one run, and one lift.", targets:"High-fit roles and warm employers" },
+          "2026-11-09": { career:"Close active interview loops and keep a compact backup pipeline", training:"Maintain the indoor rhythm and protect sleep before interviews.", targets:"Active processes · two best backup employers" },
+          "2026-11-16": { career:"Prepare references and negotiation while maintaining targeted outreach", training:"Keep all four sessions easy and move them around interview commitments.", targets:"Late-stage processes" },
+          "2026-11-23": { career:"Keep the three lanes alive without forcing low-fit holiday applications", training:"Prioritize consistency over intensity during the holiday-shortened week.", targets:"Responsive roles only" },
+          "2026-11-30": { career:"Review the funnel and concentrate December effort on viable processes", training:"Maintain indoor swim and bike plus one run and one lift.", targets:"Late-stage and high-fit roles" },
+          "2026-12-07": { career:"Drive decisions, prepare negotiation points, and keep one backup path warm", training:"Keep the four-block base while offer work takes priority.", targets:"Offer-stage companies · best backup" },
           "2026-12-14": { career:"Secure the signed offer by December 15", training:"Use training for recovery and reduce intensity during decision week.", targets:"Best available permanent role" },
           "2026-12-21": { career:"Transition cleanly and protect recovery", training:"Maintain a flexible holiday rhythm without chasing missed sessions.", targets:"Onboarding or active backup" },
           "2026-12-28": { career:"Close 2026 and lock the January base plan", training:"Review consistency and set the January 2027 swim-bike-run-lift base.", targets:"2027 priorities" }
@@ -2796,6 +3018,7 @@
         let syncQueued = false;
         let notesSaveTimer = null;
         let journalSaveTimer = null;
+        let careerSaveTimer = null;
         let selectedJournalDate = todayStr();
         let roadmapSaveTimer = null;
         let lastModalTrigger = null;
@@ -2936,13 +3159,17 @@
           careerAppForm: document.getElementById("career-app-form"),
           careerAppCompany: document.getElementById("career-app-company"),
           careerAppTitle: document.getElementById("career-app-title"),
+          careerAppLane: document.getElementById("career-app-lane"),
           careerAppStatus: document.getElementById("career-app-status"),
-          careerAppTbody: document.getElementById("career-app-tbody"),
+          careerAppPipeline: document.getElementById("career-app-pipeline"),
+          careerLaneFilter: document.getElementById("career-lane-filter"),
           careerContactForm: document.getElementById("career-contact-form"),
           careerContactName: document.getElementById("career-contact-name"),
           careerContactCompany: document.getElementById("career-contact-company"),
+          careerContactLane: document.getElementById("career-contact-lane"),
           careerContactStatus: document.getElementById("career-contact-status"),
-          careerContactTbody: document.getElementById("career-contact-tbody"),
+          careerContactPipeline: document.getElementById("career-contact-pipeline"),
+          careerTrackerStatus: document.getElementById("career-tracker-status"),
           careerTargetList: document.getElementById("career-target-list"),
           careerLanesList: document.getElementById("career-lanes-list"),
           careerPlanContent: document.getElementById("career-plan-content"),
@@ -2999,6 +3226,13 @@
           });
           root.querySelectorAll(".roadmap-contact-select, .portfolio-milestone input, .networking-done-btn, .form-check-input").forEach(function(control) {
             control.disabled = !admin;
+          });
+          root.querySelectorAll(".career-record select, .career-record input, .career-record textarea").forEach(function(control) {
+            control.disabled = !admin;
+            if (control.tagName === "TEXTAREA" || control.tagName === "INPUT") {
+              control.readOnly = !admin;
+              control.setAttribute("aria-readonly", String(!admin));
+            }
           });
           root.querySelectorAll(".task-drag-handle, .task-hide-btn").forEach(function(control) {
             control.disabled = !admin;
@@ -3411,8 +3645,8 @@
         function getPortfolioWeeklyFocus(week) {
           const key = dateKey(week);
           if (PORTFOLIO_WEEKLY_FOCUS[key]) return PORTFOLIO_WEEKLY_FOCUS[key];
-          if (week < parseDate("2026-08-31")) {
-            return { projectId:null, label:"Portfolio plan", due:"Starts Sep 1", text:"Projects are scoped and ready; protect the Monday, Wednesday, Saturday, and Sunday build rhythm." };
+          if (week < parseDate("2026-07-20")) {
+            return { projectId:null, label:"Portfolio plan", due:"Starts Jul 20", text:"Projects are scoped and ready; protect Wednesday, Saturday morning, and Sunday build blocks." };
           }
           return { projectId:null, label:"Interview mode", due:"Development frozen", text:"Use the released portfolio in interviews and avoid feature creep." };
         }
@@ -3420,12 +3654,11 @@
         function portfolioTaskForDate(date) {
           const day = date.getDay();
           const cadence = {
-            1: { duration:"1h", label:"Portfolio build sprint" },
             3: { duration:"1.5h", label:"Portfolio build" },
-            6: { duration:"3h", label:"Portfolio deep work" },
+            6: { duration:"3h", label:"Portfolio morning deep work" },
             0: { duration:"1.5h", label:"Portfolio QA + documentation" }
           }[day];
-          if (!cadence || date < parseDate("2026-09-01") || date > parseDate("2026-11-22")) return null;
+          if (!cadence || date < parseDate("2026-07-20") || date > parseDate("2026-10-25")) return null;
           const phase = getPortfolioPhaseForDate(date);
           const track = phase ? getPortfolioTrack(phase.id) : null;
           if (!track) return null;
@@ -3537,8 +3770,8 @@
               if (data.priorityMatrix) state.priorityMatrix = normalizePriorityMatrix(data.priorityMatrix);
               if (data.journal) state.journal = normalizeJournal(data.journal);
               if (data.notes !== undefined) state.notes = data.notes;
-              if (data.careerApps) state.careerApps = data.careerApps;
-              if (data.careerContacts) state.careerContacts = data.careerContacts;
+              if (data.careerApps) state.careerApps = normalizeCareerApps(data.careerApps);
+              if (data.careerContacts) state.careerContacts = normalizeCareerContacts(data.careerContacts);
               if (data.careerContent) state.careerContent = mergeCareerContent(data.careerContent);
               saveState("Loaded from cloud.");
               renderAll();
@@ -3560,11 +3793,91 @@
         }
 
         // ===== STATE MANAGEMENT =====
+        function inferCareerLane(company, detail) {
+          const value = (String(company || "") + " " + String(detail || "")).toLowerCase();
+          if (/opg|ontario power|bruce power|nuclear|candu|cnl|canadian nuclear|bwxt|kinectrics|aecon|atkins|project control|project coordinator|cost control|planner|scheduler|pmo|primavera|p6/.test(value)) return "Nuclear Project Delivery";
+          if (/intact|munich re|hsb|zurich|marsh|insurance|underwrit|reinsurance|broking|surety/.test(value)) return "Insurance / Underwriting";
+          if (/iqvia|astrazeneca|sanofi|veeva|pharma|health|commercial analytics|patient data|oncology/.test(value)) return "Healthcare Commercial Analytics";
+          return "Opportunistic / Other";
+        }
+
+        function normalizeCareerApps(value) {
+          const source = Array.isArray(value) ? value : [];
+          const seen = new Set();
+          return source.map(function(app, index) {
+            const company = cleanFocusText(app && app.company).slice(0, 100);
+            const title = cleanFocusText(app && app.title).slice(0, 140);
+            if (!company || !title) return null;
+            let id = String(app && app.id || "app-" + (app && app.date || todayStr()) + "-" + index);
+            if (seen.has(id)) id += "-" + index;
+            seen.add(id);
+            const status = APPLICATION_STATUSES.includes(app && app.status) ? app.status : "Watching";
+            const lane = CAREER_LANES.includes(app && app.lane) ? app.lane : inferCareerLane(company, title);
+            return {
+              id: id,
+              company: company,
+              title: title,
+              lane: lane,
+              status: status,
+              date: /^\d{4}-\d{2}-\d{2}$/.test(app && app.date) ? app.date : todayStr(),
+              notes: String(app && app.notes || "").slice(0, 1200),
+              createdAt: Number(app && app.createdAt) || Date.now() + index
+            };
+          }).filter(Boolean);
+        }
+
+        function normalizeCareerContacts(value) {
+          const source = Array.isArray(value) ? value : [];
+          const seen = new Set();
+          return source.map(function(contact, index) {
+            const name = cleanFocusText(contact && contact.name).slice(0, 100);
+            const company = cleanFocusText(contact && contact.company).slice(0, 100);
+            if (!name || !company) return null;
+            let id = String(contact && contact.id || "contact-" + (contact && contact.date || todayStr()) + "-" + index);
+            if (seen.has(id)) id += "-" + index;
+            seen.add(id);
+            const status = NETWORKING_STATUSES.includes(contact && contact.status) ? contact.status : "Planned";
+            const lane = CAREER_LANES.includes(contact && contact.lane) ? contact.lane : inferCareerLane(company, contact && contact.notes);
+            return {
+              id: id,
+              name: name,
+              company: company,
+              lane: lane,
+              status: status,
+              date: /^\d{4}-\d{2}-\d{2}$/.test(contact && contact.date) ? contact.date : todayStr(),
+              nextAction: String(contact && contact.nextAction || "").slice(0, 240),
+              notes: String(contact && contact.notes || "").slice(0, 1200),
+              createdAt: Number(contact && contact.createdAt) || Date.now() + index
+            };
+          }).filter(Boolean);
+        }
+
         function mergeCareerContent(content) {
+          const savedVersion = Number(content && content.strategyVersion) || 0;
+          const migrateStrategy = savedVersion < CAREER_STRATEGY_VERSION;
           const merged = Object.assign({}, defaultState.careerContent, content || {});
-          merged.weeklyFocus = content && content.weeklyFocus && typeof content.weeklyFocus === "object"
-            ? content.weeklyFocus
+          merged.strategyVersion = CAREER_STRATEGY_VERSION;
+          if (migrateStrategy) {
+            merged.targetCompaniesText = defaultState.careerContent.targetCompaniesText;
+            merged.searchLanesText = defaultState.careerContent.searchLanesText;
+            merged.strategicPlanText = defaultState.careerContent.strategicPlanText;
+          }
+          const savedFocus = content && content.weeklyFocus && typeof content.weeklyFocus === "object"
+            ? JSON.parse(JSON.stringify(content.weeklyFocus))
             : {};
+          if (migrateStrategy) {
+            Object.keys(savedFocus).forEach(function(weekKey) {
+              if (weekKey < "2026-07-20") return;
+              if (!savedFocus[weekKey] || typeof savedFocus[weekKey] !== "object") {
+                delete savedFocus[weekKey];
+                return;
+              }
+              delete savedFocus[weekKey].career;
+              delete savedFocus[weekKey].targets;
+              if (!Object.keys(savedFocus[weekKey]).length) delete savedFocus[weekKey];
+            });
+          }
+          merged.weeklyFocus = savedFocus;
           merged.networkingContacts = content && Array.isArray(content.networkingContacts) && content.networkingContacts.length
             ? content.networkingContacts
             : JSON.parse(JSON.stringify(DEFAULT_NETWORKING_CONTACTS));
@@ -3573,6 +3886,7 @@
             : {};
           merged.weeklyNetworking = JSON.parse(JSON.stringify(DEFAULT_WEEKLY_NETWORKING));
           Object.keys(savedNetworking).forEach(function(weekKey) {
+            if (migrateStrategy && weekKey >= "2026-07-20") return;
             merged.weeklyNetworking[weekKey] = Object.assign({}, merged.weeklyNetworking[weekKey] || {}, savedNetworking[weekKey] || {});
           });
           const savedPortfolio = content && content.portfolioProgress && typeof content.portfolioProgress === "object"
@@ -3660,8 +3974,8 @@
               priorityMatrix: normalizePriorityMatrix(parsed.priorityMatrix),
               journal: normalizeJournal(parsed.journal),
               notes: parsed.notes || "",
-              careerApps: parsed.careerApps || [],
-              careerContacts: parsed.careerContacts || [],
+              careerApps: normalizeCareerApps(parsed.careerApps),
+              careerContacts: normalizeCareerContacts(parsed.careerContacts),
               careerContent: mergeCareerContent(parsed.careerContent)
             };
           } catch (e) { return JSON.parse(JSON.stringify(defaultState)); }
@@ -3683,9 +3997,9 @@
         // ===== CORE LOGIC =====
         function getPhase(date) {
           if (date <= parseDate("2026-07-19")) return { name: "Setup", focus: "Build the operating system", companies: "All primary targets" };
-          if (date <= parseDate("2026-08-02")) return { name: "Launch", focus: "Launch the application pipeline", companies: "First five targets" };
-          if (date <= parseDate("2026-09-13")) return { name: "Build", focus: "Build referrals and start cycling", companies: "Primary target rotation" };
-          if (date <= parseDate("2026-10-11")) return { name: "Convert", focus: "Convert outreach into interviews", companies: "Responsive companies" };
+          if (date <= parseDate("2026-08-09")) return { name: "Nuclear launch", focus: "Build proof and open the nuclear pipeline", companies: "Nuclear delivery targets" };
+          if (date <= parseDate("2026-08-30")) return { name: "Proof + gate", focus: "Release Insurance proof and test lane response", companies: "Three-lane target rotation" };
+          if (date <= parseDate("2026-10-11")) return { name: "Convert", focus: "Use released proof to convert outreach", companies: "Responsive companies" };
           if (date <= parseDate("2026-11-15")) return { name: "Interview", focus: "Deep interview preparation", companies: "Active and backup pipelines" };
           if (date <= parseDate("2026-12-15")) return { name: "Offer close", focus: "Drive an offer to signature", companies: "Late-stage processes" };
           return { name: "Transition", focus: "Close the year and plan January", companies: "Onboarding or backup" };
@@ -3730,7 +4044,7 @@
         }
 
         function isPortfolioBuildDate(date) {
-          return date >= parseDate("2026-09-01") && date <= parseDate("2026-11-22");
+          return date >= parseDate("2026-07-20") && date <= parseDate("2026-10-25");
         }
 
         function scheduleForDate(date) {
@@ -3740,7 +4054,9 @@
           }
           if (day >= 1 && day <= 5) {
             blocks.push({time:"8:00–8:30",label:"Commute to work"});
-            blocks.push({time:"8:30–18:00",label: day===2||day===4 ? "Work; use lunch for a networking call if booked" : "Work"});
+            blocks.push({time:"8:30–18:00",label:"Work"});
+            if (day === 2) blocks.push({time:"12:15–13:00",label:"Nuclear outreach or a booked networking call"});
+            if (day === 4) blocks.push({time:"12:15–13:00",label:"Insurance outreach or a booked networking call"});
             if (isTrainingDay(date)) {
               blocks.push({time:"18:00–18:30",label:"Commute to training"});
               blocks.push({time:"18:30–21:00",label:"Training block: "+trainingType(date)});
@@ -3748,26 +4064,26 @@
             } else if (day === 1 || day === 3) {
               blocks.push({time:"18:00–18:30",label:"Commute home"});
               blocks.push({time:"18:30–19:00",label:"Dinner and reset"});
-              if (isPortfolioBuildDate(date) && day === 1) {
-                blocks.push({time:"19:00–20:00",label:"Applications and live-role priorities"});
-                blocks.push({time:"20:00–21:00",label:"Portfolio build sprint"});
+              if (day === 1) {
+                blocks.push({time:"19:00–19:45",label:"Nuclear applications and live-role scan"});
+                blocks.push({time:"After 19:45",label:"Open evening"});
               } else if (isPortfolioBuildDate(date)) {
-                blocks.push({time:"19:00–19:30",label:"Networking and follow-ups"});
-                blocks.push({time:"19:30–21:00",label:"Portfolio build block"});
+                blocks.push({time:"19:00–20:30",label:"Portfolio build block"});
+                blocks.push({time:"After 20:30",label:"Open evening"});
               } else {
-                blocks.push({time:"19:00–21:00",label:"Job-search focus block"});
+                blocks.push({time:"19:00–20:30",label:"Interview prep or highest-priority career block"});
+                blocks.push({time:"After 20:30",label:"Open evening"});
               }
             } else {
               blocks.push({time:"18:00–18:30",label:"Commute home"});
-              blocks.push({time:"19:00–19:30",label:"Follow-ups and weekly close"});
-              blocks.push({time:"After 19:30",label:"Recovery, social time, or overflow"});
+              blocks.push({time:"After 18:30",label:"Protected Friday evening"});
             }
           } else if (day === 6) {
-            blocks.push({time:"8:30–9:00",label:"Commute to training"});
-            blocks.push({time:"9:00–11:30",label:"Training block: "+trainingType(date)});
-            blocks.push({time:"11:30–12:00",label:"Commute home"});
-            blocks.push({time:"13:30–15:30",label:"Applications and target-company research"});
-            if (isPortfolioBuildDate(date)) blocks.push({time:"15:30–18:30",label:"Portfolio deep-work block"});
+            if (isPortfolioBuildDate(date)) blocks.push({time:"7:30–10:30",label:"Portfolio deep-work block"});
+            blocks.push({time:"10:30–11:00",label:"Commute to training"});
+            blocks.push({time:"11:00–13:30",label:"Training block: "+trainingType(date)});
+            blocks.push({time:"13:30–14:00",label:"Commute home"});
+            blocks.push({time:"After 14:00",label:"Protected Saturday afternoon and evening"});
           } else if (isTrainingDay(date)) {
             blocks.push({time:"8:30–9:00",label:"Commute to training"});
             blocks.push({time:"9:00–11:30",label:"Training block: "+trainingType(date)});
@@ -3819,21 +4135,26 @@
           return includeHidden ? ordered : ordered.filter(function(task) { return !hidden.has(task.id); });
         }
 
+        function careerLaneForDate(date) {
+          if (date.getDay() === 4) return "Insurance / Underwriting";
+          if (date.getDay() === 0) return "Healthcare Commercial Analytics";
+          return "Nuclear Project Delivery";
+        }
+
         function tasksForDate(date, options) {
           const key = dateKey(date);
           const week = startOfWeek(date);
           const targets = getWeekTargets(week);
-          const appAlloc = allocateWeeklyTarget(week, targets.applications, [{day:1,weight:2},{day:3,weight:2},{day:6,weight:3},{day:0,weight:1}]);
-          const outAlloc = allocateWeeklyTarget(week, targets.outreach, [{day:1,weight:3},{day:3,weight:3},{day:5,weight:2},{day:6,weight:1},{day:0,weight:1}]);
+          const appAlloc = allocateWeeklyTarget(week, targets.applications, [{day:1,weight:3},{day:4,weight:3},{day:0,weight:2}]);
+          const outAlloc = allocateWeeklyTarget(week, targets.outreach, [{day:1,weight:2},{day:2,weight:3},{day:4,weight:3},{day:0,weight:2}]);
           const tasks = [];
           const day = date.getDay();
           const phase = getPhase(date);
-          if (day >= 1 && day <= 5) {
-            const workText = {1:"Set the three work outcomes that matter this week",2:"Finish today's highest-value WebHealth outcome",3:"Update the work pipeline and close one open loop",4:"Finish today's highest-value WebHealth outcome",5:"Write the week's wins, open items, and Monday priorities"};
-            tasks.push({id:key+"-work", category:"Work", text:workText[day], custom:false});
-          }
+          if (day === 1) tasks.push({id:key+"-work", category:"Work", text:"Name this week's three concrete WebHealth deliverables and choose today's first action", custom:false});
+          if (day === 5) tasks.push({id:key+"-work", category:"Work", text:"Record completed WebHealth deliverables, open handoffs, and Monday's first action", custom:false});
           const appCount = appAlloc[key] || 0;
-          if (appCount > 0) tasks.push({id:key+"-apps", category:"Career", text:"Submit "+appCount+" tailored application"+(appCount===1?"":"s"), custom:false, metricType:"application", metricValue:appCount});
+          const dailyLane = careerLaneForDate(date);
+          if (appCount > 0) tasks.push({id:key+"-apps", category:"Career", text:"Submit "+appCount+" tailored "+dailyLane+" application"+(appCount===1?"":"s"), custom:false, metricType:"application", metricValue:appCount});
           const outCount = outAlloc[key] || 0;
           const networkingAssignment = getNetworkingAssignmentForDate(date);
           const networkingCredit = networkingAssignment && outCount > 0 ? 1 : 0;
@@ -3851,8 +4172,8 @@
             });
           }
           const remainingOutreach = Math.max(0, outCount - networkingCredit);
-          if (remainingOutreach > 0) tasks.push({id:key+"-out", category:"Career", text:"Send "+remainingOutreach+" additional targeted outreach or follow-up message"+(remainingOutreach===1?"":"s"), custom:false, metricType:"outreach", metricValue:remainingOutreach});
-          if (day === 2 || day === 4) tasks.push({id:key+"-conv", category:"Career", text:"Hold or book one networking conversation", custom:false});
+          if (remainingOutreach > 0) tasks.push({id:key+"-out", category:"Career", text:"Send "+remainingOutreach+" additional "+dailyLane+" outreach or follow-up message"+(remainingOutreach===1?"":"s"), custom:false, metricType:"outreach", metricValue:remainingOutreach});
+          if (day === 2 || day === 4) tasks.push({id:key+"-conv", category:"Career", text:"Use the 12:15–1:00 window for a networking call, or book the next one", custom:false});
           if ((phase.name === "Convert" || phase.name === "Interview") && day === 3) tasks.push({id:key+"-interview-prep", category:"Career", text:"Practice two interview stories or one case prompt", custom:false});
           if (phase.name === "Offer close" && day === 3) tasks.push({id:key+"-offer-prep", category:"Career", text:"Update interview, reference, and negotiation notes", custom:false});
           const portfolioTask = portfolioTaskForDate(date);
@@ -3869,7 +4190,7 @@
           if (key === "2026-07-10") tasks.push({id:key+"-friends-event", category:"Life", text:"Friends' event at 8:00 PM", custom:false});
           if (key === "2026-07-17") tasks.push({id:key+"-pmi-toronto-check", category:"Career", text:"Check PMI Toronto for mentor-mentee program updates and new workshop resources", custom:false});
           if (day === 0) { tasks.push({id:key+"-meal-prep", category:"Nutrition", text:"Meal prep for Monday through Thursday", custom:false}); tasks.push({id:key+"-weekly-review", category:"Life", text:"Review the dashboard and lock next week's calendar", custom:false}); }
-          if (day === 6) {
+          if (day === 1) {
             const focus = getWeeklyFocus(week);
             tasks.push({id:key+"-company-research", category:"Career", text:"Research the week's focus: "+focus.targets, custom:false});
           }
@@ -3901,7 +4222,7 @@
           els.networkingFocus.textContent = networkingAssignments.length
             ? networkingDone + " / " + networkingAssignments.length + " contacts complete"
             : "No contacts planned";
-          els.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 2 conversations";
+          els.weeklyQuota.textContent = targets.applications + " applications · " + targets.outreach + " outreach · 45 / 30 / 25 lane mix";
           renderPortfolioWeek();
           renderNetworking();
           renderDayStrip();
@@ -3918,9 +4239,9 @@
           els.portfolioWeekTitle.textContent = focus.text;
           els.portfolioWeekDetail.textContent = track
             ? track.lane + " · " + track.dateLabel + " · " + track.hours
-            : (selectedWeek < parseDate("2026-08-31")
-              ? "The first build begins September 1; the scoped plan is ready when the protected sessions start."
-              : "Portfolio development is frozen after November 22 so interview conversion stays the priority.");
+            : (selectedWeek < parseDate("2026-07-20")
+              ? "The first build begins July 20; the scoped plan is ready when the protected sessions start."
+              : "Portfolio development is frozen after October 25 so interview conversion stays the priority.");
           els.portfolioWeekProgressLabel.textContent = track ? track.number + " progress" : "Overall progress";
           els.portfolioWeekProgressValue.textContent = progress.percent + "%";
           els.portfolioWeekProgressFill.style.width = progress.percent + "%";
@@ -4860,10 +5181,10 @@
             els.portfolioCurrentDue.textContent = activePhase.title + " · due " + compactDate(activePhase.end);
           } else if (activePhase && activePhase.id === "portfolio-freeze") {
             els.portfolioCurrentPhase.textContent = "Interview mode";
-            els.portfolioCurrentDue.textContent = "Development frozen since Nov 22";
+            els.portfolioCurrentDue.textContent = "Development frozen since Oct 25";
           } else {
             els.portfolioCurrentPhase.textContent = "Planning";
-            els.portfolioCurrentDue.textContent = "Insurance Workbench starts Sep 1";
+            els.portfolioCurrentDue.textContent = "Nuclear Controls MVP starts Jul 20";
           }
 
           els.portfolioTimeline.innerHTML = "";
@@ -4874,7 +5195,7 @@
             item.dataset.phaseId = phase.id;
             item.dataset.active = String(activePhase
               ? phase.id === activePhase.id && phase.start === activePhase.start
-              : phase.id === "insurance-workbench");
+              : phase.id === "project-controls");
             const date = document.createElement("span");
             date.textContent = phase.dateLabel;
             const title = document.createElement("strong");
@@ -4939,7 +5260,7 @@
             row.appendChild(createRoadmapCell("Career", "career", focus.career, key));
             row.appendChild(createRoadmapCell("Training", "training", focus.training, key));
             row.appendChild(createNetworkingRoadmapCell(key));
-            if (week >= parseDate("2026-08-31")) row.appendChild(createPortfolioRoadmapCell(week));
+            if (week >= parseDate("2026-07-20")) row.appendChild(createPortfolioRoadmapCell(week));
             els.roadmapList.appendChild(row);
           });
         }
@@ -5101,6 +5422,190 @@
         }
 
         // ===== CAREER TRACKER =====
+        function queueCareerRecordSave(message) {
+          if (!isAdmin()) return;
+          if (careerSaveTimer) clearTimeout(careerSaveTimer);
+          if (els.careerTrackerStatus) els.careerTrackerStatus.textContent = "Saving career tracker changes.";
+          careerSaveTimer = setTimeout(function() {
+            careerSaveTimer = null;
+            saveState(message || "Career tracker updated.");
+            if (els.careerTrackerStatus) els.careerTrackerStatus.textContent = "Career tracker saved.";
+          }, 500);
+        }
+
+        function createCareerSelect(labelText, value, options, onChange) {
+          const label = document.createElement("label");
+          label.className = "form-label";
+          label.appendChild(document.createTextNode(labelText));
+          const select = document.createElement("select");
+          select.className = "form-select";
+          options.forEach(function(optionValue) {
+            const option = document.createElement("option");
+            option.value = optionValue;
+            option.textContent = optionValue;
+            option.selected = optionValue === value;
+            select.appendChild(option);
+          });
+          select.addEventListener("change", function() {
+            if (!requireAdmin()) return;
+            onChange(this.value);
+          });
+          label.appendChild(select);
+          return label;
+        }
+
+        function createCareerTextControl(labelText, value, multiline, onInput) {
+          const label = document.createElement("label");
+          label.className = "form-label career-record-wide";
+          label.appendChild(document.createTextNode(labelText));
+          const control = document.createElement(multiline ? "textarea" : "input");
+          control.className = "form-control";
+          control.value = value || "";
+          if (multiline) control.rows = 2;
+          control.maxLength = multiline ? 1200 : 240;
+          control.addEventListener("input", function() {
+            if (!isAdmin()) return;
+            onInput(this.value);
+          });
+          label.appendChild(control);
+          return label;
+        }
+
+        function createCareerStage(title, records, renderRecord) {
+          const stage = document.createElement("section");
+          stage.className = "career-stage";
+          const heading = document.createElement("div");
+          heading.className = "career-stage-heading";
+          const name = document.createElement("strong");
+          name.textContent = title;
+          const count = document.createElement("span");
+          count.className = "career-stage-count";
+          count.textContent = records.length;
+          heading.appendChild(name);
+          heading.appendChild(count);
+          stage.appendChild(heading);
+          const list = document.createElement("div");
+          list.className = "career-stage-list";
+          if (!records.length) {
+            const empty = document.createElement("p");
+            empty.className = "career-stage-empty";
+            empty.textContent = "Nothing here yet.";
+            list.appendChild(empty);
+          } else {
+            records.slice().sort(function(a, b) { return (b.createdAt || 0) - (a.createdAt || 0); }).forEach(function(record) {
+              list.appendChild(renderRecord(record));
+            });
+          }
+          stage.appendChild(list);
+          return stage;
+        }
+
+        function createApplicationCard(app) {
+          const card = document.createElement("article");
+          card.className = "career-record";
+          const top = document.createElement("div");
+          top.className = "career-record-top";
+          const title = document.createElement("div");
+          title.className = "career-record-title";
+          const company = document.createElement("strong");
+          company.textContent = app.company;
+          const role = document.createElement("span");
+          role.textContent = app.title;
+          title.appendChild(company);
+          title.appendChild(role);
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "btn btn-ghost btn-danger admin-only career-record-remove";
+          remove.setAttribute("aria-label", "Remove " + app.company + " application");
+          remove.innerHTML = '<i data-lucide="trash-2"></i>';
+          remove.addEventListener("click", function() {
+            if (!requireAdmin()) return;
+            state.careerApps = state.careerApps.filter(function(item) { return item.id !== app.id; });
+            saveState("Application removed.");
+            renderCareer();
+          });
+          top.appendChild(title);
+          top.appendChild(remove);
+          card.appendChild(top);
+          const controls = document.createElement("div");
+          controls.className = "career-record-grid";
+          controls.appendChild(createCareerSelect("Stage", app.status, APPLICATION_STATUSES, function(nextStatus) {
+            app.status = nextStatus;
+            saveState("Application stage updated.");
+            renderCareer();
+          }));
+          controls.appendChild(createCareerSelect("Lane", app.lane, CAREER_LANES, function(nextLane) {
+            app.lane = nextLane;
+            saveState("Application lane updated.");
+            renderCareer();
+          }));
+          controls.appendChild(createCareerTextControl("Notes", app.notes, true, function(value) {
+            app.notes = value;
+            queueCareerRecordSave("Application notes updated.");
+          }));
+          card.appendChild(controls);
+          const meta = document.createElement("span");
+          meta.className = "career-record-meta";
+          meta.textContent = "Added " + app.date;
+          card.appendChild(meta);
+          return card;
+        }
+
+        function createNetworkingCard(contact) {
+          const card = document.createElement("article");
+          card.className = "career-record";
+          const top = document.createElement("div");
+          top.className = "career-record-top";
+          const title = document.createElement("div");
+          title.className = "career-record-title";
+          const name = document.createElement("strong");
+          name.textContent = contact.name;
+          const company = document.createElement("span");
+          company.textContent = contact.company;
+          title.appendChild(name);
+          title.appendChild(company);
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "btn btn-ghost btn-danger admin-only career-record-remove";
+          remove.setAttribute("aria-label", "Remove " + contact.name + " from networking pipeline");
+          remove.innerHTML = '<i data-lucide="trash-2"></i>';
+          remove.addEventListener("click", function() {
+            if (!requireAdmin()) return;
+            state.careerContacts = state.careerContacts.filter(function(item) { return item.id !== contact.id; });
+            saveState("Contact removed.");
+            renderCareer();
+          });
+          top.appendChild(title);
+          top.appendChild(remove);
+          card.appendChild(top);
+          const controls = document.createElement("div");
+          controls.className = "career-record-grid";
+          controls.appendChild(createCareerSelect("Stage", contact.status, NETWORKING_STATUSES, function(nextStatus) {
+            contact.status = nextStatus;
+            saveState("Networking stage updated.");
+            renderCareer();
+          }));
+          controls.appendChild(createCareerSelect("Lane", contact.lane, CAREER_LANES, function(nextLane) {
+            contact.lane = nextLane;
+            saveState("Networking lane updated.");
+            renderCareer();
+          }));
+          controls.appendChild(createCareerTextControl("Next action", contact.nextAction, false, function(value) {
+            contact.nextAction = value;
+            queueCareerRecordSave("Networking next action updated.");
+          }));
+          controls.appendChild(createCareerTextControl("Notes", contact.notes, true, function(value) {
+            contact.notes = value;
+            queueCareerRecordSave("Networking notes updated.");
+          }));
+          card.appendChild(controls);
+          const meta = document.createElement("span");
+          meta.className = "career-record-meta";
+          meta.textContent = "Added " + contact.date;
+          card.appendChild(meta);
+          return card;
+        }
+
         function renderCareer() {
           const apps = state.careerApps || [];
           const contacts = state.careerContacts || [];
@@ -5166,41 +5671,33 @@
             });
           }
 
-          els.careerAppTbody.innerHTML = "";
-          if (apps.length === 0) {
-            els.careerAppTbody.innerHTML = '<tr><td class="tracker-empty" colspan="6">No applications logged yet.</td></tr>';
-          }
-          apps.slice().reverse().forEach((app, idx) => {
-            const row = document.createElement("tr");
-            const statusClass = String(app.status || "watching").toLowerCase().replace(/[^a-z-]/g, "");
-            row.innerHTML = `<td><strong>${escapeHTML(app.company)}</strong></td><td>${escapeHTML(app.title)}</td><td><span class="status-badge ${statusClass}">${escapeHTML(app.status)}</span></td><td>${escapeHTML(app.date)}</td><td>${escapeHTML(app.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger admin-only" aria-label="Remove ${escapeHTML(app.company)} application" data-app-idx="${apps.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
-            row.querySelector('[data-app-idx]').addEventListener('click', function() {
-              if (!requireAdmin()) return;
-              const realIdx = parseInt(this.dataset.appIdx);
-              state.careerApps.splice(realIdx, 1);
-              saveState("Application removed.");
-              renderCareer();
-            });
-            els.careerAppTbody.appendChild(row);
+          const laneFilter = els.careerLaneFilter.value || "all";
+          const filteredApps = laneFilter === "all" ? apps : apps.filter(function(app) { return app.lane === laneFilter; });
+          const filteredContacts = laneFilter === "all" ? contacts : contacts.filter(function(contact) { return contact.lane === laneFilter; });
+
+          const applicationStages = [
+            { title:"Targets", statuses:["Watching"] },
+            { title:"In progress", statuses:["Applied", "Screening"] },
+            { title:"Interviews & outcomes", statuses:["Interview", "Offer", "Rejected"] }
+          ];
+          els.careerAppPipeline.innerHTML = "";
+          applicationStages.forEach(function(stage) {
+            const records = filteredApps.filter(function(app) { return stage.statuses.includes(app.status); });
+            els.careerAppPipeline.appendChild(createCareerStage(stage.title, records, createApplicationCard));
           });
 
-          els.careerContactTbody.innerHTML = "";
-          if (contacts.length === 0) {
-            els.careerContactTbody.innerHTML = '<tr><td class="tracker-empty" colspan="6">No networking contacts logged yet.</td></tr>';
-          }
-          contacts.slice().reverse().forEach((c, idx) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `<td><strong>${escapeHTML(c.name)}</strong></td><td>${escapeHTML(c.company)}</td><td>${escapeHTML(c.status)}</td><td>${escapeHTML(c.date)}</td><td>${escapeHTML(c.notes)}</td><td><button type="button" class="btn btn-ghost btn-danger admin-only" aria-label="Remove ${escapeHTML(c.name)} contact" data-contact-idx="${contacts.length - 1 - idx}" style="color:var(--text); padding:4px 8px;"><i data-lucide="x" style="width:14px;"></i></button></td>`;
-            row.querySelector('[data-contact-idx]').addEventListener('click', function() {
-              if (!requireAdmin()) return;
-              const realIdx = parseInt(this.dataset.contactIdx);
-              state.careerContacts.splice(realIdx, 1);
-              saveState("Contact removed.");
-              renderCareer();
-            });
-            els.careerContactTbody.appendChild(row);
+          const networkingStages = [
+            { title:"To contact", statuses:["Planned"] },
+            { title:"In motion", statuses:["Sent", "Call", "Follow-up"] },
+            { title:"Completed & referred", statuses:["Done", "Referral"] }
+          ];
+          els.careerContactPipeline.innerHTML = "";
+          networkingStages.forEach(function(stage) {
+            const records = filteredContacts.filter(function(contact) { return stage.statuses.includes(contact.status); });
+            els.careerContactPipeline.appendChild(createCareerStage(stage.title, records, createNetworkingCard));
           });
           refreshIcons();
+          applyRoleAccess();
         }
 
         function populateCareerEditFields() {
@@ -5713,11 +6210,14 @@
             const title = els.careerAppTitle.value.trim();
             if (!company || !title) return;
             state.careerApps.push({
+              id: "app-" + Date.now(),
               company: company,
               title: title,
+              lane: els.careerAppLane.value,
               status: els.careerAppStatus.value,
               date: todayStr(),
-              notes: ""
+              notes: "",
+              createdAt: Date.now()
             });
             saveState("Application logged.");
             els.careerAppCompany.value = "";
@@ -5732,15 +6232,23 @@
             const company = els.careerContactCompany.value.trim();
             if (!name || !company) return;
             state.careerContacts.push({
+              id: "contact-" + Date.now(),
               name: name,
               company: company,
+              lane: els.careerContactLane.value,
               status: els.careerContactStatus.value,
               date: todayStr(),
-              notes: ""
+              nextAction: "",
+              notes: "",
+              createdAt: Date.now()
             });
             saveState("Contact logged.");
             els.careerContactName.value = "";
             els.careerContactCompany.value = "";
+            renderCareer();
+          });
+
+          els.careerLaneFilter.addEventListener("change", function() {
             renderCareer();
           });
 
