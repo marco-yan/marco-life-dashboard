@@ -498,13 +498,58 @@
       gap: 6px;
       justify-content: flex-end;
     }
-    #marco-life-dashboard .matrix-move-select,
-    #marco-life-dashboard .matrix-recurrence-select {
+    #marco-life-dashboard .matrix-move-select {
       min-height: 44px;
       min-width: 126px;
       padding-bottom: 8px;
       padding-top: 8px;
     }
+    #marco-life-dashboard .matrix-repeat-control {
+      align-items: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--primary);
+      display: flex;
+      min-height: 44px;
+      min-width: 126px;
+      overflow: hidden;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    #marco-life-dashboard .matrix-repeat-control:hover { border-color: var(--secondary); }
+    #marco-life-dashboard .matrix-repeat-control:focus-within {
+      border-color: var(--primary);
+      outline: 2px solid var(--highlight);
+      outline-offset: 1px;
+    }
+    #marco-life-dashboard .matrix-repeat-control[data-repeating="true"] {
+      background: var(--background);
+      border-color: var(--highlight);
+    }
+    #marco-life-dashboard .matrix-repeat-icon,
+    #marco-life-dashboard .matrix-repeat-chevron {
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+    }
+    #marco-life-dashboard .matrix-repeat-icon { left: 11px; }
+    #marco-life-dashboard .matrix-repeat-chevron { right: 10px; }
+    #marco-life-dashboard .matrix-recurrence-select {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      border: 0;
+      color: var(--primary);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      min-height: 44px;
+      padding: 0 32px 0 35px;
+      width: 100%;
+    }
+    #marco-life-dashboard .matrix-recurrence-select:focus { outline: none; }
     #marco-life-dashboard .matrix-delete-btn {
       height: 44px;
       justify-content: center;
@@ -520,6 +565,7 @@
     }
     #marco-life-dashboard .matrix-add-form .form-control,
     #marco-life-dashboard .matrix-add-form .form-select { min-height: 44px; }
+    #marco-life-dashboard .matrix-add-form .matrix-repeat-control { width: 100%; }
     #marco-life-dashboard .matrix-empty {
       color: var(--secondary);
       font-size: 0.82rem;
@@ -592,7 +638,7 @@
         width: 100%;
       }
       #marco-life-dashboard .matrix-move-select,
-      #marco-life-dashboard .matrix-recurrence-select { min-width: 0; width: 100%; }
+      #marco-life-dashboard .matrix-repeat-control { min-width: 0; width: 100%; }
       #marco-life-dashboard .matrix-add-form { grid-template-columns: 1fr; }
       #marco-life-dashboard .matrix-add-form .btn { justify-content: center; width: 100%; }
       #marco-life-dashboard .matrix-completed-task { grid-template-columns: 1fr; }
@@ -2462,7 +2508,7 @@
           { id:"delete", title:"Delete", subtitle:"Remove or decline it", urgent:"Not urgent", important:"Not important" }
         ];
         const MATRIX_RECURRENCES = [
-          { id:"none", label:"Does not repeat", shortLabel:"No repeat" },
+          { id:"none", label:"Does not repeat", shortLabel:"Repeat" },
           { id:"daily", label:"Repeat daily", shortLabel:"Daily" },
           { id:"weekly", label:"Repeat weekly", shortLabel:"Weekly" },
           { id:"monthly", label:"Repeat monthly", shortLabel:"Monthly" }
@@ -4377,9 +4423,14 @@
           announceMatrixChange("Completed and hidden: " + task.text);
         }
 
-        function createMatrixRecurrenceSelect(currentValue, ariaLabel) {
+        function createMatrixRecurrenceControl(currentValue, ariaLabel) {
+          const control = document.createElement("span");
+          control.className = "matrix-repeat-control";
+          const icon = document.createElement("i");
+          icon.className = "matrix-repeat-icon";
+          icon.setAttribute("data-lucide", "repeat-2");
           const select = document.createElement("select");
-          select.className = "form-select matrix-recurrence-select";
+          select.className = "matrix-recurrence-select";
           select.setAttribute("aria-label", ariaLabel);
           MATRIX_RECURRENCES.forEach(function(recurrence) {
             const option = document.createElement("option");
@@ -4388,7 +4439,15 @@
             select.appendChild(option);
           });
           select.value = getMatrixRecurrence(currentValue).id;
-          return select;
+          select.title = getMatrixRecurrence(currentValue).label;
+          const chevron = document.createElement("i");
+          chevron.className = "matrix-repeat-chevron";
+          chevron.setAttribute("data-lucide", "chevron-down");
+          control.dataset.repeating = String(select.value !== "none");
+          control.appendChild(icon);
+          control.appendChild(select);
+          control.appendChild(chevron);
+          return { element: control, select: select };
         }
 
         function createMatrixTask(task) {
@@ -4434,7 +4493,8 @@
             move.appendChild(option);
           });
           move.value = task.quadrant;
-          const recurrence = createMatrixRecurrenceSelect(task.recurrence, "Set how often " + task.text + " repeats");
+          const recurrenceControl = createMatrixRecurrenceControl(task.recurrence, "Set how often " + task.text + " repeats");
+          const recurrence = recurrenceControl.select;
           recurrence.disabled = !isAdmin();
 
           const remove = document.createElement("button");
@@ -4472,7 +4532,7 @@
           });
 
           actions.appendChild(move);
-          actions.appendChild(recurrence);
+          actions.appendChild(recurrenceControl.element);
           actions.appendChild(remove);
           row.appendChild(checkLabel);
           row.appendChild(copy);
@@ -4538,14 +4598,15 @@
           input.placeholder = "Add to " + quadrant.title;
           input.setAttribute("aria-label", "Add a task to " + quadrant.title);
           input.required = true;
-          const recurrence = createMatrixRecurrenceSelect("none", "Choose recurrence for new " + quadrant.title + " task");
+          const recurrenceControl = createMatrixRecurrenceControl("none", "Choose recurrence for new " + quadrant.title + " task");
+          const recurrence = recurrenceControl.select;
           recurrence.id = "matrix-repeat-" + quadrant.id;
           const add = document.createElement("button");
           add.type = "submit";
           add.className = "btn btn-primary";
           add.innerHTML = '<i data-lucide="plus"></i> Add';
           form.appendChild(input);
-          form.appendChild(recurrence);
+          form.appendChild(recurrenceControl.element);
           form.appendChild(add);
           form.addEventListener("submit", function(event) {
             event.preventDefault();
