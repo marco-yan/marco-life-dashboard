@@ -392,6 +392,24 @@
       font-weight: 700;
       text-align: right;
     }
+    #marco-life-dashboard .matrix-undo {
+      align-items: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--highlight);
+      border-radius: 12px;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin: -6px 0 18px;
+      padding: 10px 12px 10px 16px;
+    }
+    #marco-life-dashboard .matrix-undo.is-hidden { display: none; }
+    #marco-life-dashboard .matrix-undo span {
+      font-size: 0.84rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    #marco-life-dashboard .matrix-undo .btn { min-height: 44px; }
     #marco-life-dashboard .matrix-grid {
       display: grid;
       gap: 18px;
@@ -444,7 +462,6 @@
       min-height: 64px;
       padding: 9px 10px;
     }
-    #marco-life-dashboard .matrix-task[data-complete="true"] { opacity: 0.68; }
     #marco-life-dashboard .matrix-check {
       align-items: center;
       display: flex;
@@ -457,19 +474,32 @@
       height: 23px;
       width: 23px;
     }
+    #marco-life-dashboard .matrix-task-copy { min-width: 0; }
     #marco-life-dashboard .matrix-task-text {
+      display: block;
       font-size: 0.88rem;
       font-weight: 600;
       line-height: 1.45;
       min-width: 0;
       overflow-wrap: anywhere;
     }
-    #marco-life-dashboard .matrix-task[data-complete="true"] .matrix-task-text {
+    #marco-life-dashboard .matrix-repeat-badge {
       color: var(--secondary);
-      text-decoration: line-through;
+      display: inline-flex;
+      font-size: 0.7rem;
+      font-weight: 700;
+      gap: 4px;
+      margin-top: 4px;
     }
-    #marco-life-dashboard .matrix-task-actions { align-items: center; display: flex; gap: 6px; }
-    #marco-life-dashboard .matrix-move-select {
+    #marco-life-dashboard .matrix-task-actions {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+    #marco-life-dashboard .matrix-move-select,
+    #marco-life-dashboard .matrix-recurrence-select {
       min-height: 44px;
       min-width: 126px;
       padding-bottom: 8px;
@@ -485,26 +515,89 @@
     #marco-life-dashboard .matrix-add-form {
       display: grid;
       gap: 8px;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) 148px auto;
       margin-top: 12px;
     }
-    #marco-life-dashboard .matrix-add-form .form-control { min-height: 44px; }
+    #marco-life-dashboard .matrix-add-form .form-control,
+    #marco-life-dashboard .matrix-add-form .form-select { min-height: 44px; }
     #marco-life-dashboard .matrix-empty {
       color: var(--secondary);
       font-size: 0.82rem;
       line-height: 1.5;
       padding: 16px 4px;
     }
+    #marco-life-dashboard .matrix-completed {
+      border-top: 3px solid var(--secondary);
+      margin-top: 18px;
+      padding: 0;
+    }
+    #marco-life-dashboard .matrix-completed summary {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      min-height: 56px;
+      padding: 12px 16px;
+    }
+    #marco-life-dashboard .matrix-completed-title {
+      align-items: center;
+      color: var(--primary);
+      display: inline-flex;
+      font-weight: 700;
+      gap: 8px;
+    }
+    #marco-life-dashboard .matrix-completed > .text-small { padding: 0 16px 12px; }
+    #marco-life-dashboard .matrix-completed-list {
+      border-top: 1px solid var(--border);
+      display: grid;
+      gap: 8px;
+      padding: 12px 16px 16px;
+    }
+    #marco-life-dashboard .matrix-completed-task {
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      min-height: 64px;
+      padding: 10px 12px;
+    }
+    #marco-life-dashboard .matrix-completed-task .matrix-task-text {
+      color: var(--secondary);
+      text-decoration: line-through;
+    }
+    #marco-life-dashboard .matrix-completed-meta {
+      color: var(--secondary);
+      font-size: 0.72rem;
+      line-height: 1.45;
+      margin-top: 3px;
+    }
+    #marco-life-dashboard .matrix-completed-actions { display: flex; gap: 6px; }
+    #marco-life-dashboard .matrix-completed-actions .btn { min-height: 44px; }
 
     @media (max-width: 740px) {
       #marco-life-dashboard .matrix-toolbar { align-items: flex-start; flex-direction: column; }
       #marco-life-dashboard .matrix-summary { text-align: left; }
+      #marco-life-dashboard .matrix-undo { align-items: stretch; flex-direction: column; }
+      #marco-life-dashboard .matrix-undo .btn { justify-content: center; width: 100%; }
       #marco-life-dashboard .matrix-grid { grid-template-columns: 1fr; }
       #marco-life-dashboard .matrix-task { grid-template-columns: 44px minmax(0, 1fr); }
-      #marco-life-dashboard .matrix-task-actions { grid-column: 2; width: 100%; }
-      #marco-life-dashboard .matrix-move-select { flex: 1; min-width: 0; width: 100%; }
+      #marco-life-dashboard .matrix-task-actions {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px;
+        width: 100%;
+      }
+      #marco-life-dashboard .matrix-move-select,
+      #marco-life-dashboard .matrix-recurrence-select { min-width: 0; width: 100%; }
       #marco-life-dashboard .matrix-add-form { grid-template-columns: 1fr; }
       #marco-life-dashboard .matrix-add-form .btn { justify-content: center; width: 100%; }
+      #marco-life-dashboard .matrix-completed-task { grid-template-columns: 1fr; }
+      #marco-life-dashboard .matrix-completed-actions { display: grid; grid-template-columns: 1fr 44px; width: 100%; }
+      #marco-life-dashboard .matrix-completed-actions .btn:first-child { justify-content: center; }
     }
 
     #marco-life-dashboard .todo-list { display: flex; flex-direction: column; gap: 0; position: relative; }
@@ -1930,12 +2023,24 @@
         <div class="matrix-toolbar-copy">
           <span class="eyebrow">Decide what deserves your attention</span>
           <h2>Eisenhower priority matrix</h2>
-          <p class="text-small">Sort work by urgency and importance. Start with Do, protect time for Schedule, move quick handoffs to Delegate, and remove low-value work through Delete.</p>
+          <p class="text-small">Sort work by urgency and importance. Completed tasks leave the active grid, stay available below for recovery, and return automatically when set to repeat.</p>
         </div>
-        <span class="matrix-summary" id="matrix-summary" aria-live="polite">0 open · 0 complete</span>
+        <span class="matrix-summary" id="matrix-summary" aria-live="polite">0 open · 0 hidden</span>
       </div>
       <span class="sr-only" id="matrix-status" aria-live="assertive"></span>
+      <div class="matrix-undo is-hidden" id="matrix-undo" role="status">
+        <span id="matrix-undo-text">Task completed and hidden.</span>
+        <button type="button" class="btn btn-primary admin-only" id="matrix-undo-button"><i data-lucide="undo-2"></i> Undo</button>
+      </div>
       <div class="matrix-grid" id="priority-matrix-grid" aria-label="Eisenhower priority matrix"></div>
+      <details class="card matrix-completed" id="matrix-completed-section" hidden>
+        <summary>
+          <span class="matrix-completed-title"><i data-lucide="archive-restore"></i> Completed tasks</span>
+          <span class="matrix-count" id="matrix-completed-count">0 hidden</span>
+        </summary>
+        <p class="text-small">Restore anything completed by mistake. Repeating tasks show when they will return to the active grid.</p>
+        <div class="matrix-completed-list" id="matrix-completed-list" role="list"></div>
+      </details>
     </section>
 
     <!-- ===== PANEL: ROADMAP ===== -->
@@ -2356,6 +2461,12 @@
           { id:"delegate", title:"Delegate", subtitle:"Hand it off", urgent:"Urgent", important:"Not important" },
           { id:"delete", title:"Delete", subtitle:"Remove or decline it", urgent:"Not urgent", important:"Not important" }
         ];
+        const MATRIX_RECURRENCES = [
+          { id:"none", label:"Does not repeat", shortLabel:"No repeat" },
+          { id:"daily", label:"Repeat daily", shortLabel:"Daily" },
+          { id:"weekly", label:"Repeat weekly", shortLabel:"Weekly" },
+          { id:"monthly", label:"Repeat monthly", shortLabel:"Monthly" }
+        ];
 
         // Curated from Marco's outreach research. The roster lives in state so
         // weekly selections and future edits travel through the existing sync.
@@ -2643,6 +2754,7 @@
         let roadmapSaveTimer = null;
         let lastModalTrigger = null;
         let taskDragState = null;
+        let lastCompletedMatrixTaskId = null;
         let calendarRefreshTimer = null;
         let calendarRuntime = {
           events: [],
@@ -2676,6 +2788,12 @@
           priorityMatrixGrid: document.getElementById("priority-matrix-grid"),
           matrixSummary: document.getElementById("matrix-summary"),
           matrixStatus: document.getElementById("matrix-status"),
+          matrixUndo: document.getElementById("matrix-undo"),
+          matrixUndoText: document.getElementById("matrix-undo-text"),
+          matrixUndoButton: document.getElementById("matrix-undo-button"),
+          matrixCompletedSection: document.getElementById("matrix-completed-section"),
+          matrixCompletedCount: document.getElementById("matrix-completed-count"),
+          matrixCompletedList: document.getElementById("matrix-completed-list"),
           todoList: document.getElementById("todo-list"),
           selectedDayTitle: document.getElementById("selected-day-title"),
           dayStatus: document.getElementById("day-status"),
@@ -3424,11 +3542,22 @@
 
         function normalizePriorityMatrix(value) {
           const validQuadrants = new Set(MATRIX_QUADRANTS.map(function(quadrant) { return quadrant.id; }));
+          const validRecurrences = new Set(MATRIX_RECURRENCES.map(function(recurrence) { return recurrence.id; }));
           const source = value && Array.isArray(value.tasks) ? value.tasks : [];
           const seen = new Set();
           const tasks = source.map(function(task, index) {
             const text = String(task && task.text || "").replace(/\s+/g, " ").trim().slice(0, 160);
             const quadrant = validQuadrants.has(task && task.quadrant) ? task.quadrant : "schedule";
+            const recurrence = validRecurrences.has(task && task.recurrence) ? task.recurrence : "none";
+            const completed = Boolean(task && task.completed);
+            const completedAt = completed ? Math.max(0, Number(task && task.completedAt) || 0) : 0;
+            let nextOccurrence = completed && recurrence !== "none" && isValidMatrixDate(task && task.nextOccurrence)
+              ? task.nextOccurrence
+              : "";
+            if (completed && recurrence !== "none" && !nextOccurrence) {
+              const basisDate = completedAt ? dateKey(new Date(completedAt)) : todayStr();
+              nextOccurrence = getNextMatrixOccurrence(basisDate, recurrence);
+            }
             let id = String(task && task.id || "matrix-import-" + index);
             if (seen.has(id)) id += "-" + index;
             seen.add(id);
@@ -3437,7 +3566,10 @@
               id: id,
               text: text,
               quadrant: quadrant,
-              completed: Boolean(task && task.completed),
+              recurrence: recurrence,
+              completed: completed,
+              completedAt: completedAt,
+              nextOccurrence: nextOccurrence,
               createdAt: Number(task && task.createdAt) || Date.now() + index
             };
           }).filter(Boolean);
@@ -4158,15 +4290,110 @@
           return state.priorityMatrix.tasks;
         }
 
+        function isValidMatrixDate(value) {
+          const text = String(value || "");
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return false;
+          const parsed = parseDate(text);
+          return !Number.isNaN(parsed.getTime()) && dateKey(parsed) === text;
+        }
+
+        function getMatrixRecurrence(recurrenceId) {
+          return MATRIX_RECURRENCES.find(function(recurrence) { return recurrence.id === recurrenceId; }) || MATRIX_RECURRENCES[0];
+        }
+
+        function getNextMatrixOccurrence(fromDate, recurrenceId) {
+          const recurrence = getMatrixRecurrence(recurrenceId);
+          if (recurrence.id === "none") return "";
+          const base = isValidMatrixDate(fromDate) ? parseDate(fromDate) : parseDate(todayStr());
+          if (recurrence.id === "daily") return dateKey(addDays(base, 1));
+          if (recurrence.id === "weekly") return dateKey(addDays(base, 7));
+          const targetMonthIndex = base.getMonth() + 1;
+          const targetYear = base.getFullYear() + Math.floor(targetMonthIndex / 12);
+          const targetMonth = targetMonthIndex % 12;
+          const lastDay = new Date(targetYear, targetMonth + 1, 0).getDate();
+          return dateKey(new Date(targetYear, targetMonth, Math.min(base.getDate(), lastDay)));
+        }
+
+        function formatMatrixDate(value) {
+          if (!isValidMatrixDate(value)) return "a future date";
+          const date = parseDate(value);
+          return MONTH_NAMES[date.getMonth()].slice(0, 3) + " " + date.getDate() + ", " + date.getFullYear();
+        }
+
         function announceMatrixChange(message) {
           els.matrixStatus.textContent = "";
           requestAnimationFrame(function() { els.matrixStatus.textContent = message; });
         }
 
+        function reopenDueRecurringMatrixTasks(tasks) {
+          if (!isAdmin()) return [];
+          const today = todayStr();
+          const reopened = [];
+          tasks.forEach(function(task) {
+            if (!task.completed || task.recurrence === "none" || !isValidMatrixDate(task.nextOccurrence)) return;
+            if (task.nextOccurrence > today) return;
+            task.completed = false;
+            task.completedAt = 0;
+            task.nextOccurrence = "";
+            if (lastCompletedMatrixTaskId === task.id) lastCompletedMatrixTaskId = null;
+            reopened.push(task);
+          });
+          return reopened;
+        }
+
+        function restoreMatrixTask(task) {
+          if (!requireAdmin()) return;
+          task.completed = false;
+          task.completedAt = 0;
+          task.nextOccurrence = "";
+          if (lastCompletedMatrixTaskId === task.id) lastCompletedMatrixTaskId = null;
+          saveState("Priority task restored.");
+          renderPriorityMatrix();
+          announceMatrixChange("Restored: " + task.text);
+        }
+
+        function deleteMatrixTask(task) {
+          if (!requireAdmin()) return;
+          const tasks = getPriorityMatrixTasks();
+          const index = tasks.findIndex(function(item) { return item.id === task.id; });
+          if (index < 0) return;
+          tasks.splice(index, 1);
+          if (lastCompletedMatrixTaskId === task.id) lastCompletedMatrixTaskId = null;
+          saveState("Priority task deleted.");
+          renderPriorityMatrix();
+          announceMatrixChange("Deleted: " + task.text);
+        }
+
+        function completeMatrixTask(task) {
+          if (!requireAdmin()) return;
+          task.completed = true;
+          task.completedAt = Date.now();
+          task.nextOccurrence = task.recurrence === "none"
+            ? ""
+            : getNextMatrixOccurrence(todayStr(), task.recurrence);
+          lastCompletedMatrixTaskId = task.id;
+          saveState("Priority task completed and hidden.");
+          renderPriorityMatrix();
+          announceMatrixChange("Completed and hidden: " + task.text);
+        }
+
+        function createMatrixRecurrenceSelect(currentValue, ariaLabel) {
+          const select = document.createElement("select");
+          select.className = "form-select matrix-recurrence-select";
+          select.setAttribute("aria-label", ariaLabel);
+          MATRIX_RECURRENCES.forEach(function(recurrence) {
+            const option = document.createElement("option");
+            option.value = recurrence.id;
+            option.textContent = recurrence.shortLabel;
+            select.appendChild(option);
+          });
+          select.value = getMatrixRecurrence(currentValue).id;
+          return select;
+        }
+
         function createMatrixTask(task) {
           const row = document.createElement("article");
           row.className = "matrix-task";
-          row.dataset.complete = String(task.completed);
           row.dataset.taskId = task.id;
           row.setAttribute("role", "listitem");
 
@@ -4174,14 +4401,24 @@
           checkLabel.className = "matrix-check";
           const checkbox = document.createElement("input");
           checkbox.type = "checkbox";
-          checkbox.checked = task.completed;
+          checkbox.checked = false;
           checkbox.disabled = !isAdmin();
-          checkbox.setAttribute("aria-label", (task.completed ? "Mark incomplete: " : "Mark complete: ") + task.text);
+          checkbox.setAttribute("aria-label", "Mark complete: " + task.text);
           checkLabel.appendChild(checkbox);
 
+          const copy = document.createElement("div");
+          copy.className = "matrix-task-copy";
           const text = document.createElement("span");
           text.className = "matrix-task-text";
           text.textContent = task.text;
+          copy.appendChild(text);
+          if (task.recurrence !== "none") {
+            const repeatBadge = document.createElement("span");
+            repeatBadge.className = "matrix-repeat-badge";
+            repeatBadge.innerHTML = '<i data-lucide="repeat-2"></i>';
+            repeatBadge.appendChild(document.createTextNode(getMatrixRecurrence(task.recurrence).shortLabel));
+            copy.appendChild(repeatBadge);
+          }
 
           const actions = document.createElement("div");
           actions.className = "matrix-task-actions admin-only";
@@ -4197,6 +4434,8 @@
             move.appendChild(option);
           });
           move.value = task.quadrant;
+          const recurrence = createMatrixRecurrenceSelect(task.recurrence, "Set how often " + task.text + " repeats");
+          recurrence.disabled = !isAdmin();
 
           const remove = document.createElement("button");
           remove.type = "button";
@@ -4206,11 +4445,8 @@
           remove.innerHTML = '<i data-lucide="trash-2"></i>';
 
           checkbox.addEventListener("change", function() {
-            if (!requireAdmin()) { checkbox.checked = task.completed; return; }
-            task.completed = checkbox.checked;
-            saveState("Priority task updated.");
-            renderPriorityMatrix();
-            announceMatrixChange((task.completed ? "Completed: " : "Reopened: ") + task.text);
+            if (!requireAdmin()) { checkbox.checked = false; return; }
+            if (checkbox.checked) completeMatrixTask(task);
           });
           move.addEventListener("change", function() {
             if (!requireAdmin()) { move.value = task.quadrant; return; }
@@ -4221,21 +4457,25 @@
             renderPriorityMatrix();
             announceMatrixChange("Moved to " + destination.title + ": " + task.text);
           });
-          remove.addEventListener("click", function() {
-            if (!requireAdmin()) return;
-            const tasks = getPriorityMatrixTasks();
-            const index = tasks.findIndex(function(item) { return item.id === task.id; });
-            if (index < 0) return;
-            tasks.splice(index, 1);
-            saveState("Priority task deleted.");
+          recurrence.addEventListener("change", function() {
+            if (!requireAdmin()) { recurrence.value = task.recurrence; return; }
+            task.recurrence = getMatrixRecurrence(recurrence.value).id;
+            task.nextOccurrence = "";
+            saveState("Priority task recurrence updated.");
             renderPriorityMatrix();
-            announceMatrixChange("Deleted: " + task.text);
+            announceMatrixChange(task.recurrence === "none"
+              ? "Repeat removed: " + task.text
+              : "Set to repeat " + task.recurrence + ": " + task.text);
+          });
+          remove.addEventListener("click", function() {
+            deleteMatrixTask(task);
           });
 
           actions.appendChild(move);
+          actions.appendChild(recurrence);
           actions.appendChild(remove);
           row.appendChild(checkLabel);
-          row.appendChild(text);
+          row.appendChild(copy);
           row.appendChild(actions);
           return row;
         }
@@ -4269,8 +4509,7 @@
           headingGroup.appendChild(tags);
           const count = document.createElement("span");
           count.className = "matrix-count";
-          const open = tasks.filter(function(task) { return !task.completed; }).length;
-          count.textContent = open + " open · " + (tasks.length - open) + " done";
+          count.textContent = tasks.length + " open";
           header.appendChild(headingGroup);
           header.appendChild(count);
 
@@ -4299,11 +4538,14 @@
           input.placeholder = "Add to " + quadrant.title;
           input.setAttribute("aria-label", "Add a task to " + quadrant.title);
           input.required = true;
+          const recurrence = createMatrixRecurrenceSelect("none", "Choose recurrence for new " + quadrant.title + " task");
+          recurrence.id = "matrix-repeat-" + quadrant.id;
           const add = document.createElement("button");
           add.type = "submit";
           add.className = "btn btn-primary";
           add.innerHTML = '<i data-lucide="plus"></i> Add';
           form.appendChild(input);
+          form.appendChild(recurrence);
           form.appendChild(add);
           form.addEventListener("submit", function(event) {
             event.preventDefault();
@@ -4314,7 +4556,10 @@
               id: "matrix-" + Date.now() + "-" + Math.floor(Math.random() * 100000),
               text: value,
               quadrant: quadrant.id,
+              recurrence: getMatrixRecurrence(recurrence.value).id,
               completed: false,
+              completedAt: 0,
+              nextOccurrence: "",
               createdAt: Date.now()
             });
             saveState("Priority task added.");
@@ -4330,16 +4575,91 @@
           return card;
         }
 
+        function createCompletedMatrixTask(task) {
+          const row = document.createElement("article");
+          row.className = "matrix-completed-task";
+          row.dataset.taskId = task.id;
+          row.setAttribute("role", "listitem");
+
+          const copy = document.createElement("div");
+          copy.className = "matrix-task-copy";
+          const text = document.createElement("span");
+          text.className = "matrix-task-text";
+          text.textContent = task.text;
+          const meta = document.createElement("p");
+          meta.className = "matrix-completed-meta";
+          const quadrant = MATRIX_QUADRANTS.find(function(item) { return item.id === task.quadrant; });
+          const details = [quadrant ? quadrant.title : "Priority task"];
+          if (task.completedAt) details.push("Completed " + formatMatrixDate(dateKey(new Date(task.completedAt))));
+          if (task.recurrence !== "none") {
+            details.push("Repeats " + task.recurrence);
+            if (task.nextOccurrence) details.push("Returns " + formatMatrixDate(task.nextOccurrence));
+          }
+          meta.textContent = details.join(" · ");
+          copy.appendChild(text);
+          copy.appendChild(meta);
+
+          const actions = document.createElement("div");
+          actions.className = "matrix-completed-actions admin-only";
+          actions.hidden = !isAdmin();
+          const restore = document.createElement("button");
+          restore.type = "button";
+          restore.className = "btn";
+          restore.innerHTML = '<i data-lucide="undo-2"></i> Restore';
+          restore.setAttribute("aria-label", "Restore priority task: " + task.text);
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.className = "btn btn-ghost matrix-delete-btn";
+          remove.innerHTML = '<i data-lucide="trash-2"></i>';
+          remove.setAttribute("aria-label", "Permanently delete completed priority task: " + task.text);
+          restore.addEventListener("click", function() { restoreMatrixTask(task); });
+          remove.addEventListener("click", function() { deleteMatrixTask(task); });
+          actions.appendChild(restore);
+          actions.appendChild(remove);
+
+          row.appendChild(copy);
+          row.appendChild(actions);
+          return row;
+        }
+
+        function renderMatrixUndo(completedTasks) {
+          const task = isAdmin() && lastCompletedMatrixTaskId
+            ? completedTasks.find(function(item) { return item.id === lastCompletedMatrixTaskId; })
+            : null;
+          els.matrixUndo.classList.toggle("is-hidden", !task);
+          if (!task) return;
+          els.matrixUndoText.textContent = task.recurrence === "none"
+            ? "Completed and hidden: " + task.text
+            : "Completed and hidden: " + task.text + ". Returns " + formatMatrixDate(task.nextOccurrence) + ".";
+        }
+
+        function renderCompletedMatrixTasks(completedTasks) {
+          els.matrixCompletedSection.hidden = !completedTasks.length;
+          els.matrixCompletedCount.textContent = completedTasks.length + " hidden";
+          els.matrixCompletedList.innerHTML = "";
+          completedTasks.slice().sort(function(a, b) {
+            return (Number(b.completedAt) || Number(b.createdAt)) - (Number(a.completedAt) || Number(a.createdAt));
+          }).forEach(function(task) {
+            els.matrixCompletedList.appendChild(createCompletedMatrixTask(task));
+          });
+        }
+
         function renderPriorityMatrix() {
           const tasks = getPriorityMatrixTasks();
-          const complete = tasks.filter(function(task) { return task.completed; }).length;
-          els.matrixSummary.textContent = (tasks.length - complete) + " open · " + complete + " complete";
+          const reopened = reopenDueRecurringMatrixTasks(tasks);
+          if (reopened.length) saveState(reopened.length + (reopened.length === 1 ? " recurring priority task returned." : " recurring priority tasks returned."));
+          const activeTasks = tasks.filter(function(task) { return !task.completed; });
+          const completedTasks = tasks.filter(function(task) { return task.completed; });
+          els.matrixSummary.textContent = activeTasks.length + " open · " + completedTasks.length + " hidden";
           els.priorityMatrixGrid.innerHTML = "";
           MATRIX_QUADRANTS.forEach(function(quadrant) {
-            const quadrantTasks = tasks.filter(function(task) { return task.quadrant === quadrant.id; });
+            const quadrantTasks = activeTasks.filter(function(task) { return task.quadrant === quadrant.id; });
             els.priorityMatrixGrid.appendChild(createMatrixQuadrant(quadrant, quadrantTasks));
           });
+          renderMatrixUndo(completedTasks);
+          renderCompletedMatrixTasks(completedTasks);
           refreshIcons();
+          if (reopened.length) announceMatrixChange(reopened.length + (reopened.length === 1 ? " recurring task returned to the matrix." : " recurring tasks returned to the matrix."));
         }
 
         function createPortfolioProgressBar(percent, label) {
@@ -5079,6 +5399,12 @@
             });
           });
 
+          els.matrixUndoButton.addEventListener("click", function() {
+            if (!requireAdmin()) return;
+            const task = getPriorityMatrixTasks().find(function(item) { return item.id === lastCompletedMatrixTaskId; });
+            if (task && task.completed) restoreMatrixTask(task);
+          });
+
           els.editWeekFocus.addEventListener("click", function() {
             if (!requireAdmin()) return;
             activateView("roadmap");
@@ -5425,8 +5751,9 @@
             });
           }, 1000);
           document.addEventListener("visibilitychange", function() {
-            if (document.visibilityState === "visible" && Date.now() - calendarRuntime.updatedAt > 10 * 60 * 1000) {
-              loadCalendarEvents({ force: true });
+            if (document.visibilityState === "visible") {
+              if (!els.panels.matrix.hidden) renderPriorityMatrix();
+              if (Date.now() - calendarRuntime.updatedAt > 10 * 60 * 1000) loadCalendarEvents({ force: true });
             }
           });
         }
