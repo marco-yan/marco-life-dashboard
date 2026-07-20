@@ -2826,21 +2826,21 @@
           {
             id:"insurance-workbench",
             number:"Project 2",
-            title:"Commercial Underwriting Pricing & Portfolio Workbench",
-            lane:"Insurance / Underwriting",
+            title:"Contract Surety Underwriting & Bond Capacity Workbench",
+            lane:"Insurance / Contract Surety",
             start:"2026-08-10",
             end:"2026-08-23",
             dateLabel:"Aug 10–23",
-            hours:"10–14 hours",
+            hours:"12–16 hours",
             tools:["Excel", "Power Query", "Power Pivot", "PivotTables", "LET", "XLOOKUP", "Solver", "Data Tables"],
-            summary:"An adjustable commercial-risk pricing model that turns claims and expense assumptions into an underwriting decision and portfolio view.",
+            summary:"A reusable contractor-assessment model built around a synthetic C$30M hydroelectric spillway rehabilitation bond request, translating financial strength, WIP, capacity, and project risk into bond limits and a documented underwriting recommendation.",
             milestones:[
-              { id:"insurance-source", title:"Create the synthetic policies, claims, and assumptions files with a short data dictionary", due:"2026-08-11" },
-              { id:"insurance-query", title:"Build refreshable Power Query imports and basic data-quality checks", due:"2026-08-13" },
-              { id:"insurance-engine", title:"Build frequency × severity pricing, expense, risk-load, and margin calculations with LET and XLOOKUP", due:"2026-08-16" },
-              { id:"insurance-decision", title:"Add risk tiers, recommended terms, and accept / refer / decline decision logic", due:"2026-08-18" },
-              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable portfolio dashboard", due:"2026-08-21" },
-              { id:"insurance-scenarios", title:"Add scenario comparison, Solver optimization, data tables, QA, and a documented v1 release", due:"2026-08-23" }
+              { id:"insurance-source", title:"Create synthetic contractor financial statements, WIP / backlog, and a C$30M hydro spillway rehabilitation bond request", due:"2026-08-11" },
+              { id:"insurance-query", title:"Build refreshable Power Query imports and data-quality checks for financial, WIP, and project-risk inputs", due:"2026-08-13" },
+              { id:"insurance-engine", title:"Calculate adjusted working capital, tangible net worth, liquidity, leverage, backlog-to-equity, and remaining bond capacity", due:"2026-08-16" },
+              { id:"insurance-decision", title:"Apply Capital / Capacity / Character logic and recommend terms, single and aggregate limits, and approve / condition / refer / decline", due:"2026-08-18" },
+              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable exposure dashboard plus a one-page underwriting memo", due:"2026-08-21" },
+              { id:"insurance-scenarios", title:"Run six contractor and hydro stress cases, use Solver for maximum additional job size, complete QA, and release v1", due:"2026-08-23" }
             ]
           },
           {
@@ -2877,7 +2877,7 @@
             summary:"A recruiter-friendly public hub with concise case studies, working proof, architecture context, downloads, and short walkthroughs.",
             milestones:[
               { id:"site-shell", title:"Create the GitHub repository, responsive site shell, navigation, and reusable case-study layout", due:"2026-08-27" },
-              { id:"site-initial-release", title:"Publish the Nuclear and Insurance case studies with working artifacts and coming-soon Pharma proof", due:"2026-08-30" },
+              { id:"site-initial-release", title:"Publish the Nuclear and Contract Surety case studies with working artifacts and coming-soon Pharma proof", due:"2026-08-30" },
               { id:"site-cases", title:"Write the three case studies with problem, method, output, recommendation, and architecture diagram", due:"2026-10-02" },
               { id:"site-embeds", title:"Add Power BI embeds where available plus clear video / image fallbacks", due:"2026-10-04" },
               { id:"site-assets", title:"Add downloadable files, repository links, tech badges, and synthetic-data disclosures", due:"2026-10-06" },
@@ -2907,10 +2907,10 @@
         };
 
         // Ship the largest credibility-gap project first, then publish a thin
-        // public shell once Nuclear and Insurance proof are both available.
+        // public shell once Nuclear and Contract Surety proof are both available.
         const PORTFOLIO_PHASES = [
           { id:"project-controls", title:"Nuclear Controls MVP", dateLabel:"Jul 20–Aug 9", start:"2026-07-20", end:"2026-08-09" },
-          { id:"insurance-workbench", title:"Insurance MVP", dateLabel:"Aug 10–23", start:"2026-08-10", end:"2026-08-23" },
+          { id:"insurance-workbench", title:"Surety MVP", dateLabel:"Aug 10–23", start:"2026-08-10", end:"2026-08-23" },
           { id:"portfolio-site", title:"Public shell", dateLabel:"Aug 24–30", start:"2026-08-24", end:"2026-08-30" },
           { id:"pharma-analytics", title:"Pharma MVP", dateLabel:"Aug 31–Sep 27", start:"2026-08-31", end:"2026-09-27" },
           { id:"portfolio-site", title:"Site polish", dateLabel:"Sep 28–Oct 11", start:"2026-09-28", end:"2026-10-11" },
@@ -2922,9 +2922,9 @@
           "2026-07-20": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 2", text:"Define the mock refurbishment WBS and build the first logic-linked P6 or Microsoft Project schedule." },
           "2026-07-27": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 2", text:"Build earned-value measures and publish the first schedule, cost, milestone, and risk view." },
           "2026-08-03": { projectId:"project-controls", label:"Nuclear Controls v1", due:"Aug 9", text:"Add P50 / P80 risk simulation, validate the schedule, and package the executive narrative." },
-          "2026-08-10": { projectId:"insurance-workbench", label:"Insurance MVP", due:"Aug 23", text:"Build the refreshable claims import, pricing engine, and underwriting decision logic." },
-          "2026-08-17": { projectId:"insurance-workbench", label:"Insurance MVP", due:"Aug 23", text:"Finish the portfolio dashboard, scenarios, Solver optimization, QA, and documented v1." },
-          "2026-08-24": { projectId:"portfolio-site", label:"Public portfolio shell", due:"Aug 30", text:"Publish Nuclear and Insurance case studies with working artifacts and a Pharma coming-soon card." },
+          "2026-08-10": { projectId:"insurance-workbench", label:"Surety MVP", due:"Aug 23", text:"Build the contractor financial and WIP imports, bond-capacity model, and hydro bond-request decision logic." },
+          "2026-08-17": { projectId:"insurance-workbench", label:"Surety MVP", due:"Aug 23", text:"Finish the exposure dashboard, underwriting memo, hydro stress cases, Solver capacity test, QA, and documented v1." },
+          "2026-08-24": { projectId:"portfolio-site", label:"Public portfolio shell", due:"Aug 30", text:"Publish Nuclear and Contract Surety case studies with working artifacts and a Pharma coming-soon card." },
           "2026-08-31": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Create the relational commercial dataset, SQL schema, and quality checks." },
           "2026-09-07": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Build reusable joins, CTEs, window functions, and the first reporting views." },
           "2026-09-14": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Build the control-vs-exposed simulation, confidence intervals, ROI, and allocation logic." },
@@ -2987,8 +2987,8 @@
           "2026-07-20": { career:"Launch the nuclear-first campaign: map roles, send warm outreach, and start the schedule MVP", training:"Prioritize summer running while maintaining the run/lift rotation.", targets:"OPG · AtkinsRéalis / Candu · Aecon · CNL" },
           "2026-07-27": { career:"Turn nuclear conversations into sharper applications and ship the thin Project Controls MVP", training:"Complete the final running-heavy week and prepare bike access and fit.", targets:"Bruce Power · OPG · BWXT · Kinectrics" },
           "2026-08-03": { career:"Release Nuclear Controls v1 and use it in targeted follow-ups", training:"Start the Saturday outdoor bike; replace one run rather than adding a fifth block.", targets:"AtkinsRéalis / Candu · Aecon · CNL" },
-          "2026-08-10": { career:"Build the insurance proof while keeping the nuclear pipeline moving", training:"Keep one outdoor bike, two runs, and one lift inside four total blocks.", targets:"Intact · Munich Re / HSB · OPG" },
-          "2026-08-17": { career:"Release the underwriting workbench and convert the strongest conversations into referrals", training:"Build bike comfort while keeping the remaining sessions easy and consistent.", targets:"Zurich · Marsh · Aecon · Bruce Power" },
+          "2026-08-10": { career:"Build the hydro contract-surety proof while keeping the nuclear pipeline moving", training:"Keep one outdoor bike, two runs, and one lift inside four total blocks.", targets:"Intact · Munich Re / HSB · OPG" },
+          "2026-08-17": { career:"Release the surety workbench and convert the strongest conversations into referrals", training:"Build bike comfort while keeping the remaining sessions easy and consistent.", targets:"Zurich · Marsh · Aecon · Bruce Power" },
           "2026-08-24": { career:"Publish the first portfolio shell and run the August lane decision gate", training:"Continue the weekly outdoor bike and steady summer running volume.", targets:"Responsive Nuclear · Insurance · Healthcare leads" },
           "2026-08-31": { career:"Start the Pharma Analytics MVP without diluting the 45 / 30 / 25 search mix", training:"Maintain one outdoor bike, two runs, and one lift with no volume creep.", targets:"OPG · Intact · IQVIA" },
           "2026-09-07": { career:"Use released proof in applications and deepen the healthcare bridge", training:"Keep the outdoor bike consistent and begin planning the indoor swim routine.", targets:"AtkinsRéalis / Candu · Zurich · AstraZeneca" },
