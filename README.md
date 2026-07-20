@@ -223,12 +223,15 @@ The Portfolio tab tracks four recruiter-facing deliverables and the final respon
 - **Tools:** Primavera P6 or Microsoft Project, Excel, Power Query, Python, pandas, NumPy, Power BI, and DAX
 - **Proof:** A mock nuclear-refurbishment WBS and logic-linked schedule, baseline and critical path, earned-value measures, P50/P80 risk simulation, risk heatmap, Power BI reporting, and an executive narrative
 
-#### Project 2 — Commercial Underwriting Pricing & Portfolio Workbench
+#### Project 2 — Contract Surety Underwriting & Bond Capacity Workbench
 
-- **Lane:** Insurance / Underwriting
-- **Window:** August 10–23 (10–14 hours)
+- **Lane:** Insurance / Contract Surety
+- **Window:** August 10–23 (12–16 hours)
 - **Tools:** Excel, Power Query, Power Pivot, PivotTables, LET, XLOOKUP, Solver, and data tables
-- **Proof:** Claims import, frequency × severity pricing, expenses and risk load, underwriting decisions, portfolio dashboard, scenario comparison, and Solver optimization
+- **Featured case:** A synthetic Canadian civil contractor requests performance and labour-and-material payment bonds for a C$30M spillway rehabilitation package within a hydroelectric dam refurbishment.
+- **Proof:** Refreshable contractor financial statements and WIP data; adjusted working capital, tangible net worth, liquidity, leverage, backlog-to-equity, and remaining-capacity analysis; Capital / Capacity / Character assessment; recommended single and aggregate limits; approve / condition / refer / decline logic; an exposure dashboard; and a one-page underwriting memo.
+- **Stress tests:** High-water delay, 10% material inflation, late owner payment, margin fade, a concurrent project win, and specialized-subcontractor failure. Solver tests the maximum additional job size that remains within the model's documented capacity constraints.
+- **Scope note:** The hydro package is the featured case study, while the workbook remains reusable for road, bridge, transit, municipal, and other bonded construction work. All contractor data and thresholds are clearly labelled as synthetic educational assumptions.
 
 #### Project 3 — Pharma Commercial Effectiveness & Channel Optimization
 
@@ -242,7 +245,7 @@ The Portfolio tab tracks four recruiter-facing deliverables and the final respon
 - **Lane:** Shared proof layer
 - **Window:** August 24–30 for the first public shell; September 28–October 11 for the complete site (6–10 hours total)
 - **Tools:** HTML, CSS, basic JavaScript, Git/GitHub, Power BI embeds, downloads, and short walkthrough videos
-- **Proof:** Early live Nuclear and Insurance case studies, followed by all three concise case studies with working artifacts, architecture context, synthetic-data disclosures, mobile QA, and fallback media where live embedding is unavailable
+- **Proof:** Early live Nuclear and Contract Surety case studies, followed by all three concise case studies with working artifacts, architecture context, synthetic-data disclosures, mobile QA, and fallback media where live embedding is unavailable
 
 #### Refinement and freeze
 
@@ -254,7 +257,7 @@ The protected weekly build rhythm is 1.5 hours Wednesday, 3 hours Saturday morni
 The release order is intentionally tied to the job-search funnel:
 
 1. Ship a thin Nuclear Project Controls MVP by August 2 and the validated v1 by August 9.
-2. Release the Insurance Workbench by August 23.
+2. Release the Contract Surety Workbench by August 23.
 3. Publish the first public portfolio shell by August 30.
 4. Release Pharma by September 27 while using current WebHealth experience as the healthcare bridge.
 5. Finish the public presentation layer by October 11, refine only the proof receiving meaningful response, and freeze development October 25.
@@ -354,6 +357,14 @@ Future updates should preserve these project constraints:
 13. Keep Career Tracker records in `state.careerApps` and `state.careerContacts`; preserve stable IDs, lane/stage fields, direct editing, and Guest read-only guards.
 
 ## Update history
+
+### v3.1 — 2026-07-20
+
+- Reframed the generic commercial-pricing project as a **Contract Surety Underwriting & Bond Capacity Workbench**.
+- Added a synthetic C$30M hydroelectric spillway rehabilitation bond request as the featured case without making the underlying workbook project-specific.
+- Replaced claims frequency-and-severity pricing with contractor financial-statement, WIP, backlog, Capital / Capacity / Character, bond-limit, and remaining-capacity analysis.
+- Added a one-page underwriting memo, hydro and contractor stress cases, and a Solver test for maximum additional job size.
+- Preserved the existing project dates, milestone IDs, completion history, Portfolio layout, mobile behavior, and synchronization paths.
 
 ### v3.0 — 2026-07-17
 
