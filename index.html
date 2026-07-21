@@ -1118,6 +1118,91 @@
 
 
     /* ===== DAILY JOURNAL ===== */
+    #marco-life-dashboard .journal-lock {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      min-height: min(620px, calc(100vh - 220px));
+      padding: 24px 0;
+    }
+    #marco-life-dashboard .journal-lock[hidden],
+    #marco-life-dashboard .journal-content[hidden] { display: none; }
+    #marco-life-dashboard .journal-lock-card {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 470px;
+      padding: clamp(28px, 6vw, 46px);
+      text-align: center;
+      width: 100%;
+    }
+    #marco-life-dashboard .journal-lock-icon {
+      align-items: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--highlight);
+      border-radius: 50%;
+      color: var(--primary);
+      display: inline-flex;
+      height: 58px;
+      justify-content: center;
+      margin-bottom: 18px;
+      width: 58px;
+    }
+    #marco-life-dashboard .journal-lock-icon svg { height: 24px; width: 24px; }
+    #marco-life-dashboard .journal-lock-title {
+      color: var(--primary);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.65rem, 5vw, 2.15rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 6px 0 10px;
+    }
+    #marco-life-dashboard .journal-lock-copy {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0 auto 24px;
+      max-width: 34ch;
+    }
+    #marco-life-dashboard .journal-unlock-form {
+      display: grid;
+      gap: 12px;
+      text-align: left;
+    }
+    #marco-life-dashboard .journal-password-label {
+      color: var(--text);
+      display: grid;
+      font-size: 0.8rem;
+      font-weight: 600;
+      gap: 7px;
+    }
+    #marco-life-dashboard .journal-password-input {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      min-height: 48px;
+      padding: 12px 14px;
+      width: 100%;
+    }
+    #marco-life-dashboard .journal-unlock-button {
+      justify-content: center;
+      min-height: 48px;
+      width: 100%;
+    }
+    #marco-life-dashboard .journal-unlock-error {
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      min-height: 1.5em;
+      text-align: center;
+    }
+    #marco-life-dashboard .journal-unlock-note {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 4px;
+      text-align: center;
+    }
     #marco-life-dashboard .journal-layout {
       align-items: start;
       display: grid;
@@ -1259,6 +1344,12 @@
     body[data-dashboard-role="guest"] #marco-life-dashboard .journal-textarea { cursor: default; }
 
     @media (max-width: 740px) {
+      #marco-life-dashboard .journal-lock {
+        align-items: flex-start;
+        min-height: 0;
+        padding: 8px 0;
+      }
+      #marco-life-dashboard .journal-lock-card { padding: 30px 20px; }
       #marco-life-dashboard .journal-layout { grid-template-columns: 1fr; }
       #marco-life-dashboard .journal-page { padding: 22px 18px; }
       #marco-life-dashboard .journal-date-controls {
@@ -2457,39 +2548,59 @@
 
     <!-- ===== PANEL: JOURNAL ===== -->
     <section id="panel-journal" class="is-hidden" role="tabpanel" aria-labelledby="tab-journal" hidden>
-      <div class="journal-layout">
-        <article class="journal-page">
-          <header class="journal-page-header">
-            <span class="eyebrow">Daily journal</span>
-            <h2 class="journal-date-heading" id="journal-date-heading">Today</h2>
-          </header>
-
-          <div class="journal-date-controls" aria-label="Browse journal days">
-            <button type="button" class="btn btn-ghost" id="journal-previous-day" aria-label="Previous day"><i data-lucide="chevron-left"></i></button>
-            <label for="journal-date-input">
-              <span class="sr-only">Journal date</span>
-              <input class="journal-date-input" id="journal-date-input" type="date">
+      <div class="journal-lock" id="journal-lock">
+        <div class="journal-lock-card">
+          <span class="journal-lock-icon" aria-hidden="true"><i data-lucide="lock-keyhole"></i></span>
+          <span class="eyebrow">Private space</span>
+          <h2 class="journal-lock-title" id="journal-lock-title">Unlock your journal</h2>
+          <p class="journal-lock-copy">Enter the separate journal password to view your entries. You will only need it once during this browser session.</p>
+          <form class="journal-unlock-form" id="journal-unlock-form" aria-labelledby="journal-lock-title">
+            <label class="journal-password-label" for="journal-password-input">
+              Journal password
+              <input class="journal-password-input" id="journal-password-input" type="password" autocomplete="off" aria-describedby="journal-unlock-error journal-unlock-note" required>
             </label>
-            <button type="button" class="btn btn-ghost" id="journal-next-day" aria-label="Next day"><i data-lucide="chevron-right"></i></button>
-            <button type="button" class="btn journal-today-btn" id="journal-today">Today</button>
-          </div>
+            <button type="submit" class="btn btn-primary journal-unlock-button" id="journal-unlock-button"><i data-lucide="unlock-keyhole"></i> Unlock journal</button>
+            <p class="journal-unlock-error" id="journal-unlock-error" role="alert" aria-live="assertive"></p>
+            <p class="journal-unlock-note" id="journal-unlock-note">The journal locks again when you sign out or close this browser session.</p>
+          </form>
+        </div>
+      </div>
 
-          <p class="text-small journal-helper" id="journal-helper">Write freely. Your entry saves automatically as you type.</p>
-          <textarea class="journal-textarea" id="journal-textarea" aria-labelledby="journal-date-heading" placeholder="What happened today? What mattered? What do you want to remember?"></textarea>
+      <div class="journal-content" id="journal-content" hidden>
+        <div class="journal-layout">
+          <article class="journal-page">
+            <header class="journal-page-header">
+              <span class="eyebrow">Daily journal</span>
+              <h2 class="journal-date-heading" id="journal-date-heading">Today</h2>
+            </header>
 
-          <footer class="journal-meta">
-            <span class="text-small" id="journal-status" aria-live="polite">Saved automatically.</span>
-            <span class="text-small" id="journal-word-count">0 words</span>
-          </footer>
-        </article>
+            <div class="journal-date-controls" aria-label="Browse journal days">
+              <button type="button" class="btn btn-ghost" id="journal-previous-day" aria-label="Previous day"><i data-lucide="chevron-left"></i></button>
+              <label for="journal-date-input">
+                <span class="sr-only">Journal date</span>
+                <input class="journal-date-input" id="journal-date-input" type="date">
+              </label>
+              <button type="button" class="btn btn-ghost" id="journal-next-day" aria-label="Next day"><i data-lucide="chevron-right"></i></button>
+              <button type="button" class="btn journal-today-btn" id="journal-today">Today</button>
+            </div>
 
-        <aside class="card journal-history" aria-labelledby="journal-history-title">
-          <div class="journal-history-header">
-            <h3 id="journal-history-title">Past entries</h3>
-            <span class="text-small" id="journal-entry-count">0 entries</span>
-          </div>
-          <div class="journal-entry-list" id="journal-entry-list"></div>
-        </aside>
+            <p class="text-small journal-helper" id="journal-helper">Write freely. Your entry saves automatically as you type.</p>
+            <textarea class="journal-textarea" id="journal-textarea" aria-labelledby="journal-date-heading" placeholder="What happened today? What mattered? What do you want to remember?"></textarea>
+
+            <footer class="journal-meta">
+              <span class="text-small" id="journal-status" aria-live="polite">Saved automatically.</span>
+              <span class="text-small" id="journal-word-count">0 words</span>
+            </footer>
+          </article>
+
+          <aside class="card journal-history" aria-labelledby="journal-history-title">
+            <div class="journal-history-header">
+              <h3 id="journal-history-title">Past entries</h3>
+              <span class="text-small" id="journal-entry-count">0 entries</span>
+            </div>
+            <div class="journal-entry-list" id="journal-entry-list"></div>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -2627,6 +2738,8 @@
         guest: { password: "123", role: "guest" }
       });
       const SESSION_KEY = "marco-dashboard-role";
+      const JOURNAL_SESSION_KEY = "marco-journal-unlocked";
+      const JOURNAL_PASSWORD_HASH = "cba97cc0f46767a763f3895ae9ba59de84960c2f570a7ec28f30ed6caf8ad2c8";
       const passwordScreen = document.getElementById('password-screen');
       const dashboard = document.getElementById('marco-life-dashboard');
       const loginForm = document.getElementById('login-form');
@@ -2637,6 +2750,11 @@
       let currentRole = null;
 
       function isAdmin() { return currentRole === "admin"; }
+
+      function isJournalUnlocked() {
+        try { return sessionStorage.getItem(JOURNAL_SESSION_KEY) === "true"; }
+        catch (e) { return false; }
+      }
 
       function getStoredRole() {
         try {
@@ -2685,7 +2803,10 @@
       const storedRole = getStoredRole();
       if (storedRole) openDashboard(storedRole);
       else {
-        try { sessionStorage.removeItem("dashboard_unlocked"); } catch (e) {}
+        try {
+          sessionStorage.removeItem("dashboard_unlocked");
+          sessionStorage.removeItem(JOURNAL_SESSION_KEY);
+        } catch (e) {}
         usernameInput.focus();
       }
 
@@ -3149,6 +3270,12 @@
           journalWordCount: document.getElementById("journal-word-count"),
           journalEntryCount: document.getElementById("journal-entry-count"),
           journalEntryList: document.getElementById("journal-entry-list"),
+          journalLock: document.getElementById("journal-lock"),
+          journalContent: document.getElementById("journal-content"),
+          journalUnlockForm: document.getElementById("journal-unlock-form"),
+          journalPasswordInput: document.getElementById("journal-password-input"),
+          journalUnlockButton: document.getElementById("journal-unlock-button"),
+          journalUnlockError: document.getElementById("journal-unlock-error"),
           notesTextarea: document.getElementById("notes-textarea"),
           notesStatus: document.getElementById("notes-status"),
           notesHelper: document.getElementById("notes-helper"),
@@ -5719,6 +5846,71 @@
 
 
         // ===== DAILY JOURNAL =====
+        function clearJournalSurface() {
+          els.journalDateHeading.textContent = "Journal locked";
+          els.journalDateInput.value = "";
+          els.journalTextarea.value = "";
+          els.journalEntryList.replaceChildren();
+          els.journalEntryCount.textContent = "Locked";
+          els.journalWordCount.textContent = "";
+          els.journalStatus.textContent = "Journal locked.";
+        }
+
+        function applyJournalAccess() {
+          const unlocked = isJournalUnlocked();
+          els.journalLock.hidden = unlocked;
+          els.journalLock.setAttribute("aria-hidden", String(unlocked));
+          els.journalContent.hidden = !unlocked;
+          els.journalContent.setAttribute("aria-hidden", String(!unlocked));
+          if (!unlocked) clearJournalSurface();
+          return unlocked;
+        }
+
+        async function hashJournalPassword(value) {
+          if (!window.crypto || !window.crypto.subtle || typeof TextEncoder === "undefined") {
+            throw new Error("Secure password checks are unavailable.");
+          }
+          const bytes = new TextEncoder().encode(value);
+          const digest = await window.crypto.subtle.digest("SHA-256", bytes);
+          return Array.from(new Uint8Array(digest), function(byte) {
+            return byte.toString(16).padStart(2, "0");
+          }).join("");
+        }
+
+        async function unlockJournal(event) {
+          event.preventDefault();
+          els.journalUnlockError.textContent = "";
+          els.journalUnlockButton.disabled = true;
+          els.journalUnlockForm.setAttribute("aria-busy", "true");
+
+          try {
+            const passwordHash = await hashJournalPassword(els.journalPasswordInput.value);
+            if (passwordHash !== JOURNAL_PASSWORD_HASH) {
+              els.journalUnlockError.textContent = "That password is incorrect. Try again.";
+              els.journalPasswordInput.value = "";
+              els.journalPasswordInput.focus();
+              return;
+            }
+
+            try { sessionStorage.setItem(JOURNAL_SESSION_KEY, "true"); }
+            catch (e) {
+              els.journalUnlockError.textContent = "This browser could not start a private journal session.";
+              return;
+            }
+
+            els.journalPasswordInput.value = "";
+            applyJournalAccess();
+            renderJournal();
+            els.journalDateHeading.tabIndex = -1;
+            els.journalDateHeading.focus();
+          } catch (e) {
+            els.journalUnlockError.textContent = "The password check is unavailable. Reload this page over a secure connection.";
+          } finally {
+            els.journalUnlockButton.disabled = false;
+            els.journalUnlockForm.removeAttribute("aria-busy");
+          }
+        }
+
         function isValidJournalDate(value) {
           if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return false;
           const parsed = parseDate(value);
@@ -5752,6 +5944,11 @@
         }
 
         function renderJournalHistory() {
+          if (!isJournalUnlocked()) {
+            els.journalEntryList.replaceChildren();
+            els.journalEntryCount.textContent = "Locked";
+            return;
+          }
           ensureJournalState();
           const entryDates = Object.keys(state.journal.entries).sort().reverse();
           els.journalEntryCount.textContent = entryDates.length + (entryDates.length === 1 ? " entry" : " entries");
@@ -5790,6 +5987,7 @@
         }
 
         function renderJournal() {
+          if (!applyJournalAccess()) return;
           ensureJournalState();
           if (!isValidJournalDate(selectedJournalDate)) selectedJournalDate = todayStr();
           const entry = state.journal.entries[selectedJournalDate];
@@ -5806,6 +6004,7 @@
         }
 
         function updateJournalDraft() {
+          if (!isJournalUnlocked()) return;
           ensureJournalState();
           const text = els.journalTextarea.value;
           if (text.trim()) {
@@ -5820,6 +6019,7 @@
         }
 
         function saveJournalEntry() {
+          if (!isJournalUnlocked()) return false;
           if (!requireAdmin()) {
             renderJournal();
             return false;
@@ -5839,6 +6039,7 @@
         }
 
         function selectJournalDate(value) {
+          if (!isJournalUnlocked()) return;
           if (!isValidJournalDate(value)) return;
           flushJournalSave();
           selectedJournalDate = value;
@@ -5893,7 +6094,10 @@
           if (view === "portfolio") renderPortfolio();
           if (view === "settings") populateSettings();
           if (view === "career") { renderCareer(); populateCareerEditFields(); }
-          if (view === "journal") renderJournal();
+          if (view === "journal") {
+            if (applyJournalAccess()) renderJournal();
+            else requestAnimationFrame(function() { els.journalPasswordInput.focus(); });
+          }
           if (view === "notes") renderNotes();
           if (options && options.focusTab) {
             const activeTab = els.tabs.find(function(tab) { return tab.dataset.view === view; });
@@ -5956,6 +6160,8 @@
               activateView(els.tabs[nextIndex].dataset.view, { focusTab: true });
             });
           });
+
+          els.journalUnlockForm.addEventListener("submit", unlockJournal);
 
           els.matrixUndoButton.addEventListener("click", function() {
             if (!requireAdmin()) return;
@@ -6020,6 +6226,7 @@
             try {
               sessionStorage.removeItem(SESSION_KEY);
               sessionStorage.removeItem("dashboard_unlocked");
+              sessionStorage.removeItem(JOURNAL_SESSION_KEY);
             } catch (e) {}
             window.location.reload();
           });
@@ -6338,6 +6545,7 @@
           populateSettings();
           populateCareerEditFields();
           bindEvents();
+          applyJournalAccess();
           els.weekSelect.innerHTML = "";
           weeks.forEach(w => {
             const opt = document.createElement("option");
