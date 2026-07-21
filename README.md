@@ -13,13 +13,13 @@ The login screen supports two dashboard accounts:
 | Role | Username | Password | Access |
 | --- | --- | --- | --- |
 | Admin | `` | `` | Full editing, local saving, and JSONBin synchronization |
-| Guest | `guest` | `123` | Read-only preview of every dashboard tab |
+| Guest | `guest` | `123` | Read-only preview, with the Journal protected by its separate password |
 
-The active role is kept in `sessionStorage`, so signing out or closing the browser session returns the viewer to the login screen. A role badge is always visible in the dashboard header, and guest sessions display a read-only banner.
+The active role is kept in `sessionStorage`, so signing out or closing the browser session returns the viewer to the login screen. A role badge is always visible in the dashboard header, and guest sessions display a read-only banner. Journal access has its own session-only unlock flag and is cleared on sign-out or when the browser session closes.
 
-Guest mode can browse the weekly plan, Priority Matrix, Journal, tasks, schedule, Roadmap, portfolio, Career Tracker, notes, and settings. All mutation paths are also guarded in JavaScript: guests cannot complete, move, add, or delete Priority Matrix tasks; complete, reorder, hide, or add daily tasks; edit schedules or Roadmap content; change networking selections; complete portfolio milestones; edit Journal entries, career data, or notes; save settings; write to `localStorage`; or send updates to JSONBin. Guests may still load the latest cloud data for viewing.
+Guest mode can browse the weekly plan, Priority Matrix, tasks, schedule, Roadmap, portfolio, Career Tracker, notes, and settings. The Journal remains locked until its separate password is entered, after which guests can browse entries in read-only mode. All mutation paths are also guarded in JavaScript: guests cannot complete, move, add, or delete Priority Matrix tasks; complete, reorder, hide, or add daily tasks; edit schedules or Roadmap content; change networking selections; complete portfolio milestones; edit Journal entries, career data, or notes; save settings; write to `localStorage`; or send updates to JSONBin. Guests may still load the latest cloud data for viewing.
 
-> **Security note:** This is client-side access control for a static personal dashboard, not server-backed authentication. Credentials and JSONBin configuration remain visible in the delivered page source. Use a server-side authentication and data proxy if the dashboard ever contains sensitive information or requires access control that cannot be bypassed by a technically advanced visitor.
+> **Security note:** This is client-side access control for a static personal dashboard, not server-backed authentication. The journal password is stored as a SHA-256 digest rather than readable text, but the gate can still be bypassed by a technically advanced visitor because the journal data and access logic ultimately run in the browser. The password itself is intentionally not printed in this public README. Use server-side authentication and a data proxy if the dashboard ever contains information that requires strong confidentiality.
 
 ### This week
 
@@ -53,6 +53,9 @@ The Priority Matrix tab adds a dedicated Eisenhower Matrix for work that needs p
 
 The Journal tab provides a calm, date-based writing space for daily thoughts, ideas, and reflections.
 
+- Opening the tab first shows a separate, mobile-friendly password gate; journal entry data is not populated into the interface before it is unlocked.
+- A correct password unlocks the Journal once per browser session for either account role. A wrong password shows an inline error and leaves every entry blocked.
+- Journal access is stored only in `sessionStorage` and is cleared by dashboard sign-out or when the browser session closes.
 - Open today or select any earlier date with the date picker.
 - Move one day at a time with the previous and next controls, or return directly to today.
 - Browse all written dates from the **Past entries** list, with a short preview of each entry.
@@ -60,7 +63,7 @@ The Journal tab provides a calm, date-based writing space for daily thoughts, id
 - Entries save automatically after a short typing pause, persist locally, and use the existing JSONBin synchronization path.
 - Erasing all text for a date removes that empty entry from the history list.
 - Word count and save status remain visible without adding a manual Save button.
-- Guests can browse every synced entry and date, but the writing area remains read-only.
+- Guests can browse synced entries only after unlocking the Journal, and the writing area remains read-only.
 - On iPhone, the writing page and history stack vertically, with date controls and history rows retaining touch-friendly targets.
 
 ### Google Calendar
@@ -314,6 +317,7 @@ The dashboard is designed for regular iPhone use:
 - Calendar event rows collapse cleanly on narrow screens, and calendar actions retain 44px touch targets.
 - Priority Matrix quadrants stack vertically, while add, move, complete, and delete controls retain 44px touch targets.
 - Journal writing and entry history stack into one column, while date navigation and entry buttons retain 44px touch targets.
+- The Journal password field and unlock button are at least 48px tall and fit without horizontal scrolling on iPhone.
 - Networking actions and selectors use touch targets of at least 44px.
 - Career pipeline cards stack into one column; their stage, lane, next-action, notes, and remove controls retain touch-friendly targets.
 - Task drag handles and Hide controls are touch-friendly.
@@ -353,10 +357,18 @@ Future updates should preserve these project constraints:
 9. Avoid unnecessary third-party dependencies or abstractions.
 10. Keep Google Calendar event data read-only and transient; persist only the validated Apps Script `/exec` URL.
 11. Keep Priority Matrix tasks in `state.priorityMatrix` and preserve Guest read-only guards for every matrix action.
-12. Keep dated Journal entries in `state.journal.entries`, include them in JSONBin synchronization, and preserve the Guest read-only guard.
+12. Keep dated Journal entries in `state.journal.entries`, include them in JSONBin synchronization, preserve the Guest read-only guard, and keep the separate journal unlock state session-only.
 13. Keep Career Tracker records in `state.careerApps` and `state.careerContacts`; preserve stable IDs, lane/stage fields, direct editing, and Guest read-only guards.
 
 ## Update history
+
+### v3.2 — 2026-07-21
+
+- Added a separate password gate inside the Journal tab without changing the main Admin / Guest login.
+- Added one-time-per-session journal unlocking through `sessionStorage`, with automatic relocking on sign-out or browser-session close.
+- Kept journal entry data out of the interface until unlock and added an inline wrong-password error that leaves access blocked.
+- Stored only a SHA-256 password digest in the public single-file application and documented the limits of browser-only access control.
+- Preserved Admin editing, Guest read-only behavior, local and JSONBin synchronization, the five-color palette, and iPhone-friendly 48px unlock controls.
 
 ### v3.1 — 2026-07-20
 
