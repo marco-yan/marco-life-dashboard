@@ -2227,8 +2227,8 @@
       <section class="portfolio-week-card" id="portfolio-week-card" aria-labelledby="portfolio-week-title">
         <div class="portfolio-week-copy">
           <span class="eyebrow" id="portfolio-week-label">Portfolio plan</span>
-          <h2 id="portfolio-week-title">Nuclear project-controls MVP starts July 20</h2>
-          <p class="text-small" id="portfolio-week-detail">Build the credibility gap first, release proof in small increments, and freeze development on October 25.</p>
+          <h2 id="portfolio-week-title">Surety workbench v4 is live; presentation polish runs to August 2</h2>
+          <p class="text-small" id="portfolio-week-detail">The technical MVP is complete. Finish the standalone memo, experienced review, sensitivity tools, and recruiter-facing presentation before sharing it broadly.</p>
         </div>
         <div class="portfolio-week-progress">
           <div class="portfolio-progress-label"><span id="portfolio-week-progress-label">Overall progress</span><strong id="portfolio-week-progress-value">0%</strong></div>
@@ -2369,14 +2369,14 @@
         <div>
           <span class="eyebrow">July 20–October 25, 2026</span>
           <h2>Job-search proof portfolio</h2>
-          <p class="text-small">Build the Nuclear Project Controls proof first, then Insurance and Healthcare Analytics. Release each MVP quickly, document it publicly, and freeze development for interview season.</p>
+          <p class="text-small">The Contract Surety technical MVP shipped first. Finish its presentation layer, then build Nuclear Project Controls and Healthcare Analytics before freezing development for interview season.</p>
         </div>
         <button type="button" class="btn" id="portfolio-jump-current"><i data-lucide="locate-fixed"></i> Jump to current phase</button>
       </div>
 
       <div class="viz-grid">
         <div class="card viz-stat"><span class="text-muted">Overall completion</span><span class="viz-stat-value" id="portfolio-overall-percent">0%</span><span class="text-small" id="portfolio-overall-detail">0 of 0 milestones</span></div>
-        <div class="card viz-stat"><span class="text-muted">Current phase</span><span class="viz-stat-value" id="portfolio-current-phase">Plan</span><span class="text-small" id="portfolio-current-due">Nuclear MVP starts Jul 20</span></div>
+        <div class="card viz-stat"><span class="text-muted">Current phase</span><span class="viz-stat-value" id="portfolio-current-phase">Project 2</span><span class="text-small" id="portfolio-current-due">Surety polish · due Aug 2</span></div>
         <div class="card viz-stat"><span class="text-muted">Build cadence</span><span class="viz-stat-value">6 hrs</span><span class="text-small">Wednesday · Saturday morning · Sunday</span></div>
         <div class="card viz-stat"><span class="text-muted">Development freeze</span><span class="viz-stat-value">Oct 25</span><span class="text-small">Afterward: interviews, not feature creep</span></div>
       </div>
@@ -2929,39 +2929,44 @@
             number:"Project 1",
             title:"Nuclear Project Controls & Risk Forecasting Command Center",
             lane:"Nuclear Project Delivery / Project Controls",
-            start:"2026-07-20",
-            end:"2026-08-09",
-            dateLabel:"Jul 20–Aug 9 · thin MVP Aug 2",
+            start:"2026-08-03",
+            end:"2026-08-23",
+            dateLabel:"Aug 3–23 · thin MVP Aug 16",
             hours:"14–18 hours",
             tools:["Primavera P6", "Microsoft Project", "Excel", "Power Query", "Python", "pandas", "NumPy", "Power BI", "DAX"],
             summary:"A fictional nuclear refurbishment schedule and controls command center combining WBS logic, critical path, earned value, risk forecasting, and an executive decision narrative.",
             milestones:[
-              { id:"controls-source", title:"Define the mock nuclear scope, WBS, 8 work packages, 12 periods, milestones, and risk register", due:"2026-07-22" },
-              { id:"controls-query", title:"Build the first P6 or Microsoft Project schedule with logic links, constraints, baseline, and critical path", due:"2026-07-25" },
-              { id:"controls-evm", title:"Create the Excel / Power Query model and implement PV, EV, AC, CPI, SPI, CV, SV, and EAC", due:"2026-07-29" },
-              { id:"controls-report", title:"Publish a thin Power BI MVP with schedule, cost, milestone, and risk views", due:"2026-08-02" },
-              { id:"controls-simulation", title:"Add the documented pandas / NumPy P50 and P80 schedule-risk simulation", due:"2026-08-06" },
-              { id:"controls-release", title:"Validate the schedule and numbers, write the executive narrative, and package v1", due:"2026-08-09" }
+              { id:"controls-source", title:"Define the mock nuclear scope, WBS, 8 work packages, 12 periods, milestones, and risk register", due:"2026-08-05" },
+              { id:"controls-query", title:"Build the first P6 or Microsoft Project schedule with logic links, constraints, baseline, and critical path", due:"2026-08-09" },
+              { id:"controls-evm", title:"Create the Excel / Power Query model and implement PV, EV, AC, CPI, SPI, CV, SV, and EAC", due:"2026-08-13" },
+              { id:"controls-report", title:"Publish a thin Power BI MVP with schedule, cost, milestone, and risk views", due:"2026-08-16" },
+              { id:"controls-simulation", title:"Add the documented pandas / NumPy P50 and P80 schedule-risk simulation", due:"2026-08-20" },
+              { id:"controls-release", title:"Validate the schedule and numbers, write the executive narrative, and package v1", due:"2026-08-23" }
             ]
           },
           {
             id:"insurance-workbench",
             number:"Project 2",
-            title:"Contract Surety Underwriting & Bond Capacity Workbench",
+            title:"Energy Infrastructure Contract Surety Underwriting Workbench",
             lane:"Insurance / Contract Surety",
-            start:"2026-08-10",
-            end:"2026-08-23",
-            dateLabel:"Aug 10–23",
-            hours:"12–16 hours",
-            tools:["Excel", "Power Query", "Power Pivot", "PivotTables", "LET", "XLOOKUP", "Solver", "Data Tables"],
-            summary:"A reusable contractor-assessment model built around a synthetic C$30M hydroelectric spillway rehabilitation bond request, translating financial strength, WIP, capacity, and project risk into bond limits and a documented underwriting recommendation.",
+            start:"2026-07-22",
+            end:"2026-08-02",
+            dateLabel:"MVP shipped Jul 22 · presentation-ready target Aug 2",
+            hours:"v4 live · 10–14 polish hours remaining",
+            statusLabel:"MVP complete",
+            statusState:"Complete",
+            tools:["Excel", "CSV", "JavaScript", "Node.js", "Word", "PDF", "Git", "GitHub"],
+            summary:"A public v4 underwriting work sample built around a fictional C$28M hydroelectric dam rehabilitation request, twelve months of post-award monitoring, and a second C$16M conventional civil request at a controlled nuclear site. The technical MVP is complete; independent review and recruiter-facing presentation work remain.",
             milestones:[
-              { id:"insurance-source", title:"Create synthetic contractor financial statements, WIP / backlog, and a C$30M hydro spillway rehabilitation bond request", due:"2026-08-11" },
-              { id:"insurance-query", title:"Build refreshable Power Query imports and data-quality checks for financial, WIP, and project-risk inputs", due:"2026-08-13" },
-              { id:"insurance-engine", title:"Calculate adjusted working capital, tangible net worth, liquidity, leverage, backlog-to-equity, and remaining bond capacity", due:"2026-08-16" },
-              { id:"insurance-decision", title:"Apply Capital / Capacity / Character logic and recommend terms, single and aggregate limits, and approve / condition / refer / decline", due:"2026-08-18" },
-              { id:"insurance-dashboard", title:"Build the Power Pivot and PivotTable exposure dashboard plus a one-page underwriting memo", due:"2026-08-21" },
-              { id:"insurance-scenarios", title:"Run six contractor and hydro stress cases, use Solver for maximum additional job size, complete QA, and release v1", due:"2026-08-23" }
+              { id:"insurance-source", title:"Lock the fictional contractor, C$28M hydro request, three-year financials, WIP, completed-job history, and provenance framework", due:"2026-07-22" },
+              { id:"insurance-query", title:"Create auditable CSV inputs, the assumptions and source register, reconciliation checks, and reproducible workbook build", due:"2026-07-22" },
+              { id:"insurance-engine", title:"Complete the financial spread, adjusted working capital and tangible net worth, WIP / backlog, capacity screens, and weighted 5C assessment", due:"2026-07-22" },
+              { id:"insurance-decision", title:"Document the hydro recommendation, twelve-month monitoring, C$16M nuclear-site reassessment, and integrated conditions tracker", due:"2026-07-22" },
+              { id:"insurance-dashboard", title:"Publish the ten-sheet v4 workbook, editable Word and PDF beginner guides, and the complete editable build methodology", due:"2026-07-22" },
+              { id:"insurance-scenarios", title:"Run seven deterministic downside and concurrent-workload scenarios, complete formula and visual QA, and release v4", due:"2026-07-22" },
+              { id:"insurance-memo", title:"Create the standalone two-page underwriting recommendation memo and concise reviewer handoff", due:"2026-07-25" },
+              { id:"insurance-review", title:"Complete an experienced-surety review and resolve any material feedback or unsupported assumptions", due:"2026-07-29" },
+              { id:"insurance-presentation", title:"Add Data Tables and Solver sensitivity, build the recruiter-facing case page, record a 60–90 second walkthrough, and run final shareability QA", due:"2026-08-02" }
             ]
           },
           {
@@ -3027,11 +3032,11 @@
           ]
         };
 
-        // Ship the largest credibility-gap project first, then publish a thin
-        // public shell once Nuclear and Contract Surety proof are both available.
+        // The Surety technical MVP shipped ahead of plan. Finish its presentation
+        // layer, then complete Nuclear Controls before publishing the public shell.
         const PORTFOLIO_PHASES = [
-          { id:"project-controls", title:"Nuclear Controls MVP", dateLabel:"Jul 20–Aug 9", start:"2026-07-20", end:"2026-08-09" },
-          { id:"insurance-workbench", title:"Surety MVP", dateLabel:"Aug 10–23", start:"2026-08-10", end:"2026-08-23" },
+          { id:"insurance-workbench", title:"Surety v4 + polish", dateLabel:"MVP Jul 22 · polish to Aug 2", start:"2026-07-22", end:"2026-08-02" },
+          { id:"project-controls", title:"Nuclear Controls MVP", dateLabel:"Aug 3–23", start:"2026-08-03", end:"2026-08-23" },
           { id:"portfolio-site", title:"Public shell", dateLabel:"Aug 24–30", start:"2026-08-24", end:"2026-08-30" },
           { id:"pharma-analytics", title:"Pharma MVP", dateLabel:"Aug 31–Sep 27", start:"2026-08-31", end:"2026-09-27" },
           { id:"portfolio-site", title:"Site polish", dateLabel:"Sep 28–Oct 11", start:"2026-09-28", end:"2026-10-11" },
@@ -3040,11 +3045,11 @@
         ];
 
         const PORTFOLIO_WEEKLY_FOCUS = {
-          "2026-07-20": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 2", text:"Define the mock refurbishment WBS and build the first logic-linked P6 or Microsoft Project schedule." },
-          "2026-07-27": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 2", text:"Build earned-value measures and publish the first schedule, cost, milestone, and risk view." },
-          "2026-08-03": { projectId:"project-controls", label:"Nuclear Controls v1", due:"Aug 9", text:"Add P50 / P80 risk simulation, validate the schedule, and package the executive narrative." },
-          "2026-08-10": { projectId:"insurance-workbench", label:"Surety MVP", due:"Aug 23", text:"Build the contractor financial and WIP imports, bond-capacity model, and hydro bond-request decision logic." },
-          "2026-08-17": { projectId:"insurance-workbench", label:"Surety MVP", due:"Aug 23", text:"Finish the exposure dashboard, underwriting memo, hydro stress cases, Solver capacity test, QA, and documented v1." },
+          "2026-07-20": { projectId:"insurance-workbench", label:"Surety v4", due:"MVP shipped Jul 22", text:"Treat the technical underwriting MVP as complete, then draft the standalone recommendation memo and reviewer handoff." },
+          "2026-07-27": { projectId:"insurance-workbench", label:"Surety presentation polish", due:"Aug 2", text:"Complete the experienced-surety review, sensitivity tools, recruiter-facing case page, walkthrough, and final shareability QA." },
+          "2026-08-03": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 16", text:"Define the mock refurbishment WBS and build the first logic-linked P6 or Microsoft Project schedule." },
+          "2026-08-10": { projectId:"project-controls", label:"Nuclear Controls MVP", due:"Thin MVP Aug 16", text:"Build earned-value measures and publish the first schedule, cost, milestone, and risk view." },
+          "2026-08-17": { projectId:"project-controls", label:"Nuclear Controls v1", due:"Aug 23", text:"Add P50 / P80 risk simulation, validate the schedule, and package the executive narrative." },
           "2026-08-24": { projectId:"portfolio-site", label:"Public portfolio shell", due:"Aug 30", text:"Publish Nuclear and Contract Surety case studies with working artifacts and a Pharma coming-soon card." },
           "2026-08-31": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Create the relational commercial dataset, SQL schema, and quality checks." },
           "2026-09-07": { projectId:"pharma-analytics", label:"Pharma MVP", due:"Sep 27", text:"Build reusable joins, CTEs, window functions, and the first reporting views." },
@@ -3065,6 +3070,29 @@
           "2026-12-21": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Reuse the finished proof and capture lessons for a later, deliberate update." },
           "2026-12-28": { projectId:null, label:"Interview mode", due:"Development frozen", text:"Close the year with the released versions unchanged and ready to share." }
         };
+
+        const PORTFOLIO_PROGRESS_VERSION = 2;
+        const VERIFIED_PORTFOLIO_COMPLETIONS = [
+          "insurance-source",
+          "insurance-query",
+          "insurance-engine",
+          "insurance-decision",
+          "insurance-dashboard",
+          "insurance-scenarios"
+        ];
+
+        function migratePortfolioProgress(value) {
+          const source = value && typeof value === "object" ? value : {};
+          const completedMilestones = source.completedMilestones && typeof source.completedMilestones === "object"
+            ? Object.assign({}, source.completedMilestones)
+            : {};
+          if ((Number(source.version) || 0) < PORTFOLIO_PROGRESS_VERSION) {
+            VERIFIED_PORTFOLIO_COMPLETIONS.forEach(function(milestoneId) {
+              completedMilestones[milestoneId] = true;
+            });
+          }
+          return { version:PORTFOLIO_PROGRESS_VERSION, completedMilestones:completedMilestones };
+        }
 
         const defaultState = {
           settings: {
@@ -3093,10 +3121,10 @@
             weeklyFocus: {},
             networkingContacts: DEFAULT_NETWORKING_CONTACTS,
             weeklyNetworking: DEFAULT_WEEKLY_NETWORKING,
-            portfolioProgress: { completedMilestones: {} },
+            portfolioProgress: migratePortfolioProgress(null),
             targetCompaniesText: "OPG: Project Coordinator, Project Analyst, Project Controls, Procurement / Commercial Coordinator\nAtkinsRéalis / Candu Energy: Project Controls Analyst, Junior Planner / Scheduler, Risk Analyst, PMO Coordinator\nAecon: Project Coordinator, Project Controls Analyst, Cost Control Analyst, Project Reporting\nBruce Power: Project Coordinator, Project Controls, Business Analyst, Change Control\nCanadian Nuclear Laboratories: Project Controls Coordinator, Project Analyst, PMO Coordinator\nKinectrics / BWXT Canada: Project Coordinator, Project Analyst, Commercial Coordinator\nIntact: Underwriting Associate, Commercial Lines Development, Specialty Lines Development\nMunich Re / HSB: Underwriting Associate, Reinsurance Trainee, Risk Analyst\nZurich / Marsh: Underwriting Trainee, Broking Analyst, Commercial Insurance Analyst\nIQVIA: Associate Consultant, Business Analyst, Commercial Analytics\nAstraZeneca / Sanofi: Business Insights, Commercial Excellence, Omnichannel Analytics\nVeeva: Associate Consultant, Data Operations, Analytics Associate",
             searchLanesText: "Nuclear Project Delivery / Project Controls: 45%\nInsurance / Underwriting: 30%\nHealthcare Commercial Analytics: 25%\nBanking / General Analyst: Paused except unusually strong warm leads",
-            strategicPlanText: "Jul 20–Aug 2 · Nuclear proof: Build a thin P6 or Microsoft Project schedule, EVM model, and first Power BI view while contacting 4–6 nuclear professionals each week.\nAug 3–9 · Nuclear release: Add risk simulation and executive narrative; publish the Project Controls v1 and begin using it in outreach.\nAug 10–23 · Insurance proof: Build and release the underwriting workbench while maintaining nuclear applications and insurance conversations.\nAug 24–30 · Decision gate 1: Publish the public portfolio shell. Compare conversations, recruiter replies, referrals, and interviews by lane; reallocate effort only if the evidence is clear.\nAug 31–Sep 27 · Healthcare proof: Build the Pharma Analytics v1 while keeping the 45 / 30 / 25 application and outreach mix.\nSep 28–Oct 11 · Public proof: Finish all three case studies, downloads, walkthroughs, and mobile QA.\nOct 12–25 · Response-led refinement: Improve only the project receiving meaningful market response, tighten résumé bullets and interview stories, then freeze development.\nOct 26–Nov 30 · Conversion: Use the finished proof in targeted applications, referrals, interviews, and follow-ups. Expand titles before expanding into a fourth lane.\nDecember · Close: Prioritize active processes, references, offer evaluation, and a clean transition. Keep a smaller backup pipeline alive until an offer is signed."
+            strategicPlanText: "Jul 22–Aug 2 · Surety release and polish: Treat the v4 technical MVP as complete, then finish the standalone memo, experienced review, sensitivity tools, case page, and walkthrough while keeping nuclear outreach active.\nAug 3–23 · Nuclear proof: Build the P6 or Microsoft Project schedule, EVM model, Power BI view, risk simulation, and executive narrative.\nAug 24–30 · Decision gate 1: Publish the public portfolio shell. Compare conversations, recruiter replies, referrals, and interviews by lane; reallocate effort only if the evidence is clear.\nAug 31–Sep 27 · Healthcare proof: Build the Pharma Analytics v1 while keeping the 45 / 30 / 25 application and outreach mix.\nSep 28–Oct 11 · Public proof: Finish all three case studies, downloads, walkthroughs, and mobile QA.\nOct 12–25 · Response-led refinement: Improve only the project receiving meaningful market response, tighten résumé bullets and interview stories, then freeze development.\nOct 26–Nov 30 · Conversion: Use the finished proof in targeted applications, referrals, interviews, and follow-ups. Expand titles before expanding into a fourth lane.\nDecember · Close: Prioritize active processes, references, offer evaluation, and a clean transition. Keep a smaller backup pipeline alive until an offer is signed."
           }
         };
 
@@ -3105,11 +3133,11 @@
         const weekFocus = {
           "2026-07-06": { career:"Kick off the dashboard and lock the weekly rhythm", training:"Keep the run-and-lift rotation light while the system is set up.", targets:"All 10 primary targets" },
           "2026-07-13": { career:"Finish résumé variants, LinkedIn, tracker, and role lanes", training:"Hold four reserved run/lift blocks and protect recovery after work.", targets:"AtkinsRéalis · Intact · IQVIA" },
-          "2026-07-20": { career:"Launch the nuclear-first campaign: map roles, send warm outreach, and start the schedule MVP", training:"Prioritize summer running while maintaining the run/lift rotation.", targets:"OPG · AtkinsRéalis / Candu · Aecon · CNL" },
-          "2026-07-27": { career:"Turn nuclear conversations into sharper applications and ship the thin Project Controls MVP", training:"Complete the final running-heavy week and prepare bike access and fit.", targets:"Bruce Power · OPG · BWXT · Kinectrics" },
-          "2026-08-03": { career:"Release Nuclear Controls v1 and use it in targeted follow-ups", training:"Start the Saturday outdoor bike; replace one run rather than adding a fifth block.", targets:"AtkinsRéalis / Candu · Aecon · CNL" },
-          "2026-08-10": { career:"Build the hydro contract-surety proof while keeping the nuclear pipeline moving", training:"Keep one outdoor bike, two runs, and one lift inside four total blocks.", targets:"Intact · Munich Re / HSB · OPG" },
-          "2026-08-17": { career:"Release the surety workbench and convert the strongest conversations into referrals", training:"Build bike comfort while keeping the remaining sessions easy and consistent.", targets:"Zurich · Marsh · Aecon · Bruce Power" },
+          "2026-07-20": { career:"Use the released Surety v4 as the technical baseline, define the remaining presentation gaps, and keep the nuclear outreach campaign moving", training:"Prioritize summer running while maintaining the run/lift rotation.", targets:"OPG · AtkinsRéalis / Candu · Aecon · Intact" },
+          "2026-07-27": { career:"Finish the surety review and presentation package while turning nuclear conversations into sharper applications", training:"Complete the final running-heavy week and prepare bike access and fit.", targets:"Bruce Power · OPG · Zurich · Marsh" },
+          "2026-08-03": { career:"Start the Nuclear Controls MVP and use the completed surety proof in targeted underwriting conversations", training:"Start the Saturday outdoor bike; replace one run rather than adding a fifth block.", targets:"AtkinsRéalis / Candu · Aecon · CNL · Intact" },
+          "2026-08-10": { career:"Ship the thin Nuclear Controls MVP while maintaining the strongest surety follow-ups", training:"Keep one outdoor bike, two runs, and one lift inside four total blocks.", targets:"OPG · AtkinsRéalis / Candu · Aecon · Zurich" },
+          "2026-08-17": { career:"Release Nuclear Controls v1 and convert the strongest nuclear and surety conversations into referrals", training:"Build bike comfort while keeping the remaining sessions easy and consistent.", targets:"CNL · Bruce Power · BWXT · Marsh" },
           "2026-08-24": { career:"Publish the first portfolio shell and run the August lane decision gate", training:"Continue the weekly outdoor bike and steady summer running volume.", targets:"Responsive Nuclear · Insurance · Healthcare leads" },
           "2026-08-31": { career:"Start the Pharma Analytics MVP without diluting the 45 / 30 / 25 search mix", training:"Maintain one outdoor bike, two runs, and one lift with no volume creep.", targets:"OPG · Intact · IQVIA" },
           "2026-09-07": { career:"Use released proof in applications and deepen the healthcare bridge", training:"Keep the outdoor bike consistent and begin planning the indoor swim routine.", targets:"AtkinsRéalis / Candu · Zurich · AstraZeneca" },
@@ -3729,11 +3757,11 @@
         }
 
         function getPortfolioProgressState() {
-          if (!state.careerContent.portfolioProgress || typeof state.careerContent.portfolioProgress !== "object") {
-            state.careerContent.portfolioProgress = { completedMilestones: {} };
-          }
-          if (!state.careerContent.portfolioProgress.completedMilestones || typeof state.careerContent.portfolioProgress.completedMilestones !== "object") {
-            state.careerContent.portfolioProgress.completedMilestones = {};
+          const portfolioProgress = state.careerContent.portfolioProgress;
+          if (!portfolioProgress || typeof portfolioProgress !== "object" ||
+              !portfolioProgress.completedMilestones || typeof portfolioProgress.completedMilestones !== "object" ||
+              (Number(portfolioProgress.version) || 0) < PORTFOLIO_PROGRESS_VERSION) {
+            state.careerContent.portfolioProgress = migratePortfolioProgress(portfolioProgress);
           }
           return state.careerContent.portfolioProgress;
         }
@@ -4019,11 +4047,7 @@
           const savedPortfolio = content && content.portfolioProgress && typeof content.portfolioProgress === "object"
             ? content.portfolioProgress
             : {};
-          merged.portfolioProgress = {
-            completedMilestones: savedPortfolio.completedMilestones && typeof savedPortfolio.completedMilestones === "object"
-              ? savedPortfolio.completedMilestones
-              : {}
-          };
+          merged.portfolioProgress = migratePortfolioProgress(savedPortfolio);
           return merged;
         }
 
@@ -4124,8 +4148,8 @@
         // ===== CORE LOGIC =====
         function getPhase(date) {
           if (date <= parseDate("2026-07-19")) return { name: "Setup", focus: "Build the operating system", companies: "All primary targets" };
-          if (date <= parseDate("2026-08-09")) return { name: "Nuclear launch", focus: "Build proof and open the nuclear pipeline", companies: "Nuclear delivery targets" };
-          if (date <= parseDate("2026-08-30")) return { name: "Proof + gate", focus: "Release Insurance proof and test lane response", companies: "Three-lane target rotation" };
+          if (date <= parseDate("2026-08-02")) return { name: "Surety release", focus: "Finish presentation polish and open the nuclear pipeline", companies: "Surety and nuclear targets" };
+          if (date <= parseDate("2026-08-30")) return { name: "Nuclear proof + gate", focus: "Build Nuclear Controls proof and test lane response", companies: "Three-lane target rotation" };
           if (date <= parseDate("2026-10-11")) return { name: "Convert", focus: "Use released proof to convert outreach", companies: "Responsive companies" };
           if (date <= parseDate("2026-11-15")) return { name: "Interview", focus: "Deep interview preparation", companies: "Active and backup pipelines" };
           if (date <= parseDate("2026-12-15")) return { name: "Offer close", focus: "Drive an offer to signature", companies: "Late-stage processes" };
@@ -5222,8 +5246,8 @@
           headingGroup.appendChild(meta);
           const status = document.createElement("span");
           status.className = "portfolio-status";
-          status.dataset.status = progress.status;
-          status.textContent = progress.status;
+          status.dataset.status = track.statusState || progress.status;
+          status.textContent = track.statusLabel || progress.status;
           top.appendChild(headingGroup);
           top.appendChild(status);
 
@@ -5311,7 +5335,7 @@
             els.portfolioCurrentDue.textContent = "Development frozen since Oct 25";
           } else {
             els.portfolioCurrentPhase.textContent = "Planning";
-            els.portfolioCurrentDue.textContent = "Nuclear Controls MVP starts Jul 20";
+            els.portfolioCurrentDue.textContent = "Surety MVP shipped Jul 22";
           }
 
           els.portfolioTimeline.innerHTML = "";
