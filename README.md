@@ -222,19 +222,21 @@ The Portfolio tab tracks four recruiter-facing deliverables and the final respon
 #### Project 1 — Nuclear Project Controls & Risk Forecasting Command Center
 
 - **Lane:** Nuclear Project Delivery / Project Controls
-- **Window:** July 20–August 9, with a thin MVP by August 2 (14–18 hours)
+- **Window:** August 3–23, with a thin MVP by August 16 (14–18 hours)
 - **Tools:** Primavera P6 or Microsoft Project, Excel, Power Query, Python, pandas, NumPy, Power BI, and DAX
 - **Proof:** A mock nuclear-refurbishment WBS and logic-linked schedule, baseline and critical path, earned-value measures, P50/P80 risk simulation, risk heatmap, Power BI reporting, and an executive narrative
 
-#### Project 2 — Contract Surety Underwriting & Bond Capacity Workbench
+#### Project 2 — Energy Infrastructure Contract Surety Underwriting Workbench
 
 - **Lane:** Insurance / Contract Surety
-- **Window:** August 10–23 (12–16 hours)
-- **Tools:** Excel, Power Query, Power Pivot, PivotTables, LET, XLOOKUP, Solver, and data tables
-- **Featured case:** A synthetic Canadian civil contractor requests performance and labour-and-material payment bonds for a C$30M spillway rehabilitation package within a hydroelectric dam refurbishment.
-- **Proof:** Refreshable contractor financial statements and WIP data; adjusted working capital, tangible net worth, liquidity, leverage, backlog-to-equity, and remaining-capacity analysis; Capital / Capacity / Character assessment; recommended single and aggregate limits; approve / condition / refer / decline logic; an exposure dashboard; and a one-page underwriting memo.
-- **Stress tests:** High-water delay, 10% material inflation, late owner payment, margin fade, a concurrent project win, and specialized-subcontractor failure. Solver tests the maximum additional job size that remains within the model's documented capacity constraints.
-- **Scope note:** The hydro package is the featured case study, while the workbook remains reusable for road, bridge, transit, municipal, and other bonded construction work. All contractor data and thresholds are clearly labelled as synthetic educational assumptions.
+- **Status:** Technical MVP complete; public workbook release `v4`; presentation polish in progress
+- **Window:** MVP shipped July 22; presentation-ready target August 2 (10–14 polish hours remaining)
+- **Tools used:** Excel, auditable CSV inputs, JavaScript / Node.js build scripts, Word, PDF, Git, and GitHub
+- **Featured cases:** A fictional Canadian heavy-civil contractor first requests performance and labour-and-material payment bond support for a C$28M hydroelectric dam rehabilitation package. Twelve simulated months later, the same account requests support for C$16M of conventional civil work at a controlled nuclear site while the hydro job remains active.
+- **Shipped proof:** A ten-sheet macro-free v4 workbook with a three-year financial spread, adjusted working capital and tangible net worth, WIP and backlog, capacity screens, weighted 5C analysis, two underwriting decisions, twelve-month hydro monitoring, a nineteen-item conditions tracker, seven deterministic scenarios, visible QA, editable Word and PDF beginner guides, and a complete editable build methodology.
+- **Current recommendation:** Refer the nuclear-site request to senior underwriting and hold issuance until the mandatory readiness gates are closed and the hydro recovery plan is accepted. The modeled financial-capacity screens pass; execution readiness, information quality, and concurrent-project risk remain the controlling issues.
+- **Remaining before broad sharing:** Produce the standalone two-page underwriting memo, complete an experienced-surety review, add Data Tables and Solver sensitivity, build the recruiter-facing case page, record a 60–90 second walkthrough, and run final shareability QA.
+- **Scope note:** The contractor and contractor-specific commercial information are fictional. Public sources define the workflow and context; visible educational assumptions drive the model. The work does not claim insurer authority, proprietary carrier rules, or authentic utility procurement information.
 
 #### Project 3 — Pharma Commercial Effectiveness & Channel Optimization
 
@@ -257,10 +259,10 @@ The Portfolio tab tracks four recruiter-facing deliverables and the final respon
 
 The protected weekly build rhythm is 1.5 hours Wednesday, 3 hours Saturday morning, and 1.5 hours Sunday. Monday remains an application block, Tuesday a nuclear outreach block, and Thursday an insurance outreach/application block. Friday after work and Saturday afternoon stay protected. Milestone completion is stored in `state.careerContent.portfolioProgress.completedMilestones`.
 
-The release order is intentionally tied to the job-search funnel:
+The revised release order reflects the Surety MVP shipping ahead of its original August slot:
 
-1. Ship a thin Nuclear Project Controls MVP by August 2 and the validated v1 by August 9.
-2. Release the Contract Surety Workbench by August 23.
+1. Treat the Contract Surety v4 technical MVP as complete on July 22 and finish presentation polish by August 2.
+2. Ship a thin Nuclear Project Controls MVP by August 16 and the validated v1 by August 23.
 3. Publish the first public portfolio shell by August 30.
 4. Release Pharma by September 27 while using current WebHealth experience as the healthcare bridge.
 5. Finish the public presentation layer by October 11, refine only the proof receiving meaningful response, and freeze development October 25.
@@ -361,6 +363,16 @@ Future updates should preserve these project constraints:
 13. Keep Career Tracker records in `state.careerApps` and `state.careerContacts`; preserve stable IDs, lane/stage fields, direct editing, and Guest read-only guards.
 
 ## Update history
+
+### v3.3 — 2026-07-22
+
+- Reconciled the Contract Surety project card and portfolio timeline to the live `energy-infrastructure-surety-workbench` repository.
+- Marked the six objectively shipped v4 milestones complete through a versioned progress migration while preserving all existing milestone IDs and user-managed progress.
+- Updated the case from a planned C$30M spillway request to the released C$28M hydro rehabilitation decision, twelve-month post-award monitoring, and C$16M nuclear-site civil reassessment.
+- Replaced unbuilt Power Query / Power Pivot claims with the tools and artifacts actually present in v4: Excel, auditable CSVs, JavaScript / Node.js build scripts, Word and PDF guides, Git, and GitHub.
+- Added three explicit presentation-readiness milestones for the standalone memo, experienced-surety review, sensitivity tools, recruiter-facing case page, walkthrough, and final shareability QA.
+- Moved Surety polish to July 22–August 2 and the Nuclear Controls build to August 3–23 without changing the later public-site, Pharma, refinement, or development-freeze dates.
+- Preserved the single-file application, five-color palette, Admin / Guest access, JSONBin synchronization, Journal gate, and iPhone interaction targets.
 
 ### v3.2 — 2026-07-21
 
